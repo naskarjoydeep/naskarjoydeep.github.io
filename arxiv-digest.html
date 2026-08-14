@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>arXiv Margins — Joydeep Naskar</title>
+<meta name="description" content="Automated daily digest of new arXiv papers in holography, quantum information, and mathematical physics, with a first-pass AI referee note for each.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --ink: #0f172a;
+    --ink-soft: #475569;
+    --heading: #075985;
+    --link: #0369a1;
+    --audit: #be123c;
+    --audit-bg: #fff1f2;
+    --tag-bg: #e0f2fe;
+    --shadow: 0 2px 8px rgba(0,0,0,0.05);
+    --radius: 12px;
+    --sans: system-ui, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --maxw: 860px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 20px 20px 80px; }
+  header.page-head {
+    background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 20px 24px; margin: 20px 0;
+  }
+  .back-link { font-size: 0.85rem; color: var(--ink-soft); }
+  h1.title { color: var(--heading); font-weight: 700; font-size: 2rem; margin: 10px 0 8px; }
+  p.subtitle { color: var(--ink-soft); font-size: 0.98rem; max-width: 62ch; margin: 0 0 8px; }
+  p.mechanism-note { color: var(--ink-soft); font-size: 0.88rem; max-width: 62ch; margin: 0; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 20px; }
+  #filter {
+    flex: 1 1 260px; font-family: var(--sans); font-size: 0.92rem; padding: 10px 14px;
+    border: 1px solid #cbd5e1; border-radius: 8px; background: var(--bg); color: var(--ink);
+  }
+  #filter::placeholder { color: var(--ink-soft); }
+  .stamp { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft); }
+  .day-heading {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--heading); margin: 32px 4px 12px;
+  }
+  .day-group:first-of-type .day-heading { margin-top: 24px; }
+  article.paper-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 24px; margin-bottom: 16px; }
+  .paper-card h3 { color: var(--heading); font-weight: 700; font-size: 1.15rem; margin: 0 0 8px; line-height: 1.4; }
+  .paper-card h3 a { color: var(--heading); }
+  .paper-card h3 a:hover { text-decoration: underline; }
+  .meta-line { font-family: var(--mono); font-size: 0.76rem; color: var(--ink-soft); margin: 0 0 12px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
+  .tag { font-family: var(--mono); font-size: 0.68rem; color: var(--link); background: var(--tag-bg); padding: 3px 9px; border-radius: 20px; }
+  .summary { font-size: 0.96rem; margin: 0; }
+  .body-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 880px) {
+    .body-grid.has-audit { grid-template-columns: minmax(0,1fr) 260px; }
+  }
+  .audit-col {
+    background: var(--audit-bg); border-radius: 10px; padding: 14px 16px;
+  }
+  .audit-eyebrow {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--audit); margin: 0 0 8px; display: flex; align-items: baseline; gap: 8px;
+  }
+  .confidence { text-transform: none; letter-spacing: 0; color: var(--ink-soft); font-weight: 400; font-size: 0.68rem; }
+  .audit-block { margin: 0 0 12px; }
+  .audit-block:last-child { margin-bottom: 0; }
+  .audit-block h4 { font-weight: 600; font-size: 0.78rem; color: var(--audit); margin: 0 0 4px; }
+  .audit-block ul { margin: 0; padding-left: 18px; font-size: 0.85rem; color: var(--ink); }
+  .audit-block li { margin-bottom: 4px; }
+  .audit-empty { font-size: 0.82rem; color: var(--ink-soft); font-style: italic; margin: 0; }
+  .empty-state { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 40px 28px; text-align: center; color: var(--ink-soft); font-size: 0.95rem; }
+  .empty-state strong { color: var(--ink); }
+  footer.page-foot { margin-top: 40px; font-family: var(--mono); font-size: 0.74rem; color: var(--ink-soft); text-align: center; }
+  footer.page-foot a { color: var(--ink-soft); text-decoration: underline; }
+  @media (prefers-reduced-motion: no-preference) {
+    article.paper-card { transition: box-shadow 0.15s ease; }
+    article.paper-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.09); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="page-head">
+    <a class="back-link" href="./">&larr; naskarjoydeep.github.io</a>
+    <h1 class="title">arXiv Margins</h1>
+    <p class="subtitle">A daily automated read of new arXiv papers in holography, quantum information, and mathematical physics — a plain summary plus a first-pass AI referee note for each.</p>
+    <p class="mechanism-note">Generated automatically every day: new arXiv papers are matched against a topic list, then read and annotated by Claude. Treat the notes in the margin as a fast, sometimes-wrong first pass — not a substitute for reading the paper.</p>
+    <div class="toolbar">
+      <input type="text" id="filter" placeholder="Filter by title, category, or topic…" autocomplete="off">
+      <span class="stamp">Last updated: <span id="last-updated">—</span></span>
+    </div>
+  </header>
+
+  <main id="digest-root"></main>
+
+  <footer class="page-foot">
+    <span id="count-line"></span> · Source on <a href="https://github.com/naskarjoydeep/naskarjoydeep.github.io" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+</div>
+
+<script type="application/json" id="digest-data">
+[
+  {
+    "id": "example",
+    "title": "Example entry — this shows the layout",
+    "authors": ["Generated automatically"],
+    "categories": ["demo"],
+    "published": "0000-00-00",
+    "link": "#",
+    "summary": "This placeholder shows how a real entry will look, including inline math like $\\mathcal{N}=4$ SYM or a formula such as $S = -\\mathrm{Tr}(\\rho \\log \\rho)$. Once the workflow runs — on its daily schedule or triggered by hand from the Actions tab — real arXiv papers will replace this card automatically.",
+    "audit": {
+      "substantive": ["Example: a concern about an assumption or a gap in the argument would appear here."],
+      "formulas": ["Example: a notation or derivation issue would appear here."],
+      "framing": ["Example: a note about overclaiming or unclear novelty would appear here."],
+      "questions": ["Example: an open question for the authors would appear here."]
+    },
+    "matched_terms": ["demo"],
+    "confidence": "n/a"
+  }
+]
+</script>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters: [
+    {left: '$$', right: '$$', display: true},
+    {left: '$', right: '$', display: false},
+    {left: '\\(', right: '\\)', display: false},
+    {left: '\\[', right: '\\]', display: true}
+  ], throwOnError: false});"></script>
+
+<script>
+(function () {
+  var dataEl = document.getElementById('digest-data');
+  var entries = [];
+  try { entries = JSON.parse(dataEl.textContent); } catch (e) { entries = []; }
+
+  var root = document.getElementById('digest-root');
+  var lastUpdatedEl = document.getElementById('last-updated');
+  var countEl = document.getElementById('count-line');
+  var filterInput = document.getElementById('filter');
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function groupByDate(list) {
+    var map = {};
+    var order = [];
+    list.forEach(function (e) {
+      var d = e.published || 'undated';
+      if (!map[d]) { map[d] = []; order.push(d); }
+      map[d].push(e);
+    });
+    order.sort();
+    order.reverse();
+    return order.map(function (d) { return [d, map[d]]; });
+  }
+
+  function auditSection(label, items) {
+    if (!items || !items.length) return '';
+    return '<div class="audit-block"><h4>' + label + '</h4><ul>' +
+      items.map(function (i) { return '<li>' + escapeHtml(i) + '</li>'; }).join('') +
+      '</ul></div>';
+  }
+
+  function paperCard(e) {
+    var audit = e.audit || {};
+    var hasAudit = ['substantive', 'formulas', 'framing', 'questions'].some(function (k) {
+      return audit[k] && audit[k].length;
+    });
+    var tags = (e.matched_terms || []).slice(0, 6)
+      .map(function (t) { return '<span class="tag">' + escapeHtml(t) + '</span>'; }).join('');
+    var auditHtml = hasAudit
+      ? auditSection('Substantive concerns', audit.substantive) +
+        auditSection('Formulas &amp; notation', audit.formulas) +
+        auditSection('Framing &amp; claims', audit.framing) +
+        auditSection('Questions for authors', audit.questions)
+      : '<p class="audit-empty">No issues flagged on this pass.</p>';
+    var confidence = e.confidence ? '<span class="confidence">(' + escapeHtml(e.confidence) + ' confidence)</span>' : '';
+
+    return '' +
+      '<article class="paper-card">' +
+        '<h3><a href="' + escapeHtml(e.link || '#') + '" target="_blank" rel="noopener">' + escapeHtml(e.title) + '</a></h3>' +
+        '<p class="meta-line">' + escapeHtml((e.authors || []).join(', ')) + ' &middot; ' +
+          escapeHtml((e.categories || []).join(', ')) + ' &middot; <a href="' + escapeHtml(e.link || '#') + '" target="_blank" rel="noopener">' + escapeHtml(e.id || '') + '</a></p>' +
+        (tags ? '<div class="tags">' + tags + '</div>' : '') +
+        '<div class="body-grid ' + (hasAudit ? 'has-audit' : '') + '">' +
+          '<div class="main-col"><p class="summary">' + escapeHtml(e.summary) + '</p></div>' +
+          '<div class="audit-col"><p class="audit-eyebrow">AI referee pass ' + confidence + '</p>' + auditHtml + '</div>' +
+        '</div>' +
+      '</article>';
+  }
+
+  function render(list) {
+    if (!list.length) {
+      root.innerHTML = '<div class="empty-state"><strong>No entries yet.</strong><br>The digest runs daily and will populate this page automatically. You can also trigger it by hand from the repo\'s Actions tab.</div>';
+      countEl.textContent = '';
+      return;
+    }
+    var groups = groupByDate(list);
+    root.innerHTML = groups.map(function (pair) {
+      return '<section class="day-group"><h2 class="day-heading">' + escapeHtml(pair[0]) + '</h2>' +
+        pair[1].map(paperCard).join('') + '</section>';
+    }).join('');
+    countEl.textContent = list.length + (list.length === 1 ? ' entry' : ' entries') + ' on file';
+    if (window.renderMathInElement) {
+      renderMathInElement(root, {delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false},
+        {left: '\\(', right: '\\)', display: false},
+        {left: '\\[', right: '\\]', display: true}
+      ], throwOnError: false});
+    }
+  }
+
+  var realEntries = entries.filter(function (e) { return e.id !== 'example'; });
+  var showList = realEntries.length ? realEntries : entries;
+
+  if (realEntries.length) {
+    var dates = realEntries.map(function (e) { return e.published; }).filter(Boolean).sort();
+    lastUpdatedEl.textContent = dates.length ? dates[dates.length - 1] : '—';
+  } else {
+    lastUpdatedEl.textContent = 'not yet run';
+  }
+
+  filterInput.addEventListener('input', function () {
+    var q = filterInput.value.trim().toLowerCase();
+    if (!q) { render(showList); return; }
+    var filtered = showList.filter(function (e) {
+      var hay = [e.title, e.summary, (e.categories || []).join(' '), (e.matched_terms || []).join(' '), (e.authors || []).join(' ')]
+        .join(' ').toLowerCase();
+      return hay.indexOf(q) !== -1;
+    });
+    render(filtered);
+  });
+
+  render(showList);
+})();
+</script>
+</body>
+</html>
