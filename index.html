@@ -14,6 +14,12 @@
     a:hover { text-decoration: underline; }
     .profile-pic { width: 160px; height: 160px; border-radius: 16px; object-fit: cover; display: block; margin: 0 auto 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
     .center { text-align: center; }
+    .tool-badge { margin: 10px 0 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .tool-badge a { display: inline-block; background: #e0f2fe; color: #0369a1; font-size: 0.85rem; padding: 6px 14px; border-radius: 20px; text-decoration: none; }
+    .tool-badge a:hover { background: #bae6fd; text-decoration: none; }
+    .about { max-width: 68ch; margin: 0 auto; }
+    .collage { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin: 0; }
+    .collage img { display: block; width: 100%; height: 150px; object-fit: cover; border-radius: 10px; background: #e2e8f0; }
   </style>
 </head>
 <body>
@@ -21,80 +27,39 @@
     <img class="profile-pic" src="JN_HD.jpg" alt="Portrait of Joydeep Naskar" />
     <h1>Joydeep Naskar</h1>
     <p><a href="holography.html">Holography</a> · <a href="quantum-information.html">Quantum information</a> · <a href="machine-learning.html">Machine learning</a> · <a href="mathematical-physics.html">Mathematical physics</a></p>
-    <p class="tool-badge"><a href="arxiv-digest.html">arXiv Digest — daily papers matching my interests.</a></p>
+    <p class="tool-badge"><a href="biography.html">Biography</a><a href="publications.html">Publications</a><a href="photography.html">Photography</a><a href="arxiv-digest.html">arXiv Digest — daily papers matching my interests</a></p>
   </div>
 
-  <section id="positions">
-    <h2>Positions</h2>
-    <ul>
-      <li><strong>2026-present</strong> — Postdoctoral Fellow, <em>Beijing Institute of Mathematical Sciences and Applications</em>, Beijing, China.</li>
-      <li><strong>Spring 2026</strong> — KITP Graduate Fellow, <em>Kavli Institute for Theoretical Physics</em>, Santa Barbara, CA, USA.</li>
-      <li><strong>2024–2026</strong> — Junior Investigator, <em>NSF AI Institute for Artificial Intelligence and Fundamental Interactions</em>, Cambridge, MA, USA.</li>
-      <!--
-      <li><strong>Summer 2025</strong> — PhD Intern, <em>Pacific Northwest National Laboratory</em>, Richland, WA, USA.</li>
-      <li><strong>Summer 2018</strong> - VSRP Intern, <em>Tata Institute of Fundamental Research</em>, Mumbai, India.</li>
-      -->
-    </ul>
-  </section>
-
- <section id="education">
-    <h2>Education</h2>
-    <ul>
-      <li><strong>2021–2026</strong> — PhD, <em>Northeastern University</em>, Boston, MA, USA.</li>
-      <li><strong>2016-2021</strong> - Integrated MS, <em>National Institute of Science Education and Research</em>, Bhubaneswar, India</li>
-    </ul>
-  </section>
-
-  
 <!--
-  <section id="codes">
-    <h2>Code Repositories</h2>
-    <ul>
-      <li><strong>Contraction Map </strong></li>
-    <ul>
+  ABOUT PARAGRAPH — uncomment and write when ready.
+
+  <section id="about">
+    <div class="about">
+      <p>A paragraph about yourself goes here.</p>
+    </div>
   </section>
 -->
 
-  <section id="teaching">
-    <h2>Teaching Assistantship</h2>
-    <ul>
-      <li><strong>Introductory Physics Labs </strong></li>
-       <li><strong>Quantum Computation &#38 Information </strong> (Fall 2023)</li>
-       <li><strong>Quantum Field theory 2 </strong> (Spring 2025)</li>
-       <li><strong>Computational Physics </strong> (Fall 2026)</li>
-    <ul>
-  </section>
-      
-<section id="publications">
-    <h2>Publications & Preprints</h2>
+<!--
+  PHOTOGRAPHY COLLAGE — uncomment when you have images.
+  Put files in a photos/ folder; add or remove <img> tags to taste.
+  The grid reflows automatically, so any number of images works.
 
-    <h3>Preprints</h3>
-    <ol>
-      <li><strong>J. Naskar</strong>. <em>On a mixed-state extension of the holographic signal inequality</em>, <a href="https://arxiv.org/abs/2605.26617">arXiv:2605.26617</a> (2026).</li>
-    </ol>
-
-    <h3>Published</h3>
-    <ol>
-      <li>N. Bao, K. Furuya, <strong>J. Naskar</strong>. <em>Tripartite Correlation Signal from Multipartite Entanglement of Purification</em>, <strong>JHEP</strong> 05 (2026) 236. <a href="https://arxiv.org/abs/2509.08209">arXiv:2509.08209</a>.</li>
-      <li>N. Bao, K. Furuya, <strong>J. Naskar</strong>. <em>On the completeness of contraction map proof method for holographic entropy inequalities</em>, <strong>JHEP</strong> 12 (2025) 140. <a href="https://arxiv.org/abs/2506.18086">arXiv:2506.18086</a>.</li>
-      <li><strong>J. Naskar</strong>, S.S. Samal. <em>Topological entanglement entropy meets holographic entropy inequalities</em>, <strong>Phys. Rev. D</strong> 114, 026025 (2026). <a href="https://arxiv.org/abs/2412.05484">arXiv:2412.05484</a>.</li>
-      <li>J. Halverson, <strong>J. Naskar</strong>, J. Tian. <em>Conformal Fields from Neural Networks</em>, <strong>JHEP</strong> 10 (2025) 39. <a href="https://arxiv.org/abs/2409.12222">arXiv:2409.12222</a>.</li>
-      <li>A. Bhattacharjee, <strong>J. Naskar</strong>. <em>Revisiting holographic codes with fractal-like boundary erasures</em>, <strong>Phys. Rev. D</strong> 111, 026012 (2025). <a href="https://arxiv.org/abs/2411.02825">arXiv:2411.02825</a>.</li>
-      <li>N. Bao, K. Furuya, <strong>J. Naskar</strong>. <em>Towards a complete classification of holographic entropy inequalities</em>, <strong>JHEP</strong> 03 (2025) 117. <a href="https://arxiv.org/abs/2409.17317">arXiv:2409.17317</a>.</li>
-      <li>N. Bao, Y. Jiang, <strong>J. Naskar</strong>. <em>Subregion duality, wedge classification and no global symmetries in AdS/CFT</em>, <strong>JHEP</strong> 01 (2025) 64. <a href="https://arxiv.org/abs/2408.04016">arXiv:2408.04016</a>.</li>
-      <li>N. Bao, K. Furuya, <strong>J. Naskar</strong>. <em>A framework for generalizing toric inequalities for holographic entanglement entropy</em>, <strong>JHEP</strong> 10 (2024) 251. <a href="https://arxiv.org/abs/2408.04741">arXiv:2408.04741</a>.</li>
-      <li>N. Bao, <strong>J. Naskar</strong>. <em>Properties of the contraction map for holographic entanglement entropy inequalities</em>, <strong>JHEP</strong> 06 (2024) 39. <a href="https://arxiv.org/abs/2403.13283">arXiv:2403.13283</a>.</li>
-      <li>N. Bao, <strong>J. Naskar</strong>. <em>Reconstruction wedges in AdS/CFT with boundary fractal-like structures</em>, <strong>Phys. Rev. D</strong> 107, 066014 (2023). <a href="https://arxiv.org/abs/2209.15026">arXiv:2209.15026</a>.</li>
-      <li>N. Bao, <strong>J. Naskar</strong>. <em>Code properties of the Holographic Sierpinski Triangle</em>, <strong>Phys. Rev. D</strong> 106, 126006 (2022). <a href="https://arxiv.org/abs/2203.01379">arXiv:2203.01379</a>.</li>
-      <li>G. Tiago, <strong>J. Naskar</strong>, A.C. Maioli, W.F. Balthazar, A.G.M. Schmidt, J.A.O. Huguenin. <em>Classical and quantum multiplayer Colonel Blotto game in all-optical setup</em>, <strong>Quantum Inf. Process</strong> 24, 152 (2025). <a href="https://arxiv.org/abs/2008.00762">arXiv:2008.00762</a>.</li>
-      <li><strong>J. Naskar</strong>. <em>Comments on Quantization and experimental realization of the Colonel Blotto game</em>, <strong>Quantum Inf. Process</strong> 19, 388 (2020). <a href="https://doi.org/10.1007/s11128-020-02734-1">DOI</a>.</li>
-    </ol>
+  <section id="collage">
+    <div class="collage">
+      <img src="photos/collage-01.jpg" alt="Describe the photo">
+      <img src="photos/collage-02.jpg" alt="Describe the photo">
+      <img src="photos/collage-03.jpg" alt="Describe the photo">
+      <img src="photos/collage-04.jpg" alt="Describe the photo">
+    </div>
+    <p style="text-align:center; margin:14px 0 0;"><a href="photography.html">More photographs &rarr;</a></p>
   </section>
+-->
 
 <!--
     <section id="seminars">
     <h2>Talks and Seminars</h2>
-     </ol>
+    <ol>
       <li><q>Higher dimensional conformal fields from neural network statistics</q>, Caltech High Energy Theory Seminar (05/13/26)</li>
       <li><q>Higher dimensional conformal fields from neural network statistics and applications</q>, UCSD Particle Physics Seminars (03/31/26)</li>
       <li><q>Holographic Entropy Inequalities, Contraction Maps and Partial Cubes, and more</q>, Narang Lab, UCLA (03/30/26)</li>
