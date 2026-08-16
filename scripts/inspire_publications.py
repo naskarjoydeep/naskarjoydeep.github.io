@@ -44,6 +44,7 @@ FIELDS = ",".join([
     "titles", "authors.full_name", "arxiv_eprints", "dois",
     "publication_info", "earliest_date", "citation_count",
     "document_type", "control_number", "preprint_date",
+    "abstracts", "inspire_categories",
 ])
 
 
@@ -154,9 +155,24 @@ def parse_record(hit):
         authors = shown + ["et al."]
 
     arxiv = None
+    categories = []
     eprints = m.get("arxiv_eprints") or []
     if eprints:
         arxiv = eprints[0].get("value")
+        categories = list(eprints[0].get("categories") or [])
+
+    # Abstracts: several may be present (arXiv, publisher, ...). Prefer the
+    # arXiv one for consistency, since that's what the categories describe.
+    abstract = None
+    abstracts = m.get("abstracts") or []
+    if abstracts:
+        preferred = next(
+            (a for a in abstracts if (a.get("source") or "").lower() == "arxiv"),
+            abstracts[0],
+        )
+        abstract = (preferred.get("value") or "").strip() or None
+        if abstract:
+            abstract = re.sub(r"\s+", " ", abstract)
 
     doi = None
     dois = m.get("dois") or []
@@ -192,6 +208,8 @@ def parse_record(hit):
         "title": title,
         "authors": authors,
         "arxiv": arxiv,
+        "categories": categories,
+        "abstract": abstract,
         "doi": doi,
         "journal": journal,
         "year": year,
