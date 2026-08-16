@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog — Joydeep Naskar</title>
+
+<style>
+  /* ---------------------------------------------------------------
+     THEME TOKENS — edit these to match the rest of your site.
+     If your other pages use a serif or a different link colour,
+     change --serif / --accent here and everything follows.
+  ---------------------------------------------------------------- */
+  :root{
+    --bg:      #ffffff;
+    --ink:     #171717;   /* main text            */
+    --muted:   #737373;   /* dates, descriptions  */
+    --faint:   #b8b8b8;   /* year markers, hints  */
+    --line:    #ececec;   /* hairline dividers    */
+    --accent:  #1c5d8c;   /* links on hover       */
+
+    --serif: Georgia, "Times New Roman", Times, serif;
+    --sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    --measure: 680px;     /* reading column width */
+  }
+
+  *{ box-sizing:border-box; }
+
+  html{ -webkit-text-size-adjust:100%; }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--serif);
+    line-height:1.6;
+    font-size:18px;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  .wrap{
+    max-width:var(--measure);
+    margin:0 auto;
+    padding:3.5rem 1.5rem 5rem;
+  }
+
+  /* --- back link (matches your other pages) --- */
+  .back{
+    font-family:var(--sans);
+    font-size:.85rem;
+    letter-spacing:.02em;
+    color:var(--muted);
+    text-decoration:none;
+    display:inline-block;
+    margin-bottom:3rem;
+  }
+  .back:hover{ color:var(--accent); }
+
+  /* --- masthead --- */
+  h1{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:2rem;
+    line-height:1.15;
+    margin:0 0 .6rem;
+    letter-spacing:-.01em;
+  }
+  .lede{
+    font-family:var(--sans);
+    color:var(--muted);
+    font-size:.95rem;
+    line-height:1.5;
+    margin:0 0 3.25rem;
+    max-width:46ch;
+  }
+
+  /* --- year-grouped list ---
+     The year sits in the left margin as a quiet chronological anchor.
+     It collapses above the posts on narrow screens. --- */
+  .year{
+    display:grid;
+    grid-template-columns:5.5rem 1fr;
+    gap:0 2rem;
+    padding-top:2.25rem;
+  }
+  .year + .year{ border-top:1px solid var(--line); }
+
+  .year-label{
+    font-family:var(--sans);
+    font-size:2rem;
+    font-weight:300;
+    color:var(--faint);
+    line-height:1;
+    letter-spacing:-.01em;
+    padding-top:.15rem;
+  }
+
+  .posts{ list-style:none; margin:0; padding:0; }
+
+  .post{ padding:0 0 2rem; }
+  .post:last-child{ padding-bottom:0; }
+
+  .post-date{
+    font-family:var(--sans);
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--muted);
+    display:block;
+    margin-bottom:.3rem;
+  }
+
+  .post-title{
+    display:inline-block;
+    font-family:var(--serif);
+    font-size:1.2rem;
+    font-weight:600;
+    color:var(--ink);
+    text-decoration:none;
+    line-height:1.3;
+    border-bottom:1px solid transparent;
+  }
+  .post-title:hover{
+    color:var(--accent);
+    border-bottom-color:var(--accent);
+  }
+
+  .post-desc{
+    font-family:var(--sans);
+    font-size:.9rem;
+    color:var(--muted);
+    line-height:1.55;
+    margin:.35rem 0 0;
+  }
+
+  /* --- footer nav for site cohesion --- */
+  footer{
+    margin-top:4rem;
+    padding-top:1.5rem;
+    border-top:1px solid var(--line);
+    font-family:var(--sans);
+    font-size:.82rem;
+  }
+  footer a{
+    color:var(--muted);
+    text-decoration:none;
+    margin-right:1.1rem;
+  }
+  footer a:hover{ color:var(--accent); }
+
+  /* --- responsive --- */
+  @media (max-width:560px){
+    body{ font-size:17px; }
+    .wrap{ padding:2.5rem 1.25rem 3.5rem; }
+    .year{ grid-template-columns:1fr; gap:0; }
+    .year-label{ font-size:1.1rem; margin-bottom:1.25rem; }
+    .back{ margin-bottom:2rem; }
+  }
+
+  /* --- a11y --- */
+  a:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <a class="back" href="index.html">← Joydeep Naskar</a>
+
+    <h1>Blog</h1>
+    <p class="lede">
+      Working notes on holography, quantum information, and the odd
+      computational detour. Rougher than a paper, more permanent than a chalkboard.
+    </p>
+
+    <!-- ===========================================================
+         Add new posts at the TOP of the earliest matching <ul>.
+         Each post is one <li class="post"> block. Duplicate a block,
+         change the date, title, href, and description.
+    ============================================================ -->
+
+    <section class="year">
+      <div class="year-label">2026</div>
+      <ul class="posts">
+
+        <li class="post">
+          <span class="post-date">Aug 12, 2026</span>
+          <a class="post-title" href="posts/superbalanced-heis.html">Counting superbalanced entropy inequalities by hand</a>
+          <p class="post-desc">A partial-cube picture of where new holographic inequalities can live, and why the clique criterion is the right filter.</p>
+        </li>
+
+        <li class="post">
+          <span class="post-date">Jul 03, 2026</span>
+          <a class="post-title" href="posts/stabilizer-bootstrap.html">Magic, defects, and a factor of two</a>
+          <p class="post-desc">Stabilizer Rényi entropy meets the defect bootstrap — and a stubborn discrepancy in the XXZ chain that the naïve prediction misses.</p>
+        </li>
+
+        <li class="post">
+          <span class="post-date">May 21, 2026</span>
+          <a class="post-title" href="posts/mixed-state-signal.html">Extending the signal inequality to mixed states</a>
+          <p class="post-desc">What canonical purification buys you, and the disconnected entanglement wedge that breaks the minimal extension.</p>
+        </li>
+
+      </ul>
+    </section>
+
+    <section class="year">
+      <div class="year-label">2025</div>
+      <ul class="posts">
+
+        <li class="post">
+          <span class="post-date">Dec 09, 2025</span>
+          <a class="post-title" href="posts/hello-world.html">Why I'm keeping a research notebook in public</a>
+          <p class="post-desc">A first post on the case for writing things down before they're ready.</p>
+        </li>
+
+      </ul>
+    </section>
+
+    <footer>
+      <a href="biography.html">Biography</a>
+      <a href="publications.html">Publications</a>
+      <a href="photography.html">Photography</a>
+      <a href="arxiv-digest.html">arXiv Digest</a>
+    </footer>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>News — Joydeep Naskar</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.6; margin: 0; padding: 20px; max-width: 900px; margin: auto; }
+    h1, h2, h3 { color: #075985; }
+    a { color: #0369a1; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back-link { font-size: 0.9rem; color: #475569; }
+    h1 { margin: 10px 0 6px; }
+    .lede { color: #475569; max-width: 62ch; }
+
+    .news-list { list-style: none; margin: 24px 0 0; padding: 0; }
+    .news-list li {
+      background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 14px 20px; margin-bottom: 12px;
+      display: grid; grid-template-columns: 110px 1fr; gap: 4px 18px; align-items: baseline;
+    }
+    @media (max-width: 560px) {
+      .news-list li { grid-template-columns: 1fr; gap: 2px; }
+    }
+    .news-date {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.78rem; color: #475569; white-space: nowrap;
+    }
+    .news-body { margin: 0; }
+    .news-tag {
+      display: inline-block; font-size: 0.7rem; color: #0369a1; background: #e0f2fe;
+      padding: 1px 8px; border-radius: 20px; margin-left: 6px; vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="index.html">&larr; Joydeep Naskar</a>
+  <h1>News</h1>
+  <p class="lede">Talks, papers, and other updates.</p>
+
+  <!--
+    TO ADD AN ITEM: copy one <li> block and put it at the TOP of the list
+    (newest first). The <span class="news-tag"> is optional — drop it, or
+    change the text to anything you like ("Paper", "Talk", "Award", "Travel").
+
+    The entries below were seeded from the talks list in your index.html.
+    Edit, reorder, or delete them freely.
+  -->
+
+  <ul class="news-list">
+    <li>
+      <span class="news-date">2026-05-13</span>
+      <p class="news-body">Seminar at Caltech High Energy Theory: <q>Higher dimensional conformal fields from neural network statistics</q>.<span class="news-tag">Talk</span></p>
+    </li>
+    <li>
+      <span class="news-date">2026-03-31</span>
+      <p class="news-body">Seminar at UCSD Particle Physics: <q>Higher dimensional conformal fields from neural network statistics and applications</q>.<span class="news-tag">Talk</span></p>
+    </li>
+    <li>
+      <span class="news-date">2026-03-30</span>
+      <p class="news-body">Talk at the Narang Lab, UCLA: <q>Holographic Entropy Inequalities, Contraction Maps and Partial Cubes, and more</q>.<span class="news-tag">Talk</span></p>
+    </li>
+    <li>
+      <span class="news-date">2026-03-02</span>
+      <p class="news-body">KITP Locals Lunch: <q>Entropy Inequalities</q>.<span class="news-tag">Talk</span></p>
+    </li>
+    <li>
+      <span class="news-date">2026-02-03</span>
+      <p class="news-body">KITP&ndash;UCSB High Energy and Gravity Seminar: <q>Higher dimensional conformal fields from neural network statistics and applications</q>.<span class="news-tag">Talk</span></p>
+    </li>
+  </ul>
+</body>
+</html>
