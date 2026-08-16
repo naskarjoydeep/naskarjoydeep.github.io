@@ -19,55 +19,148 @@
       padding: 14px 20px; margin-bottom: 12px;
       display: grid; grid-template-columns: 110px 1fr; gap: 4px 18px; align-items: baseline;
     }
-    @media (max-width: 560px) {
-      .news-list li { grid-template-columns: 1fr; gap: 2px; }
-    }
-    .news-date {
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 0.78rem; color: #475569; white-space: nowrap;
-    }
+    @media (max-width: 560px) { .news-list li { grid-template-columns: 1fr; gap: 2px; } }
+    .news-date { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.78rem; color: #475569; white-space: nowrap; }
     .news-body { margin: 0; }
-    .news-tag {
-      display: inline-block; font-size: 0.7rem; color: #0369a1; background: #e0f2fe;
-      padding: 1px 8px; border-radius: 20px; margin-left: 6px; vertical-align: middle;
-    }
+    .news-tag { display: inline-block; font-size: 0.7rem; color: #0369a1; background: #e0f2fe; padding: 1px 8px; border-radius: 20px; margin-left: 6px; vertical-align: middle; }
+    .auto-mark { font-size: 0.68rem; color: #94a3b8; margin-left: 6px; }
+    .stamp { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.74rem; color: #475569; text-align: center; margin-top: 30px; }
+    .parse-error { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; border-radius: 10px; padding: 14px 18px; font-size: 0.9rem; }
   </style>
 </head>
 <body>
   <a class="back-link" href="index.html">&larr; Joydeep Naskar</a>
   <h1>News</h1>
-  <p class="lede">Talks, papers, and other updates.</p>
+  <p class="lede">Talks, papers, and other updates. Seminars and papers are pulled automatically from INSPIRE; everything else is written by hand.</p>
 
-  <!--
-    TO ADD AN ITEM: copy one <li> block and put it at the TOP of the list
-    (newest first). The <span class="news-tag"> is optional — drop it, or
-    change the text to anything you like ("Paper", "Talk", "Award", "Travel").
+  <ul class="news-list" id="news-root"></ul>
+  <p class="stamp">Automatic items last checked: <span id="last-checked">—</span></p>
 
-    The entries below were seeded from the talks list in your index.html.
-    Edit, reorder, or delete them freely.
-  -->
+<!--
+  ============================================================
+  HAND-WRITTEN ITEMS — the update script NEVER touches this block.
+  Add anything INSPIRE won't know about: conferences, visits, awards,
+  teaching, or talks that were never submitted to INSPIRE's database.
 
-  <ul class="news-list">
-    <li>
-      <span class="news-date">2026-05-13</span>
-      <p class="news-body">Seminar at Caltech High Energy Theory: <q>Higher dimensional conformal fields from neural network statistics</q>.<span class="news-tag">Talk</span></p>
-    </li>
-    <li>
-      <span class="news-date">2026-03-31</span>
-      <p class="news-body">Seminar at UCSD Particle Physics: <q>Higher dimensional conformal fields from neural network statistics and applications</q>.<span class="news-tag">Talk</span></p>
-    </li>
-    <li>
-      <span class="news-date">2026-03-30</span>
-      <p class="news-body">Talk at the Narang Lab, UCLA: <q>Holographic Entropy Inequalities, Contraction Maps and Partial Cubes, and more</q>.<span class="news-tag">Talk</span></p>
-    </li>
-    <li>
-      <span class="news-date">2026-03-02</span>
-      <p class="news-body">KITP Locals Lunch: <q>Entropy Inequalities</q>.<span class="news-tag">Talk</span></p>
-    </li>
-    <li>
-      <span class="news-date">2026-02-03</span>
-      <p class="news-body">KITP&ndash;UCSB High Energy and Gravity Seminar: <q>Higher dimensional conformal fields from neural network statistics and applications</q>.<span class="news-tag">Talk</span></p>
-    </li>
-  </ul>
+  Format: {"date": "YYYY-MM-DD", "tag": "Talk", "text": "...", "url": null}
+    - "tag" is optional; use anything ("Talk", "Award", "Visit", "Paper")
+    - "url" is optional; use null for no link
+    - commas between entries, NO trailing comma after the last one
+  ============================================================
+-->
+<script type="application/json" id="news-manual">
+[
+  {
+    "date": "2026-05-13",
+    "tag": "Talk",
+    "text": "Caltech High Energy Theory Seminar: “Higher dimensional conformal fields from neural network statistics”.",
+    "url": null
+  },
+  {
+    "date": "2026-03-31",
+    "tag": "Talk",
+    "text": "UCSD Particle Physics Seminar: “Higher dimensional conformal fields from neural network statistics and applications”.",
+    "url": null
+  },
+  {
+    "date": "2026-03-30",
+    "tag": "Talk",
+    "text": "Narang Lab, UCLA: “Holographic Entropy Inequalities, Contraction Maps and Partial Cubes, and more”.",
+    "url": null
+  },
+  {
+    "date": "2026-03-02",
+    "tag": "Talk",
+    "text": "KITP Locals Lunch: “Entropy Inequalities”.",
+    "url": null
+  },
+  {
+    "date": "2026-02-03",
+    "tag": "Talk",
+    "text": "KITP–UCSB High Energy and Gravity Seminar: “Higher dimensional conformal fields from neural network statistics and applications”.",
+    "url": null
+  }
+]
+</script>
+
+<!--
+  AUTOMATIC ITEMS — rewritten by scripts/news_updates.py on every run.
+  Do not hand-edit; your changes will be overwritten.
+-->
+<script type="application/json" id="news-auto">
+{
+  "generated": null,
+  "items": []
+}
+</script>
+
+<script>
+(function () {
+  var root = document.getElementById('news-root');
+  var stampEl = document.getElementById('last-checked');
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function readJSON(id, fallback) {
+    var el = document.getElementById(id);
+    if (!el) return { ok: true, value: fallback };
+    try {
+      return { ok: true, value: JSON.parse(el.textContent) };
+    } catch (e) {
+      return { ok: false, value: fallback, error: e.message };
+    }
+  }
+
+  var manual = readJSON('news-manual', []);
+  var auto = readJSON('news-auto', { items: [] });
+
+  // A typo in the hand-edited block shouldn't blank the page silently.
+  if (!manual.ok) {
+    var warn = document.createElement('div');
+    warn.className = 'parse-error';
+    warn.textContent = 'The hand-written news entries could not be read (JSON error: ' +
+      manual.error + '). Check for a missing comma or quote in the news-manual block. ' +
+      'Automatic entries are still shown below.';
+    root.parentNode.insertBefore(warn, root);
+  }
+
+  var manualItems = (manual.value || []).map(function (i) { i._auto = false; return i; });
+  var autoItems = ((auto.value || {}).items || []).map(function (i) { i._auto = true; return i; });
+
+  var all = manualItems.concat(autoItems).filter(function (i) { return i && i.text; });
+
+  // Hand-written entries win over an automatic duplicate of the same day.
+  var seen = {};
+  var merged = [];
+  all.forEach(function (i) {
+    var key = (i.date || '') + '|' + (i.text || '').slice(0, 40).toLowerCase();
+    if (seen[key]) return;
+    seen[key] = true;
+    merged.push(i);
+  });
+
+  merged.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+
+  if (!merged.length) {
+    root.innerHTML = '<li><span class="news-date">—</span><p class="news-body">No news items yet.</p></li>';
+  } else {
+    root.innerHTML = merged.map(function (i) {
+      var tag = i.tag ? '<span class="news-tag">' + esc(i.tag) + '</span>' : '';
+      var mark = i._auto ? '<span class="auto-mark" title="Pulled automatically from INSPIRE">auto</span>' : '';
+      var body = i.url
+        ? '<a href="' + esc(i.url) + '" target="_blank" rel="noopener">' + esc(i.text) + '</a>'
+        : esc(i.text);
+      return '<li><span class="news-date">' + esc(i.date || '') + '</span>' +
+             '<p class="news-body">' + body + tag + mark + '</p></li>';
+    }).join('');
+  }
+
+  stampEl.textContent = (auto.value && auto.value.generated) || 'not yet run';
+})();
+</script>
 </body>
 </html>
