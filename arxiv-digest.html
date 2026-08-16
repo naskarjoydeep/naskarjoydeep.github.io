@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>arXiv Margins — Joydeep Naskar</title>
-<meta name="description" content="Automated daily digest of new arXiv papers in holography, quantum information, and mathematical physics, with a first-pass AI referee note for each.">
+<title>arXiv Digest — Joydeep Naskar</title>
+<meta name="description" content="Automated daily feed of new arXiv papers in holography, quantum information, and mathematical physics, matched against a topic list. No AI — each entry shows the paper's own abstract.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <style>
   :root {
@@ -14,8 +14,6 @@
     --ink-soft: #475569;
     --heading: #075985;
     --link: #0369a1;
-    --audit: #be123c;
-    --audit-bg: #fff1f2;
     --tag-bg: #e0f2fe;
     --shadow: 0 2px 8px rgba(0,0,0,0.05);
     --radius: 12px;
@@ -64,24 +62,6 @@
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
   .tag { font-family: var(--mono); font-size: 0.68rem; color: var(--link); background: var(--tag-bg); padding: 3px 9px; border-radius: 20px; }
   .summary { font-size: 0.96rem; margin: 0; }
-  .body-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
-  @media (min-width: 880px) {
-    .body-grid.has-audit { grid-template-columns: minmax(0,1fr) 260px; }
-  }
-  .audit-col {
-    background: var(--audit-bg); border-radius: 10px; padding: 14px 16px;
-  }
-  .audit-eyebrow {
-    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--audit); margin: 0 0 8px; display: flex; align-items: baseline; gap: 8px;
-  }
-  .confidence { text-transform: none; letter-spacing: 0; color: var(--ink-soft); font-weight: 400; font-size: 0.68rem; }
-  .audit-block { margin: 0 0 12px; }
-  .audit-block:last-child { margin-bottom: 0; }
-  .audit-block h4 { font-weight: 600; font-size: 0.78rem; color: var(--audit); margin: 0 0 4px; }
-  .audit-block ul { margin: 0; padding-left: 18px; font-size: 0.85rem; color: var(--ink); }
-  .audit-block li { margin-bottom: 4px; }
-  .audit-empty { font-size: 0.82rem; color: var(--ink-soft); font-style: italic; margin: 0; }
   .empty-state { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 40px 28px; text-align: center; color: var(--ink-soft); font-size: 0.95rem; }
   .empty-state strong { color: var(--ink); }
   footer.page-foot { margin-top: 40px; font-family: var(--mono); font-size: 0.74rem; color: var(--ink-soft); text-align: center; }
@@ -96,9 +76,9 @@
 <div class="wrap">
   <header class="page-head">
     <a class="back-link" href="./">&larr; naskarjoydeep.github.io</a>
-    <h1 class="title">arXiv Margins</h1>
-    <p class="subtitle">A daily automated read of new arXiv papers in holography, quantum information, and mathematical physics — a plain summary plus a first-pass AI referee note for each.</p>
-    <p class="mechanism-note">Generated automatically every day: new arXiv papers are matched against a topic list, then read and annotated by Claude. Treat the notes in the margin as a fast, sometimes-wrong first pass — not a substitute for reading the paper.</p>
+    <h1 class="title">arXiv Digest</h1>
+    <p class="subtitle">New arXiv papers in holography, quantum information, and mathematical physics, matched daily against a topic list — shown with each paper's own abstract.</p>
+    <p class="mechanism-note">No AI involved: a script queries arXiv's API and keyword-matches titles and abstracts against the topic list in <code>scripts/arxiv_digest.py</code>. What you see below is unedited, straight from the paper.</p>
     <div class="toolbar">
       <input type="text" id="filter" placeholder="Filter by title, category, or topic…" autocomplete="off">
       <span class="stamp">Last updated: <span id="last-updated">—</span></span>
@@ -121,15 +101,8 @@
     "categories": ["demo"],
     "published": "0000-00-00",
     "link": "#",
-    "summary": "This placeholder shows how a real entry will look, including inline math like $\\mathcal{N}=4$ SYM or a formula such as $S = -\\mathrm{Tr}(\\rho \\log \\rho)$. Once the workflow runs — on its daily schedule or triggered by hand from the Actions tab — real arXiv papers will replace this card automatically.",
-    "audit": {
-      "substantive": ["Example: a concern about an assumption or a gap in the argument would appear here."],
-      "formulas": ["Example: a notation or derivation issue would appear here."],
-      "framing": ["Example: a note about overclaiming or unclear novelty would appear here."],
-      "questions": ["Example: an open question for the authors would appear here."]
-    },
-    "matched_terms": ["demo"],
-    "confidence": "n/a"
+    "summary": "This placeholder shows how a real entry will look: title, authors, categories, and the paper's own abstract shown verbatim, including inline math like $\\mathcal{N}=4$ SYM or $S = -\\mathrm{Tr}(\\rho \\log \\rho)$. Once the workflow runs — on its daily schedule or triggered by hand from the Actions tab — real arXiv papers will replace this card automatically.",
+    "matched_terms": ["demo"]
   }
 ]
 </script>
@@ -173,38 +146,16 @@
     return order.map(function (d) { return [d, map[d]]; });
   }
 
-  function auditSection(label, items) {
-    if (!items || !items.length) return '';
-    return '<div class="audit-block"><h4>' + label + '</h4><ul>' +
-      items.map(function (i) { return '<li>' + escapeHtml(i) + '</li>'; }).join('') +
-      '</ul></div>';
-  }
-
   function paperCard(e) {
-    var audit = e.audit || {};
-    var hasAudit = ['substantive', 'formulas', 'framing', 'questions'].some(function (k) {
-      return audit[k] && audit[k].length;
-    });
     var tags = (e.matched_terms || []).slice(0, 6)
       .map(function (t) { return '<span class="tag">' + escapeHtml(t) + '</span>'; }).join('');
-    var auditHtml = hasAudit
-      ? auditSection('Substantive concerns', audit.substantive) +
-        auditSection('Formulas &amp; notation', audit.formulas) +
-        auditSection('Framing &amp; claims', audit.framing) +
-        auditSection('Questions for authors', audit.questions)
-      : '<p class="audit-empty">No issues flagged on this pass.</p>';
-    var confidence = e.confidence ? '<span class="confidence">(' + escapeHtml(e.confidence) + ' confidence)</span>' : '';
-
     return '' +
       '<article class="paper-card">' +
         '<h3><a href="' + escapeHtml(e.link || '#') + '" target="_blank" rel="noopener">' + escapeHtml(e.title) + '</a></h3>' +
         '<p class="meta-line">' + escapeHtml((e.authors || []).join(', ')) + ' &middot; ' +
           escapeHtml((e.categories || []).join(', ')) + ' &middot; <a href="' + escapeHtml(e.link || '#') + '" target="_blank" rel="noopener">' + escapeHtml(e.id || '') + '</a></p>' +
         (tags ? '<div class="tags">' + tags + '</div>' : '') +
-        '<div class="body-grid ' + (hasAudit ? 'has-audit' : '') + '">' +
-          '<div class="main-col"><p class="summary">' + escapeHtml(e.summary) + '</p></div>' +
-          '<div class="audit-col"><p class="audit-eyebrow">AI referee pass ' + confidence + '</p>' + auditHtml + '</div>' +
-        '</div>' +
+        '<p class="summary">' + escapeHtml(e.summary) + '</p>' +
       '</article>';
   }
 
