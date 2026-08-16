@@ -13,14 +13,16 @@
     .back-link { font-size: 0.9rem; color: #475569; }
     h1 { margin: 10px 0 6px; }
     .lede { color: #475569; max-width: 62ch; }
-    h2 { font-size: 1.15rem; margin: 0 0 14px; }
+    h2 { font-size: 1.15rem; margin: 0 0 16px; }
 
-    .entry-list { list-style: none; margin: 0; padding: 0; }
-    .entry-list li { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #f1f5f9; }
-    .entry-list li:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-    .entry-date { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.75rem; color: #475569; display: block; }
-    .entry-title { margin: 2px 0 0; font-style: italic; color: #0f172a; }
-    .entry-venue { margin: 1px 0 0; font-size: 0.9rem; color: #475569; }
+    .topic-list { list-style: none; margin: 0; padding: 0; }
+    .topic-list > li { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #f1f5f9; }
+    .topic-list > li:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .topic-title { font-style: italic; font-size: 1.02rem; color: #0f172a; margin: 0 0 6px; }
+    .venues { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 2px solid #e2e8f0; }
+    .venues li { font-size: 0.85rem; color: #475569; margin-bottom: 3px; }
+    .venues li:last-child { margin-bottom: 0; }
+    .venue-date { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.78rem; color: #64748b; }
     .plain-list { margin: 0 0 0 20px; padding: 0; }
     .plain-list li { margin-bottom: 8px; }
   </style>
@@ -28,118 +30,88 @@
 <body>
   <a class="back-link" href="biography.html">&larr; Biography</a>
   <h1>Scientific Participation</h1>
-  <p class="lede">Seminars and conference talks, poster presentations, and schools and workshops attended.</p>
+  <p class="lede">Talks and posters, grouped by topic, together with schools and workshops attended.</p>
 
   <section id="talks">
     <h2>Talks</h2>
-    <ul class="entry-list">
+    <ul class="topic-list">
       <li>
-        <span class="entry-date">13 May 2026</span>
-        <p class="entry-title">Higher dimensional conformal fields from neural network statistics</p>
-        <p class="entry-venue">Caltech High Energy Theory Seminar, Pasadena, CA</p>
+        <p class="topic-title">Higher dimensional conformal fields from neural network statistics and applications</p>
+        <ul class="venues">
+          <li>Caltech High Energy Theory Seminar, Pasadena, CA — <span class="venue-date">13 May 2026</span></li>
+          <li>UCSD Particle Physics Seminar, San Diego, CA — <span class="venue-date">31 March 2026</span></li>
+          <li>KITP&ndash;UCSB High Energy and Gravity Seminar, Broida 3302, Santa Barbara, CA — <span class="venue-date">3 February 2026</span></li>
+        </ul>
       </li>
       <li>
-        <span class="entry-date">31 March 2026</span>
-        <p class="entry-title">Higher dimensional conformal fields from neural network statistics and applications</p>
-        <p class="entry-venue">UCSD Particle Physics Seminar, San Diego, CA</p>
+        <p class="topic-title">Holographic Entropy Inequalities, Contraction Maps and Partial Cubes</p>
+        <ul class="venues">
+          <li>Narang Lab, UCLA, Los Angeles, CA — <span class="venue-date">30 March 2026</span></li>
+          <li>APS Global Physics Summit, Denver, CO — <span class="venue-date">March 2026</span></li>
+          <li>USC High Energy Theory Seminar, SSC 319, Los Angeles, CA — <span class="venue-date">4 February 2026</span></li>
+        </ul>
       </li>
       <li>
-        <span class="entry-date">30 March 2026</span>
-        <p class="entry-title">Holographic Entropy Inequalities, Contraction Maps and Partial Cubes, and more</p>
-        <p class="entry-venue">Narang Lab, UCLA, Los Angeles, CA</p>
+        <p class="topic-title">Holographic Entropy Inequalities</p>
+        <ul class="venues">
+          <li>KITP Locals Lunch, Santa Barbara, CA — <span class="venue-date">2 March 2026</span></li>
+          <li>Majorana&ndash;Raychaudhuri Seminar Series (online) — <span class="venue-date">19 December 2025</span></li>
+          <li>UMass Lowell Quantum Seminar, Lowell, MA — <span class="venue-date">21 November 2025</span></li>
+          <li>TASI Student Talks, Boulder, CO — <span class="venue-date">19 June 2024</span></li>
+        </ul>
       </li>
       <li>
-        <span class="entry-date">March 2026</span>
-        <p class="entry-title">Holographic Entropy Inequalities, Contraction Maps and Partial Cubes</p>
-        <p class="entry-venue">APS Global Physics Summit, Denver, CO</p>
+        <p class="topic-title">Neural Network Field Theories &mdash; Conformal Correlators</p>
+        <ul class="venues">
+          <li>IAIFI Journal Club, Cambridge, MA — <span class="venue-date">8 October 2025</span></li>
+        </ul>
       </li>
       <li>
-        <span class="entry-date">2 March 2026</span>
-        <p class="entry-title">Entropy Inequalities</p>
-        <p class="entry-venue">KITP Locals Lunch, Santa Barbara, CA</p>
+        <p class="topic-title">Towards a complete classification of holographic entropy inequalities</p>
+        <ul class="venues">
+          <li>Caltech High Energy Theory Seminar, Pasadena, CA — <span class="venue-date">5 March 2025</span></li>
+          <li>National Strings Meet, Ropar, India — <span class="venue-date">13 December 2024</span></li>
+        </ul>
       </li>
       <li>
-        <span class="entry-date">4 February 2026</span>
-        <p class="entry-title">Holographic Entropy Inequalities, Contraction Maps and Partial Cubes, and more</p>
-        <p class="entry-venue">USC High Energy Theory Seminar, SSC 319, Los Angeles, CA</p>
-      </li>
-      <li>
-        <span class="entry-date">3 February 2026</span>
-        <p class="entry-title">Higher dimensional conformal fields from neural network statistics and applications</p>
-        <p class="entry-venue">KITP&ndash;UCSB High Energy and Gravity Seminar, Broida 3302, Santa Barbara, CA</p>
-      </li>
-      <li>
-        <span class="entry-date">19 December 2025</span>
-        <p class="entry-title">Holographic Entropy Inequalities</p>
-        <p class="entry-venue">Majorana&ndash;Raychaudhuri Seminar Series (online)</p>
-      </li>
-      <li>
-        <span class="entry-date">21 November 2025</span>
-        <p class="entry-title">Holographic Entropy Inequalities</p>
-        <p class="entry-venue">UMass Lowell Quantum Seminar, Lowell, MA</p>
-      </li>
-      <li>
-        <span class="entry-date">8 October 2025</span>
-        <p class="entry-title">Neural Network Field Theories &mdash; Conformal Correlators</p>
-        <p class="entry-venue">IAIFI Journal Club, Cambridge, MA</p>
-      </li>
-      <li>
-        <span class="entry-date">5 March 2025</span>
-        <p class="entry-title">Towards a complete classification of holographic entropy inequalities, and beyond&hellip;</p>
-        <p class="entry-venue">Caltech High Energy Theory Seminar, Pasadena, CA</p>
-      </li>
-      <li>
-        <span class="entry-date">26 February 2025</span>
-        <p class="entry-title">Conformal Fields from Neural Networks</p>
-        <p class="entry-venue">Indian Institute of Science CHEP Seminar, Bangalore, India (online)</p>
-      </li>
-      <li>
-        <span class="entry-date">13 December 2024</span>
-        <p class="entry-title">Towards a complete classification of holographic entropy inequalities</p>
-        <p class="entry-venue">National Strings Meet, Ropar, India</p>
-      </li>
-      <li>
-        <span class="entry-date">18 October 2024</span>
-        <p class="entry-title">Conformal Fields from Neural Networks</p>
-        <p class="entry-venue">New England Section of the APS Meeting, Boston, MA</p>
-      </li>
-      <li>
-        <span class="entry-date">19 June 2024</span>
-        <p class="entry-title">Holographic Entropy Inequalities</p>
-        <p class="entry-venue">TASI Student Talks, Boulder, CO</p>
+        <p class="topic-title">Conformal Fields from Neural Networks</p>
+        <ul class="venues">
+          <li>Indian Institute of Science CHEP Seminar, Bangalore, India (online) — <span class="venue-date">26 February 2025</span></li>
+          <li>New England Section of the APS Meeting, Boston, MA — <span class="venue-date">18 October 2024</span></li>
+        </ul>
       </li>
     </ul>
   </section>
 
   <section id="posters">
     <h2>Posters</h2>
-    <ul class="entry-list">
+    <ul class="topic-list">
       <li>
-        <span class="entry-date">2025</span>
-        <p class="entry-title">Towards a Complete Classification of Holographic Entropy Inequalities</p>
-        <p class="entry-venue">AAAS Annual Meeting, Boston, MA</p>
+        <p class="topic-title">Towards a Complete Classification of Holographic Entropy Inequalities</p>
+        <ul class="venues">
+          <li>AAAS Annual Meeting, Boston, MA — <span class="venue-date">2025</span></li>
+          <li>Strings 2025, Abu Dhabi, UAE — <span class="venue-date">Spring 2025</span></li>
+        </ul>
       </li>
       <li>
-        <span class="entry-date">Spring 2025</span>
-        <p class="entry-title">Towards a Complete Classification of Holographic Entropy Inequalities</p>
-        <p class="entry-venue">Strings 2025, Abu Dhabi, UAE</p>
+        <p class="topic-title">Conformal Fields from Neural Networks</p>
+        <ul class="venues">
+          <li>Boston Symmetry Day, Boston, MA — <span class="venue-date">Spring 2024</span></li>
+        </ul>
       </li>
       <li>
-        <span class="entry-date">Spring 2024</span>
-        <p class="entry-title">Conformal Fields from Neural Networks</p>
-        <p class="entry-venue">Boston Symmetry Day, Boston, MA</p>
-      </li>
-      <li>
-        <span class="entry-date">Summer 2023</span>
-        <p class="entry-title">Proving Holographic Entropy Inequalities using Contraction Maps</p>
-        <p class="entry-venue">Prospects in Theoretical Physics Poster Session, IAS, Princeton, NJ</p>
+        <p class="topic-title">Proving Holographic Entropy Inequalities using Contraction Maps</p>
+        <ul class="venues">
+          <li>Prospects in Theoretical Physics Poster Session, IAS, Princeton, NJ — <span class="venue-date">Summer 2023</span></li>
+        </ul>
       </li>
     </ul>
   </section>
 
   <section id="attended">
-    <h2>Schools &amp; Workshops Attended</h2>
+    <h2>Conferences, Workshops &amp; Schools Attended</h2>
     <ul class="plain-list">
+      <li><strong>2026</strong> — International Congress of Basic Science, Beijing, China.</li>
       <li><strong>2025</strong> — Indian Strings Meeting, India.</li>
       <li><strong>2023</strong> — Workshop on Spacetime and Quantum Information, IAS, Princeton, NJ, USA.</li>
       <li><strong>2022, 2023</strong> — IAIFI Summer School and Workshop, Boston, MA, USA.</li>
