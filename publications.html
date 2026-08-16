@@ -26,6 +26,12 @@
     .pub-meta { font-size: 0.88rem; color: #475569; }
     .journal { font-weight: 600; color: #0f172a; }
     .cites { display: inline-block; font-size: 0.75rem; background: #e0f2fe; color: #0369a1; padding: 1px 8px; border-radius: 20px; margin-left: 4px; }
+    .cats { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
+    .cat { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.7rem; color: #475569; background: #f1f5f9; padding: 2px 8px; border-radius: 20px; }
+    details.abstract { margin: 8px 0 0; }
+    details.abstract summary { font-size: 0.85rem; color: #0369a1; cursor: pointer; width: fit-content; }
+    details.abstract summary:hover { text-decoration: underline; }
+    details.abstract p { font-size: 0.9rem; color: #334155; margin: 8px 0 0; padding-left: 12px; border-left: 3px solid #e2e8f0; max-width: 78ch; }
     .links a { font-size: 0.88rem; margin-right: 10px; }
     .stamp { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.74rem; color: #475569; text-align: center; margin-top: 30px; }
     .empty { color: #475569; font-style: italic; }
@@ -110,11 +116,21 @@
         var journal = r.journal ? '<span class="journal">' + esc(r.journal) + '</span>' : '<em>Preprint</em>';
         var cites = (r.citations && r.citations > 0)
           ? '<span class="cites">' + esc(r.citations) + (r.citations === 1 ? ' citation' : ' citations') + '</span>' : '';
+        var cats = (r.categories && r.categories.length)
+          ? '<div class="cats">' + r.categories.map(function (c) {
+              return '<span class="cat">' + esc(c) + '</span>';
+            }).join('') + '</div>'
+          : '';
+        var abstract = r.abstract
+          ? '<details class="abstract"><summary>Abstract</summary><p>' + esc(r.abstract) + '</p></details>'
+          : '';
         return '<li>' +
           '<div class="pub-title">' + esc(r.title) + '</div>' +
           '<div class="pub-authors">' + authorList(r.authors) + '</div>' +
           '<div class="pub-meta">' + journal + cites + '</div>' +
+          cats +
           '<div class="links">' + linkBits(r) + '</div>' +
+          abstract +
         '</li>';
       }).join('') +
       '</ol></section>';
