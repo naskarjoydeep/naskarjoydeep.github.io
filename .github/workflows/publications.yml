@@ -2,8 +2,7 @@ name: Publications
 
 on:
   schedule:
-    # Weekly, Mondays at 06:00 UTC. Publication records change slowly, so
-    # there's no reason to hit INSPIRE daily.
+    # Weekly, Mondays at 06:00 UTC.
     - cron: "0 6 * * 1"
   workflow_dispatch: {}   # lets you trigger a run by hand from the Actions tab
 
