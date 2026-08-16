@@ -1,1 +1,12 @@
-
+[
+  {
+    "id": "example",
+    "title": "Example entry — this shows the layout",
+    "authors": ["Generated automatically"],
+    "categories": ["demo"],
+    "published": "0000-00-00",
+    "link": "#",
+    "summary": "This placeholder shows how a real entry will look: title, authors, categories, and the paper's own abstract shown verbatim, including inline math like $\\mathcal{N}=4$ SYM or $S = -\\mathrm{Tr}(\\rho \\log \\rho)$. Once the workflow runs — on its daily schedule or triggered by hand from the Actions tab — real arXiv papers will replace this card automatically.",
+    "matched_terms": ["demo"]
+  }
+]
