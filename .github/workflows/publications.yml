@@ -1,0 +1,37 @@
+name: Publications
+
+on:
+  schedule:
+    # Weekly, Mondays at 06:00 UTC. Publication records change slowly, so
+    # there's no reason to hit INSPIRE daily.
+    - cron: "0 6 * * 1"
+  workflow_dispatch: {}   # lets you trigger a run by hand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  sync-publications:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Sync from INSPIRE
+        run: python scripts/inspire_publications.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "inspire-sync-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add publications.html
+          git diff --quiet --cached || git commit -m "Sync publications from INSPIRE ($(date -u +%Y-%m-%d))"
+          git push
