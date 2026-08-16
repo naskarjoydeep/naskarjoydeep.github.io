@@ -1,0 +1,36 @@
+name: News
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Weekly, Mondays at 07:00 UTC (an hour after the publications sync).
+    - cron: "0 7 * * 1"
+
+permissions:
+  contents: write
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Update news from INSPIRE
+        run: python scripts/news_updates.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "news-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add news.html
+          git diff --quiet --cached || git commit -m "Update news from INSPIRE ($(date -u +%Y-%m-%d))"
+          git push
