@@ -15,6 +15,7 @@ import json
 import os
 import re
 import sys
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 
 import requests
@@ -121,6 +122,128 @@ def fetch_literature(session, bai):
     )
 
 
+MATHML_RE = re.compile(r"<math\b[^>]*>(.*?)</math>", re.DOTALL | re.IGNORECASE)
+
+# Operators/symbols INSPIRE emits as literal unicode inside <mo>/<mi>.
+SYMBOL_MAP = {
+    "\u2212": "-", "\u2013": "-", "\u2014": "-",      # minus / en / em dash
+    "\u00d7": r"\times", "\u22c5": r"\cdot", "\u2217": "*",
+    "\u2264": r"\leq", "\u2265": r"\geq", "\u2260": r"\neq",
+    "\u2248": r"\approx", "\u223c": r"\sim", "\u2245": r"\cong",
+    "\u2192": r"\to", "\u21d2": r"\Rightarrow", "\u2208": r"\in",
+    "\u221e": r"\infty", "\u2202": r"\partial", "\u2207": r"\nabla",
+    "\u222b": r"\int", "\u2211": r"\sum", "\u220f": r"\prod",
+    "\u221a": r"\sqrt", "\u00b1": r"\pm", "\u2295": r"\oplus",
+    "\u2297": r"\otimes", "\u2286": r"\subseteq", "\u2282": r"\subset",
+    "\u222a": r"\cup", "\u2229": r"\cap",
+}
+for _name, _ch in [
+    ("alpha", "\u03b1"), ("beta", "\u03b2"), ("gamma", "\u03b3"), ("delta", "\u03b4"),
+    ("epsilon", "\u03b5"), ("zeta", "\u03b6"), ("eta", "\u03b7"), ("theta", "\u03b8"),
+    ("iota", "\u03b9"), ("kappa", "\u03ba"), ("lambda", "\u03bb"), ("mu", "\u03bc"),
+    ("nu", "\u03bd"), ("xi", "\u03be"), ("pi", "\u03c0"), ("rho", "\u03c1"),
+    ("sigma", "\u03c3"), ("tau", "\u03c4"), ("phi", "\u03c6"), ("chi", "\u03c7"),
+    ("psi", "\u03c8"), ("omega", "\u03c9"),
+    ("Gamma", "\u0393"), ("Delta", "\u0394"), ("Theta", "\u0398"), ("Lambda", "\u039b"),
+    ("Xi", "\u039e"), ("Pi", "\u03a0"), ("Sigma", "\u03a3"), ("Phi", "\u03a6"),
+    ("Psi", "\u03a8"), ("Omega", "\u03a9"),
+]:
+    SYMBOL_MAP[_ch] = "\\" + _name
+
+
+def _strip_ns(tag):
+    return tag.split("}", 1)[-1] if "}" in tag else tag
+
+
+def _map_symbols(text):
+    out = []
+    for ch in text:
+        rep = SYMBOL_MAP.get(ch)
+        if rep is None:
+            out.append(ch)
+        elif rep.startswith("\\"):
+            # Trailing space so \leq followed by A doesn't become \leqA
+            out.append(rep + " ")
+        else:
+            out.append(rep)
+    return "".join(out)
+
+
+def _mathml_node_to_latex(node):
+    """Recursively turn one MathML element into a LaTeX fragment."""
+    tag = _strip_ns(node.tag)
+    kids = list(node)
+
+    def kid(i):
+        return _mathml_node_to_latex(kids[i]) if i < len(kids) else ""
+
+    def own_text():
+        return _map_symbols((node.text or "").strip())
+
+    if tag in ("mi", "mn", "mo", "mtext"):
+        out = own_text()
+        # Multi-letter identifiers should be upright, as in \mathrm{AdS}
+        if tag == "mi" and len(out) > 1 and out.isalpha():
+            out = r"\mathrm{" + out + "}"
+        return out
+    if tag in ("mrow", "math", "mstyle", "semantics", "mpadded"):
+        return "".join(_mathml_node_to_latex(k) for k in kids)
+    if tag == "msup":
+        return "{" + kid(0) + "}^{" + kid(1) + "}"
+    if tag == "msub":
+        return "{" + kid(0) + "}_{" + kid(1) + "}"
+    if tag == "msubsup":
+        return "{" + kid(0) + "}_{" + kid(1) + "}^{" + kid(2) + "}"
+    if tag == "mfrac":
+        return r"\frac{" + kid(0) + "}{" + kid(1) + "}"
+    if tag == "msqrt":
+        return r"\sqrt{" + "".join(_mathml_node_to_latex(k) for k in kids) + "}"
+    if tag == "mroot":
+        return r"\sqrt[" + kid(1) + "]{" + kid(0) + "}"
+    if tag == "mover":
+        return r"\overline{" + kid(0) + "}"
+    if tag == "munder":
+        return r"\underline{" + kid(0) + "}"
+    if tag == "mspace":
+        return " "
+    if tag == "annotation":
+        return ""  # alternate encodings; skip so they don't double up
+    # Unknown element: fall back to concatenating whatever is inside it
+    return own_text() + "".join(_mathml_node_to_latex(k) for k in kids)
+
+
+def mathml_to_latex(fragment):
+    """Convert one <math> inner fragment to LaTeX. Returns None if unparseable."""
+    try:
+        root = ET.fromstring("<math>" + fragment + "</math>")
+    except ET.ParseError:
+        return None
+    latex = _mathml_node_to_latex(root).strip()
+    latex = re.sub(r"\s+", " ", latex)
+    return latex or None
+
+
+def clean_text(s):
+    """Normalize an INSPIRE title/abstract: MathML -> LaTeX, fix invisible chars."""
+    if not s:
+        return s
+
+    def repl(match):
+        latex = mathml_to_latex(match.group(1))
+        if latex is None:
+            # Unparseable: strip the markup rather than show raw tags
+            return re.sub(r"<[^>]+>", "", match.group(1))
+        return "$" + latex + "$"
+
+    s = MATHML_RE.sub(repl, s)
+    # Soft hyphens render as nothing, turning "fractal-like" into "fractallike"
+    s = s.replace("\u00ad", "-")
+    s = s.replace("\u200b", "")           # zero-width space
+    s = s.replace("\u00a0", " ")          # non-breaking space
+    s = re.sub(r"\s+", " ", s)
+    return s.strip()
+
+
 def format_author(full_name):
     """INSPIRE gives 'Bao, Ning'; render it as 'N. Bao' to match the site style."""
     if "," not in full_name:
@@ -137,11 +260,36 @@ def format_author(full_name):
     return (" ".join(initials) + " " + surname).strip() if initials else surname
 
 
+# Only these INSPIRE document types are listed. INSPIRE tags journal articles
+# and arXiv preprints alike as "article", so this keeps both while dropping
+# theses, conference proceedings, book chapters, reports, and notes.
+ALLOWED_DOCUMENT_TYPES = {"article"}
+
+# A record carrying any of these is dropped even if it is also tagged
+# "article" — proceedings published in a journal are the common case.
+EXCLUDED_DOCUMENT_TYPES = {
+    "thesis", "book", "book chapter", "proceedings", "conference paper",
+    "note", "report", "activity report",
+}
+
+
+def is_journal_article(hit):
+    """True if the record should appear on the publications page."""
+    types = {str(t).lower() for t in (hit.get("metadata", {}).get("document_type") or [])}
+    if not types:
+        # INSPIRE nearly always sets this; if it's absent, keep the record
+        # rather than silently dropping a real paper.
+        return True
+    if types & EXCLUDED_DOCUMENT_TYPES:
+        return False
+    return bool(types & ALLOWED_DOCUMENT_TYPES)
+
+
 def parse_record(hit):
     m = hit.get("metadata", {})
 
     titles = m.get("titles") or [{}]
-    title = titles[0].get("title", "(untitled)")
+    title = clean_text(titles[0].get("title", "")) or "(untitled)"
 
     raw_authors = [a.get("full_name", "") for a in m.get("authors", []) if a.get("full_name")]
     authors = [format_author(a) for a in raw_authors]
@@ -170,9 +318,7 @@ def parse_record(hit):
             (a for a in abstracts if (a.get("source") or "").lower() == "arxiv"),
             abstracts[0],
         )
-        abstract = (preferred.get("value") or "").strip() or None
-        if abstract:
-            abstract = re.sub(r"\s+", " ", abstract)
+        abstract = clean_text(preferred.get("value") or "") or None
 
     doi = None
     dois = m.get("dois") or []
@@ -250,7 +396,19 @@ def main():
     bai = discover_bai(session)
     hits = fetch_literature(session, bai)
 
-    records = [parse_record(h) for h in hits]
+    kept, dropped = [], []
+    for h in hits:
+        (kept if is_journal_article(h) else dropped).append(h)
+
+    if dropped:
+        print(f"Excluded {len(dropped)} non-article record(s):")
+        for h in dropped:
+            md = h.get("metadata", {})
+            t = (md.get("titles") or [{}])[0].get("title", "(untitled)")
+            dt = ", ".join(md.get("document_type") or []) or "no document_type"
+            print(f"  - [{dt}] {t[:70]}")
+
+    records = [parse_record(h) for h in kept]
     # Newest first; unpublished/undated sort last
     records.sort(key=lambda r: (r["year"] if r["year"].isdigit() else "0000"), reverse=True)
 
