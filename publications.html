@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Publications — Joydeep Naskar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
   <style>
     body { font-family: system-ui, sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.6; margin: 0; padding: 20px; max-width: 900px; margin: auto; }
     h1, h2, h3 { color: #075985; }
@@ -40,7 +41,7 @@
 <body>
   <a class="back-link" href="index.html">&larr; Joydeep Naskar</a>
   <h1>Publications</h1>
-  <p class="lede">Synced automatically from <a href="https://inspirehep.net/authors/2044957" target="_blank" rel="noopener">INSPIRE-HEP</a>. Updated once a week.</p>
+  <p class="lede">Synced automatically from <a href="https://inspirehep.net/authors/2044957" target="_blank" rel="noopener">INSPIRE-HEP</a>. Citation counts reflect the most recent sync.</p>
 
   <div class="summary-bar" id="summary"></div>
   <main id="pubs-root"></main>
@@ -48,273 +49,9 @@
 
 <script type="application/json" id="publications-data">
 {
-  "synced": "2026-08-16",
-  "summary": {
-    "papers": 14,
-    "citations": 121,
-    "h_index": 7
-  },
-  "records": [
-    {
-      "title": "On a mixed-state extension of the holographic signal inequality",
-      "authors": [
-        "J. Naskar"
-      ],
-      "arxiv": "2605.26617",
-      "categories": [
-        "hep-th",
-        "quant-ph"
-      ],
-      "abstract": "A novel inequality involving the residual entropy and genuine multi-entropy was proposed in \\cite{Balasubramanian:2025hxg} for tripartite holographic pure states, using which it was argued, that purely GHZ-like tripartite entanglement is not allowed in holography. In this work, we generalize this holographic signal inequality to mixed states. In a minimal extension, we compute the reflected genuine multi-entropy following \\cite{Yuan:2024yfg} and find a class of holographic geometries that violate this minimally extended inequality due to vanishing Markov gap. We can symmetrize this prescription, where instead of computing the residual entropy on the given mixed state $ρ_{ABC}$, we compute it on its canonical purification. The inequality is restored on the canonically purified state, as expected. Finally, we conjecture a new inequality for tripartite holographic states and give supporting evidence.",
-      "doi": null,
-      "journal": null,
-      "year": "2026",
-      "citations": 4,
-      "inspire_id": 3160262
-    },
-    {
-      "title": "Multipartite correlations in holography",
-      "authors": [
-        "J. Naskar"
-      ],
-      "arxiv": null,
-      "categories": [],
-      "abstract": "Understanding the nature of quantum gravity is an important goal of contemporary physics: it is expected to shed light on black hole interiors and associated problems such as the information paradox, while also informing early-universe cosmology. A complete theory would also need to unify gravity with the Standard Model, and string theory is a leading candidate, albeit with its own present limitations. One of its most useful offshoots is a concrete realization of the holographic principle --- the $AdS/CFT$ correspondence --- in which a theory of gravity in $(d+1)$ dimensions is captured by a $d$-dimensional conformal field theory living on its boundary, letting us recast questions about the gravitational theory in its non-gravitational dual. The central object of this thesis is the entanglement structure of quantum states in the boundary CFT that admit a semiclassical gravity bulk dual. The story we will tell is one in which a sharp question about quantum information --- ``how is correlation distributed among many parties of a quantum system?'' --- receives, in the holographic setting, a fascinating geometric answer. Inequalities that constrain entropies of subsystems turn out to be statements about minimal surfaces in the higher-dimensional spacetime; multipartite correlations are encoded by the way bulk regions thread between boundary subsystems. The \\emph{holographic entropy cone} approaches this problem by discretizing the bulk geometry and translating it into the language of graph theory. In this thesis, we address some open problems in the holographic entropy cone program. In particular, we develop an efficient algorithm for proving holographic entropy inequalities and discover a triality between holographic entropy inequalities, contraction maps, and graph maps between hypercubes and partial cubes. We exploit this triality and some physical assumptions to resolve the standing question of completeness of the contraction-map proof method. Finally, we give an algorithm to enumerate all holographic entropy inequalities. We also discuss a tripartite holographic correlation signal for genuine multipartite entanglement.--Author's abstract",
-      "doi": null,
-      "journal": null,
-      "year": "2026",
-      "citations": 0,
-      "inspire_id": 3185432
-    },
-    {
-      "title": "Tripartite correlation signal from multipartite entanglement of purification",
-      "authors": [
-        "N. Bao",
-        "K. Furuya",
-        "J. Naskar"
-      ],
-      "arxiv": "2509.08209",
-      "categories": [
-        "hep-th",
-        "quant-ph"
-      ],
-      "abstract": "We propose a signal $Δ^{(3)}_p$ for genuine tripartite entanglement in finite-dimensional quantum systems and $Δ^{(3)}_w$ for holographic systems. We prove that $Δ^{(3)}_p$ is non-negative for any tripartite entangled mixed states. Based on the conjecture, the equality between an entanglement wedge cross section $E_w$ and entanglement of purification $E_p$, i.e., $E_w = E_P$ in the semiclassical limit, we apply the tripartite entanglement measure to study the structures of tripartite entanglement in AdS$_3$/CFT$_2$, especially for pure AdS$_3$. We comment on a generalization to $n$-partite entanglement signals $Δ^{(n)}_p(A_1:\\cdots:A_n)$.",
-      "doi": "10.1007/JHEP05(2026)236",
-      "journal": "JHEP 05 (2026) 236",
-      "year": "2026",
-      "citations": 15,
-      "inspire_id": 2968629
-    },
-    {
-      "title": "Topological entanglement entropy meets holographic entropy inequalities",
-      "authors": [
-        "J. Naskar",
-        "S. S. Samal"
-      ],
-      "arxiv": "2412.05484",
-      "categories": [
-        "quant-ph",
-        "cond-mat.str-el",
-        "hep-th"
-      ],
-      "abstract": "Topological entanglement entropy (TEE) is an efficient way to detect topological order in the ground state of gapped Hamiltonians. The seminal work of Kitaev and Preskill~\\cite{preskill-kitaev-tee} and simultaneously by Levin and Wen~\\cite{levin-wen-tee} proposed information quantities that can probe the TEE. In the present work, we explain why the subtraction schemes in the proposed information quantities~\\cite{levin-wen-tee,preskill-kitaev-tee} work for the computation of TEE and generalize them for arbitrary number of subregions by explicitly noting the necessary conditions for an information quantity to capture TEE. Our conditions differentiate the probes defined by Kitaev-Preskill and Levin-Wen into separate classes. While there are infinitely many possible probes of TEE, we focus particularly on the cyclic quantities $Q_{2n+1}$ and multi-information $I_n$. We also show that the holographic entropy inequalities are satisfied by the quantum entanglement entropy of the non-degenerate ground state of a topologically ordered two-dimensional medium with a mass gap.",
-      "doi": "10.1103/hvf8-jcff",
-      "journal": "Phys.Rev.D 114 (2026) 026025",
-      "year": "2026",
-      "citations": 4,
-      "inspire_id": 2857321
-    },
-    {
-      "title": "On the completeness of contraction map proof method for holographic entropy inequalities",
-      "authors": [
-        "N. Bao",
-        "K. Furuya",
-        "J. Naskar"
-      ],
-      "arxiv": "2506.18086",
-      "categories": [
-        "hep-th",
-        "math-ph",
-        "math.MP",
-        "quant-ph"
-      ],
-      "abstract": "The contraction map proof method is the commonly used method to prove holographic entropy inequalities. Existence of a contraction map corresponding to a holographic entropy inequality is a sufficient condition for its validity. But is it also necessary? In this note, we answer that question in affirmative for all linear holographic entropy inequalities with rational coefficients. We show that the pre-image of a non-contraction map is not a hypercube, but a proper cubical subgraph, and show that this manifests as alterations to the geodesic structure in the bulk, which leads to the violation of inequalities by holographic geometries obeying the RT formula.",
-      "doi": "10.1007/JHEP12(2025)140",
-      "journal": "JHEP 12 (2025) 140",
-      "year": "2025",
-      "citations": 7,
-      "inspire_id": 2937934
-    },
-    {
-      "title": "Revisiting holographic codes with fractallike boundary erasures",
-      "authors": [
-        "A. Bhattacharjee",
-        "J. Naskar"
-      ],
-      "arxiv": "2411.02825",
-      "categories": [
-        "hep-th",
-        "quant-ph"
-      ],
-      "abstract": "In this paper we investigate the code properties of holographic fractal geometries initiated in \\cite{Pastawski:2016qrs}. We study reconstruction wedges in $AdS_3/CFT_2$ for black hole backgrounds, which are in qualitative agreement with the vacuum-AdS approximation using generalized entanglement entropy in \\cite{Bao:2022tgv}. In higher dimensions, we study reconstruction wedges for the infinite, straight strip in $AdS_{d+1}/CFT_{d}$ and clarify the roles of `straight' and `infinite' in their code properties. Lastly, we comment on uberholography from the perspective of complexity transfer and one-shot holography.",
-      "doi": "10.1103/PhysRevD.111.026012",
-      "journal": "Phys.Rev.D 111 (2025) 026012",
-      "year": "2025",
-      "citations": 3,
-      "inspire_id": 2845613
-    },
-    {
-      "title": "Towards a complete classification of holographic entropy inequalities",
-      "authors": [
-        "N. Bao",
-        "K. Furuya",
-        "J. Naskar"
-      ],
-      "arxiv": "2409.17317",
-      "categories": [
-        "hep-th",
-        "cs.DM",
-        "quant-ph"
-      ],
-      "abstract": "We propose a deterministic method to find all holographic entropy inequalities that have corresponding contraction maps and argue the completeness of our method. We use a triality between holographic entropy inequalities, contraction maps and partial cubes. More specifically, the validity of a holographic entropy inequality is implied by the existence of a contraction map, which we prove to be equivalent to finding an isometric embedding of a contracted graph. Thus, by virtue of the argued completeness of the contraction map proof method, the problem of finding all holographic entropy inequalities is equivalent to the problem of finding all contraction maps, which we translate to a problem of finding all image graph partial cubes. We give an algorithmic solution to this problem and characterize the complexity of our method. We also demonstrate interesting by-products, most notably, a procedure to generate candidate quantum entropy inequalities.",
-      "doi": "10.1007/JHEP03(2025)117",
-      "journal": "JHEP 03 (2025) 117",
-      "year": "2025",
-      "citations": 19,
-      "inspire_id": 2833838
-    },
-    {
-      "title": "Conformal fields from neural networks",
-      "authors": [
-        "J. Halverson",
-        "J. Naskar",
-        "J. Tian"
-      ],
-      "arxiv": "2409.12222",
-      "categories": [
-        "hep-th",
-        "cs.LG"
-      ],
-      "abstract": "We use the embedding formalism to construct conformal fields in $D$ dimensions, by restricting Lorentz-invariant ensembles of homogeneous neural networks in $(D+2)$ dimensions to the projective null cone. Conformal correlators may be computed using the parameter space description of the neural network. Exact four-point correlators are computed in a number of examples, and we perform a 4D conformal block decomposition that elucidates the spectrum. In some examples the analysis is facilitated by recent approaches to Feynman integrals. Generalized free CFTs are constructed using the infinite-width Gaussian process limit of the neural network, enabling a realization of the free boson. The extension to deep networks constructs conformal fields at each subsequent layer, with recursion relations relating their conformal dimensions and four-point functions. Numerical approaches are discussed.",
-      "doi": "10.1007/JHEP10(2025)039",
-      "journal": "JHEP 10 (2025) 039",
-      "year": "2025",
-      "citations": 24,
-      "inspire_id": 2830440
-    },
-    {
-      "title": "Subregion duality, wedge classification and no global symmetries in AdS/CFT",
-      "authors": [
-        "N. Bao",
-        "Y. Jiang",
-        "J. Naskar"
-      ],
-      "arxiv": "2408.04016",
-      "categories": [
-        "hep-th"
-      ],
-      "abstract": "We study various notions of `subregion duality' in the context of AdS/CFT. We highlight the differences between the `background wedge' and the `operator reconstruction wedges,' providing a resolution to the paradox raised in \\cite{Bao:2019hwq}. Additionally, we elucidate the distinctions between four different `operator reconstruction wedges' and demonstrate how to enhance the proof for the absence of global symmetries in geometrical states in AdS/CFT \\cite{Harlow:2018jwu, Harlow:2018tng} as an example of these distinctions.",
-      "doi": "10.1007/JHEP01(2025)064",
-      "journal": "JHEP 01 (2025) 064",
-      "year": "2025",
-      "citations": 8,
-      "inspire_id": 2816345
-    },
-    {
-      "title": "Classical and quantum multiplayer Colonel Blotto game in all-optical setup",
-      "authors": [
-        "G. Tiago",
-        "J. Naskar",
-        "A. C. Maioli",
-        "W. F. Balthazar",
-        "A. G. M. Schmidt",
-        "J. A. O. Huguenin"
-      ],
-      "arxiv": "2008.00762",
-      "categories": [
-        "quant-ph"
-      ],
-      "abstract": "In this work we successfully present a quantum version of the multiplayer Colonel Blotto game. We find that players with access to the quantum strategies has a advantage over the classical ones. The payoff is invariant under the order of the strategies.",
-      "doi": "10.1007/s11128-025-04760-3",
-      "journal": "Quant.Inf.Proc. 24 (2025) 152",
-      "year": "2025",
-      "citations": 3,
-      "inspire_id": 2806399
-    },
-    {
-      "title": "A framework for generalizing toric inequalities for holographic entanglement entropy",
-      "authors": [
-        "N. Bao",
-        "K. Furuya",
-        "J. Naskar"
-      ],
-      "arxiv": "2408.04741",
-      "categories": [
-        "hep-th",
-        "quant-ph"
-      ],
-      "abstract": "We conjecture a multi-parameter generalization of the toric inequalities of \\cite{Czech:2023xed}. We then extend their proof methods for the generalized toric inequalities in two ways. The first extension constructs the graph corresponding to the toric inequalities and the generalized toric conjectures by tiling the Euclidean space. An entanglement wedge nesting relation then determines the geometric structure of the tiles. In the second extension, we exploit the cyclic nature of the inequalities and conjectures to construct cycle graphs. Then, the graph can be obtained using graph Cartesian products of cycle graphs. In addition, we define a set of knots on the graph by following \\cite{Czech:2023xed}. These graphs with knots then imply the validity of their associated inequality. We study the case where the graph can be decomposed into disjoint unions of torii. Under the specific case, we explore and prove the conjectures for some ranges of parameters. We also discuss ways to explore the conjectured inequalities whose corresponding geometries are $d$-dimensional torii $(d>2)$",
-      "doi": "10.1007/JHEP10(2024)251",
-      "journal": "JHEP 10 (2024) 251",
-      "year": "2024",
-      "citations": 9,
-      "inspire_id": 2816888
-    },
-    {
-      "title": "Properties of the contraction map for holographic entanglement entropy inequalities",
-      "authors": [
-        "N. Bao",
-        "J. Naskar"
-      ],
-      "arxiv": "2403.13283",
-      "categories": [
-        "hep-th",
-        "cs.DM"
-      ],
-      "abstract": "We present a deterministic way of finding contraction maps for candidate holographic entanglement entropy inequalities modulo choices due to actual degeneracy. We characterize its complexity and give an argument for the completeness of the contraction map proof method as a necessary and sufficient condition for the validity of an entropy inequality for holographic entanglement.",
-      "doi": "10.1007/JHEP06(2024)039",
-      "journal": "JHEP 06 (2024) 039",
-      "year": "2024",
-      "citations": 15,
-      "inspire_id": 2770435
-    },
-    {
-      "title": "Reconstruction wedges in <math display=\"inline\"><mrow><mi>AdS</mi><mo>/</mo><mi>CFT</mi></mrow></math> with boundary fractallike structures",
-      "authors": [
-        "N. Bao",
-        "J. Naskar"
-      ],
-      "arxiv": "2209.15026",
-      "categories": [
-        "hep-th",
-        "quant-ph"
-      ],
-      "abstract": "In this work, we show the robustness of uberholography and its associated quantum error correcting code against the breakdown of entanglement wedge in the presence of highly entropic mixed states in the bulk. We show that for Cantor-set-like erasure in the boundary in $AdS_3/CFT_2$, the code distance is independent of the mixed-state entropy in the bulk in the $m\\rightarrow\\infty$ limit. We also show that for a Sierpinski triangle shaped boundary subregion with fractal boundary erasures in $AdS_4/CFT_3$, bulk reconstruction is possible in the presence of highly entropic mixed states in the bulk in the large $m$ regime.",
-      "doi": "10.1103/PhysRevD.107.066014",
-      "journal": "Phys.Rev.D 107 (2023) 066014",
-      "year": "2023",
-      "citations": 4,
-      "inspire_id": 2158989
-    },
-    {
-      "title": "Code properties of the holographic Sierpinski triangle",
-      "authors": [
-        "N. Bao",
-        "J. Naskar"
-      ],
-      "arxiv": "2203.01379",
-      "categories": [
-        "hep-th",
-        "quant-ph"
-      ],
-      "abstract": "We study the holographic quantum error correcting code properties of a Sierpinski Triangle-shaped boundary subregion in $AdS_4/CFT_3$. Due to existing no-go theorems in topological quantum error correction regarding fractal noise, this gives holographic codes a specific advantage over topological codes. We then further argue that a boundary subregion in the shape of the Sierpinski gasket in $AdS_5/CFT_4$ does not possess these holographic quantum error correction properties.",
-      "doi": "10.1103/PhysRevD.106.126006",
-      "journal": "Phys.Rev.D 106 (2022) 126006",
-      "year": "2022",
-      "citations": 6,
-      "inspire_id": 2044954
-    }
-  ]
+  "synced": null,
+  "summary": {"papers": 0, "citations": 0, "h_index": 0},
+  "records": []
 }
 </script>
 
@@ -399,7 +136,31 @@
       }).join('') +
       '</ol></section>';
   }).join('');
+
+  // Titles and abstracts may contain LaTeX (converted from INSPIRE's MathML).
+  // Render it once the list is in the DOM; if KaTeX hasn't loaded yet, wait.
+  function renderMath() {
+    if (!window.renderMathInElement) return;
+    window.renderMathInElement(root, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true }
+      ],
+      throwOnError: false,
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    });
+  }
+  if (window.renderMathInElement) {
+    renderMath();
+  } else {
+    window.addEventListener('load', renderMath);
+  }
 })();
 </script>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
 </body>
 </html>
