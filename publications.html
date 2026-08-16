@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Publications — Joydeep Naskar</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.6; margin: 0; padding: 20px; max-width: 900px; margin: auto; }
+    h1, h2, h3 { color: #075985; }
+    section { background: #fff; padding: 18px 24px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    a { color: #0369a1; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back-link { font-size: 0.9rem; color: #475569; }
+    h1 { margin: 10px 0 6px; }
+    .lede { color: #475569; }
+    .summary-bar { display: flex; flex-wrap: wrap; gap: 24px; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); padding: 16px 24px; margin: 20px 0; }
+    .stat { min-width: 90px; }
+    .stat .num { font-size: 1.5rem; font-weight: 700; color: #075985; line-height: 1.2; }
+    .stat .lbl { font-size: 0.78rem; color: #475569; text-transform: uppercase; letter-spacing: 0.04em; }
+    .year-heading { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.06em; color: #075985; margin: 0 0 12px; }
+    ol.pubs { margin: 0; padding-left: 22px; }
+    ol.pubs li { margin-bottom: 14px; }
+    .pub-title { font-weight: 600; }
+    .pub-authors { color: #475569; font-size: 0.92rem; }
+    .me { color: #0f172a; font-weight: 600; }
+    .pub-meta { font-size: 0.88rem; color: #475569; }
+    .journal { font-weight: 600; color: #0f172a; }
+    .cites { display: inline-block; font-size: 0.75rem; background: #e0f2fe; color: #0369a1; padding: 1px 8px; border-radius: 20px; margin-left: 4px; }
+    .links a { font-size: 0.88rem; margin-right: 10px; }
+    .stamp { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.74rem; color: #475569; text-align: center; margin-top: 30px; }
+    .empty { color: #475569; font-style: italic; }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="index.html">&larr; Joydeep Naskar</a>
+  <h1>Publications</h1>
+  <p class="lede">Synced automatically from <a href="https://inspirehep.net/authors/2044957" target="_blank" rel="noopener">INSPIRE-HEP</a>. Citation counts reflect the most recent sync.</p>
+
+  <div class="summary-bar" id="summary"></div>
+  <main id="pubs-root"></main>
+  <p class="stamp">Last synced: <span id="last-synced">—</span></p>
+
+<script type="application/json" id="publications-data">
+{
+  "synced": null,
+  "summary": {"papers": 0, "citations": 0, "h_index": 0},
+  "records": []
+}
+</script>
+
+<script>
+(function () {
+  var data = {};
+  try { data = JSON.parse(document.getElementById('publications-data').textContent); }
+  catch (e) { data = { records: [], summary: {}, synced: null }; }
+
+  var root = document.getElementById('pubs-root');
+  var summaryEl = document.getElementById('summary');
+  var records = data.records || [];
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // Summary stats
+  var s = data.summary || {};
+  summaryEl.innerHTML =
+    '<div class="stat"><div class="num">' + esc(s.papers != null ? s.papers : records.length) + '</div><div class="lbl">Papers</div></div>' +
+    '<div class="stat"><div class="num">' + esc(s.citations != null ? s.citations : '—') + '</div><div class="lbl">Citations</div></div>' +
+    '<div class="stat"><div class="num">' + esc(s.h_index != null ? s.h_index : '—') + '</div><div class="lbl">h-index</div></div>';
+
+  document.getElementById('last-synced').textContent = data.synced || 'not yet run';
+
+  if (!records.length) {
+    root.innerHTML = '<section><p class="empty">No records yet — the sync workflow will populate this page automatically. You can trigger it by hand from the repo\'s Actions tab.</p></section>';
+    return;
+  }
+
+  // Group by year, newest first
+  var byYear = {};
+  var years = [];
+  records.forEach(function (r) {
+    var y = r.year || 'Unpublished';
+    if (!byYear[y]) { byYear[y] = []; years.push(y); }
+    byYear[y].push(r);
+  });
+  years.sort(function (a, b) { return String(b).localeCompare(String(a)); });
+
+  function authorList(authors) {
+    if (!authors || !authors.length) return '';
+    return authors.map(function (a) {
+      var isMe = /naskar/i.test(a);
+      return isMe ? '<span class="me">' + esc(a) + '</span>' : esc(a);
+    }).join(', ');
+  }
+
+  function linkBits(r) {
+    var out = [];
+    if (r.arxiv) out.push('<a href="https://arxiv.org/abs/' + esc(r.arxiv) + '" target="_blank" rel="noopener">arXiv:' + esc(r.arxiv) + '</a>');
+    if (r.doi) out.push('<a href="https://doi.org/' + esc(r.doi) + '" target="_blank" rel="noopener">DOI</a>');
+    if (r.inspire_id) out.push('<a href="https://inspirehep.net/literature/' + esc(r.inspire_id) + '" target="_blank" rel="noopener">INSPIRE</a>');
+    return out.join('');
+  }
+
+  root.innerHTML = years.map(function (y) {
+    return '<section><h2 class="year-heading">' + esc(y) + '</h2><ol class="pubs">' +
+      byYear[y].map(function (r) {
+        var journal = r.journal ? '<span class="journal">' + esc(r.journal) + '</span>' : '<em>Preprint</em>';
+        var cites = (r.citations && r.citations > 0)
+          ? '<span class="cites">' + esc(r.citations) + (r.citations === 1 ? ' citation' : ' citations') + '</span>' : '';
+        return '<li>' +
+          '<div class="pub-title">' + esc(r.title) + '</div>' +
+          '<div class="pub-authors">' + authorList(r.authors) + '</div>' +
+          '<div class="pub-meta">' + journal + cites + '</div>' +
+          '<div class="links">' + linkBits(r) + '</div>' +
+        '</li>';
+      }).join('') +
+      '</ol></section>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

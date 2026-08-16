@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Machine learning — Joydeep Naskar</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.6; margin: 0; padding: 20px; max-width: 900px; margin: auto; }
+    h1, h2, h3 { color: #075985; }
+    section { background: #fff; padding: 18px 24px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    ul { margin: 0 0 0 20px; padding: 0; }
+    li { margin-bottom: 8px; }
+    a { color: #0369a1; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back-link { font-size: 0.9rem; color: #475569; }
+    .lede { color: #475569; }
+    h1 { margin: 10px 0 6px; }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="index.html">&larr; Joydeep Naskar</a>
+  <h1>Machine learning</h1>
+  <p class="lede">Neural networks as field theories: when an ensemble of networks realizes conformal symmetry, and what field-theoretic structure can be engineered into an architecture.</p>
+
+  <section>
+    <h2>The area</h2>
+    <p>An ensemble of randomly initialized neural networks defines a distribution over functions, and that distribution can be read as the partition function of a field theory. At infinite width the central limit theorem makes the ensemble Gaussian — a free field — and finite width, or correlated parameters, turns on interactions. This correspondence is useful in both directions: field theory supplies exact statements about network ensembles, and architectures supply concrete realizations of theories that are otherwise defined only formally.</p>
+    <p>My interest is in the symmetry side of this dictionary. Conformal symmetry is restrictive enough that asking a network ensemble to realize it is a sharp design constraint, and the resulting correlators can be compared directly against what the conformal bootstrap requires.</p>
+  </section>
+
+  <section>
+    <h2>Questions I'm interested in</h2>
+    <ul>
+      <li><strong>When does a network ensemble realize a conformal field theory?</strong> Translation and rotation invariance are relatively easy to arrange; scale and special conformal transformations are not.</li>
+      <li><strong>Can operators with spin be constructed this way?</strong> Scalar correlators are the natural starting point, but the interesting structure — and the sharper tests — live in spinning correlators.</li>
+      <li><strong>How far does the construction go in higher dimensions?</strong> Dimension-dependence of the conformal group makes this a nontrivial extension rather than a routine one.</li>
+      <li><strong>Is the correspondence a computational tool or a structural statement?</strong> There's a difference between using networks to sample a known theory and using them to define one, and the boundary between the two is worth being precise about.</li>
+      <li><strong>What CFT data can be specified in advance?</strong> If architecture choices map onto operator dimensions and OPE coefficients, the dictionary becomes constructive.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Related work</h2>
+    <ul>
+      <li><em>Conformal Fields from Neural Networks</em>, JHEP 10 (2025) 39. <a href="https://arxiv.org/abs/2409.12222">arXiv:2409.12222</a>.</li>
+    </ul>
+  </section>
+</body>
+</html>

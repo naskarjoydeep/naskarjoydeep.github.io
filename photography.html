@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photography — Joydeep Naskar</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.6; margin: 0; padding: 20px; max-width: 900px; margin: auto; }
+    h1, h2, h3 { color: #075985; }
+    a { color: #0369a1; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back-link { font-size: 0.9rem; color: #475569; }
+    h1 { margin: 10px 0 6px; }
+    .lede { color: #475569; max-width: 60ch; }
+
+    /* Gallery grid: auto-fills columns, so it reflows on any screen width. */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .gallery figure {
+      margin: 0;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+    .gallery img {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background: #e2e8f0;
+    }
+    .gallery figcaption {
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      color: #475569;
+    }
+    .placeholder {
+      background: #fff; border: 1px dashed #cbd5e1; border-radius: 12px;
+      padding: 32px 24px; color: #475569; font-size: 0.95rem;
+    }
+    .placeholder code { background: #f1f5f9; padding: 1px 5px; border-radius: 4px; font-size: 0.88em; }
+
+    /* Lightbox */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 50;
+      background: rgba(15,23,42,0.92);
+      align-items: center; justify-content: center; padding: 24px;
+      cursor: zoom-out;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img { max-width: 100%; max-height: 82vh; border-radius: 8px; }
+    #lightbox .cap { position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; color: #e2e8f0; font-size: 0.9rem; padding: 0 20px; }
+    #lightbox .close { position: absolute; top: 16px; right: 22px; color: #e2e8f0; font-size: 2rem; line-height: 1; background: none; border: none; cursor: pointer; }
+    @media (prefers-reduced-motion: no-preference) {
+      .gallery figure { transition: box-shadow 0.15s ease, transform 0.15s ease; }
+      .gallery figure:hover { box-shadow: 0 6px 18px rgba(0,0,0,0.10); transform: translateY(-2px); }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="index.html">&larr; Joydeep Naskar</a>
+  <h1>Photography</h1>
+  <p class="lede">A place for photographs. Add a short line here about what you shoot, or delete this paragraph.</p>
+
+  <!--
+    TO ADD A PHOTO:
+      1. Put the image file in a `photos/` folder in the repo.
+      2. Copy one <figure> block below, change the src and the caption.
+      3. Delete the .placeholder div once you've added your first photo.
+
+    Tips: resize to ~1600px on the long edge before uploading — full-size
+    camera JPEGs are slow to load and GitHub caps web uploads at 25 MB/file.
+    Always keep the alt text meaningful; it's what screen readers announce.
+  -->
+
+  <div class="placeholder">
+    No photos yet. Drop image files into a <code>photos/</code> folder in the repo,
+    then uncomment and duplicate the <code>&lt;figure&gt;</code> blocks in this
+    page's source — the pattern is right there in the HTML comments.
+  </div>
+
+  <div class="gallery">
+    <!--
+    <figure>
+      <img src="photos/example-01.jpg" alt="Describe what's in the photo">
+      <figcaption>Caption or location, year</figcaption>
+    </figure>
+
+    <figure>
+      <img src="photos/example-02.jpg" alt="Describe what's in the photo">
+      <figcaption>Caption or location, year</figcaption>
+    </figure>
+
+    <figure>
+      <img src="photos/example-03.jpg" alt="Describe what's in the photo">
+      <figcaption>Caption or location, year</figcaption>
+    </figure>
+    -->
+  </div>
+
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo">
+    <button class="close" aria-label="Close">&times;</button>
+    <img src="" alt="">
+    <div class="cap"></div>
+  </div>
+
+<script>
+(function () {
+  var box = document.getElementById('lightbox');
+  var boxImg = box.querySelector('img');
+  var boxCap = box.querySelector('.cap');
+  var lastFocus = null;
+
+  function open(img, caption) {
+    lastFocus = document.activeElement;
+    boxImg.src = img.src;
+    boxImg.alt = img.alt || '';
+    boxCap.textContent = caption || '';
+    box.classList.add('open');
+    box.querySelector('.close').focus();
+  }
+
+  function close() {
+    box.classList.remove('open');
+    boxImg.src = '';
+    if (lastFocus) lastFocus.focus();
+  }
+
+  // Delegated, so figures added later work without touching this script.
+  document.querySelector('.gallery').addEventListener('click', function (e) {
+    var fig = e.target.closest('figure');
+    if (!fig) return;
+    var img = fig.querySelector('img');
+    var cap = fig.querySelector('figcaption');
+    if (img) open(img, cap ? cap.textContent : '');
+  });
+
+  box.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && box.classList.contains('open')) close();
+  });
+})();
+</script>
+</body>
+</html>
