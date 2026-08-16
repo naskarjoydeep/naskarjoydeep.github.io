@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Joydeep Naskar — Academic Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
   <style>
     body { font-family: system-ui, sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.6; margin: 0; padding: 20px; max-width: 900px; margin: auto; }
     h1, h2, h3 { color: #075985; }
@@ -18,8 +19,29 @@
     .tool-badge a { display: inline-block; background: #e0f2fe; color: #0369a1; font-size: 0.85rem; padding: 6px 14px; border-radius: 20px; text-decoration: none; }
     .tool-badge a:hover { background: #bae6fd; text-decoration: none; }
     .about { max-width: 68ch; margin: 0 auto; }
-    .collage { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin: 0; }
-    .collage img { display: block; width: 100%; height: 150px; object-fit: cover; border-radius: 10px; background: #e2e8f0; }
+
+    /* Section headers with a "see all" link on the right */
+    .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 12px; }
+    .sec-head h2 { margin: 0; font-size: 1.15rem; }
+    .sec-head a { font-size: 0.85rem; }
+
+    /* Compact list used by news / papers / posts */
+    .feed { list-style: none; margin: 0; padding: 0; }
+    .feed li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #f1f5f9; }
+    .feed li:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .feed-date { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.74rem; color: #475569; display: block; }
+    .feed-title { margin: 2px 0 0; }
+    .feed-sub { font-size: 0.85rem; color: #475569; margin: 2px 0 0; }
+    .feed-tag { display: inline-block; font-size: 0.68rem; color: #0369a1; background: #e0f2fe; padding: 1px 8px; border-radius: 20px; margin-left: 6px; }
+
+    /* Photo strip */
+    .photo-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .photo-strip a { display: block; }
+    .photo-strip img { display: block; width: 100%; height: 120px; object-fit: cover; border-radius: 10px; background: #e2e8f0; }
+
+    .loading { color: #94a3b8; font-size: 0.88rem; margin: 0; }
+    /* Sections stay hidden until they actually have content */
+    section[hidden] { display: none; }
   </style>
 </head>
 <body>
@@ -27,7 +49,7 @@
     <img class="profile-pic" src="JN_HD.jpg" alt="Portrait of Joydeep Naskar" />
     <h1>Joydeep Naskar</h1>
     <p><a href="holography.html">Holography</a> · <a href="quantum-information.html">Quantum information</a> · <a href="machine-learning.html">Machine learning</a> · <a href="mathematical-physics.html">Mathematical physics</a></p>
-    <p class="tool-badge"><a href="biography.html">Biography</a><a href="news.html">News</a><a href="publications.html">Publications</a><a href="photography.html">Photography</a><a href="blog.html">Blog</a><a href="arxiv-digest.html">arXiv Digest</a></p>
+    <p class="tool-badge"><a href="biography.html">Biography</a><a href="news.html">News</a><a href="publications.html">Publications</a><a href="blog.html">Blog</a><a href="photography.html">Photography</a><a href="arxiv-digest.html">arXiv Digest</a></p>
   </div>
 
   <section id="about">
@@ -36,21 +58,191 @@
     </div>
   </section>
 
-
-<!--
-  PHOTOGRAPHY COLLAGE — uncomment when you have images.
-  Put files in a photos/ folder; add or remove <img> tags to taste.
-  The grid reflows automatically, so any number of images works.
-
-  <section id="collage">
-    <div class="collage">
-      <img src="photos/collage-01.jpg" alt="Describe the photo">
-      <img src="photos/collage-02.jpg" alt="Describe the photo">
-      <img src="photos/collage-03.jpg" alt="Describe the photo">
-      <img src="photos/collage-04.jpg" alt="Describe the photo">
-    </div>
-    <p style="text-align:center; margin:14px 0 0;"><a href="photography.html">More photographs &rarr;</a></p>
+  <section id="sec-news" hidden>
+    <div class="sec-head"><h2>Recent news</h2><a href="news.html">All news &rarr;</a></div>
+    <ul class="feed" id="feed-news"></ul>
   </section>
--->
+
+  <section id="sec-papers" hidden>
+    <div class="sec-head"><h2>Recent papers</h2><a href="publications.html">All publications &rarr;</a></div>
+    <ul class="feed" id="feed-papers"></ul>
+  </section>
+
+  <section id="sec-blog" hidden>
+    <div class="sec-head"><h2>From the blog</h2><a href="blog.html">All posts &rarr;</a></div>
+    <ul class="feed" id="feed-blog"></ul>
+  </section>
+
+  <section id="sec-photos" hidden>
+    <div class="sec-head"><h2>Photographs</h2><a href="photography.html">More &rarr;</a></div>
+    <div class="photo-strip" id="feed-photos"></div>
+  </section>
+
+<script>
+(function () {
+  'use strict';
+
+  // How many items each homepage section shows.
+  var LIMITS = { news: 3, papers: 3, blog: 2, photos: 6 };
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function jsonFrom(doc, id) {
+    var el = doc.getElementById(id);
+    if (!el) return null;
+    try { return JSON.parse(el.textContent); } catch (e) { return null; }
+  }
+
+  // ---- Pure extractors: take a parsed Document, return an array ----------
+
+  function extractNews(doc) {
+    var manual = jsonFrom(doc, 'news-manual') || [];
+    var autoBlock = jsonFrom(doc, 'news-auto') || {};
+    var auto = autoBlock.items || [];
+    var all = manual.concat(auto).filter(function (i) { return i && i.text; });
+    var seen = {}, out = [];
+    all.forEach(function (i) {
+      var key = (i.date || '') + '|' + String(i.text).slice(0, 40).toLowerCase();
+      if (seen[key]) return;
+      seen[key] = true;
+      out.push(i);
+    });
+    out.sort(function (a, b) { return String(b.date || '').localeCompare(String(a.date || '')); });
+    return out;
+  }
+
+  function extractPapers(doc) {
+    var data = jsonFrom(doc, 'publications-data') || {};
+    var recs = data.records || [];
+    return recs.slice().sort(function (a, b) {
+      return String(b.year || '').localeCompare(String(a.year || ''));
+    });
+  }
+
+  function extractPosts(doc) {
+    var nodes = doc.querySelectorAll('.post-list li');
+    var out = [];
+    Array.prototype.forEach.call(nodes, function (li) {
+      var link = li.querySelector('.post-title a');
+      if (!link) return;
+      var dateEl = li.querySelector('.post-date');
+      var blurbEl = li.querySelector('.post-blurb');
+      out.push({
+        title: link.textContent.trim(),
+        href: link.getAttribute('href'),
+        date: dateEl ? dateEl.textContent.trim() : '',
+        blurb: blurbEl ? blurbEl.textContent.trim() : ''
+      });
+    });
+    return out;
+  }
+
+  function extractPhotos(doc) {
+    var nodes = doc.querySelectorAll('.gallery figure img');
+    var out = [];
+    Array.prototype.forEach.call(nodes, function (img) {
+      var src = img.getAttribute('src');
+      if (!src) return;
+      out.push({ src: src, alt: img.getAttribute('alt') || '' });
+    });
+    return out;
+  }
+
+  // ---- Renderers --------------------------------------------------------
+
+  function show(sectionId) {
+    var s = document.getElementById(sectionId);
+    if (s) s.removeAttribute('hidden');
+  }
+
+  function renderNews(items) {
+    if (!items.length) return;
+    document.getElementById('feed-news').innerHTML = items.slice(0, LIMITS.news).map(function (i) {
+      var tag = i.tag ? '<span class="feed-tag">' + esc(i.tag) + '</span>' : '';
+      var body = i.url
+        ? '<a href="' + esc(i.url) + '" target="_blank" rel="noopener">' + esc(i.text) + '</a>'
+        : esc(i.text);
+      return '<li><span class="feed-date">' + esc(i.date || '') + '</span>' +
+             '<p class="feed-title">' + body + tag + '</p></li>';
+    }).join('');
+    show('sec-news');
+  }
+
+  function renderPapers(recs) {
+    if (!recs.length) return;
+    document.getElementById('feed-papers').innerHTML = recs.slice(0, LIMITS.papers).map(function (r) {
+      var venue = r.journal ? esc(r.journal) : 'Preprint';
+      var href = r.arxiv ? 'https://arxiv.org/abs/' + esc(r.arxiv)
+               : (r.inspire_id ? 'https://inspirehep.net/literature/' + esc(r.inspire_id) : 'publications.html');
+      return '<li><span class="feed-date">' + esc(r.year || '') + '</span>' +
+             '<p class="feed-title"><a href="' + href + '" target="_blank" rel="noopener">' + esc(r.title) + '</a></p>' +
+             '<p class="feed-sub">' + venue + '</p></li>';
+    }).join('');
+    show('sec-papers');
+    if (window.renderMathInElement) {
+      window.renderMathInElement(document.getElementById('feed-papers'), {
+        delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
+        throwOnError: false
+      });
+    }
+  }
+
+  function renderPosts(posts) {
+    if (!posts.length) return;
+    document.getElementById('feed-blog').innerHTML = posts.slice(0, LIMITS.blog).map(function (p) {
+      return '<li><span class="feed-date">' + esc(p.date) + '</span>' +
+             '<p class="feed-title"><a href="' + esc(p.href) + '">' + esc(p.title) + '</a></p>' +
+             (p.blurb ? '<p class="feed-sub">' + esc(p.blurb) + '</p>' : '') + '</li>';
+    }).join('');
+    show('sec-blog');
+  }
+
+  function renderPhotos(photos) {
+    if (!photos.length) return;
+    document.getElementById('feed-photos').innerHTML = photos.slice(0, LIMITS.photos).map(function (p) {
+      return '<a href="photography.html"><img src="' + esc(p.src) + '" alt="' + esc(p.alt) + '" loading="lazy"></a>';
+    }).join('');
+    show('sec-photos');
+  }
+
+  // ---- Wiring -----------------------------------------------------------
+
+  function load(page, extract, render) {
+    fetch(page, { cache: 'no-cache' })
+      .then(function (r) {
+        if (!r.ok) throw new Error(page + ' -> HTTP ' + r.status);
+        return r.text();
+      })
+      .then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        render(extract(doc));
+      })
+      .catch(function (err) {
+        // A missing or unreachable page just means that section stays hidden.
+        if (window.console) console.warn('Homepage preview skipped:', err.message);
+      });
+  }
+
+  if (window.fetch && window.DOMParser) {
+    load('news.html', extractNews, renderNews);
+    load('publications.html', extractPapers, renderPapers);
+    load('blog.html', extractPosts, renderPosts);
+    load('photography.html', extractPhotos, renderPhotos);
+  }
+
+  // Exposed so the previews can be unit-tested outside a browser.
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { extractNews: extractNews, extractPapers: extractPapers,
+                       extractPosts: extractPosts, extractPhotos: extractPhotos };
+  }
+})();
+</script>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
 </body>
 </html>
