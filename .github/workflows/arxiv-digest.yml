@@ -1,1 +1,38 @@
+name: arXiv Digest
 
+on:
+  schedule:
+    # 12:00 UTC daily. GitHub may delay scheduled runs by up to ~30 min at
+    # peak times — this is a platform limitation, not a bug. Edit the cron
+    # expression to change the time (fields are: minute hour day month weekday).
+    - cron: "0 12 * * *"
+  workflow_dispatch: {}   # lets you trigger a run by hand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update-digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run digest script
+        run: python scripts/arxiv_digest.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "arxiv-digest-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/arxiv-digest.json arxiv-digest.html
+          git diff --quiet --cached || git commit -m "Update arXiv digest ($(date -u +%Y-%m-%d))"
+          git push
