@@ -26,6 +26,19 @@
     .auto-mark { font-size: 0.68rem; color: #94a3b8; margin-left: 6px; }
     .stamp { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.74rem; color: #475569; text-align: center; margin-top: 30px; }
     .parse-error { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; border-radius: 10px; padding: 14px 18px; font-size: 0.9rem; }
+
+    /* --- Instagram embeds --- */
+    .ig-section { margin-top: 40px; }
+    .ig-section[hidden] { display: none; }
+    .ig-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+               padding-bottom: 8px; border-bottom: 1px solid #e2e8f0; margin-bottom: 18px; }
+    .ig-head h2 { margin: 0; font-size: 1.15rem; }
+    .ig-head a { font-size: 0.85rem; }
+    .ig-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(326px, 1fr)); gap: 16px; justify-items: center; }
+    /* Instagram requires embeds between 326px and 540px wide */
+    .ig-grid blockquote.instagram-media { width: 100% !important; max-width: 540px !important; min-width: 326px !important; margin: 0 !important; }
+    .ig-note { font-size: 0.82rem; color: #64748b; margin: 14px 0 0; }
+    .ig-note[hidden] { display: none; }
   </style>
 </head>
 <body>
@@ -35,6 +48,54 @@
 
   <ul class="news-list" id="news-root"></ul>
   <p class="stamp">Automatic items last checked: <span id="last-checked">—</span></p>
+
+  <section class="ig-section">
+    <div class="ig-head">
+      <h2>From Instagram</h2>
+      <a href="https://www.instagram.com/deepjoy.phy" target="_blank" rel="noopener">@deepjoy.phy &rarr;</a>
+    </div>
+
+    <!--
+      ======================================================================
+      OPTION A — LIVE FEED (auto-updating, recommended)
+
+      Requires a Creator or Business account. Personal accounts can no longer
+      connect to any feed service since Meta retired the Basic Display API in
+      December 2024. To switch: Instagram app > Settings > Account type and
+      tools > Switch to professional account > Creator. Free and reversible.
+
+      Then: sign up free at snapwidget.com or lightwidget.com, connect the
+      account, choose a grid layout, and paste their snippet between the
+      ig-widget div tags below. The feed then updates itself.
+      ======================================================================
+    -->
+    <div id="ig-widget">
+      <!-- PASTE WIDGET CODE HERE -->
+    </div>
+
+    <!--
+      ======================================================================
+      OPTION B — INDIVIDUAL POSTS (manual, no account change needed)
+
+      Used only when the widget div above is empty. Paste post URLs below,
+      newest first. Works for /p/, /reel/ and /tv/ links.
+
+        "https://www.instagram.com/p/ABC123xyz/",
+
+      Leave both empty and the whole section hides itself.
+      ======================================================================
+    -->
+    <script type="application/json" id="ig-posts">
+[
+]
+    </script>
+
+    <div class="ig-grid" id="ig-grid"></div>
+    <p class="ig-note" id="ig-note" hidden>
+      Posts are loaded from Instagram. If you see only text links here, a browser
+      privacy setting or content blocker is preventing Instagram's script from running.
+    </p>
+  </section>
 
 <!--
   ============================================================
@@ -50,6 +111,30 @@
 -->
 <script type="application/json" id="news-manual">
 [
+  {
+    "date": "2026-07-01",
+    "tag": "Position",
+    "text": "Joined the Beijing Institute of Mathematical Sciences and Applications (BIMSA) as a Postdoctoral Fellow.",
+    "url": null
+  },
+  {
+    "date": "2026-06-15",
+    "tag": "Milestone",
+    "text": "Defended my PhD at Northeastern University.",
+    "url": null
+  },
+  {
+    "date": "2026-03-15",
+    "tag": "Award",
+    "text": "Received the FIP Distinguished Student Award and a GRAV Travel Award at the APS Global Physics Summit 2026, Denver.",
+    "url": null
+  },
+  {
+    "date": "2026-01-05",
+    "tag": "Fellowship",
+    "text": "Began the KITP Graduate Fellowship at the Kavli Institute for Theoretical Physics, Santa Barbara (January–May 2026).",
+    "url": "https://www.kitp.ucsb.edu/about-us/people/graduate-fellows/graduate-fellows-to-date"
+  },
   {
     "date": "2026-05-13",
     "tag": "Talk",
@@ -89,17 +174,8 @@
 -->
 <script type="application/json" id="news-auto">
 {
-  "generated": "2026-08-16",
-  "items": [
-    {
-      "date": "2025-12-19",
-      "tag": "Talk",
-      "text": "Majorana-Raychaudhuri Seminar: “Holographic Entropy Inequalities + Some Recent Developments in Warm Inflation + Mutual information as a measure of renormalizability”",
-      "url": "https://inspirehep.net/seminars/3093751",
-      "source": "INSPIRE seminars",
-      "match": "author-profile link"
-    }
-  ]
+  "generated": null,
+  "items": []
 }
 </script>
 
@@ -169,6 +245,60 @@
   }
 
   stampEl.textContent = (auto.value && auto.value.generated) || 'not yet run';
+})();
+</script>
+
+<script>
+/* Instagram embeds: builds Instagram's own blockquote markup from a list of
+   post URLs, then lets Instagram's embed.js upgrade each one into the real
+   post. No API call, no access token — the script does the work client-side. */
+(function () {
+  var section = document.querySelector('.ig-section');
+  var grid = document.getElementById('ig-grid');
+  var note = document.getElementById('ig-note');
+  var dataEl = document.getElementById('ig-posts');
+  var widget = document.getElementById('ig-widget');
+  if (!section || !grid || !dataEl) return;
+
+  // Option A: a widget snippet was pasted in. Comments and whitespace don't
+  // count as content, so an untouched placeholder still reads as empty.
+  var hasWidget = widget && widget.children.length > 0;
+  if (hasWidget) {
+    grid.setAttribute('hidden', '');
+    return;   // the widget handles its own rendering
+  }
+
+  // Option B: fall back to individually listed posts.
+  var urls = [];
+  try { urls = JSON.parse(dataEl.textContent) || []; } catch (e) { urls = []; }
+
+  // Accept only real Instagram post/reel/tv permalinks.
+  var VALID = /^https:\/\/(www\.)?instagram\.com\/(p|reel|tv)\/[A-Za-z0-9_-]+\/?/;
+  urls = urls.filter(function (u) { return typeof u === 'string' && VALID.test(u.trim()); });
+
+  if (!urls.length) {
+    section.setAttribute('hidden', '');   // nothing to show, so hide the heading too
+    return;
+  }
+
+  grid.innerHTML = urls.map(function (u) {
+    var clean = u.trim().split('?')[0];
+    if (clean.slice(-1) !== '/') clean += '/';
+    return '<blockquote class="instagram-media" data-instgrm-captioned' +
+           ' data-instgrm-permalink="' + clean + '" data-instgrm-version="14">' +
+           '<a href="' + clean + '" target="_blank" rel="noopener">View this post on Instagram</a>' +
+           '</blockquote>';
+  }).join('');
+
+  note.hidden = false;
+
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.instagram.com/embed.js';
+  s.onload = function () {
+    if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
+  };
+  document.body.appendChild(s);
 })();
 </script>
 </body>
