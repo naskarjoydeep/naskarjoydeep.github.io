@@ -1,5 +1,135 @@
 [
   {
+    "id": "2608.17898v1",
+    "title": "Holographic subregion complexity in unbalanced Stückelberg holographic superconductors",
+    "authors": [
+      "Yu Shi",
+      "Chikun Ding",
+      "Yuebing Zhou",
+      "Qiyuan Pan",
+      "Jiliang Jing"
+    ],
+    "categories": [
+      "hep-th"
+    ],
+    "published": "2026-08-18",
+    "link": "https://arxiv.org/abs/2608.17898v1",
+    "summary": "Within the subregion complexity-volume conjecture, we numerically compare holographic subregion complexity (HSC) and holographic entanglement entropy (HEE) for a strip in unbalanced Stückelberg holographic superconductors. Varying the Stückelberg parameter $γ$ yields both second- and first-order transitions. Both observables signal these transitions, but with markedly different robustness. The qualitative HEE signatures persist across strip widths, and the finite part of HEE remains smaller in the superconducting phase than in the normal phase. The HSC is instead strongly width dependent: its temperature trend is opposite to that of HEE at small $\\ell$ and agrees with it at large $\\ell$. Consequently, the superconducting and normal HSC branches reverse their relative ordering, creating a crossover region where they nearly coincide. There, HSC alone cannot reliably determine the occurrence or order of the transition, and the physical branch must be selected from the grand potential. Thus, HEE provides a more robust diagnostic, whereas HSC is a scale-dependent probe whose interpretation depends explicitly on the subsystem size.",
+    "matched_terms": [
+      "holographic entanglement",
+      "entanglement entropy"
+    ]
+  },
+  {
+    "id": "2608.17877v1",
+    "title": "A compact analytic formula for the one-loop triangle cosmological correlator",
+    "authors": [
+      "Johannes Henn",
+      "Jiajie Mei",
+      "Qinglin Yang"
+    ],
+    "categories": [
+      "hep-th"
+    ],
+    "published": "2026-08-18",
+    "link": "https://arxiv.org/abs/2608.17877v1",
+    "summary": "We derive a compact analytic formula for the one-loop triangle correlator of conformally coupled scalars in de Sitter space. The result is organised as six leading-singularity prefactors multiplying pure weight-two functions of the six energy variables. It contains forty-two dilogarithms, compared with approximately one hundred and twenty in the previously known closed-form representation, and requires no auxiliary regulator. The dilogarithms occur in Galois-conjugate pairs, making each contribution separately real throughout the physical region. We validate the result numerically. Moreover, we show that its symbol can be derived directly from the dressed integral representation or, independently, bootstrapped from Landau singularities and general consistency conditions. Finally, we show that the correlator (in a suitable normalization) is a Stieltjes function of each squared energy separately and is jointly completely monotone in all six squared energies. These structures suggest a route towards higher-point one-loop cosmological correlators.",
+    "matched_terms": [
+      "de Sitter"
+    ]
+  },
+  {
+    "id": "2608.18071v1",
+    "title": "Ultrafast and high resolution spatial light modulation for cold atoms",
+    "authors": [
+      "Alexander Dennisovich Deters",
+      "Yanfei Li",
+      "Alexander Douglas",
+      "Markus Greiner",
+      "Aaron W. Young"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-18",
+    "link": "https://arxiv.org/abs/2608.18071v1",
+    "summary": "Programmable arrays of ultracold atoms are a leading platform for quantum computation and simulation, enabling state-of-the-art implementations of quantum error correction, and analog simulations of Hubbard models that address open problems in condensed matter physics. In these systems, all local control is mediated through precisely shaped optical fields, and so the challenge of managing many-body quantum states becomes an exercise in optical design. In particular, one wishes for fast, flexible control with low disorder and heating, and access to large arrays with many atoms. An ideal optical system therefore must generate arbitrary patterns with high spatial resolution and low disorder, and alter these patterns on a timescale that is faster than the relevant atomic dynamics. Here, we present an optical system that is comparable to previous approaches in scale, while advancing all other axes. We demonstrate arbitrary pattern generation with $10^{-3}$ intensity resolution, a frame rate of $>84$ MFPS (megaframes per second), and a spatial resolution of $83 \\times 52$ beam waists (with $11 \\times 52$ waists accessible via a single $40$ GHz electro-optic modulator). These capabilities unlock a new class of experiments. We develop and numerically validate a scheme for fully programmable Hubbard models, with time-dependent control over local chemical potentials, tunneling amplitudes, on-site interactions, and patterns of artificial magnetic flux. The same architecture performs fast, arbitrary permutations of tweezers in 2D, decoupling optical constraints from the design of high-rate error-correcting codes.",
+    "matched_terms": [
+      "quantum error correction"
+    ]
+  },
+  {
+    "id": "2608.18065v1",
+    "title": "Quantum Geometric Tensor Preconditioning for Stable Training of Recurrent Neural Quantum States",
+    "authors": [
+      "Adil Attar",
+      "Amine M. Aboussalah",
+      "Mohamed Hibat-Allah"
+    ],
+    "categories": [
+      "cond-mat.str-el",
+      "quant-ph"
+    ],
+    "published": "2026-08-18",
+    "link": "https://arxiv.org/abs/2608.18065v1",
+    "summary": "Neural Quantum States (NQS) provide a powerful neural network-based variational framework for representing many-body wave functions and solving for ground states. Recurrent Neural Networks (RNNs) are particularly promising owing to their relatively low computational cost and their autoregressive property, which enables perfect sampling. Recently, RNNs have been reported to be unstable under curvature-based optimizers such as the minimum-step stochastic reconfiguration (minSR) method. In this paper, we address this perceived limitation and show that minSR can be stabilized through simple regularization techniques, enabling robust training of RNN-based NQS with only a few samples. Our approach outperforms the Adam optimizer on the one-dimensional transverse-field Ising model and the one-dimensional cluster state, and provides competitive results on the two-dimensional Heisenberg and $J_1-J_2$ models. This work offers a promising pathway for using modern optimization techniques with autoregressive NQS to address open questions in quantum simulation.",
+    "matched_terms": [
+      "neural network"
+    ]
+  },
+  {
+    "id": "2608.17913v1",
+    "title": "Where Atom Loss Lands Matters: Decoder-Aware Risk Deposition in Neutral-Atom QEC",
+    "authors": [
+      "Xinyi Li",
+      "Yifeng Peng",
+      "Ying Wang"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-18",
+    "link": "https://arxiv.org/abs/2608.17913v1",
+    "summary": "Neutral-atom arrays are emerging as a leading platform for scalable quantum error correction (QEC). Qubits are routed and reused across the array, while detected loss is reported to the decoder as erasure information. Existing neutral-atom compilers optimize this movement, including routing, shuttling, and reuse, and often model loss through scalar exposure costs. Yet total exposure is an incomplete statistic for erasure-corrected QEC. It captures how much loss occurs, but not where it lands on the code, which we call its deposition. Under the same expected atom-loss budget, different deposition patterns over a code patch induce substantially different logical error rates (LER). We formalize this as decoder-aware risk deposition and present CAST, a compiler-side optimization pass that overlays a code-topology sensitivity map on a role-indexed exposure ledger and minimizes a decoder-weighted harm objective under a comparable-exposure constraint, using only local route, role, and seam-cooling actions. Across surface-code memory, physical-scale architecture models, lattice surgery, and decoder-mismatch checks, CAST lowers LER relative to topology-blind exposure minimization, improving on it in 35 of 48 physical-scale settings and by as much as 5.3x where exposure is heterogeneous and routing has slack. The largest gains occur when high exposure and high decoder sensitivity are initially misaligned, giving CAST room to redirect risk toward lower-impact code roles. CAST shows that decoder-aware atom-loss risk deposition can be optimized as a compiler-side pass in neutral-atom QEC.",
+    "matched_terms": [
+      "quantum error correction"
+    ]
+  },
+  {
+    "id": "2608.17331v1",
+    "title": "Beyond Legal Spacing: A Residual-Aware Characterization of Entangling-Zone Spacing in Neutral-Atom Compilation",
+    "authors": [
+      "Xinyi Li",
+      "Yifeng Peng",
+      "Ying Wang"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-18",
+    "link": "https://arxiv.org/abs/2608.17331v1",
+    "summary": "Neutral-atom processors rely on spatially arranged qubit arrays and parallel Rydberg entangling gates for scalable execution. Their compilers enforce geometric spacing rules for simultaneous gates, yet legal separation does not make residual van der Waals coupling disappear. This paper studies that gap between geometric legality and residual noise by treating entangling-zone spacing as a cross-layer reliability-parallelism variable anchored to experimental neutral-atom geometry. We combine fixed-schedule residual replay, surface-code simulation with matched correlated decoding, and fresh recompilation to connect spacing to physical residual exposure, logical reliability, and makespan cost. The results show that near-floor spacing can produce structured correlated exposure that is visible both at the physical layer and, in the tightest case, after quantum error correction (QEC). Modest geometric slack strongly suppresses this residual contribution, but the timing cost of looser spacing is mediated by placement and scheduling rather than by a simple monotonic slowdown. These findings distinguish hardware legality from residual-noise safety and motivate spacing-aware compiler evaluations that report physical geometry, QEC absorption, and scheduling cost together.",
+    "matched_terms": [
+      "quantum error correction"
+    ]
+  },
+  {
+    "id": "2608.17274v1",
+    "title": "Weak Typicality of von Neumann Entanglement Entropy in Gaussian Boson Sampling",
+    "authors": [
+      "Hongru Zhao"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-18",
+    "link": "https://arxiv.org/abs/2608.17274v1",
+    "summary": "We study the von Neumann entanglement entropy generated by a Haar distributed passive interferometer acting on $n$ equally squeezed input modes with fixed nonzero squeezing strength $s$. Previous work established proportional weak typicality for integer R'enyi orders $α\\geq 2$ and stated a sublinear von Neumann result, while the proportional von Neumann case remained open. For a subsystem of $k_n$ modes satisfying $k_n/n\\to r\\in(0,1)$, we prove that, for every $\\varepsilon>0$ and all sufficiently large $n$, $\\mathbb{P}\\left(\\left|\\frac{S_{1,n}}{\\mathbb{E}S_{1,n}}-1\\right|\\geq\\varepsilon\\right)\\leq2\\exp\\left[-\\frac{c_{s,r}\\varepsilon^2n^2}{\\log^2(en)}\\right].$ The proof represents the entropy as a singular value statistic of a principal block of $UU^{\\mathsf T}$, where $U$ denotes the unitary interferometer. It regularizes the logarithmic singularity at the endpoint corresponding to a pure Gaussian mode and applies concentration on the unitary group. The result establishes proportional von Neumann weak typicality and further implies almost sure convergence of $S_{1,n}/\\mathbb{E}S_{1,n}$ to $1$, a typical volume law, and the variance bound $\\mathrm{Var}(S_{1,n})=O_s(\\log^2 n)$. An accompanying Lean 4 development verifies the proof chain.",
+    "matched_terms": [
+      "entanglement entropy"
+    ]
+  },
+  {
     "id": "2608.16772v1",
     "title": "The linear dilaton in cosmology and particle physics",
     "authors": [
@@ -189,6 +319,110 @@
     "summary": "Entanglement among particles is a defining feature of strongly correlated quantum materials, distinguishing them from conventional metals and semiconductors. The ability to certify intrinsic entanglement among interacting electrons in solid-state materials is important not only for classifying quantum states of matter, but also for developing material-based quantum technologies. Here, we introduce a transport-based protocol for witnessing multipartite entangled electronic states, based on the equilibrium noise spectrum as an experimentally accessible observable. The appropriately integrated, symmetrized, and projected current noise obeys an upper bound that can be derived from microscopic model parameters and is invariant with respect to the choice of electronic basis. We benchmark this framework in several paradigmatic systems, including twisted bilayer graphene, twisted bilayer MoTe$_2$, and Hubbard models, certifying entanglement in the fractional Chern insulating state. The method extends recently developed scattering-based entanglement witnesses to ultralow-temperature materials, where conventional spectroscopic probes are inaccessible but candidate entangled states are expected to arise.",
     "matched_terms": [
       "multipartite entanglement"
+    ]
+  },
+  {
+    "id": "2608.17064v1",
+    "title": "Robin boundary conditions in global AdS$_4$: exact double-trace thermodynamics and a soft-mode instability",
+    "authors": [
+      "David A. Lowe",
+      "Juanyi Yang"
+    ],
+    "categories": [
+      "hep-th"
+    ],
+    "published": "2026-08-17",
+    "link": "https://arxiv.org/abs/2608.17064v1",
+    "summary": "We consider a conformally coupled scalar field in four-dimensional global anti-de Sitter space with Robin boundary conditions, parametrized by an angle $α$. On the boundary cylinder $\\mathbb{R}\\times S^{2}$ these conditions realize the double-trace deformation $\\tfrac12λ\\!\\int O^{2}$ of the dimension-one operator $O$ in the alternate quantization with $λ=\\cotα/L$. Because the conformal map to one half of the Einstein static universe is exact, the boundary integral equation can be diagonalized, and the deformed two-point function follows in closed form, $\\widehat{\\mathcal G}_α=\\widehat{\\mathcal G}_{N}/(1+λ\\widehat{\\mathcal G}_{N})$. Its poles give the normal-mode spectrum, and its determinant gives the free energy exactly within this Gaussian sector. After three local boundary counterterms, the Casimir energy reaches the stability endpoint with a finite square-root cusp. At any finite coupling the bulk $T^{4}$ and $T^{3}$ terms are independent of $α$ and cancel in the difference from Neumann, leaving $\\tfracπ{3}\\cotα\\,LT^{2}$ as the leading $α$-dependent term. All nonanalyticity comes from one static homogeneous mode, which becomes soft at $α_{\\rm crit}$, in agreement with the known classical stability threshold. The susceptibility diverges with exponent $γ=1$ and the gap closes with exponent $1/2$. Beyond this angle the mode is tachyonic, and a stable phase would require a stabilizing interaction. In the flat-space limit the physical coupling scales to zero at fixed energy, so the Robin dependence survives only in the soft-frequency sector, which we characterize by a meromorphic Mellin transform in the boost weight. The Robin angle thus gives a control parameter for a Gaussian stability endpoint that can be followed exactly, and raises the analogous question for relaxed boundary conditions in AdS gravity.",
+    "matched_terms": [
+      "de Sitter"
+    ]
+  },
+  {
+    "id": "2608.16992v1",
+    "title": "Bulk Criticality and Boundary Spectra in AdS from Matrix Product States",
+    "authors": [
+      "Faizan Bhat"
+    ],
+    "categories": [
+      "hep-th"
+    ],
+    "published": "2026-08-17",
+    "link": "https://arxiv.org/abs/2608.16992v1",
+    "summary": "We study interacting scalar quantum field theories in anti-de Sitter (AdS) space using a tensor-network approach based on matrix product states. We develop methods for extracting low-lying boundary spectra from global-AdS energy levels, probing bulk criticality through finite-size scaling in the AdS radius, and identifying conformal boundary conditions. Applying these methods to scalar $φ^4$ theory in $\\mathrm{AdS}_2$, we compute the lowest non-trivial $\\mathbb{Z}_2$-odd and even boundary scaling dimensions non-perturbatively. We then locate the bulk $\\mathbb{Z}_2$ symmetry-breaking transition and extract critical exponents and central charge consistent with the 2D Ising universality class. At the critical point, we determine the low-lying boundary spectrum and use it to identify the $\\mathbb{Z}_2$-preserving free/ordinary Ising conformal boundary condition, thereby characterising both the bulk and boundary universality classes.",
+    "matched_terms": [
+      "de Sitter"
+    ]
+  },
+  {
+    "id": "2608.16982v1",
+    "title": "A geodesic distance interpretation of Lanczos coefficients",
+    "authors": [
+      "Le-Chen Qu"
+    ],
+    "categories": [
+      "hep-th",
+      "math-ph"
+    ],
+    "published": "2026-08-17",
+    "link": "https://arxiv.org/abs/2608.16982v1",
+    "summary": "We study the spread complexity of the infinite-temperature thermofield double state in large-$N$ random matrix theory and investigate the physical meaning of its Lanczos coefficients. The leading density of states defines a family of orthogonal polynomials whose recursion coefficients coincide with the Lanczos coefficients of the associated Krylov dynamics. Starting from the Coulomb-gas equation, we derive a pair of nonlinear relations for these coefficients, which we call the Lanczos equations. Since the Lanczos coefficients approach constants at large Krylov index, the spread complexity grows linearly at late times. We further show that the Lanczos coefficients can be interpreted as generating functions for planar maps. For an even potential, the difference $b_{n+1}^2-b_n^2$ generates maps with two legs whose marked legs are separated by the exact geodesic distance $n$. Consequently, the spread complexity acceleration operator equals twice the geodesic generating operator. We illustrate these results in the quartic matrix model, where the expansion in the quartic coupling counts tetravalent planar maps, and in the double-scaled Sachdev--Ye--Kitaev model, where the auxiliary Hilbert space can be identified with the physical chord Hilbert space.",
+    "matched_terms": [
+      "matrix model"
+    ]
+  },
+  {
+    "id": "2608.17201v1",
+    "title": "One-at-a-Time Quantum Guessing: Multipartite Entanglement Beyond MoE Games",
+    "authors": [
+      "Michael Schleppy",
+      "Emina Soljanin"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-17",
+    "link": "https://arxiv.org/abs/2608.17201v1",
+    "summary": "Multipartite entanglement remains a challenging and not fully understood aspect of quantum information. Monogamy-of-Entanglement (MoE) games have been highly effective for studying limitations on the usefulness of entanglement imposed by monogamy constraints. To better reveal the extent to which multipartite entanglement can be useful, we introduce a class of quantum guessing games, termed One-at-a-Time Guessing (OTG) games. In these games, quantum players individually guess the outcomes of random measurements performed by a referee on a pre-shared entangled state. Unlike MoE games, OTG games select players individually at random according to a specified probability distribution, thereby probing each player's correlation with the referee. We show that, despite monogamy constraints, players sharing certain entangled states can moderately outperform those relying only on classical uncertainty. This advantage arises even in simple OTG games involving only Pauli measurements on qubits, where optimal entanglement increases the winning probability by at least 4%. This contrasts with MoE games, where shared entanglement has been shown in several settings to provide only limited (if any) advantage over classical strategies. We further establish a majorization property: the value of an OTG game respects the majorization ordering of the player-selection probability distribution. We also analyze in detail a two-player OTG game in which the referee measures one of the three Pauli observables on a qubit, and show that it is optimally played using a specific parameterized family of three-qubit $W$-like states. These results suggest that OTG games provide a useful framework for investigating the usefulness of multipartite entanglement in multiparty quantum correlations.",
+    "matched_terms": [
+      "multipartite entanglement"
+    ]
+  },
+  {
+    "id": "2608.17023v1",
+    "title": "Hardware-Aware Compilation and Execution of Bivariate Bicycle Codes on Neutral-Atom Systems",
+    "authors": [
+      "Jason Ludmir",
+      "Aditya Ranjan",
+      "Nicholas S. DiBrita",
+      "Jason Han",
+      "Tirthak Patel"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-17",
+    "link": "https://arxiv.org/abs/2608.17023v1",
+    "summary": "Quantum computers are noisy; without quantum error correction (QEC), deep programs fail as qubits lose information due to decoherence. Among QEC approaches, bivariate bicycle (BB) codes offer low overhead and constant-depth syndrome extraction, while neutral-atom arrays provide scalable, reconfigurable qubit layouts. However, executing BB-code primitives on neutral-atom systems requires a hardware-aware mapping that respects movement, zoning, and interaction constraints. We present Park-n-Ride, a system for compiling and executing the BB code on neutral-atom processors. Park-n-Ride introduces a module layout and movement model aligned with neutral-atom constraints, exposes a compact BB-native logical interface for compilation, and integrates scheduling mechanisms that enable efficient execution on zoned architectures. By co-designing BB-code abstractions with hardware execution, Park-n-Ride provides a practical path from qLDPC primitives to resource-efficient, high-throughput execution on reconfigurable neutral-atom arrays.",
+    "matched_terms": [
+      "quantum error correction"
+    ]
+  },
+  {
+    "id": "2608.17025v1",
+    "title": "Simplicity of reduced crossed products",
+    "authors": [
+      "Thomas Bray",
+      "Matthew Kennedy"
+    ],
+    "categories": [
+      "math.OA"
+    ],
+    "published": "2026-08-17",
+    "link": "https://arxiv.org/abs/2608.17025v1",
+    "summary": "We characterize the simplicity of reduced crossed product C*-algebras in terms of stabilizer subgroups. Specifically, we prove that if $G$ is a countable group and $X$ is a minimal $G$-flow, then the reduced crossed product C*-algebra $\\mathrm{C}(X) \\times_λG$ is simple if and only if there is a point in $X$ with a C*-simple stabilizer subgroup. Further, these conditions are equivalent to a generic point in $X$ having a C*-simple stabilizer subgroup. We also provide an example demonstrating that this result does not extend to uncountable groups. This completely resolves a question of Ozawa.",
+    "matched_terms": [
+      "crossed product"
     ]
   },
   {
