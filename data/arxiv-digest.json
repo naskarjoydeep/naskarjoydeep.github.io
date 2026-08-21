@@ -1,5 +1,249 @@
 [
   {
+    "id": "2608.20333v1",
+    "title": "Maximal Torus Topological Entanglement Entropy in WZW Theories at Bounded Ground-State Degeneracy",
+    "authors": [
+      "Ce Shen"
+    ],
+    "categories": [
+      "cond-mat.str-el",
+      "hep-th"
+    ],
+    "published": "2026-08-20",
+    "link": "https://arxiv.org/abs/2608.20333v1",
+    "summary": "For an untwisted Wess--Zumino--Witten modular tensor category $\\cC(\\mathfrak g,k)$, let $r(\\mathfrak g,k)$ be the number of simple objects and $\\cD(\\mathfrak g,k)$ its total quantum dimension. The vacuum-flux state on a torus divided into two cylinders has positive universal entropy contribution $Γ_{T^2}=2\\log\\cD$. We maximize this quantity over all simple Lie algebras and positive integral levels subject to $r(\\mathfrak g,k)\\leq R$. If $q_R=\\log_2R$, then $Γ_{\\max}(R)\\sim[7ζ(3)/(4π^2)]q_R^2$ as $R\\to\\infty$.   The sequence $Sp(2n)_n$ attains the asymptotic coefficient. At equal rank   and level, the Fourier expansion of the type-$C$ root product loses its even modes, leaving $2π^{-2}\\sum_{m\\,\\mathrm{odd}}m^{-3}=7ζ(3)/(4π^2)$. An entropy--spectral inequality proves optimality among the classical families, while rank--level duality and fixed-rank estimates control unbalanced and exceptional sequences.",
+    "matched_terms": [
+      "entanglement entropy",
+      "topological entanglement entropy"
+    ]
+  },
+  {
+    "id": "2608.20330v1",
+    "title": "Torus Berry Data Determine All-Genus Abelian Topological Orders",
+    "authors": [
+      "Daniel Galviz"
+    ],
+    "categories": [
+      "cond-mat.str-el",
+      "hep-th",
+      "math-ph"
+    ],
+    "published": "2026-08-20",
+    "link": "https://arxiv.org/abs/2608.20330v1",
+    "summary": "We show that for Abelian Chern-Simons topological orders, torus Berry matrices determine the all-genus extended TQFT. We identify the topological part of the projective Berry holonomy under metric deformations with the mapping-class-group representation of the Abelian Chern-Simons TQFT and prove that the normalized torus data reconstruct its finite quadratic module $(G,q)$. Recent work showed that $(G,q)$ classifies the extended theory up to symmetric monoidal natural isomorphism, then genus-one data determine the all-genus theory without choosing a $K$-matrix presentation. We also prove that, for normalized character row errors $δ<21.96$%, nearest-row decoding recovers the Abelian fusion algebra independently of the number of anyons. The result applies to Abelian fractional quantum Hall and spin-liquid phases described by even-lattice Chern-Simons theories.",
+    "matched_terms": [
+      "topological order"
+    ]
+  },
+  {
+    "id": "2608.20156v1",
+    "title": "Biorthogonal Conformal Dynamics in Non-Hermitian Quantum Quenches",
+    "authors": [
+      "Yifan Liu"
+    ],
+    "categories": [
+      "cond-mat.str-el",
+      "hep-th"
+    ],
+    "published": "2026-08-20",
+    "link": "https://arxiv.org/abs/2608.20156v1",
+    "summary": "Global quenches at one-dimensional critical points admit a boundary conformal field theory (BCFT) description in which Euclidean strip correlators are analytically continued to real time. We formulate this construction for interacting non-Hermitian critical systems, where a right ket alone does not specify the dynamical readout and the left covector is part of the microscopic quench protocol. Independent left and right preparations flowing to the same conformal boundary define the two temporal boundaries of a strip with generally complex one-sided extrapolation parameters; linear and antilinear symmetry pairings are exploited to constrain this geometry. In the interacting Yang-Lee spin chain, statically calibrated boundary data determine the biorthogonal dynamics of the complete-character return amplitude, a primary one-point function, and a spatial correlator. The imaginary part of the linear-paired extrapolation parameter predicts the temporal center of an independently evolved antilinear-paired one-point function at the $10^{-3}$ relative level; the same preparation phase controls local phase evolution and the analytic-continuation path of boundary blocks. Further results test this formalism with a direct field-on quench, mixed left and right preparations, and a complex five-state Potts fixed point with complex primary dimensions. These results establish a BCFT framework for biorthogonal global quenches in interacting non-Hermitian critical systems, in which complex temporal-boundary data organize universal post-quench dynamics.",
+    "matched_terms": [
+      "conformal field theory"
+    ]
+  },
+  {
+    "id": "2608.19948v1",
+    "title": "Hilbert space relation from dS to AdS through Reflection Positivity",
+    "authors": [
+      "Yu-ki Suzuki"
+    ],
+    "categories": [
+      "gr-qc",
+      "hep-th"
+    ],
+    "published": "2026-08-20",
+    "link": "https://arxiv.org/abs/2608.19948v1",
+    "summary": "De Sitter unitarity and reflection positivity are logically independent. We study their relation for a free scalar field on a fixed de Sitter background, restricting attention to the one-particle sector. Motivated by Witten's de Sitter pairing and the radial adjoint of Bousso, Maloney and Strominger, we compose the invariant Hilbert product with equatorial reflection. In the standard principal-series realization, this form vanishes identically and its Osterwalder-Schrader quotient contains no states. For the complementary series, the reflected product becomes a nonzero reflected kernel on the unit ball. A result of Neeb and Ólafsson shows that this kernel is positive semidefinite precisely when the lower weight satisfies the scalar conformal unitarity bound. The resulting Hilbert space with the reflected inner product furnishes a positive-energy representation of AdS isometries according to Neeb and Ólafsson. We identify that the range coincides with the Klebanov-Witten alternative-quantization window from physics point of view. This correspondence suggests a novel relation from the representation viewpoint between AdS and dS without the conventional analytic continuation of radius.",
+    "matched_terms": [
+      "de Sitter"
+    ]
+  },
+  {
+    "id": "2608.19845v1",
+    "title": "Holographic Dual of Synge's Identity in AdS/CFT",
+    "authors": [
+      "Bingbing Chen",
+      "Deyou Chen"
+    ],
+    "categories": [
+      "hep-th"
+    ],
+    "published": "2026-08-20",
+    "link": "https://arxiv.org/abs/2608.19845v1",
+    "summary": "We identify CFT counterparts of Synge's identity for finite AdS geodesics in arbitrary dimensions. Starting from exact finite bulk--boundary pairs, the Synge equation induces endpoint scale equations for a Weyl-frame scalar two-point function and for the finite entanglement entropy between disjoint balls. In the planar frame, the common-scale correlator equation is the dilatation Ward identity. In the entanglement sector, the corresponding relative-scale equation is governed by a transverse hyperbolic area and reduces in two dimensions to the previously identified entanglement RG equation.",
+    "matched_terms": [
+      "entanglement entropy",
+      "AdS/CFT"
+    ]
+  },
+  {
+    "id": "2608.20081v1",
+    "title": "Analyzing Quasi-normal modes spectrum in asymptotically de Sitter black bounces and their optical appearance",
+    "authors": [
+      "G. Alencar",
+      "Albert Duran-Cabacés",
+      "A. Lima",
+      "Ángel Rincón",
+      "Diego Sáez-Chillón Gómez"
+    ],
+    "categories": [
+      "gr-qc"
+    ],
+    "published": "2026-08-20",
+    "link": "https://arxiv.org/abs/2608.20081v1",
+    "summary": "This work explores asymptotically de Sitter black-bounce spacetimes, obtained as a regular extension of the Schwarzschild-de Sitter geometry via the Simpson-Visser prescription. The resulting family of solutions provides a smooth interpolation between regular black holes, extremal configurations, and traversable wormholes within a single geometrical framework. In particular, we verify the regularity of the spacetime by showing that (some of) curvature invariants, including the Kretschmann and Ricci scalars, remain finite at the origin for any non-vanishing value of the regularization parameter $a$, ensuring geodesic completeness. An analysis of the effective stress-energy tensor reveals a violation of the null energy condition, which can be consistently interpreted in terms of a composite source involving a phantom scalar field coupled to nonlinear electrodynamics. Subsequently, we investigate the observational signatures of these geometries by studying: i) null geodesic propagation and ii) constructing the associated optical appearance. In particular, we determine the shadow radius and characterize the structure of photon rings through numerical ray-tracing procedure. Finally, we compute the spectrum of axial gravitational perturbations using a pseudospectral approach, obtaining the quasinormal mode frequencies and their overtones. Our results show a non-trivial interplay between the cosmological constant and the regularization scale $a$, which imprints itself on both the light-ring structure and the quasinormal spectrum. These features suggest potential observational discriminants that could distinguish these regular spacetimes from their singular counterparts in future gravitational-wave and high-resolution electromagnetic observations.",
+    "matched_terms": [
+      "de Sitter"
+    ]
+  },
+  {
+    "id": "2608.19774v1",
+    "title": "Kerr Quasinormal Modes without Variable Separation: A Two-Dimensional Hyperboloidal Teukolsky Solver with Physics-Informed Neural Networks",
+    "authors": [
+      "Antonio Ferrer-Sánchez",
+      "Daniela D. Doneva",
+      "José D. Martín-Guerrero",
+      "Stoytcho S. Yazadjiev",
+      "Roberto Ruiz de Austri-Bazan",
+      "Yolanda Vives-Gilabert",
+      "José A. Font"
+    ],
+    "categories": [
+      "gr-qc"
+    ],
+    "published": "2026-08-20",
+    "link": "https://arxiv.org/abs/2608.19774v1",
+    "summary": "We use physics-informed neural networks (PINNs) to solve the gravitational quasinormal-mode (QNM) eigenvalue problem for Kerr spacetime directly in the two-dimensional hyperboloidal formulation of the Teukolsky equation. This formulation does not require separation of variables and thus retains the coupled radial--angular structure. Such a scheme provides a prototype for calculating the QNMs of beyond-Kerr black holes for which the perturbation equations are non-separable. Sequences with increasing angular momentum are constructed, reaching close to the extremal limit. We focus on the fundamental modes $(\\ell,m,n)=(2,0,0)$, $(2,1,0)$, $(2,2,0)$, $(3,3,0)$ and $(4,4,0)$, together with the first overtone $(2,2,1)$. Independent benchmark evaluation shows that every reported real and imaginary frequency component remains below $0.5\\%$ error, with a median deviation of $0.1\\%$. This accuracy is maintained in the near-extremal regime, where the damping rate becomes small and the modes are longest-lived. The results establish a non-spectral numerical route to multidimensional black-hole perturbation eigenproblems which does not match the substantially higher precision of dedicated Kerr solvers but offers greater flexibility and requires less analytical pre-processing. Non-separable rotating backgrounds and coupled systems, such as gravitational--electromagnetic Kerr--Newman perturbations, are natural extensions of the same construction.",
+    "matched_terms": [
+      "neural network"
+    ]
+  },
+  {
+    "id": "2608.19695v1",
+    "title": "Can Stochastic Clocks in FLRW Minisuperspace Prevent Dynamical Singularities?",
+    "authors": [
+      "Pradosh Keshav MV"
+    ],
+    "categories": [
+      "gr-qc"
+    ],
+    "published": "2026-08-20",
+    "link": "https://arxiv.org/abs/2608.19695v1",
+    "summary": "We develop a stochastic extension of the Wheeler--DeWitt equation in FLRW minisuperspace and show that quantum backreaction can dynamically regulate the big bang singularity without imposing external boundary conditions. Using Laplace--Beltrami quantisation and an open-system treatment of coarse-grained graviton modes, we obtain a stochastic Hamiltonian evolution equation in which the diffusion coefficient takes the form $σ(a)\\propto a^2$. This multiplicative noise vanishes at the origin and renders $a=0$ an entrance boundary in Feller's classification, leading to super-exponential suppression of the Laplace--Beltrami weighted stationary density and zero probability flux into the singular point. At large scale factor, the global behaviour depends on the cosmological sector: de Sitter and positive potential-dominated regimes exhibit power-law stationary tails, whereas confining potentials or negative effective cosmological constant lead to an entrance boundary at infinity and a globally normalizable steady state. Taken together, these results indicate that stochastic backreaction arising from semiclassical coarse-graining provides a consistent and dynamical mechanism for singularity avoidance in minisuperspace quantum cosmology.",
+    "matched_terms": [
+      "de Sitter"
+    ]
+  },
+  {
+    "id": "2608.19606v1",
+    "title": "Generalized Polytropic Regular Black Holes in Arbitrary Dimensions",
+    "authors": [
+      "Seyed Naseh Sajadi",
+      "Supakchai Ponglertsakul",
+      "Petarpa Boonserm",
+      "Orlando Luongo",
+      "Hernando Quevedo"
+    ],
+    "categories": [
+      "gr-qc"
+    ],
+    "published": "2026-08-20",
+    "link": "https://arxiv.org/abs/2608.19606v1",
+    "summary": "We investigate static, spherically symmetric regular black holes with anti-de Sitter (AdS) asymptotics in arbitrary spacetime dimensions. They are solutions of Einstein gravity, sourced by an anisotropic fluid whose radial pressure corresponds to vacuum energy, while the tangential pressure satisfies a generalized polytropic equation of state. By solving the Einstein field equations, we derive a generic class of asymptotically AdS black hole solutions and determine the conditions required for spacetime regularity. We then investigate the dynamical formation of these regular black holes within the thin-shell formalism, assuming a linear barotropic equation of state for the shell matter. Next, we study the thermodynamics of the regular AdS black holes in arbitrary dimensions by verifying the first law of black hole thermodynamics and the corresponding Smarr relation. We analyze the thermodynamic stability and phase structure of solutions in four, five, and six spacetime dimensions, demonstrating the existence of dimension-dependent phase transitions.",
+    "matched_terms": [
+      "de Sitter"
+    ]
+  },
+  {
+    "id": "2608.20164v1",
+    "title": "Architecture and Compilation Co-Design for High-Rate Quantum Product Codes on Neutral Atom Arrays",
+    "authors": [
+      "Adrian Liu",
+      "Wan-Hsuan Lin",
+      "Daniel Bochen Tan",
+      "Qian Xu",
+      "Jason Cong"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-20",
+    "link": "https://arxiv.org/abs/2608.20164v1",
+    "summary": "Achieving fault-tolerant quantum computing at a practical scale demands quantum error correction (QEC) codes with high encoding rates. Quantum low-density parity-check (qLDPC) codes emerge as a promising candidate, especially given the rise of neutral atom arrays that provide dynamic long-range connectivity via atom movements. In general, synthesizing valid and efficient physical execution plans for QEC is a provably hard combinatorial problem, forming a critical compilation bottleneck that worsens as code sizes grow. To overcome this complexity, we focus on an important product family of qLDPC codes with dimension-reduction properties, and propose ONEX. This framework decomposes complex 2D physical execution planning into independent 1D subproblems, each solved to optimal execution depth within practical compilation time. First, we formulate the 1D execution plan with an explicit satisfiability modulo theories (SMT) encoding. This protocol produces provably depth-optimal solutions with substantial duration reduction. Second, we develop a multi-stage compilation pipeline featuring anytime optimization, movement compaction, and iterative feedback. This pipeline maintains practical wall-clock times while providing progressive refinement and on-demand retrieval of quality solutions. Third, we evaluate ONEX in the application of hypergraph product (HGP) code memory mapped onto neutral atom arrays, achieving 3.7x to 6.1x and 29.8x to 42.1x higher clock rates than the constructive 1D algorithm and the general 2D compiler, respectively, while scaling efficiently to codes with 2,500 data qubits. Finally, we extend ONEX to zoned layouts, revealing architectural insights into the associated trade-offs, and demonstrate its applicability to the broader lifted-product (LP) code family through a representative example.",
+    "matched_terms": [
+      "quantum error correction"
+    ]
+  },
+  {
+    "id": "2608.20001v1",
+    "title": "Bayesian inference and retrodiction for faithful states on von Neumann algebras",
+    "authors": [
+      "Pradyut Karmakar",
+      "Arthur J. Parzygnat"
+    ],
+    "categories": [
+      "math.OA",
+      "quant-ph"
+    ],
+    "published": "2026-08-20",
+    "link": "https://arxiv.org/abs/2608.20001v1",
+    "summary": "Retrodiction is the act of inferring a cause from its effects, the most common example of which is Bayesian inference. Retrodiction can be defined by its structural process-theoretic properties, which are mathematically captured by category theory. This categorical definition of retrodiction has recently been shown to potentially isolate the Petz recovery map as a unique universal candidate for quantum Bayesian inference. This paper extends these results to the infinite-dimensional setting on von Neumann algebras. In the process, we provide a pedagogical review of the Petz recovery map in infinite dimensions and its relation to the more commonly used expression in the finite-dimensional setting. We formalize the open question as to whether these categorical axioms for retrodiction do in fact uniquely characterize the Petz recovery map. If such a characterization holds, this would show that Bayesian inversion and the Petz recovery map are structural necessities and not simply useful algorithms for classical and quantum inference.",
+    "matched_terms": [
+      "von Neumann algebra"
+    ]
+  },
+  {
+    "id": "2608.19528v1",
+    "title": "Physics-Based versus Data-Driven Classification of Single-Photon Quantum Emitters from Sparse Autocorrelation Data",
+    "authors": [
+      "Nhat Minh Nguyen",
+      "Md Shakhawath Hossain",
+      "Duc Anh Ngo",
+      "Chaohao Chen",
+      "Xiaoxue Xu",
+      "Toan Trong Tran",
+      "Carlo Bradac"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-20",
+    "link": "https://arxiv.org/abs/2608.19528v1",
+    "summary": "Identifying single photon emitters from large, inhomogeneous candidate populations is key to realizing many quantum applications. This requires measuring the emitters second order autocorrelation function, whose statistical reliability is fundamentally limited by acquisition time. Machine learning classifiers can accelerate identification from sparse data, but their performance relative to physics-based inference has not been systematically examined. Here, we introduce sequential Bayesian inference for single photon emitter classification and benchmark it against Levenberg-Marquardt fitting and a feedforward neural network. We use synthetic training and test data calibrated against real Hanbury Brown-Twiss measurements from hexagonal boron nitride emitters, enabling evaluation against an exactly known ground-truth emitter number under realistic noise and background conditions. All three approaches achieve high, near-perfect accuracy with sufficient integration time, but differ greatly in convergence rate and robustness under sparse photon statistics. The neural network is most robust at short integration times. The Bayesian classifier reaches near-perfect accuracy fastest, while retaining full physical interpretability. Levenberg-Marquardt fitting remains a valuable, fully interpretable method, achieving the highest recall despite being the slowest to converge. These results lead to several key conclusions. No single method dominates across all performance metrics. Relying on any one metric alone can give a misleading picture of classifier performance, particularly under sparse photon statistics. Physics-based and data-driven methods are complementary rather than competing approaches. Together, these findings provide practical guidance for selecting and combining classification strategies for scalable single-photon-source screening and other quantum-emitter characterization tasks.",
+    "matched_terms": [
+      "neural network"
+    ]
+  },
+  {
+    "id": "2608.20131v1",
+    "title": "Structural complexity of an SU(3) Fermi Hubbard model",
+    "authors": [
+      "Jiani Fu",
+      "Zewen Zhang",
+      "Eduardo Ibarra-García-Padilla"
+    ],
+    "categories": [
+      "cond-mat.str-el"
+    ],
+    "published": "2026-08-20",
+    "link": "https://arxiv.org/abs/2608.20131v1",
+    "summary": "Two-dimensional quantum gas microscopy provides an unparalleled tool to study quantum many-body systems using ultracold atoms. For the SU(2) Fermi Hubbard model (FHM), access to spin-resolved projective measurements has been vital for quantifying correlation functions and mapping out the phase diagram. Recent progress in quantum gas microscopy for experiments with ultracold alkaline-earth atoms, which are well described by the SU(N) FHM and are predicted to host exotic ground-state phases, calls for the development of theory-free numerical techniques to extract physical information from their projective measurements. To that end, we evaluate the multiscale structural complexity of snapshots of an SU(3) FHM in the square lattice at $1/3$-filling. We employ mean-field theory to generate spin-resolved density distributions and compute their structural complexity using rectangular coarse-graining windows. We demonstrate that these complexities are linked to relevant physical observables such as the entanglement entropy, and are extremely sensitive for locating phase boundaries. The results presented here validate the structural complexity as an efficient and reliable tool for analyzing the outputs of SU(N) quantum gas microscopes, offering a theory-free property, immediately accessible to experiments.",
+    "matched_terms": [
+      "entanglement entropy"
+    ]
+  },
+  {
     "id": "2608.19166v1",
     "title": "Maximal Enhancements in Eight-Dimensional Non-Supersymmetric Heterotic Strings",
     "authors": [
@@ -215,6 +459,215 @@
     "summary": "In this article, we study the norm convergence property, i.e. convergence of normalized power sequence in the norm topology for operators belonging to a type $\\mathrm{I}_k$ von Neumann algebra $\\mathcal{M}$ acting on a separable complex Hilbert space. By utilizing continuous upper-triangular forms via unitary conjugations, we construct specific projection-valued families to prove that every operator in a type $\\mathrm{I}_k$ von Neumann algebra is decomposable. As a consequence, this immediately establishes that every such operator possesses the norm convergence property.",
     "matched_terms": [
       "von Neumann algebra"
+    ]
+  },
+  {
+    "id": "2608.19428v1",
+    "title": "Holographic Bit Threads from String-Diagrammatic Quantum Information Flow",
+    "authors": [
+      "Yi-Yu Lin",
+      "Song Cheng"
+    ],
+    "categories": [
+      "hep-th",
+      "quant-ph"
+    ],
+    "published": "2026-08-19",
+    "link": "https://arxiv.org/abs/2608.19428v1",
+    "summary": "Bit threads, arising as the convex dual of the minimal-surface formula for holographic entanglement entropy, are line-like structures with nontrivial bulk trajectories. Their physical picture has long been associated with Bell-pair interpretations, yet the meaning of their detailed trajectories, particularly their nonuniqueness, remains unclear. We propose to apply Coecke's notion of quantum information flow (QIF) in protocol-network geometry, developed within categorical quantum mechanics, to a holographic setup, and show that its trajectories within the discrete holographic bulk---the tensor network---obey the divergence-free and density-bound conditions of bit threads. From this process-centered perspective, bit-thread nonuniqueness becomes natural: for a given resource state, different protocols realizing the same distillation task can give rise to different QIF trajectories. We further analyze stabilizer-type holographic tensor networks using ZX string diagrams and show that QIF trajectories can probe finer entanglement structure beyond the level captured by entanglement entropy.",
+    "matched_terms": [
+      "holographic entanglement",
+      "entanglement entropy"
+    ]
+  },
+  {
+    "id": "2608.19418v1",
+    "title": "BCFW recursion for light-like Wilson loop correlators",
+    "authors": [
+      "James Drummond",
+      "Matthew Rochford",
+      "Rowan Wright"
+    ],
+    "categories": [
+      "hep-th"
+    ],
+    "published": "2026-08-19",
+    "link": "https://arxiv.org/abs/2608.19418v1",
+    "summary": "We apply the idea of holomorphic linking (arXiv:1101.1329) to correlators of multiple light-like loop operators in $\\mathcal{N}=4$ super Yang-Mills theory. This allows us to extend the BCFW recursion relations for planar scattering amplitude integrands or single Wilson loops in the planar theory to correlators of multiple loop operators. We discover a novel term which feeds the recursion for single loops into the relation for multiple loop operators. We illustrate the recursion relations with several examples and highlight its applicability in combination with the $\\bar{Q}$-equation for multiple loop operators. Finally, we again employ holomorphic linking to derive a recursion relation for colour-exact Wilson loop correlators.",
+    "matched_terms": [
+      "Yang-Mills"
+    ]
+  },
+  {
+    "id": "2608.19378v1",
+    "title": "Stochastic Schwinger Effect: de Sitter and beyond",
+    "authors": [
+      "Lucas Vicente García-Consuegra",
+      "Azadeh Maleknejad"
+    ],
+    "categories": [
+      "gr-qc",
+      "hep-th"
+    ],
+    "published": "2026-08-19",
+    "link": "https://arxiv.org/abs/2608.19378v1",
+    "summary": "We develop a stochastic formulation of the Schwinger effect in de Sitter spacetime using the Schwinger--Keldysh (in-in) formalism, tailored to particle production by non-stationary gauge backgrounds in the early Universe. Treating the gauge field as a prescribed classical stochastic ensemble, we integrate out massless charged matter and derive the corresponding influence functional and particle-production kernel to leading non-trivial order in the gauge coupling. Conformal invariance allows the result to be extended directly from de Sitter to generic spatially flat FLRW spacetimes, without relying on asymptotic out states. We establish the infrared safety and classicality conditions of the stochastic description and clarify its relation to the conventional static Schwinger effect. We further extend the framework to massless conformally coupled scalars and to weakly coupled non-Abelian gauge sectors, including Standard Model and hidden-sector examples, in regimes where thermal corrections are negligible. Our results provide a general framework for matter creation by stochastic gauge fields in inflation, preheating, and non-thermal BSM sectors, connecting quantum field theory in curved spacetime with early-Universe and high-energy phenomenology.",
+    "matched_terms": [
+      "de Sitter",
+      "conformal invariance"
+    ]
+  },
+  {
+    "id": "2608.19373v1",
+    "title": "Krylov complexity and the growth of the black hole interior in 3D gravity",
+    "authors": [
+      "Arpan Bhattacharyya",
+      "Sounak Pal",
+      "Juan F. Pedraza"
+    ],
+    "categories": [
+      "gr-qc",
+      "hep-th",
+      "quant-ph"
+    ],
+    "published": "2026-08-19",
+    "link": "https://arxiv.org/abs/2608.19373v1",
+    "summary": "We investigate the growth of the black hole interior in three-dimensional gravity from the boundary theory. For the two-sided BTZ black hole, we propose a boundary reconstruction of the time dependence of a codimension-one surface in terms of correlation functions of smeared operators in the thermofield double state, reproducing the characteristic late-time linear growth predicted by the complexity-volume proposal. Using the Chern--Simons formulation of three-dimensional gravity, these nonlocal correlators are represented by bulk Wilson lines with smeared endpoints, extending the familiar connection between Wilson lines and codimension-two observables underlying holographic entanglement entropy to codimension-one observables. We then ask whether the same geometric growth is captured by Krylov complexity. For the smeared operators, we extract the Lanczos data from their correlation functions and find that operator Krylov complexity reproduces the late-time linear growth of the black hole interior, extending previous connections between operator growth and bulk geometry to AdS$_3$. By contrast, the Krylov spread complexity of the thermofield double state, obtained from the semiclassical gravitational partition function, does not exhibit the linear growth of the bulk volume within the regime accessible to our analysis. Our results therefore point to a distinguished role for operator Krylov complexity in encoding black hole interior growth beyond two-dimensional gravity, while highlighting a qualitative distinction between operator and state notions of Krylov complexity.",
+    "matched_terms": [
+      "holographic entanglement",
+      "entanglement entropy"
+    ]
+  },
+  {
+    "id": "2608.19346v1",
+    "title": "Quantum chaos and late-time equipartition of symmetry-resolved Krylov complexity",
+    "authors": [
+      "Jayashish Das",
+      "Suman Das",
+      "Juan F. Pedraza",
+      "Le-Chen Qu"
+    ],
+    "categories": [
+      "hep-th",
+      "quant-ph"
+    ],
+    "published": "2026-08-19",
+    "link": "https://arxiv.org/abs/2608.19346v1",
+    "summary": "We study symmetry-resolved Krylov complexity in finite-dimensional chaotic quantum many-body systems. When both the Hamiltonian and the initial operator commute with a conserved charge, the operator dynamics decomposes into independent symmetry sectors, each with its own Krylov chain. We show that, after saturation, the unresolved Krylov complexity is additive over symmetry sectors. In the absence of additional Liouvillian degeneracies, the late-time contribution of a sector with Hilbert-space dimension $d_q$ is controlled by $d_q(d_q-1)$, leading to a dimension-weighted equipartition that approaches the simple large-sector scaling $d_q^2/\\sum_{q'}d_{q'}^2$. This late-time rule differs from the early-time weighted-average discussed in the literature and is governed instead by the dimensions of the accessible operator spaces. We support the analytic prediction with numerical studies of the real and complex SYK models, a chaotic bosonic spin model, and the mixed-field Ising chain. Our results show that resolving exact symmetries is essential for interpreting the saturation value of Krylov complexity as a diagnostic of chaotic operator growth.",
+    "matched_terms": [
+      "SYK model"
+    ]
+  },
+  {
+    "id": "2608.19331v1",
+    "title": "Deep neural networks as lattice gauge theories",
+    "authors": [
+      "Ro Jefferson",
+      "Shradha Ramakrishnan"
+    ],
+    "categories": [
+      "hep-th"
+    ],
+    "published": "2026-08-19",
+    "link": "https://arxiv.org/abs/2608.19331v1",
+    "summary": "We modify the NN/QFT duality [1] to incorporate the layerwise permutation symmetry of the network, resulting in a $(0\\!+\\!1)$-dimensional lattice gauge theory, in which each layer of $N$ neurons acts as an $N$-component lattice site, and the weight matrices play the role of gauge fields living on the links. In this framework, we compute the tree-level neuron-neuron propagator which describes the evolution of layer variance in the network, and develop the Feynman diagram machinery to compute interactions in the perturbative expansion in $1/N$. In particular, we obtain a recursive expression for all corrections to the exact propagator at $O(1)$, representing statistical fluctuations in the ensemble of networks, including infinitely-many loop diagrams mediating the interactions from previous layers. We also present a preliminary analysis of neuron scattering amplitudes that contribute order-by-order in $1/N$, which provides a field-theoretic framework for studying higher-point correlations, and by extension information propagation, in deep networks. We remark on some interesting directions for future work at the intersection of neural networks and quantum field theory.",
+    "matched_terms": [
+      "neural network"
+    ]
+  },
+  {
+    "id": "2608.19327v1",
+    "title": "Inflationary Bispectra and IR Physics from Quantum Simulators",
+    "authors": [
+      "Matthias Thomas Nowinski",
+      "Ivo Sachs"
+    ],
+    "categories": [
+      "gr-qc",
+      "hep-th"
+    ],
+    "published": "2026-08-19",
+    "link": "https://arxiv.org/abs/2608.19327v1",
+    "summary": "Bose-Einstein condensates have been used successfully as quantum simulators for early-universe particle production. Here we extend this analogy to the interacting theory. To this end, we compute the leading interaction terms expected in a general experimental setup that determine the 3-point correlations. We apply them to cosmologically motivated expanding model universes, but also periodically oscillating ones. While expanding scale factors do not necessarily lead to easily observable signatures due to experimental constraints on the realizable scale factor, periodically driven ones produce resonant correlators that grow linearly over time and lend themselves well to experimental detection. One direct application of this analysis is the experimental study of late-time infrared divergencies often discussed in the context of massless scalars in de Sitter space.",
+    "matched_terms": [
+      "de Sitter"
+    ]
+  },
+  {
+    "id": "2608.19305v1",
+    "title": "Holographic Local Operator Quenches with Conserved Momentum and Spin",
+    "authors": [
+      "Pawel Caputa",
+      "Pedro Castellini Grand",
+      "Justin R. David",
+      "Rahul Metya"
+    ],
+    "categories": [
+      "cond-mat.str-el",
+      "hep-th",
+      "quant-ph"
+    ],
+    "published": "2026-08-19",
+    "link": "https://arxiv.org/abs/2608.19305v1",
+    "summary": "We investigate the holographic dictionary relating point particles carrying longitudinal momentum or angular momentum in asymptotically AdS$_3$ spacetimes to suitably regulated, time-evolved states created by local primary operators in the dual two-dimensional conformal field theory (2D CFT). We find that asymmetric left/right Euclidean smearing of local operators produces states carrying momentum, and the corresponding bulk excitation is a particle with conserved momentum. We compute the energy density and entanglement entropy in these states and in their dual back-reacted geometries, finding exact agreement between the CFT and gravity descriptions. We further extend this correspondence to particles with intrinsic spin, whose CFT duals are primary operators with unequal holomorphic and anti-holomorphic scaling dimensions. We again find a precise match between CFT and holographic calculations of energy densities and entanglement entropies. Finally, we explore applications of these setups beyond holography by deriving the evolution of Rényi entropies in 2D rational CFTs and introducing a new class of local quantum quench protocols with conserved longitudinal or angular momentum.",
+    "matched_terms": [
+      "entanglement entropy",
+      "conformal field theory"
+    ]
+  },
+  {
+    "id": "2608.19310v1",
+    "title": "Dissipation-enhanced scrambling in the SYK model coupled to a lossy cavity",
+    "authors": [
+      "Pietro Pelliconi",
+      "Bastien Lapierre",
+      "Shinsei Ryu"
+    ],
+    "categories": [
+      "cond-mat.str-el",
+      "hep-th",
+      "quant-ph"
+    ],
+    "published": "2026-08-19",
+    "link": "https://arxiv.org/abs/2608.19310v1",
+    "summary": "We study the Yukawa-Sachdev-Ye-Kitaev model, a disordered model of $N$ Majorana fermions and $R=γN$ bosons in which the bosons are linearly coupled to independent realizations of SYK $p$-body interactions, in the presence of dissipation, modeled by a Lindblad master equation. Motivated by recent proposals for implementing SYK models in quantum simulators, we focus on bosonic leakage at rate $κ$. Initializing the system in the steady state, we analyze the late-time fermionic relaxation rate and the Lyapunov exponent, solving the large-$N$ theory both numerically and for $p$ large, finding a rich landscape of dynamical behaviors. Most notably, the Lyapunov exponent remains positive for every value of $κ$ and, for $p>2$, can even grow as $κ$ increases. The QED case $p=2$, which lies between the fully chaotic regime $p>2$ and the integrable case $p=1$, exhibits special features. We also identify a critical value of the boson-to-fermion ratio $γ_c \\approx 2/p^2$ separating distinct dynamical regimes.",
+    "matched_terms": [
+      "Sachdev-Ye-Kitaev",
+      "SYK model"
+    ]
+  },
+  {
+    "id": "2608.19427v1",
+    "title": "Compressibility of genuine multipartite entanglement under the Hadamard map",
+    "authors": [
+      "Klára Baksová",
+      "Lisa T. Weinbrenner"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-19",
+    "link": "https://arxiv.org/abs/2608.19427v1",
+    "summary": "One of the most counterintuitive effects in the examination of quantum states is the phenomenon of superactivation, which describes the fact that a quantum state, which is useless for a specific task, may become useful when one considers multiple copies of it. This effect can be observed in the case of genuine multipartite entanglement, where local projections from multiple copies to the single-copy Hilbert space could significantly simplify the practical accessibility of its superactivation. We investigate how such projections behave in the limit of many copies, using the Hadamard map as an example, and studying different state families. We show that, in this scheme, for a fixed map, an optimal number of copies exists, beyond which the obtained entanglement decreases, highlighting the differences between entanglement distillation and local projection schemes.",
+    "matched_terms": [
+      "multipartite entanglement"
+    ]
+  },
+  {
+    "id": "2608.19370v1",
+    "title": "Rethinking Quantum Circuits",
+    "authors": [
+      "Steven Rayan"
+    ],
+    "categories": [
+      "math-ph",
+      "quant-ph"
+    ],
+    "published": "2026-08-19",
+    "link": "https://arxiv.org/abs/2608.19370v1",
+    "summary": "These notes develop four interconnected ways of reading a quantum circuit. A circuit for us begins as an operational composition of gates; then, it becomes a diagram whose local equalities may be used as calculations; next, it becomes a protected process once errors, syndromes, and logical degrees of freedom are separated; and finally, it becomes geometric when its connectivity, topology, and boundary data are treated as physical design parameters. The development begins at the level of bits and qubits before appealing to Deutsch's and Grover's algorithms as basic examples of quantum circuits. With the basics in hand, we interpret quantum circuits diagramatically, leading us to compact closed string diagrams and the ZX-calculus. After that, we consider how to correct quantum circuits by introducing the Knill--Laflamme condition, homological surface codes, and related concepts with a view towards thinking of these as operations on diagrams. The lectures eventually arrive at the properties of hyperbolic quantum codes and the prospect of physical superconducting circuits emulating the negatively-curved lattices needed to support those codes. These mathematical ideas and physical experiments, taken together, represent one way to impart a geometric layer onto quantum circuits. By the very end, we bring the ideas nearly full circle by assessing the extent to which these device physics experiments operationalize the basic ZX diagrams encountered much earlier in the story. While the later material reports on original research, and while the discussion becomes increasingly mathematical as the sections progress, no prior knowledge of quantum information, quantum computing, or quantum error correction is actually assumed.",
+    "matched_terms": [
+      "quantum error correction"
     ]
   },
   {
