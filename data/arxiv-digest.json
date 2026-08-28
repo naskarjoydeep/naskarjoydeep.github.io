@@ -1,5 +1,38 @@
 [
   {
+    "id": "2608.27411v1",
+    "title": "A continuous confinement-deconfinement transition in a triangular quantum magnet",
+    "authors": [
+      "Suguru Hosoi",
+      "Sejun Park",
+      "Michihiro Hirata",
+      "Minseong Lee",
+      "Adam P Dioguardi",
+      "Joe D Thompson",
+      "Filip Ronning",
+      "Allen O Scheie",
+      "Kumpei Imamura",
+      "Kenichiro Hashimoto",
+      "Takasada Shibauchi",
+      "Bishnu P Belbase",
+      "Arjun Unnikrishnan",
+      "Johannes Knolle",
+      "Arnab Banerjee",
+      "Yuji Matsuda"
+    ],
+    "categories": [
+      "cond-mat.str-el"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27411v1",
+    "summary": "A continuous transition between phases hosting distinct excitations---bosonic magnons versus fermionic spinons---is a long-sought phenomenon in quantum magnetism, analogous to the confinement--deconfinement transition in quantum chromodynamics. We report evidence for such a transition in the triangular-lattice antiferromagnet TlYbS$_2$. Antiferromagnetic order develops below $T_\\mathrm{N} \\approx 0.53\\,\\mathrm{K}$. A $c$-axis field suppresses this order, driving the system into a gapless quantum spin liquid with a spinon Fermi surface above $μ_0 H_\\mathrm{c} \\approx 3\\,\\mathrm{T}$, evidenced by a finite residual linear term in thermal conductivity, a Pauli-like susceptibility, and a temperature-independent NMR Knight shift. Approaching $H_\\mathrm{c}$ from above, the scattering rate of itinerant excitations is strongly enhanced while their density of states shows no critical enhancement, atypical of conventional magnetic quantum criticality. These results point to a continuous confinement--deconfinement transition governed by fractionalized excitations beyond the Ginzburg--Landau paradigm.",
+    "matched_terms": [],
+    "matched_authors": [
+      "Hashimoto"
+    ],
+    "priority": 1
+  },
+  {
     "id": "2608.25287v1",
     "title": "Beyond Strong Subadditivity: Holographic Entropy Inequalities Along Renormalization Group Flows",
     "authors": [
@@ -42,6 +75,54 @@
     "matched_terms": [],
     "matched_authors": [
       "Yoshida"
+    ],
+    "priority": 1
+  },
+  {
+    "id": "2608.26377v1",
+    "title": "The Capacity of Entanglement and Holographic Entropies at Finite Resources",
+    "authors": [
+      "Ning Bao",
+      "Jacob March"
+    ],
+    "categories": [
+      "hep-th",
+      "quant-ph"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26377v1",
+    "summary": "The Ryu-Takayanagi formula equates the area of a minimal surface with the von Neumann entropy of a boundary subregion, and leaves two things about that identification open.   The first is how sharply a geometry fixes an entropy. Fannes-Audenaert answers with a Hilbert-space dimension, which diverges as the cutoff is removed however close the two states are. We replace it with the capacity of entanglement, the variance of the modular energy, whose square root grows like the square root of the entangling area where the dimensional factor grows like the regulated volume. The bound is dimension-free and saturated, and it makes the ambiguity of the entropy subextensive for any perturbation whose capacity is small compared with $S_{vN}^2$ times the trace norm.   The second is what the area means for a single state, since compression and dilution rates are defined only for many copies while a geometry describes one. When a single replica saddle dominates near $α= 1$, every smooth Rényi entropy at fixed $α> 1$ agrees with $S_{vN}$ to $\\textit{O}(\\sqrt{S_{vN}})$, as do the smooth min- and max-entropies. The minimal surface therefore fixes every one-shot entropy of the state at once, with large central charge playing the role of large copy number in the asymptotic equipartition property.   As a consequence we bound how far outside the holographic entropy cone a holographic state can appear to fall, leaving estimation and certification open.",
+    "matched_terms": [
+      "holographic entropy cone",
+      "Ryu-Takayanagi",
+      "Renyi",
+      "large central charge"
+    ],
+    "matched_authors": [
+      "Ning Bao"
+    ],
+    "priority": 1
+  },
+  {
+    "id": "2608.26244v1",
+    "title": "Renormalization in Liouville gravity and stochastic inflation",
+    "authors": [
+      "Jordan Cotler",
+      "Victor Ivo",
+      "Juan Maldacena"
+    ],
+    "categories": [
+      "gr-qc",
+      "hep-th"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26244v1",
+    "summary": "Motivated by inflation and Liouville theory, we consider random $d$-dimensional geometries characterized by an overall scale factor $ds^2 = e^{2 ζ} dx^2 $ given in terms of a random Gaussian field $ζ(x)$ with logarithmic correlations. We discuss aspects of the renormalization of the volume element $e^{d ζ}$, connecting well-known Liouville theory formulas (KPZ) and inflationary ones. By starting from a fixed physical cutoff and coarse-graining operators to a fixed fiducial cutoff, defined via the flat metric $dx^2$, we provide a direct physical derivation of the KPZ scaling relation. We point out that the same renormalization problem arises in stochastic inflation, where it is modeled by Brownian motion of the inflaton field. We show that the breakdown of the renormalization of the Liouville volume when the fluctuation amplitude exceeds a critical value corresponds to the transition to eternal inflation. In $d = 2$, this matches the familiar $c_m = 1$ barrier in Liouville gravity. We also discuss connections to mathematical probabilistic approaches to random surfaces.",
+    "matched_terms": [
+      "Liouville"
+    ],
+    "matched_authors": [
+      "Maldacena"
     ],
     "priority": 1
   },
@@ -2029,6 +2110,632 @@
     "priority": 1
   },
   {
+    "id": "2608.27457v1",
+    "title": "Spectral Fingerprints of Gauge Theories on a Quantum Computer",
+    "authors": [
+      "Graham Van Goffrier",
+      "Debasish Banerjee",
+      "Bipasha Chakraborty",
+      "Emilie Huffman"
+    ],
+    "categories": [
+      "cond-mat.str-el",
+      "hep-th",
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27457v1",
+    "summary": "Maximally mixed state spectral sampling is an unbiased quantum algorithm that allows for extraction of a finite-resolution spectral distribution from a Hamiltonian over potentially the entire allowed range of energies. We show how it may be focused on any desired area of the spectrum in order to learn about the full \\textit{fingerprint} of the model of interest: from its ground state phenomena such as quantum criticality, obtained from the lowest lying energies, to its thermalization behavior, obtained from the mid-spectrum. We demonstrate this technique specifically on a $(1+1)d$ non-Abelian $SO(3)$ gauge theory, providing a comprehensive analysis of the steps necessary for performing this algorithm, as well as what is possible in the near-term with superconducting quantum hardware, performing simulations with circuits that are $78$ two-qubit gates deep. We show how this algorithm is able to take advantage of emerging dynamical circuit capabilities in near-term hardware to roughly halve the number required qubits, as well as how quantum readout error mitigation is trivial for this method. Along the way, we propose a novel strategy for compiling the controlled-time evolutions needed for spectral sampling by means of Pauli-frame optimizations. We illustrate two physical applications of quantum spectral sampling -- disordered many-body transitions, and mid-spectrum densities of states -- and what postprocessing steps they require beyond the Fourier outputs of the algorithm.",
+    "matched_terms": [
+      "error mitigation",
+      "quantum algorithm"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27453v1",
+    "title": "Metallogenic quantum criticality: Fermi surface nucleation at transitions between gapped phases",
+    "authors": [
+      "Zhengyan Darius Shi"
+    ],
+    "categories": [
+      "cond-mat.stat-mech",
+      "cond-mat.str-el",
+      "hep-th"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27453v1",
+    "summary": "Continuous quantum phase transitions in interacting many-body systems exhibit universal phenomena that are largely independent of microscopic details. An organizing principle distilled from canonical examples such as the magnetic transition in Ising models is that the low-energy physics of transitions between gapped phases is governed by scale-invariant quantum field theories with gapless degrees of freedom at isolated points in momentum space. In this paper, we show that this principle can fail in a radical way: an entire gapless Fermi surface can emerge at a quantum critical point separating two fully gapped insulators. These exotic phase transitions are dubbed \\textit{metallogenic quantum critical points} (MGQCP). We construct a controlled family of effective field theories for MGQCPs between distinct fractional Chern insulators and propose a periodically modulated quantum Hall bilayer as a minimal microscopic setting. The critical theory exhibits an unusual mixture of physical signatures: while transport and compressibility follow scaling laws compatible with a conformal field theory, the electron spectral function develops a power-law non-analyticity at the Fermi momentum, characteristic of non-Fermi-liquid metals. We discuss how the concept of MGQCP may shed new light on critical phenomena in moire materials with tunable Chern bands. More generally, our results point to a broader class of quantum critical phenomena in which extended manifolds of gapless excitations emerge in momentum space despite being absent in both neighboring phases.",
+    "matched_terms": [
+      "conformal field theory",
+      "scaling law"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27440v1",
+    "title": "Dynamics of local quantum information in random unitary circuits",
+    "authors": [
+      "Ratul Thakur",
+      "Sthitadhi Roy"
+    ],
+    "categories": [
+      "cond-mat.dis-nn",
+      "cond-mat.stat-mech",
+      "hep-th",
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27440v1",
+    "summary": "The physics of information scrambling in quantum many-body systems is intimately related to thermalisation and emergence of chaos. However, its standard characterisation through bipartite entanglement or operator growth remains inherently coarse-grained, obscuring the spatiotemporal anatomy of how quantum information flows between different regions of the system and across various length scales. In this work, we develop a theory for the dynamics of local information in local random unitary circuits which resolves the fine-grained microscopic structures of local information flow in such systems. Using the framework of information lattice which systematises the information content at each length scale within each subsystem, we identify a distribution of length scales at which information resides and obtain the dynamics of the distribution. For Haar-random circuits with infinite local Hilbert-space dimensions, we map this dynamics onto an exact classical stochastic process which reveals that this distribution is described by a Tracy-Widom form which moves ballistically in time ($ \\propto t$) toward larger scales, accompanied by a $\\sim t^{1/3}$ broadening. We also find the same qualitative behaviour for random Clifford circuits acting on qubits. The similar scaling behaviour in two rather different settings hints strongly towards the universality of our results. In the case of Clifford circuits, we develop a phenomenological Markov process for the dynamics of the stabiliser generators in a specific gauge which confirms the Tracy-Widom distribution and the $t^{1/3}$ scaling of the fluctuations. Ultimately, our results establish the universal properties of the dynamics of local quantum information in a length scale-resolved fashion and provide a possible route towards bridging exact microscopic theories for information dynamics with emergent hydrodynamic descriptions of information flow.",
+    "matched_terms": [
+      "scrambling",
+      "Clifford",
+      "hydrodynamic"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27410v1",
+    "title": "Doubly-scaled planar ${\\cal N} = 4$ SYM \\& Carroll Holography",
+    "authors": [
+      "Arjun Bagchi",
+      "Prateksh Dhivakar",
+      "Alok Laddha",
+      "Partha Paul"
+    ],
+    "categories": [
+      "hep-th"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27410v1",
+    "summary": "Okuda and Penedones (OP) \\cite{Okuda:2010ym} showed the existence of a double scaling limit of four point correlators in ${\\cal N}=4$ Supersymmetric Yang Mills (SYM) theory in four spacetime dimensions (4$d$) dual to the flat space limit of tree-level string amplitude in $\\mathbb{R}^{1,9}$ with external kinematics in $\\mathbb{R}^{1,4}$. In this paper, we show that the resulting boundary correlators can be used to define a 4d Carrollian conformal field theory (CFT) on future null infinity (${\\I}^{+}$). This is done by mapping the set of correlators in ${\\cal N} = 4$ SYM theory (in the double scaling limit) to ${\\I}^{+}$, which is the conformal boundary of all asymptotically flat spacetimes. A Carroll CFT thus emerges in the infinite 't Hooft coupling limit of ${\\cal N} = 4$ SYM theory. We extend the OP analysis to higher point functions and show how the Gram conditions on flat space amplitude put constraints on the double scaling limit of SYM correlators. We then use the soft factorization theorem for dilatonic string amplitude to write a recursion relation for $\\frac{1}{2}$ BPS sector of ${\\cal N} = 4$ SYM theory in the double scaling limit. Finally, we show that the essential ideas underlying such a double scaling limit can be used as a tool-kit to build a class of Carrollian correlators, and hence define a Carrollian CFT, via certain integral transforms of flat space amplitudes of non-gravitational effective field theories.",
+    "matched_terms": [
+      "'t Hooft",
+      "conformal field theory",
+      "Carrollian"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27350v1",
+    "title": "Quantum Chaos and Quantum Optimal Transport",
+    "authors": [
+      "Jordan Cotler",
+      "Felipe Hernández"
+    ],
+    "categories": [
+      "hep-th",
+      "math-ph",
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27350v1",
+    "summary": "Chaos in classical systems can be characterized by Lyapunov exponents that measure the exponential divergence of nearby trajectories, but directly extending this framework to quantum mechanics has been a persistent challenge. The wavelike nature of quantum states and the non-commutative geometry of quantum phase space obstruct a straightforward generalization of classical chaos theory. Here we develop a rigorous approach to quantum chaos by leveraging quantum optimal transport theory, which provides the missing geometric foundation for measuring distances between extended quantum distributions. We define quantum Lyapunov exponents that naturally avoid divergences encountered when naïvely generalizing classical exponents, and show that in the semiclassical limit they recover the classical global expansion rate, and hence the usual maximal Lyapunov exponent when they coincide. Our framework provides a tight connection between the divergence of classical trajectories and semiclassical phase space evolution, and additionally clarifies the role of out-of-time-order correlators as diagnostics of quantum chaos. These results establish quantum optimal transport as a unifying mathematical foundation for quantum chaos theory, providing new tools to characterize dynamical behavior across the full range of quantum dynamics from simple few-body models to complex many-body systems.",
+    "matched_terms": [
+      "quantum chaos",
+      "out-of-time-order",
+      "optimal transport"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27224v1",
+    "title": "Exploring continuous beta-ensembles: A Python implementation for random matrix spectral statistics",
+    "authors": [
+      "Dorin Weissman"
+    ],
+    "categories": [
+      "hep-th",
+      "math-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27224v1",
+    "summary": "We present an open-source Python package for sampling the Gaussian, Circular, and Laguerre $β$-ensembles of random matrix theory. The package implements the Dumitriu-Edelman and Killip-Nenciu constructions, allowing efficient generation of random spectra for general $β> 0$. In addition to spectrum generation, it includes tools for the analysis of spectral statistics, from standard nearest-neighbor spacings and spacing ratios to non-adjacent $k$-spacings and the spectral form factor. These tools can be applied to generic spectral data, allowing users to compare them with and fit them to $β$-ensemble predictions. In this note, we review the $β$-ensembles, describe the package interface, and illustrate its use through several numerical experiments motivated by applications to quantum chaos. Our numerical results include an analysis of $β$ as a continuous fitting parameter in spacing ratio statistics, an examination of the numerical evidence for the conjectured $k$-spacing ratio distributions, and a study of the spectral form factor for general values of $β$.",
+    "matched_terms": [
+      "quantum chaos",
+      "spectral form factor",
+      "random matrix"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26997v1",
+    "title": "Testing holographic computation of entanglement pseudo-entropy in dS\\textsubscript{3}/ICFT\\textsubscript{2}",
+    "authors": [
+      "Liang Li"
+    ],
+    "categories": [
+      "gr-qc",
+      "hep-th"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.26997v1",
+    "summary": "We establish a bottom-up model for studying the `would-be' de-Sitter/interface CFT (dS/ICFT) correspondence on the gravity side, using the Coleman-De Luccia instanton. After absorbing the region where the inflaton changes dramatically by a brane, the spacetime consists of two de Sitter spacetimes with different radii joined by a brane, which is expected to be dual to an interface CFT provided that the dS/CFT conjecture is correct. Our goal is to analyze existing prescriptions for the holographic computation of pseudo-entropy, i.e. the extremal surface in such a spacetime and argue that some of them would cause parodox with the results expected the universal properties of interface CFT and compare our results with that of Anti de Sitter/interface CFT correspondence (AdS/ICFT) after analytic continuation. We also read off the $g$-function from the entanglement entropy associated with a subregion perpendicular to the interface.",
+    "matched_terms": [
+      "entanglement entropy",
+      "extremal surface",
+      "pseudo-entropy",
+      "de Sitter",
+      "dS/CFT"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26825v1",
+    "title": "Quantum Chaos and Spread of States in Krylov Subspace: A Topical Review",
+    "authors": [
+      "Hyun-Sik Jeong",
+      "Juan F. Pedraza"
+    ],
+    "categories": [
+      "hep-th",
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.26825v1",
+    "summary": "Krylov state complexity, or spread complexity, has emerged as a sharp and versatile diagnostic of quantum chaos, information spreading, and many-body dynamics. Built from the Lanczos algorithm and grounded in the optimal-basis theorem, Krylov complexity thereby provides a robust spectroscopic window into quantum dynamics. A central theme is the characteristic overshoot observed in chaotic systems: a complexity peak in which chaotic evolution drives the state deeper into the Krylov chain than in integrable systems before relaxing to equilibrium. This behavior, tied to random-matrix universality classes of spectral statistics, is illustrated across a broad range of models, including quantum billiards, quantum spin chains, and variants of the SYK model. We also discuss proposed holographic descriptions of Krylov complexity in Einstein gravity, and conclude by outlining future directions and open problems, including time-dependent systems and quantum-field-theoretic formulations. A Mathematica notebook is provided for numerical exploration of Krylov complexity and spectral statistics across models.",
+    "matched_terms": [
+      "quantum chaos",
+      "SYK",
+      "integrable system"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26554v1",
+    "title": "Comparison of Two-Atom Cross Spectra in de Sitter Spacetime, Uniformly Accelerated Minkowski Vacuum, and a Thermal Bath",
+    "authors": [
+      "Zhiming Huang"
+    ],
+    "categories": [
+      "gr-qc",
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.26554v1",
+    "summary": "We study the weak coupling of two identical two-level atoms to a four-dimensional massless conformally coupled scalar field and compare three settings with the same local temperature but different physical origins: comoving atoms in the Bunch--Davies vacuum of de Sitter spacetime, transversely separated uniformly accelerated atoms in the Minkowski vacuum, and static atoms in a Minkowski thermal bath. We first derive the two-atom cross spectra in the three settings and then obtain the single-atom local spectra uniformly from the zero-separation limit. When $a=H$ and $β=2π/H$, the complete local Wightman kernels and local spectra are identical in all three cases. At finite separation, a genuine thermal bath produces a $\\sinc(ΩL)$ spatial factor, whereas de Sitter spacetime and the transversely accelerated vacuum produce a hyperbolic geometric factor. In the long-distance limit, the cross correlations in de Sitter spacetime and the transversely accelerated vacuum decay as $L^{-2}$, whereas those in the Minkowski thermal bath decay only as $L^{-1}$. The de Sitter and transversely accelerated vacuum cross spectra coincide when $a=H$ and the separations are instantaneously matched. For a fixed experimental setup, the physical separation between the two comoving atoms in de Sitter space evolves with cosmic expansion, whereas the pulled-back cross correlations in the uniformly accelerated and thermal Minkowski configurations are stationary.",
+    "matched_terms": [
+      "de Sitter"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27430v1",
+    "title": "Factorized Boolean representations for efficient quantum synthesis",
+    "authors": [
+      "Mehul Shah",
+      "Robert Fiszer",
+      "Marek Perkowski"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27430v1",
+    "summary": "Quantum algorithms promise advantages beyond classical reach, but running them on error-corrected hardware requires translating Boolean specifications into reversible circuits, and the resources that translation demands determine what is executable. Established methods minimize a Boolean expression and map it to a circuit, assuming the minimized form is best. Here we show that minimized expressions retain algebraic structure minimization cannot reach, arising from containment and complementary-polarity relationships among their terms, and that extracting it yields circuits cheaper to execute despite having more operations. The decisive quantity is not a circuit's operation count but the control count of its widest operation, a superlinear cost; extracting shared factors trades a few wide operations for many narrow ones and reduces qubit count. Across benchmarks and oracles from quantum search and factoring algorithms, at the representation level the transformation never increases either cost measure, a guarantee from its construction. Translation to an executable circuit returns part of that advantage, since auxiliary lines must be uncomputed, yet the factorized circuit still left a leading circuit-level optimizer reaching lower final counts, and faster, than unaided. The representation of a computation is therefore itself a resource, optimizable before compilation and distinct from both logic minimization and circuit-level optimization.",
+    "matched_terms": [
+      "quantum algorithm"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27387v1",
+    "title": "Stochastic transport of a Goldstone mode in a self-organized atomic crystal",
+    "authors": [
+      "Zhanhai Yu",
+      "Di Xiang",
+      "Xiaotian Zhang",
+      "Hao Zhang"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27387v1",
+    "summary": "Spontaneous breaking of a continuous symmetry produces a massless Goldstone mode that can evolve across a degenerate manifold at zero energy cost. Goldstone modes have been identified primarily through excitation spectra, mode softening or collective oscillations. However, their time-domain transport under intrinsic fluctuations and dissipation has remained largely unexplored. Here we directly track the stochastic transport of a Goldstone mode in a self-organized atomic crystal inside an optical ring cavity. The ring cavity maps the order-parameter phase onto the real-space position of the emergent crystal. Without any external perturbation, fundamental photon-scattering recoil drives the collective transport, while cavity dissipation generates friction. We monitor individual trajectories of the atoms and their self-generated optical lattice by measuring the cavity output phase. We find that the diffusion constant decreases as $1/N$, indicating that all atoms move collectively as a rigid object rather than independently. By tuning the Langevin driving force and cavity-mediated damping, we show that the normalized diffusion constant collapses onto a single universal curve. This work extends the study of continuous symmetry breaking from excitation-frequency measurements to real-time tracking of transport, and opens routes for studying non-equilibrium collective transport, phonon dynamics, and defect formation in driven-dissipative quantum matter.",
+    "matched_terms": [
+      "Langevin"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27333v1",
+    "title": "Evaluating Quantum Kernel Methods for Track-Based Classification in High-Energy Physics",
+    "authors": [
+      "Emmanuel Billias",
+      "Nikos Chrisochoides"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27333v1",
+    "summary": "We present a systematic design for large-scale quantum kernel classification, demonstrated through a quantum support vector classifier (QSVC) for particle-track classification using centroid-based CLAS12 drift-chamber features. Each event is encoded into a six-qubit state via a fully entangled ZZFeatureMap, whose fidelities define a quantum kernel within a standard SVM framework. By decoupling state preparation from kernel construction and distributing evaluation across a multi-node MPI-based HPC allocation, the approach scales to 1.0x10^5 training and 4.0x10^5 test events with an exactly constructed kernel matrix, to our knowledge more than an order of magnitude larger than prior high-energy-physics quantum-kernel studies.   Benchmarked against linear, polynomial, RBF, and sigmoid SVM kernels and extremely randomized trees (ERT), the ideal QSVC achieves the highest recall (99.99%) among all models. Under a calibrated hardware noise model (FakeMumbaiV2, 500 training / 2,000 test events), AUC falls from 0.9985 to 0.9671 and peak significance improvement falls from 17.5 to ~3.5, yet recall remains at 99.51% -- indicating this signal-retention advantage is attenuated but not eliminated by circuit-level decoherence.   Geometric analysis of the quantum embedding shows near-orthogonal inter-class states with coherent intra-class neighborhoods under ideal simulation; under noise this structure compresses toward the maximally mixed state while preserving its relative ordering.   These results demonstrate a scalable, reproducible workflow for quantum kernel experimentation at HEP-relevant scale, quantifying the practical cost of realistic hardware noise on quantum-enhanced classification.",
+    "matched_terms": [
+      "decoherence"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27267v1",
+    "title": "Efficient Quantum Simulations of Yang-Mills theory with Maximal-tree Gauge",
+    "authors": [
+      "Tianyin Li",
+      "Ying-Ying Li",
+      "Xiaoyang Wang",
+      "Hongxi Xing"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27267v1",
+    "summary": "We develop a quantum algorithmic framework for the efficient simulation of Yang--Mills theories, including the $\\mathrm{SU}(3)$ gauge theory in Quantum Chromodynamics (QCD). The framework uses maximal-tree gauge in terms of gauge field variables that removes all local gauge redundancies. In the resulting gauge-fixed formulation and digitization in the field-amplitude basis, we show that Hamiltonian time evolution admits an efficient implementation based on quantum singular value transformation (QSVT). We derive upper bounds on the total number of qubits and gate complexity, finding polynomial scaling with the inverse simulation precision $1/\\varepsilon_s$, lattice volume $\\mathcal{V}$, gauge coupling $g$, and target energy scale $E$. Our results provide a rigorous complexity-theoretic demonstration that non-Abelian Yang--Mills theories can be simulated efficiently on quantum computers, paving the way toward first-principles quantum simulations of non-perturbative QCD dynamics.",
+    "matched_terms": [
+      "Yang-Mills",
+      "quantum algorithm"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27237v1",
+    "title": "Long-time Dynamics of Many-body Open Quantum Systems using Quantum Generating Functions",
+    "authors": [
+      "Katha Ganguly",
+      "Dario Poletti",
+      "Bijay Kumar Agarwalla"
+    ],
+    "categories": [
+      "cond-mat.stat-mech",
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27237v1",
+    "summary": "The interplay between coherent unitary evolution and environment-induced dissipation can give rise to a wide range of non-equilibrium dynamics in open quantum systems, ranging from interesting transport phenomena to dynamical phase transitions. However, accessing such long-time dynamics remains challenging for the existing methods developed for the simulation of many-body open quantum systems. We address this problem by developing a quantum generating function (QGF) formalism for open many-body systems for both ensemble-averaged dynamics governed by a Markovian quantum master equation and trajectory-resolved dynamics described by the quantum trajectory formalism, including quantum jumps, and quantum state diffusion. Our approach computes the dynamics of higher-order moments and fluctuation statistics without explicitly evolving the quantum state, thereby providing an efficient and scalable approach for investigating many-body open quantum systems. We demonstrate the versatility of the formalism by applying it to both the integrable open XXZ chain and the nonintegrable open next-nearest-neighbor XXZ spin chain, where it uncovers distinct initial state dependent long-time transport regimes. Our work establishes quantum generating functions as an efficient and scalable framework for investigating long-time dynamics in open quantum many-body systems.",
+    "matched_terms": [
+      "open quantum system"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27216v1",
+    "title": "QH-GEM: Quantum-Hydrodynamic Generative Modeling",
+    "authors": [
+      "Harbir Antil",
+      "Alex Kaltenbach",
+      "Sarswati Shah"
+    ],
+    "categories": [
+      "math-ph",
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27216v1",
+    "summary": "In this paper, we develop a deterministic, physically constrained generative framework based on the Madelung formulation of the free-particle Schrödinger equation. A reference Born probability density and a controllable initial phase function serve as initial data for the free Madelung system, which couples the Born probability density and phase function through the Bohm quantum potential, while the phase function determines the hydrodynamic velocity field. Provided that the Born probability density remains positive and the hydrodynamic velocity field generates a unique global characteristic flow, samples drawn from the reference density and transported along the characteristic flow are distributed according to the evolving Born probability density at every time.   As a consequence, randomness enters only through the initial sampling; the subsequent generation is deterministic and involves neither stochastic dynamics nor an independently parameterized time-dependent velocity field. We formulate terminal-time distribution matching as a PDE-constrained phase-identification problem and derive the underlying Hamiltonian and Fisher-information structure. For isotropic Gaussian wave packets, we obtain explicit dynamics and a necessary and sufficient condition for exact reachability of isotropic Gaussian targets by quadratic initial phase functions, together with the corresponding sampling map. For a smooth prescribed potential initial velocity field, we further establish that the characteristic flow approximates the associated first-order transport map with an O(T^2) error, both uniformly and in the 1- and 2-Wasserstein distances. A numerical Gaussian benchmark validates the fully discrete forward solver, while full-grid PDE-constrained phase identification is demonstrated for asymmetric bimodal targets.",
+    "matched_terms": [
+      "generative model",
+      "hydrodynamic"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27202v1",
+    "title": "Strong Converse Exponent of Quantum State Merging",
+    "authors": [
+      "Mario Berta",
+      "Hao-Chung Cheng",
+      "Roberto Rubboli",
+      "Marco Tomamichel"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27202v1",
+    "summary": "We determine the strong converse exponent for the entanglement cost of quantum state merging, showing that it is characterized by the optimized $α$-$z$ conditional Rényi entropies with $z=α/2\\in[1/2,1]$. This contrasts with the sandwiched conditional Rényi entropies that typically govern strong converse exponents in quantum information theory. As a consequence, we derive the strong converse exponent of the partially smoothed conditional min-entropy in purified distance. This exponent is governed by club-sandwiched conditional entropies, whereas global smoothing leads to a sandwiched expression.",
+    "matched_terms": [
+      "Renyi"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27171v1",
+    "title": "Conditional contraction coefficients and their applications to quantum networks",
+    "authors": [
+      "Christoph Hirche",
+      "Ian George",
+      "Theshani Nuradha",
+      "Mark M. Wilde"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27171v1",
+    "summary": "Contraction coefficients quantify the loss of distinguishability induced by a channel and provide a strong form of the data-processing inequality. While standard contraction coefficients ignore auxiliary quantum systems, existing extensions based on complete contraction coefficients require the compared states to have identical reference marginals. In this work, we introduce conditional contraction coefficients, a novel family that incorporates arbitrary quantum reference systems by subtracting the distinguishability already present in the reference system. We develop a general framework for contraction coefficients with such quantum side information, including the corresponding strong-data-processing-inequality (SDPI) constants, expansion coefficients, and relative contraction coefficients. For the trace distance, we show that the optimization can be restricted to orthogonal input states. For the quantum relative entropy, we prove that its conditional contraction coefficient is exactly equal to the contraction coefficient of the conditional mutual information, extending the classical correspondence between relative-entropy contraction and mutual-information contraction to the setting with quantum side information. More generally, we identify structural properties of divergences required for these results and discuss extensions beyond the relative entropy. These results establish a unified framework for analyzing information contraction in quantum network settings, where quantum side information and distributed correlations are intrinsic features of the information-processing task. Applications include an extension of the Polyanskiy-Wu bounds on mutual information contraction, new perspectives on mixing times, and fundamental limits on quantum memories.",
+    "matched_terms": [
+      "relative entropy",
+      "mutual information"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27163v1",
+    "title": "Dynamics and spectra of open quantum systems coupled to anharmonic environments",
+    "authors": [
+      "Kian Damezin",
+      "Brendon W. Lovett",
+      "Erik M. Gauger",
+      "Adam Burgess"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27163v1",
+    "summary": "In open quantum systems, the environment is typically modelled as a collection of harmonic oscillators, whereas realistic environments often exhibit unique non-Markovian effects due to the anharmonicity of the environment. Here we present a framework for modelling anharmonic environments in open quantum systems numerically exactly, in which, via a matching criterion, we map the anharmonic environment onto an effective harmonic one. This results in an effective spectral density that is a collection of shifted bare spectra arising from the non-equidistant energy gaps of the anharmonic environment, along with a unique zero-frequency term that effectively acts as static disorder on the system. This is due to the non-zero variance of the diagonal of the bath coupling operator. In tandem, we develop a framework for investigating the effects of environments comprising a few damped anharmonic modes where the matching criterion fails to work due to the non-Gaussianity of the environment. For both continuous and discrete damped anharmonic environments, this work investigates their unique influence on the system's dynamics, including enhanced non-Markovianity compared to a harmonic approximation, novel effects in the absorption spectrum, and the potential for anharmonic environments to enhance energy transport.",
+    "matched_terms": [
+      "open quantum system"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27099v1",
+    "title": "Towards Reproducible Evaluation of Distributed Quantum Circuit Partitioning Algorithms",
+    "authors": [
+      "Javier Vela-Tambo",
+      "Davud Azizov",
+      "Tian Guo"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27099v1",
+    "summary": "Distributed Quantum Computing (DQC) addresses the physical scaling limitations of monolithic quantum processors by networking modular Quantum Processing Units (QPUs). Efficient execution of quantum algorithms on DQC architectures requires compiling them across QPUs while minimizing inter-QPU communication bottlenecks, primarily through circuit partitioning. However, current evaluations of state-of-the-art partitioning heuristics focus primarily on the total entanglement cost of the partitions, failing to capture the broader structural and temporal overheads introduced by distributed network constraints. This paper addresses this evaluation gap by applying established monolithic benchmarking metrics to partitioned distributed circuits to quantify the performance impact of network constraints. Using an open-source, automated evaluation pipeline, we systematically assess diverse partitioning algorithms across standardized workloads and quantum network topologies. Our empirical results reveal that partitioning algorithms with comparable entanglement costs can still introduce drastically different physical execution penalties. By exposing these hidden trade-offs, such as severe increases in circuit depth and substantial reductions in gate density, this study demonstrates that comprehensive circuit-level metrics are essential for guiding the future design of DQC compilers.",
+    "matched_terms": [
+      "quantum circuit",
+      "quantum algorithm"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26972v1",
+    "title": "Quantum-enhanced ghost imaging recognition via joint optimization of speckle patterns and quantum network parameters",
+    "authors": [
+      "Yirui Mao",
+      "Xiangyu Ge",
+      "Yuhang Tu",
+      "Anqi Zhang",
+      "Le Wang",
+      "Shengmei Zhao"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.26972v1",
+    "summary": "Ghost imaging enables nonlocal image reconstruction and exhibits strong robustness against interference, but achieving high-fidelity recognition at ultra-low sampling rates remains challenging. Quantum machine learning offers a novel approach for efficient feature extraction on noisy medium-scale quantum devices; however, existing methods generally suffer from low recognition accuracy and weak noise resistance. This paper proposes a ghost imaging recognition method based on the simultaneous optimization of speckle patterns and quantum network parameters. By leveraging the mathematical equivalence between classical convolution and speckle-object dot product operations in ghost imaging, a speckle consistency regularization mechanism is introduced to achieve end-to-end joint optimization of optical coding and quantum feature extractors. A parallel 8-qubit quantum circuit employing block coding and a star-shaped entanglement structure is designed to extract higher-order features from bucket signals. Simulation results on the MNIST and Fashion-MNIST datasets show that at an ultra-low sampling rate of 1.5625%, the proposed framework achieves recognition accuracies of 90.1% and 81.7%, respectively, representing a 2.6% improvement over classical convolutional neural networks and a maximum improvement of 14.2% over traditional hybrid quantum machine learning models. This method also exhibits strong robustness to quantum noise and has been validated on a real optical ghost imaging system, achieving an average recognition accuracy of 84.8%. These results confirm that the joint optimization of speckle patterns and quantum network parameters provides a reliable and practical solution for low-sampling ghost imaging recognition.",
+    "matched_terms": [
+      "quantum circuit",
+      "neural network",
+      "machine learning"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26840v1",
+    "title": "Quantum Rare-Event Estimation for Ising Graphical Models with Belief-Propagation State Preparation",
+    "authors": [
+      "Mario Hernández Vera",
+      "Narges Jamialahmadi",
+      "Burak Mete",
+      "Susanne Schneider",
+      "Marco De Pascale"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.26840v1",
+    "summary": "Quantum amplitude estimation can reduce the sampling cost of rare-event probability estimation, but applying it to correlated Ising graphical models is limited by the difficulty of preparing the target distribution and building a practical event oracle. This work explores two approximate strategies for mitigating these challenges. We introduce a sample-free state-preparation method combining loopy belief propagation with the Chow--Liu algorithm. The resulting tree approximation is compiled into a quantum circuit with linear gate count and depth, and its accuracy is evaluated across graph families spanning different topologies, coupling strengths, and coupling signs. We also construct a structural oracle that evaluates threshold rules with reversible Boolean gates. Using a twenty-node supply-chain disruption model as a case study, we compare maximum likelihood amplitude estimation against four classical Monte Carlo baselines. Under the fixed-depth schedule used throughout this work, the quantum estimator has the same asymptotic error scaling as the classical methods but achieves lower estimation error by a constant factor. This reduction narrows when amplitude-encoding queries replace raw shots as the resource metric. We separate statistical error from the deterministic errors caused by approximate state preparation and oracle construction, and identify the requirements for achieving an improvement beyond a constant factor.",
+    "matched_terms": [
+      "quantum circuit"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26600v1",
+    "title": "Auditing Structured Randomness for Quantum Error Correction under a Bounded Cloud Fault Model",
+    "authors": [
+      "Ziqing Guo",
+      "Anthony Lawrence",
+      "Renyu Wang",
+      "Randy Kuang",
+      "Ziwen Pan"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.26600v1",
+    "summary": "Cloud quantum processors compile submitted quantum error correction circuits and may colocate them with untrusted workloads. A fixed public encoder gives a fault-injection adversary a reusable target. Per-run reseeding changes the physical-to-logical fault map. Exact Haar-random encoders have exponential circuit cost. Efficient random ensembles provide average-moment guarantees and leave worst-case accepted corruption uncharacterized. We define accepted logical disturbance, an acceptance-weighted measure of harmful logical action in accepted results, and derive its exact Haar expectation. We evaluate a polynomial-cost seeded Clifford encoder family using dense linear algebra and gate-level stabilizer simulation against faults chosen before or after the encoder is known. Reseeding reduces mean accepted logical disturbance from 0.150 for faults chosen after learning each encoder to 0.020 for one fault chosen before it is known. The 86.7% reduction results from rejection. The fixed distance-three \\([[5,1,3]]\\) code corrects every tested weight-one Pauli, while 18.5% of sampled encoders in the selected ensemble satisfy exact quantum error correction. The measured reduction quantifies the integrity gain from reseeding and separates postselected detection from exact correction under explicit fault and attacker-knowledge models.",
+    "matched_terms": [
+      "quantum error correction",
+      "Clifford"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27228v1",
+    "title": "2-Morita Theory of $E_2$-Algebras and Module Categories",
+    "authors": [
+      "Rongge Xu",
+      "Holiverse Yang"
+    ],
+    "categories": [
+      "cond-mat.str-el",
+      "math-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27228v1",
+    "summary": "Building on our previous work on 2-Morita equivalence for $E_2$-algebras using topological pictures, we develop a systematic framework for Morita equivalence of topological orders in different dimensions in terms of $n$-Morita categories $\\mathrm{Mrt}_{E_n}(\\mathcal{C})$. In this framework, various notions of $n$-Morita equivalence are unified as equivalences of objects in $\\mathrm{Mrt}_{E_n}(\\mathcal{C})$. We also compare the constructions of higher Morita categories due to Haugseng and to Gwilliam--Scheimbauer.   For $n=1,2$, we prove that the functor $\\mathrm{Mod}_n:\\mathrm{Mrt}_{E_n}(\\mathcal{C})\\to \\mathrm{Mrt}_{E_{n-1}}(\\mathrm{LMod}^{\\mathrm{rep}}(\\mathcal{C}))$ is an equivalence, relating the algebraic description of higher Morita theory to its realization in terms of module categories. In this formulation, the notion of a bi-bimodule arises naturally and provides a common framework for local and confined modules. Its explicit orientation data, together with the corresponding fusion rules, clarifies the relations among defects arising from condensation in topological orders.",
+    "matched_terms": [
+      "topological order"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27105v1",
+    "title": "Stochastic Transport and Wave Interactions for Multiscale Surface Gravity Waves: Part II: Kinetic Theory and Ocean-Wave Applications",
+    "authors": [
+      "E. Mémin",
+      "B. Chapron",
+      "A. Debussche",
+      "L Marié"
+    ],
+    "categories": [
+      "math-ph",
+      "physics.flu-dyn"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27105v1",
+    "summary": "Building on the stochastic variational framework established in the companion paper, we investigate here the linearized stochastic water-wave system, consisting of a large-scale stochastic wave dynamics coupled to transport dynamics for the small-scale correlation modes. Within this framework, we develop, in the deep-water regime, a kinetic theory for surface gravity waves interacting with unresolved stochastic velocity fields.   An energy analysis yields a wave-action kinetic equation exhibiting two distinct regimes: a diffusive scattering regime and a quartic interaction regime with structural similarities to Hasselmann--Zakharov theory. In the present framework, these effective quartic interactions arise through stochastic transport of unresolved fluctuations by the large-scale flow rather than through classical intrinsic resonant nonlinearity. Scaling laws are derived for the diffusion tensor and the effective growth rate, revealing a Miles-type production--dissipation mechanism.   Using JONSWAP spectra, we then compare the strength of stochastic transport and classical Hasselmann interactions. For realistic oceanic values of unresolved velocity variance ($σ_u \\approx 0.1\\,\\mathrm{m\\,s^{-1}}$) and decorrelation time ($τ_c \\approx 10\\,\\mathrm{s}$), stochastic transport is found to compete with, and often exceed, classical four-wave interaction rates over broad spectral ranges. The transport intensity $S=σ_u^2τ_c$ emerges as a key parameter controlling the transition between interaction regimes.   These results suggest that unresolved stochastic transport may play a substantially larger role in spectral evolution than is commonly represented in operational wave models, and motivate the inclusion of transport-induced source terms alongside standard resonant interaction closures.",
+    "matched_terms": [
+      "scaling law"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26640v1",
+    "title": "Emptiness formation in the Lieb-Liniger gas: hydrodynamic instantons and a conjectured rate function",
+    "authors": [
+      "Boris A. Khanikati",
+      "Alexander G. Abanov"
+    ],
+    "categories": [
+      "cond-mat.stat-mech",
+      "math-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.26640v1",
+    "summary": "We study the emptiness formation probability (EFP) in the ground state of the repulsive one-dimensional Lieb-Liniger Bose gas. For a macroscopic empty interval of length $2R$, its leading asymptotic behavior is described by a rate function $f(γ_0)$, defined by $-\\log P(R)\\sim(ρ_0R)^2f(γ_0)$, where $ρ_0$ is the mean density and $γ_0$ is the dimensionless interaction strength. We propose a parameter-free integral equation for $f(γ_0)$. Starting from the exact dual-field Fredholm-determinant representation of the EFP, we show how the conjectured kernel arises formally and identify the uniform asymptotic statement that remains to be proven for a rigorous derivation. The conjecture reproduces the Tonks-Girardeau and weak-coupling limits, as well as the first correction obtained independently in both limits. It also agrees at the few-percent level with numerical minimization of the Lieb-Liniger hydrodynamic action over more than four orders of magnitude in coupling. The numerical calculation yields the corresponding emptiness instantons and their astroid-like vacuum regions.",
+    "matched_terms": [
+      "hydrodynamic"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26477v1",
+    "title": "Dynamical classical-field limit of Bosonic Gibbs states: Renormalized Hartree NLS correlations in 2D and 3D",
+    "authors": [
+      "Phan Thành Nam",
+      "Rongchan Zhu",
+      "Xiangchan Zhu"
+    ],
+    "categories": [
+      "math-ph"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.26477v1",
+    "summary": "In this paper we derive the time-dependent correlation functions of the renormalized Hartree NLS equation on the torus $\\mathbb T^d$, $d=2,3$, from the corresponding bosonic many-body Gibbs dynamics. In contrast with the 1D problem studied earlier by Fröhlich, Knowles, Schlein and Sohinger, in higher dimensions the scaled quantum particle number is not uniformly bounded and the relevant classical fields require Wick renormalization. Our proof combines convergence of the quantum generators in weighted Hilbert spaces with uniqueness for positive solutions of the limiting Liouville equation that are dominated by the Gibbs measure.",
+    "matched_terms": [
+      "Liouville"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26987v1",
+    "title": "Selfless Reduced Crossed Product $C^{*}$-Algebras Arising from Almost Periodic Actions",
+    "authors": [
+      "Syuichi Ohshima"
+    ],
+    "categories": [
+      "math.OA"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.26987v1",
+    "summary": "We prove that the reduced crossed product $C^*$-algebras of almost periodic actions of countable discrete groups having a topologically free extreme boundary on unital, separable, simple, exact, $\\mathcal{Z}$-stable and monotracial $C^*$-algebras are selfless.We combine Ozawa's \"tree-graded'' space method with the theory of strong convergence of indexed families for the proof.",
+    "matched_terms": [
+      "crossed product"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.27425v1",
+    "title": "Leading term strandings for webs",
+    "authors": [
+      "Michael Bo",
+      "Madelyn Burns",
+      "Junyang Chen",
+      "Blaise Marsho",
+      "Jacob Martin",
+      "Jade Mawn",
+      "Bella Mohren",
+      "Heather M. Russell",
+      "Caitlin Sales",
+      "Lance Wong"
+    ],
+    "categories": [
+      "math.CO",
+      "math.QA"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27425v1",
+    "summary": "A web is a plane graph encoding an invariant vector in a tensor product of fundamental representations of a quantum group. A stranding of an $\\mathfrak{sl}_n$ web is a system of colored oriented curves recording one monomial of the vector it encodes. This article focuses on identifying and constructing leading term strandings, those recording the leading term of a web's vector with respect to a lexicographic order on monomials. We show that every open strand of a leading term stranding is clockwise, which constrains the boundary data of such strandings enough to yield a sufficient criterion for a set of webs to form a web basis. From a row-strict tableau, we construct a web with a prescribed leading term, and the resulting webs form a web basis, giving a non-recursive construction of Fontaine's $\\mathfrak{sl}_n$ web bases. For $\\mathfrak{sl}_3$ webs with no flat vertices, we identify a leading term stranding using the depths of the faces of the web. Finally, we show a leading term stranding for any $\\mathfrak{sl}_3$ web can be reached from an arbitrary stranding via a sequence of operations called strand reversals.",
+    "matched_terms": [
+      "quantum group"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26770v1",
+    "title": "The weak bialgebra structures on $\\mathbb{k}^{\\oplus n}$",
+    "authors": [
+      "Jingheng Zhou"
+    ],
+    "categories": [
+      "math.QA"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.26770v1",
+    "summary": "Weak bialgebras are natural generalizations of bialgebras that play a fundamental role in quantum groups, tensor categories, and representation theory. In this paper, we systematically classify all (weak) bialgebra structures on the finite-dimensional semisimple algebra \\(\\Bbbk^{\\oplus n}\\), with a distinguished basis of primitive orthogonal idempotents. For the bialgebra case, we prove that such structures are in bijection with finite monoids, and that bialgebra isomorphisms correspond exactly to monoid isomorphisms. Extending the result to weak bialgebras, we show that every weak bialgebra structure uniquely determines a finite small category.",
+    "matched_terms": [
+      "quantum group"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
     "id": "2608.25860v1",
     "title": "Vacuum energy problem in anti-de Sitter space",
     "authors": [
@@ -2740,6 +3447,289 @@
     "summary": "In the present paper we perform a tight-binding simulation of gate-defined islands in Bernal bilayer graphene (BLG). The inversion of the gap sign on the boundaries of the islands creates topologically-protected valley Hall modes. We focus on the specific questions of whether the valley Hall modes around such islands could serve as a host for quantum walks or simulate weakly coupled systems, and how their tunneling is affected by in-gap impurities. In addition, we discuss the effect of misalignment of top and bottom gate patterns on the tunneling properties between islands. Our main results show that resonant tunneling via an impurity enhances overlap between superlattice islands, while misalignment does not break topological protection over a wide parameter regime. In addition, we study the two-island geometry and show that it is possible to leverage suppressed scattering to place islands more densely on a single sample.",
     "matched_terms": [
       "island"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26456v1",
+    "title": "Quantum cellular automata and invertible phases of matter",
+    "authors": [
+      "Corey Jones",
+      "Nikita Sopenko",
+      "Ryan Thorngren"
+    ],
+    "categories": [
+      "cond-mat.str-el",
+      "hep-th",
+      "math-ph",
+      "math.OA",
+      "quant-ph"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26456v1",
+    "summary": "We introduce and study (fermionic and bosonic) invertible quasi-local algebras over uniformly locally finite metric spaces $X$ with infinite-dimensional local von Neumann algebras. We show that the group of Brauer equivalence classes of such algebras is isomorphic to both the group of phases of invertible states and the group of stable equivalence classes of quantum cellular automata over $X\\times \\mathbb{Z}$. Using K-theory of the symmetric monoidal category of invertible quasi-local algebras and bounded spread isomorphisms, we propose a definition of an $Ω$-spectrum of invertible phases as conjectured by Kitaev. We then show that the $c=\\frac{1}{2}$ chiral Majorana fermion net and the $(E_{8})_{1}$ conformal net provide Brauer non-trivial invertible quasi-local algebras, thus providing explicit constructions of non-trivial invertible states and quantum cellular automata on $\\mathbb{Z}^{2}$. In addition, we show that the time-slice nets of rational diagonal conformal field theories admit lattice degrees of freedom, which implies the discretization of any holomorphic conformal net is invertible.",
+    "matched_terms": [
+      "von Neumann algebra"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26282v1",
+    "title": "Holography as an Information Principle in Quantum Gravity",
+    "authors": [
+      "Sebastian De Haro",
+      "Enrico Cinti",
+      "Aude Corbeel"
+    ],
+    "categories": [
+      "gr-qc",
+      "hep-th"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26282v1",
+    "summary": "We draw on 't Hooft's seminal formulation of the holographic principle to analyse the methodological and conceptual role of information in quantum gravity. We argue that, in 't Hooft's work and in later developments, information functions as a substantive guiding principle. We distinguish three aspects of this role: First, holographic bounds on the amount of information that can be stored in a region function as theory selection criteria that constrain viable quantum gravity theories. Second, holography functions as a principle of theoretical equivalence: the bulk and boundary theories must describe the same physical content, even though 't Hooft privileges a more fundamental, lower-dimensional, and potentially deterministic boundary description. Third, the distribution and encoding of information connect 't Hooft's proposals to contemporary work on bulk reconstruction, holographic quantum error correction, and ER=EPR, where emergent spacetime structure is tied to patterns of entanglement and redundancy. On the basis of these three roles, we argue that purely epistemic or Shannon-style conceptions of information are inadequate in this context: we instead outline a distinction between what we call maximal and intermediate conceptions that aim to capture the methodological and interpretative roles of information in holographic quantum gravity. We therefore suggest that, in the context of holography and quantum gravity, a more systematic philosophical treatment of the role of information as an interpretation-guiding principle would be desirable.",
+    "matched_terms": [
+      "quantum error correction",
+      "bulk reconstruction",
+      "ER=EPR",
+      "'t Hooft"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26266v1",
+    "title": "Lieb-Schultz-Mattis Constraints for Quantum Channels: A Spacetime-Duality View",
+    "authors": [
+      "Sarang Gopalakrishnan",
+      "Yu-Jie Liu",
+      "Tsung-Cheng Lu",
+      "Frank Pollmann",
+      "Yizhi You"
+    ],
+    "categories": [
+      "cond-mat.stat-mech",
+      "cond-mat.str-el",
+      "hep-th",
+      "quant-ph"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26266v1",
+    "summary": "Quantum anomalies strongly constrain the possible behavior of many-body systems. A prime example is the Lieb-Schultz-Mattis (LSM) theorem, which relates UV symmetry and filling constraints to IR features of the energy spectrum and ground-state structure. Here, we ask how LSM constraints shape dynamical signatures and temporal correlations in open quantum systems. Using a spacetime duality, we show that the Liouvillian of a $d$-dimensional repeated quantum channel with a mixed anomaly between strong $S$ and weak $G$ symmetry can be mapped to a $(d{+}1)$-dimensional mixed-state symmetry-protected topological (mSPT) phase. Under this correspondence, the initial and steady states of the channel are identified with boundary states of the higher-dimensional mSPT in the presence of bulk projection. We further introduce the twisted Renyi-$N$ correlator (TRNC) as a probe of temporal correlations in the channel and demonstrate that it is dual to the mSPT strange correlator, providing a direct bulk-boundary route to diagnose long-range temporal order implied by the LSM anomaly. Finally, we identify the \\textit{Liouvillian singular spectrum}, rather than the Liouvillian spectrum itself, as a more fundamental diagnostic of quantum anomalies, and show that it is dual to the operator entanglement spectrum of the mSPT.",
+    "matched_terms": [
+      "entanglement spectrum",
+      "Renyi",
+      "open quantum system"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26253v1",
+    "title": "Inner products and closed universes",
+    "authors": [
+      "Jordan Cotler",
+      "Kristan Jensen"
+    ],
+    "categories": [
+      "gr-qc",
+      "hep-th"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26253v1",
+    "summary": "We study overlaps of late-time states in semiclassical de Sitter quantum gravity. In a family of deformations of de Sitter JT gravity, we compute the no-boundary wavefunction to one-loop and derive the ultralocal late-time measure. The one-universe contribution to the norm is exactly eight times the sphere amplitude, so the pairing used by the Lorentzian measure differs from that implicit in Euclidean gravity. After summing over disconnected final universes, the no-boundary norm exponentiates the one-universe result, giving $\\langle \\!\\langle \\text{HH}|\\text{HH}\\rangle\\!\\rangle \\approx \\exp(8Z_{\\rm sphere})$ rather than the sum over closed geometries, $Z_{\\rm closed}\\approx \\exp(Z_{\\rm sphere})$. We also review an analogous mismatch in Einstein gravity with positive cosmological constant, where the late-time no-boundary norm vanishes at one-loop, differing from the Euclidean sphere amplitude. We discuss the implications for cutting and gluing in perturbative gravity, and features that arise when extending this construction to sums over topologies.",
+    "matched_terms": [
+      "closed universe",
+      "de Sitter",
+      "JT gravity"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26251v1",
+    "title": "Why Cooper pairs live in AdS2: a spectral analysis of the Yukawa-SYK model",
+    "authors": [
+      "Veronika Carolin Stangier",
+      "Jörg Schmalian"
+    ],
+    "categories": [
+      "cond-mat.str-el",
+      "hep-th"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26251v1",
+    "summary": "We establish the spectral foundation of the geometric formulation of Cooper pairing in the Yukawa--Sachdev--Ye--Kitaev model. Starting from the large-$N$ bilocal effective action, we derive the Gaussian fluctuation kernel in the even-frequency spin-singlet Cooper channel. Following the construction of Maldacena and Stanford, we determine the kernel eigenvalue $k\\left(h\\right)$ analytically for arbitrary conformal weight $h$ and resolve the pairing fluctuations into the continuous and discrete sectors of the associated de-Sitter space Laplacian. We show that the superconducting instability and the universal low-energy fluctuations near it reside entirely in the continuous scattering sector, while the discrete modes remain non-critical. Expanding the kernel about the lowest continuum mode yields a Klein--Gordon action on ${\\rm dS}_2$, restricted to the continuous spectral subspace. This is precisely the subspace on which the inverse Radon transform to ${\\rm AdS}_2$ is well defined. The projected bilocal Cooper-pair field can therefore be mapped onto a scalar matter field propagating in ${\\rm AdS}_2$, without requiring any further spectral restriction on the bulk theory. Our results provide the missing microscopic justification for the projection implicit in earlier holographic formulations and clarify how a local bulk field emerges from the bilocal pairing theory.",
+    "matched_terms": [
+      "SYK"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26246v1",
+    "title": "Positivity in energy correlators and the event distribution formula",
+    "authors": [
+      "Alexandre Belin",
+      "Nathan Borak",
+      "Johan Henriksson",
+      "Romain Piron",
+      "Alexander Zhiboedov"
+    ],
+    "categories": [
+      "hep-th"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26246v1",
+    "summary": "Energy correlators are universal observables, well defined across a wide range of theories and spacetime dimensions, from gauge theory and conformal field theory to string theory. Energy correlators are constrained by three fundamental properties: pointwise positivity of the energy flux, global positivity originating from their interpretation as state norms in a unitary theory, and energy conservation organizing multi-point energy correlators into an infinite consistent hierarchy. We argue that the most general solution to the infinite hierarchy positivity problem of energy correlators is given by the event distribution formula, which expresses energy correlators as moments of the measure on the space of probability measures on the celestial sphere. We work out in detail implications of positivity for two- and three-point energy correlators and show that it implies nontrivial two-sided bounds on their multipole expansion coefficients. The bounds obtained by requiring consistency of the infinite hierarchy of energy correlators are strictly stronger than those obtained by imposing positivity of the two- and three-point correlators alone. For the low-spin multipole coefficients studied in the paper, the derived bounds are optimal in the sense that their extrema are realized by finite mixtures of finite-particle events. We further demonstrate consequences of positivity in energy correlators in collider physics and conformal field theories.",
+    "matched_terms": [
+      "conformal field theory",
+      "celestial"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26242v1",
+    "title": "The facts on quantum self-dual Einstein gravity and self-dual Yang-Mills theory",
+    "authors": [
+      "Noah Miller"
+    ],
+    "categories": [
+      "hep-th"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26242v1",
+    "summary": "Self-dual Einstein gravity is a one-loop exact, UV and IR finite, diffeomorphism invariant, non-unitary theory of quantum gravity in four dimensions. The only non-trivial amplitudes are the one-loop-all-plus amplitudes, and they are equal to those of pure Einstein gravity.   In these notes we review SDG and SDYM pedagogically. We walk the reader through key calculations, fill in some gaps in the literature, and point out directions for future research. Topics include: derivation of the self-dual actions from the full Einstein gravity/YM actions in lightcone gauge, decoupling of ghosts, Berends-Giele currents, vanishing of tree-level-one-minus amplitudes, celestial $Lw_{1+\\infty}$ symmetry, perturbiners, double-off-shell current calculation of one-loop-all-plus SDYM and SDG amplitudes, dimension shifting, unitarity cuts, the BDPR gravity formula, one-loop color ordering, and the covariant formulations of the self-dual theories as well as their their gauge fixing. We also review some selected results from the celestial holography program, and briefly comment on an all-n expression for the one-loop-one-minus gravity amplitudes.",
+    "matched_terms": [
+      "Yang-Mills",
+      "celestial"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26446v1",
+    "title": "Detuning-robust Rydberg entangling gates from echoed pulses",
+    "authors": [
+      "Zhubing Jia",
+      "Yichao Yu",
+      "Xiye Hu",
+      "Lintao Li",
+      "Jacob Zheng",
+      "Christopher Monroe",
+      "Jacob P. Covey"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26446v1",
+    "summary": "Rydberg-based two-qubit gate fidelities in neutral atom arrays are limited chiefly by laser intensity inhomogeneity and by detuning errors from frequency miscalibration, background-field drift, intermediate state light shift and Doppler shifts. Quantum optimal control can suppress the former, but no pulse can render a controlled-Z gate first-order insensitive to detuning. Here we show that this obstruction can be circumvented by designing Rydberg gate pulses with every leading-order detuning error relegated to single-qubit Z-rotations, which an echoed sequence removes. The resulting maximally-entangling ZZ gate has no leading-order response to arbitrary detunings on either atom, maintaining an infidelity below $10^{-3}$ much wider range of single-atom detunings than previous gate designs. We further show that a large fraction of residual error is dominated by population outside the computational subspace, which can be converted into heralded erasures. Our results significantly reduce the requirements on laser frequency stability and intensity homogeneity, field calibration and atomic temperature toward practical fault-tolerant quantum computing with neutral atoms.",
+    "matched_terms": [
+      "fault-toleran"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26272v1",
+    "title": "Fault-tolerant quantum computation cannot be achieved with constant spacetime overhead",
+    "authors": [
+      "Kishor Bharti",
+      "Tobias Haug",
+      "Andrew Tanggara"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26272v1",
+    "summary": "The threshold theorem states that quantum computations can be made reliable below a physical error threshold, at the cost of additional physical qubits and circuit depth. Recent work has reduced these space and time overheads to polylogarithmic or nearly logarithmic scalings, but whether the cumulative spacetime overhead can be constant has remained unclear. Here, we show that even for the simplest task of preserving quantum information in a quantum memory, under an optimistic noise model and allowing general adaptive protocols, there is an unavoidable logarithmic contribution to the cumulative spacetime overhead. This additional cost can nevertheless be shared among many logical qubits, so sufficiently wide computations, including standard implementations of Shor's algorithm, may still achieve constant relative overhead. We further give a positive-rate CSS code construction that attains the memory bound, identify sufficient conditions under which the same scaling extends from quantum memory to fault-tolerant circuit implementations, and derive circuit-size bounds for subsystem spacetime codes. Our work establishes fundamental limits on the resources required for quantum fault tolerance.",
+    "matched_terms": [
+      "logical qubit",
+      "quantum memory",
+      "fault-toleran"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26268v1",
+    "title": "Bosonic Encodings for Hermite-Galerkin Discretizations of High-Dimensional PDEs and Bayesian Inverse Problems",
+    "authors": [
+      "Alice Barthe"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26268v1",
+    "summary": "The Koopman-von Neumann framework has been proposed to design quantum algorithms for non-linear dynamics. It maps a non-linear ordinary differential equation to a linear partial differential equation (PDE) governing a probability amplitude. Previous works represents this amplitude in the Hermite-function basis, equivalently as a bosonic state, and truncates the total Hermite degree to obtain a representation over $Θ(m\\log N)$ qubits, where $N$ is the number of variables and $m$ the truncation order. We extend this approach to a broader class of linear PDEs whose differential operators have a structured polynomial form. We prove convergence of the truncation for both time-dependent dynamics and gapped ground-state problems under explicit regularity and stability assumptions. We then introduce a qubit encoding that supports efficient block encodings of the truncated operators. Finally, we apply the framework to Bayesian inverse problems with Gaussian priors and observation noise, reducing posterior-state preparation to the preparation of a structured Hamiltonian's ground state.",
+    "matched_terms": [
+      "quantum algorithm"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26362v1",
+    "title": "Representation stability for compact and discrete quantum groups",
+    "authors": [
+      "Michael Brannan",
+      "Junichiro Matsuda",
+      "Erik Séguin"
+    ],
+    "categories": [
+      "math.OA"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26362v1",
+    "summary": "We study approximate representations of locally compact quantum groups and prove stability results in the sense of Ulam in this context. Our main result is that compact and amenable discrete quantum groups are representation stable. We also show that an analogous stability result holds for unitary compressions of general amenable locally compact quantum groups without the assumption of compactness or discreteness.",
+    "matched_terms": [
+      "quantum group"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26347v1",
+    "title": "Dynamical signatures of deconfined spinons in dimerized sawtooth chains",
+    "authors": [
+      "Nishan Ranabhat",
+      "Brandon B. Le",
+      "Seung-Hun Lee",
+      "Gia-Wei Chern"
+    ],
+    "categories": [
+      "cond-mat.str-el"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26347v1",
+    "summary": "We study the ground-state properties and dynamical response of the Heisenberg model on the sawtooth chain in and away from the exactly solvable valence-bond-solid (VBS) point. We employ U(1)-symmetric density-matrix renormalization group (DMRG) and time-dependent variational principle (TDVP) methods to compute equilibrium diagnostics and the zero-temperature dynamical structure factor (DSF) $S^{zz}(q,ω)$ across the dimerized phase, a valence-bond-ordered state in which the two symmetry-equivalent apex--base bonds of each triangle develop unequal spin correlations, probing the approach to the continuous lower phase boundary, the exact VBS point, and the approach to the first-order upper boundary. In every regime, the DSF is a broad continuum dominated by a bright band at its lower edge, with the intensity at the one-triplon energy $ω\\simeq J_{AB}$ suppressed. We identify the spectrum as a deconfined two-spinon continuum of kink and antikink domain walls between the two degenerate singlet coverings. Closed-form spinon dispersions fix the continuum edges and track the dominant band across the zone in all three regimes, while an explicit finite-separation two-kink calculation in a constrained Hilbert space reproduces the measured intensity distribution. Our results provide a microscopic picture of fractionalized excitations in the dimerized sawtooth chain and are relevant to the recently discovered Ti$^{3+}$ kagome fluorides, where strongly anisotropic exchange interactions can generate sawtooth-chain building blocks.",
+    "matched_terms": [
+      "renormalization group"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2608.26270v1",
+    "title": "Time and Momentum Resolved Tunneling Spectroscopy of Floquet dynamics",
+    "authors": [
+      "Lucas Q. Silveira",
+      "Adrian E. Feiguin"
+    ],
+    "categories": [
+      "cond-mat.str-el"
+    ],
+    "published": "2026-08-26",
+    "link": "https://arxiv.org/abs/2608.26270v1",
+    "summary": "Periodically driven quantum systems provide a powerful route to engineer novel states of matter by controlling their effective Hamiltonians through external fields. However, most treatments are usually simplified by considering the high-frequency limit, and do not account for the processes taking place in the transient regime during the onset of the drive. In this work, we introduce a time and momentum resolved tunneling spectroscopy protocol to probe the instantaneous energy spectrum of Floquet-driven systems beyond the high-frequency regime, capturing both emergent effects and non-adiabatic phenomena without requiring explicit reconstruction of the full time-dependent Green's function. We benchmark the method on driven non-interacting fermionic models, and then generalize the approach to strongly correlated systems with the aid of time-dependent density matrix renormalization group techniques. We also provide a microscopic description to the emergence of in-gap states under resonant driving, and briefly explore its finite temperature analog.",
+    "matched_terms": [
+      "renormalization group"
     ],
     "matched_authors": [],
     "priority": 2
@@ -7362,6 +8352,81 @@
       "entanglement entropy",
       "topological entanglement entropy"
     ]
+  },
+  {
+    "id": "2608.27048v1",
+    "title": "Soft Active Electromyography Interface for Machine Learning-Enabled Silent Speech Recognition",
+    "authors": [
+      "Yuta Kurotaki",
+      "Shusuke Yamakoshi",
+      "Reitaro Yoshida",
+      "Yutaka Isoda",
+      "Tamami Takano",
+      "Yuji Isano",
+      "Yusuke Miyake",
+      "Kentaro Kuribayashi",
+      "Hiroki Ota"
+    ],
+    "categories": [
+      "cs.LG"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27048v1",
+    "summary": "Silent speech recognition (SSR) provides an alternative communication pathway in the absence of audible speech. However, conventional approaches are limited by the need for constant facial attachment, privacy concerns, and unstable signal acquisition. Here, we propose a soft, active electromyography (EMG) interface that enables word-level SSR using machine learning. Worn on the hand, the device uses a fingertip electrode that can be positioned near the lips to acquire EMG signals only when needed. The interface integrates liquid metal (LM) interconnects, transparent flexible printed circuit (FPC) electrodes, and elastomer encapsulation to ensure high mechanical stability during finger motion. A deep neural network trained on these stable signals achieved a mean accuracy of 97.2 $\\pm$ 1.3% across three subjects in classifying a 30-word vocabulary, demonstrating robust linguistic discrimination. Furthermore, real-time drone control validates the practicality of this approach in noisy and privacy-sensitive environments where conventional voice recognition fails. This study highlights the potential of soft, wearable EMG systems as secure and intuitive human-machine interfaces.",
+    "matched_terms": [
+      "neural network",
+      "machine learning"
+    ],
+    "matched_authors": [
+      "Yoshida"
+    ],
+    "priority": 3
+  },
+  {
+    "id": "2608.27404v1",
+    "title": "The Erdos--Gallai bound for consecutive even cycle lengths",
+    "authors": [
+      "Yaobin Chen",
+      "Hong Liu",
+      "Xia Wang",
+      "Xin Wei",
+      "Fan Yang"
+    ],
+    "categories": [
+      "math.CO"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27404v1",
+    "summary": "Erdős and Gallai in 1959 proved the seminal result that every $n$-vertex graph with no cycle of length at least $2t+2$ has at most $\\frac{2t+1}{2}(n-1)$ edges. We prove the extension that, for every sufficiently large $t$, the same quantity is also the sharp extremal bound for graphs with no $t$ consecutive even cycle lengths, resolving a conjecture of Verstraëte. Thus, at the Erdős--Gallai threshold, forcing an entire interval of even cycle lengths costs no more than forcing its longest member. More precisely, every $n$-vertex graph $G$ with \\[   e(G)\\ge \\frac{(2t+1)(n-1)}2 \\] either contains $t$ consecutive even cycle lengths, or equality holds and $G$ is connected with every block isomorphic to $K_{2t+1}$.   As consequences, for every sufficiently large even $k$ we determine the sharp edge thresholds forcing a cycle of length $0\\pmod k$ or $2\\pmod k$, answering questions of Bai, Grzesik, Li, and Prorok and of Gao, Li, Ma and Xie, respectively. The proof develops a stability-enhanced sublinear-expander method. Its main new ingredient is a dense-case decomposition that recovers the lengths lost in the expander extraction by combining a flexible dense core with rooted cycle families in the vertices outside the core.",
+    "matched_terms": [],
+    "matched_authors": [
+      "Hong Liu"
+    ],
+    "priority": 3
+  },
+  {
+    "id": "2608.27272v1",
+    "title": "Energy transfer and scale organisation in dense canopy turbulence",
+    "authors": [
+      "Riccardo Bertoncello",
+      "Alessandro Chiarini",
+      "Giulio Foggi Rota",
+      "Maurizio Quadrio",
+      "Marco Edoardo Rosti"
+    ],
+    "categories": [
+      "physics.flu-dyn"
+    ],
+    "published": "2026-08-27",
+    "link": "https://arxiv.org/abs/2608.27272v1",
+    "summary": "This study identifies the scale-dependent processes that sustain turbulence in dense submerged canopy flows. Using a scale-resolved energy budget, we determine where in space and at which scales production, pressure-strain redistribution, and inter-scale transfer predominantly occur, and how they link the canopy layer to the overlying shear flow. We show that energy production is localised at the interfacial shear layer, over a narrow range of streamwise and spanwise scales, while fluctuations within the canopy are primarily maintained through inter-scale transfer and pressure-strain redistribution. The dynamically active scales in the canopy are largely imposed by outer-layer structures, with their organisation and coherence mediated by these inherited motions. Energy exchange across the canopy interface is asymmetric but not unidirectional: although the dominant transfer is from the outer layer towards the canopy, intermittent reverse interactions occur at all scales. The most intense cross-interface exchanges are associated with finer-scale motions rather than large-scale structures, indicating that extreme interfacial energy fluxes are governed predominantly by small-scale dynamics. The flexibility of the canopy weakens the coherence of outer-layer structures and reduces the efficiency of inter-layer energy transfer, thereby altering both the organisation and scale of the fluctuations within the canopy. These results clarify how turbulence in dense canopies is organised and sustained, providing a unified energetic interpretation that links coherent structures to scale-dependent mechanisms.",
+    "matched_terms": [
+      "turbulence"
+    ],
+    "matched_authors": [
+      "Rota"
+    ],
+    "priority": 3
   },
   {
     "id": "2608.25858v1",
