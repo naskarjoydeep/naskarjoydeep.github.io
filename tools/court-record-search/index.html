@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Court Record Search</title>
+<meta name="description" content="Search US federal court records by party name, with name disambiguation. Runs entirely in your browser.">
+<style>
+  :root {
+    --bg: #fbfaf8; --panel: #fff; --ink: #1c1b19; --muted: #6b6862;
+    --line: #e3e0da; --accent: #7a4d2b; --accent-soft: #f2ece5;
+    --warn-bg: #fdf6ec; --warn-line: #e0c9a6; --warn-ink: #6b4a17;
+    --ok: #2f6b45; --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16161a; --panel: #1e1e23; --ink: #e8e6e1; --muted: #9b968d;
+      --line: #32323a; --accent: #c08a5e; --accent-soft: #2a2520;
+      --warn-bg: #2a2318; --warn-line: #5c4a2c; --warn-ink: #e0c48d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 32px 20px 80px; }
+  h1 { font-size: 1.6rem; margin: 0 0 4px; letter-spacing: -0.01em; }
+  h2 { font-size: 1.05rem; margin: 0 0 12px; }
+  .sub { color: var(--muted); margin: 0 0 28px; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 10px; padding: 20px; margin-bottom: 20px;
+  }
+  label { display: block; font-size: .82rem; font-weight: 600; margin-bottom: 5px; }
+  .hint { font-weight: 400; color: var(--muted); font-size: .78rem; }
+  input[type=text], input[type=password], select {
+    width: 100%; padding: 9px 11px; border: 1px solid var(--line);
+    border-radius: 6px; background: var(--bg); color: var(--ink);
+    font-size: .95rem; font-family: inherit;
+  }
+  input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+  .row + .row { margin-top: 14px; }
+  button {
+    background: var(--accent); color: #fff; border: 0; border-radius: 6px;
+    padding: 10px 20px; font-size: .95rem; font-weight: 600; cursor: pointer;
+    font-family: inherit;
+  }
+  button:hover:not(:disabled) { filter: brightness(1.08); }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  button.ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+  .checks { display: flex; flex-wrap: wrap; gap: 18px; margin: 16px 0 4px; }
+  .check { display: flex; gap: 7px; align-items: flex-start; font-size: .88rem; }
+  .check input { margin-top: 4px; }
+  .actions { display: flex; gap: 10px; align-items: center; margin-top: 18px; }
+  .note {
+    background: var(--warn-bg); border: 1px solid var(--warn-line);
+    color: var(--warn-ink); border-radius: 8px; padding: 13px 15px;
+    font-size: .85rem; margin-bottom: 20px;
+  }
+  .note strong { display: block; margin-bottom: 3px; }
+  #log {
+    font-family: var(--mono); font-size: .78rem; color: var(--muted);
+    white-space: pre-wrap; margin-top: 14px; max-height: 130px; overflow-y: auto;
+  }
+  .person {
+    border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    border-radius: 8px; padding: 15px 17px; margin-bottom: 14px; background: var(--panel);
+  }
+  .person h3 { margin: 0 0 3px; font-size: 1rem; }
+  .meta { font-size: .82rem; color: var(--muted); margin-bottom: 9px; }
+  .badge {
+    display: inline-block; font-size: .68rem; font-weight: 700; padding: 2px 7px;
+    border-radius: 999px; text-transform: uppercase; letter-spacing: .04em;
+    background: var(--accent-soft); color: var(--accent); margin-left: 7px;
+  }
+  .ev { font-size: .82rem; margin: 3px 0; color: var(--muted); }
+  .ev b { color: var(--ink); font-weight: 600; }
+  .case { padding: 8px 0; border-top: 1px solid var(--line); font-size: .88rem; }
+  .case a { color: var(--accent); text-decoration: none; }
+  .case a:hover { text-decoration: underline; }
+  .case .cmeta { color: var(--muted); font-size: .78rem; }
+  .matched { font-size: .82rem; }
+  .matched b { color: var(--ok); }
+  .mass { font-size: .78rem; color: var(--warn-ink); }
+  details.unlinked-block summary { cursor: pointer; font-weight: 600; margin-bottom: 10px; }
+  footer.caveats {
+    border-top: 2px solid var(--line); margin-top: 36px; padding-top: 20px;
+    font-size: .86rem; color: var(--muted);
+  }
+  footer.caveats h2 { color: var(--ink); font-size: .95rem; }
+  footer.caveats p { margin: 0 0 12px; }
+  code { font-family: var(--mono); font-size: .85em; background: var(--accent-soft);
+         padding: 1px 5px; border-radius: 3px; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Court Record Search</h1>
+<p class="sub">
+  Federal dockets and published opinions by party name, with name disambiguation.
+  Everything runs in your browser &mdash; there is no server.
+</p>
+
+<div class="note">
+  <strong>This is not a background check.</strong>
+  It cannot be used for decisions about employment, housing, credit or insurance.
+  US federal law (FCRA, 15&nbsp;U.S.C.&nbsp;&sect;1681) routes those through a consumer
+  reporting agency with the subject's consent and an adverse action notice.
+  This page is not one and cannot be made into one.
+</div>
+
+<div class="panel">
+  <h2>API token <span class="hint">optional, but the anonymous quota is small</span></h2>
+  <div class="row">
+    <div style="grid-column: 1 / -1">
+      <label for="token">CourtListener token
+        <span class="hint">&mdash; free at courtlistener.com/profile/api</span></label>
+      <input type="password" id="token" placeholder="paste your own token" autocomplete="off">
+    </div>
+  </div>
+  <p class="hint" style="margin:10px 0 0">
+    Stored in this browser's <code>localStorage</code> and sent only to
+    courtlistener.com. It is never transmitted anywhere else &mdash; this page has no
+    backend to send it to.
+  </p>
+  <div class="actions">
+    <button class="ghost" id="clearToken" type="button">Clear stored token</button>
+    <span class="hint" id="tokenState"></span>
+  </div>
+</div>
+
+<form class="panel" id="form">
+  <h2>Search</h2>
+  <div class="row">
+    <div style="grid-column: 1 / -1">
+      <label for="name">Party name</label>
+      <input type="text" id="name" placeholder="e.g. Sarah Johnson" required>
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <label for="court">Court <span class="hint">optional</span></label>
+      <input type="text" id="court" placeholder="ilnd, ca7, scotus">
+    </div>
+    <div>
+      <label for="after">Filed after</label>
+      <input type="text" id="after" placeholder="YYYY-MM-DD">
+    </div>
+    <div>
+      <label for="before">Filed before</label>
+      <input type="text" id="before" placeholder="YYYY-MM-DD">
+    </div>
+    <div>
+      <label for="limit">Max per corpus</label>
+      <input type="text" id="limit" value="40">
+    </div>
+  </div>
+  <div class="checks">
+    <label class="check"><input type="checkbox" id="doDockets" checked>
+      <span>Dockets <span class="hint">(RECAP / PACER mirror)</span></span></label>
+    <label class="check"><input type="checkbox" id="doOpinions" checked>
+      <span>Opinions <span class="hint">(published case law)</span></span></label>
+    <label class="check"><input type="checkbox" id="doCluster" checked>
+      <span>Group into apparent people</span></label>
+    <label class="check"><input type="checkbox" id="doProbe">
+      <span>Check name frequency
+        <span class="hint">(filters officials &amp; very common names; ~15s per name, so a large search can take minutes)</span></span></label>
+  </div>
+  <div class="actions">
+    <button type="submit" id="go">Search</button>
+    <button type="button" class="ghost" id="stop" disabled>Stop</button>
+  </div>
+  <div id="log"></div>
+</form>
+
+<div id="results"></div>
+
+<footer class="caveats">
+  <h2>Read before acting on any of this</h2>
+  <p><b>A name is not an identifier.</b> A search for one name returns records
+  belonging to several different people. Open the linked filing and confirm
+  identity from its contents before attributing anything to anyone.</p>
+  <p><b>A filing is an allegation.</b> A docket entry records that something was
+  claimed, not that it was true or that it succeeded. Read the disposition.</p>
+  <p><b>Groups are hypotheses.</b> They are built from shared attorneys,
+  co-parties and name forms &mdash; not verified identity. The grouping is tuned to
+  split rather than merge, because wrongly merging two people means attributing a
+  stranger's record to your subject. <b>&ldquo;Unlinked&rdquo; means no evidence,
+  never &ldquo;different person&rdquo;.</b></p>
+  <p><b>Absence of a match is not a clean record.</b> RECAP is a partial mirror of
+  PACER, and most state trial courts &mdash; where the majority of US prosecutions
+  happen &mdash; are not indexed at all.</p>
+  <p>Data from <a href="https://www.courtlistener.com" target="_blank" rel="noopener">CourtListener</a>,
+  a non-profit. Please do not hammer it.</p>
+</footer>
+
+</div>
+<script>
+"use strict";
+
+/* ------------------------------------------------------------------ *
+ * Config
+ * ------------------------------------------------------------------ */
+const API = "https://www.courtlistener.com/api/rest/v4/search/";
+const PAUSE_MS = 350;
+const MAX_PROBES = 20;
+/* A single party lookup against the full RECAP corpus was measured at
+   ~14s, so an unbounded fetch can hang the page indefinitely. */
+const PROBE_TIMEOUT_MS = 25000;
+const PROBE_CACHE_KEY = "cs_freq_cache_v1";
+const TOKEN_KEY = "cs_token_v1";
+
+const BASE_WEIGHT = { atty: 3.0, firm: 2.4, coparty: 2.2, judge: 0.8, court: 0.6, state: 0.4 };
+const HUMAN_LABEL = {
+  atty: "same attorney", firm: "same law firm", coparty: "same co-party",
+  judge: "same judge", court: "same court", state: "same state"
+};
+const NAME_FORM_WEIGHT = 2.5;
+const THRESHOLD = 1.5;
+const MASS_ACTION_PARTIES = 25;
+/* Feature keys are "kind<SEP>value". Named rather than a literal so the
+   join and every split cannot drift apart - they silently did once, and the
+   officials roster stopped running without any error. */
+const SEP = "\u0001";
+
+const NOISE = new Set(["jr", "sr", "ii", "iii", "iv", "mr", "mrs", "ms", "dr", "the", "tr",
+  "trustee", "esq", "et", "al", "inc", "llc", "llp", "ltd", "co", "corp",
+  "company", "and", "of", "a", "an"]);
+const STATES = new Set(("al ak az ar ca co ct de fl ga hi id il in ia ks ky la me md ma mi mn ms " +
+  "mo mt ne nv nh nj nm ny nc nd oh ok or pa ri sc sd tn tx ut vt va wa wv wi wy dc pr gu vi").split(" "));
+
+const INSTITUTIONAL = /\b(united states|u\.?s\.?\s+trustee|u\.?s\.?\s+attorney|internal revenue|department of|state of|county of|city of|commissioner|warden|attorney general|public defender|corporation counsel|legal aid|district attorney|solicitor|secretary|bureau|does?\s+1|john doe|jane doe|unknown)\b/i;
+const NOT_A_PARTY = /^\s*(service list|all (plaintiffs|defendants|parties)|interested part|notice only|pro se|unrepresented|n\/?a|none|unknown party)\b/i;
+/* Docket bookkeeping that is not a person at all. Observed live as an
+   "attorney" named "Prisoner Correspondence 6 - Internal Use Only", which
+   linked four unrelated prisoner suits. Applies to counsel, not just parties. */
+const NOT_A_PERSON = /\b(internal use only|correspondence|service list|notice only|do not (?:mail|serve)|unrepresented|pro se|all (?:plaintiffs|defendants|parties))\b/i;
+const TITLE_RE = /\b(in (?:his|her|their|its) (?:official|individual) capacit|official capacity|warden|sheriff|deputy|constable|marshal|director|superintendent|commissioner|administrator|secretary|governor|mayor|comptroller|treasurer|auditor|chief of police|police chief|police officer|correctional officer|probation officer|parole|custodian|records officer|attorney general|district attorney|prosecutor|public defender|clerk of (?:the )?court|registrar|examiner|inspector|board of|department of|bureau of|division of|office of)\b/i;
+
+const SEED_ROSTER = ["wexford health sources", "corizon health", "armor correctional health",
+  "centurion of", "corecivic", "geo group", "naphcare", "federal bureau of prisons",
+  "internal revenue service", "social security administration", "united states trustee",
+  "equifax information services", "experian information solutions", "trans union", "transunion",
+  "portfolio recovery associates", "midland credit management", "navient solutions", "ocwen loan servicing"];
+
+/* ------------------------------------------------------------------ *
+ * Small helpers
+ * ------------------------------------------------------------------ */
+const $ = id => document.getElementById(id);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g,
+  c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const clean = t => t ? String(t).replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).join(" ") : "";
+const normEntity = n => nameTokens(n).join(" ");
+
+function nameTokens(name) {
+  if (!name) return [];
+  return String(name).split(/[\s,]+/)
+    .map(w => w.replace(/^[.,]+|[.,]+$/g, "").toLowerCase())
+    .filter(w => w.length > 1 && !NOISE.has(w));
+}
+
+function fullWords(set) {
+  const out = new Set();
+  for (const t of set) if (t.length > 1) out.add(t);
+  return out;
+}
+
+function matchingParties(parties, names) {
+  const wanted = names.map(n => new Set(nameTokens(n))).filter(s => s.size);
+  return (parties || []).filter(p => {
+    const have = new Set(nameTokens(p));
+    return wanted.some(w => [...w].every(t => have.has(t)));
+  });
+}
+
+function nameResidual(partyName, queryNames) {
+  const q = new Set();
+  for (const n of queryNames) for (const t of nameTokens(n)) q.add(t);
+  const out = new Set();
+  for (const t of nameTokens(partyName)) if (!q.has(t)) out.add(t);
+  return out;
+}
+
+/* Two name forms that cannot describe one person. An empty residual is
+   compatible with anything; initials never create a conflict. */
+function namesConflict(a, b) {
+  const fa = fullWords(a), fb = fullWords(b);
+  if (!fa.size || !fb.size) return false;
+  for (const t of fa) if (fb.has(t)) return false;
+  return true;
+}
+
+function courtToState(courtId) {
+  if (!courtId) return null;
+  const c = String(courtId).toLowerCase();
+  if (/^ca(\d+|dc|fc)$/.test(c)) return null;
+  if (["scotus", "uscfc", "cit", "tax", "jpml"].includes(c)) return null;
+  const two = c.slice(0, 2);
+  return STATES.has(two) ? two : null;
+}
+
+/* Opinions carry no party list, only "A v. B". Using the whole caption as a
+   name invents tokens from the opposing party, which fabricates both links and
+   conflicts, so keep only the side containing the searched name. */
+function partyFromCaption(caseName, queryNames) {
+  if (!caseName) return null;
+  const wanted = queryNames.map(n => new Set(nameTokens(n))).filter(s => s.size);
+  if (!wanted.length) return null;
+  for (let seg of String(caseName).split(/\s+(?:v\.?|vs\.?|versus|against)\s+/i)) {
+    seg = seg.replace(/^\s*(in re(?:\s+the)?|in the matter of|estate of|ex parte|application of|petition of)\s+/i, "")
+             .replace(/^[\s,;]+|[\s,;]+$/g, "");
+    const have = new Set(nameTokens(seg));
+    if (wanted.some(w => [...w].every(t => have.has(t)))) return seg;
+  }
+  return null;
+}
+
+/* ------------------------------------------------------------------ *
+ * API
+ * ------------------------------------------------------------------ */
+let abortCtl = null;
+
+async function apiGet(params, token, timeoutMs) {
+  const url = new URL(API);
+  for (const k of Object.keys(params)) {
+    const v = params[k];
+    if (v != null && v !== "") url.searchParams.set(k, v);
+  }
+  const headers = { "Accept": "application/json" };
+  if (token) headers["Authorization"] = "Token " + token;
+
+  /* Chain a per-request deadline onto the user's Stop button, so one slow
+     lookup cannot strand the whole run. */
+  let signal = abortCtl ? abortCtl.signal : undefined;
+  let timer = null;
+  if (timeoutMs) {
+    const local = new AbortController();
+    timer = setTimeout(() => local.abort(), timeoutMs);
+    if (signal) signal.addEventListener("abort", () => local.abort(), { once: true });
+    signal = local.signal;
+  }
+
+  let resp;
+  try {
+    resp = await fetch(url, { headers, signal: signal });
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+  if (resp.status === 401 || resp.status === 403)
+    throw new Error("Token rejected (HTTP " + resp.status + "). Check it, or clear it to search anonymously.");
+  if (resp.status === 429)
+    throw new Error("Rate limited by CourtListener. Add your own token for a much higher quota.");
+  if (!resp.ok) throw new Error("HTTP " + resp.status);
+  return resp.json();
+}
+
+async function apiUrl(fullUrl, token) {
+  const headers = { "Accept": "application/json" };
+  if (token) headers["Authorization"] = "Token " + token;
+  const resp = await fetch(fullUrl, { headers, signal: abortCtl ? abortCtl.signal : undefined });
+  if (!resp.ok) throw new Error("HTTP " + resp.status);
+  return resp.json();
+}
+
+function absUrl(p) {
+  if (!p) return null;
+  return /^https?:/.test(p) ? p : "https://www.courtlistener.com" + p;
+}
+
+function normalizeDocket(raw) {
+  return {
+    corpus: "docket",
+    caseName: clean(raw.caseName || raw.case_name_full) || "(unnamed)",
+    court: raw.court, courtId: raw.court_id,
+    dateFiled: raw.dateFiled, dateTerminated: raw.dateTerminated,
+    docketNumber: raw.docketNumber,
+    natureOfSuit: raw.suitNature || null,
+    chapter: raw.chapter || null,
+    judge: clean(raw.assignedTo) || null,
+    parties: (raw.party || []).map(clean),
+    attorneys: (raw.attorney || []).map(clean),
+    firms: (raw.firm || []).map(clean),
+    status: null,
+    url: absUrl(raw.docket_absolute_url),
+    key: "d" + raw.docket_id
+  };
+}
+
+function normalizeOpinion(raw) {
+  return {
+    corpus: "opinion",
+    caseName: clean(raw.caseName || raw.caseNameFull) || "(unnamed)",
+    court: raw.court, courtId: raw.court_id,
+    dateFiled: raw.dateFiled, dateTerminated: null,
+    docketNumber: raw.docketNumber,
+    natureOfSuit: raw.suitNature || null,
+    chapter: null,
+    judge: clean(raw.judge) || null,
+    parties: [], attorneys: (raw.attorney || []).map(clean), firms: [],
+    status: raw.status || null,
+    url: absUrl(raw.absolute_url),
+    key: "o" + raw.cluster_id
+  };
+}
+
+function buildQuery(name, corpus) {
+  /* RECAP indexes a party field, so ask "was this person a party" rather than
+     "does this string appear anywhere" - 87 hits versus 738 in testing. */
+  const field = corpus === "r" ? "party" : "caseName";
+  return field + ':"' + String(name).replace(/"/g, "") + '"';
+}
+
+async function search(opts, log) {
+  const out = [];
+  const seen = new Set();
+  for (const corpus of opts.corpora) {
+    log((corpus === "r" ? "searching dockets" : "searching opinions") + "...");
+    let payload = await apiGet({
+      q: buildQuery(opts.name, corpus), type: corpus, order_by: "dateFiled desc",
+      court: opts.court, filed_after: opts.after, filed_before: opts.before
+    }, opts.token);
+
+    let got = 0;
+    const norm = corpus === "r" ? normalizeDocket : normalizeOpinion;
+    while (payload && got < opts.limit) {
+      for (const raw of payload.results || []) {
+        if (got >= opts.limit) break;
+        const rec = norm(raw);
+        if (seen.has(rec.key)) continue;
+        seen.add(rec.key);
+        out.push(rec);
+        got++;
+      }
+      if (got >= opts.limit || !payload.next) break;
+      await sleep(PAUSE_MS);
+      payload = await apiUrl(payload.next, opts.token);
+    }
+    log("  " + got + " record(s)");
+  }
+  out.sort((a, b) => String(b.dateFiled || "").localeCompare(String(a.dateFiled || "")));
+  return out;
+}
+
+/* ------------------------------------------------------------------ *
+ * Officials and very common names
+ * ------------------------------------------------------------------ */
+function dedupeRepeat(name) {
+  const w = String(name || "").split(/\s+/).filter(Boolean);
+  const n = w.length;
+  if (n >= 2 && n % 2 === 0 && w.slice(0, n / 2).join(" ") === w.slice(n / 2).join(" "))
+    return w.slice(0, n / 2).join(" ");
+  return name;
+}
+
+function staticVerdict(name) {
+  if (!name) return null;
+  if (TITLE_RE.test(name)) return "official title in party name";
+  const norm = String(name).toLowerCase().replace(/[^\w\s]/g, " ").replace(/\s+/g, " ").trim();
+  for (const seed of SEED_ROSTER) if (norm.indexOf(seed) !== -1) return "known high-volume litigant";
+  return null;
+}
+
+/* Frequency does not distinguish "one official on 300 dockets" from "300 people
+   sharing a common name" - and it need not. Both mean a shared party that says
+   nothing about which person this is. */
+function weightFromCount(count) {
+  if (count == null) return 1.0;
+  if (count <= 1) return 1.0;
+  return 1.0 / (1.0 + Math.pow(count / 25.0, 1.5));
+}
+
+function loadCache() {
+  try { return JSON.parse(localStorage.getItem(PROBE_CACHE_KEY) || "{}"); }
+  catch (e) { return {}; }
+}
+function saveCache(c) {
+  try { localStorage.setItem(PROBE_CACHE_KEY, JSON.stringify(c)); } catch (e) { /* quota */ }
+}
+
+const FIELD_FOR_KIND = { coparty: "party", atty: "attorney", firm: "firm" };
+
+async function probeInformativeness(kind, name, token, cache, state, log) {
+  name = dedupeRepeat(String(name || "").trim());
+  if (!name) return [1.0, null];
+
+  const stat = staticVerdict(name);
+  if (stat) return [0.0, stat];
+
+  const field = FIELD_FOR_KIND[kind];
+  if (!field) return [1.0, null];
+
+  const key = field + ":" + name.toLowerCase();
+  let count;
+  let cached = false;
+  if (Object.prototype.hasOwnProperty.call(cache, key)) { count = cache[key]; cached = true; }
+
+  if (!cached) {
+    if (state.probes >= MAX_PROBES) { state.skipped++; return [1.0, "frequency unverified"]; }
+    try {
+      const data = await apiGet({ q: field + ':"' + name + '"', type: "r" }, token, PROBE_TIMEOUT_MS);
+      count = data.count == null ? null : Number(data.count);
+      state.probes++;
+      /* Only cache a real answer - caching a failure would let one flaky
+         request poison every future run for that name. */
+      if (count != null) { cache[key] = count; state.dirty = true; }
+      await sleep(PAUSE_MS);
+    } catch (e) {
+      if (e.name === "AbortError") throw e;
+      state.unverified++;
+      return [1.0, "frequency unverified"];
+    }
+  }
+
+  if (count == null) { state.unverified++; return [1.0, "frequency unverified"]; }
+  const w = weightFromCount(count);
+  return [w, w < 0.25 ? ("appears on " + count.toLocaleString() + " dockets") : null];
+}
+
+/* ------------------------------------------------------------------ *
+ * Clustering
+ * ------------------------------------------------------------------ */
+function extractFeatures(record, queryNames) {
+  const parties = record.parties || [];
+  const hits = matchingParties(parties, queryNames);
+  const matchedName = hits.length ? hits[0] : (partyFromCaption(record.caseName, queryNames) || "");
+  const residual = matchedName ? nameResidual(matchedName, queryNames) : new Set();
+  const massAction = parties.length > MASS_ACTION_PARTIES;
+
+  const features = new Set();
+  const display = {};
+  const add = (kind, value, shown) => {
+    if (!value) return;
+    const f = kind + SEP + value;
+    features.add(f);
+    if (!(f in display)) display[f] = shown || value;
+  };
+
+  /* In a mass action every plaintiff shares the same counsel, judge and court,
+     so none of it distinguishes one from another. Contribute nothing. */
+  if (!massAction) {
+    const matchedNorm = new Set(hits.map(normEntity));
+    for (const p of parties) {
+      const norm = normEntity(p);
+      if (!norm || matchedNorm.has(norm)) continue;
+      if (INSTITUTIONAL.test(p) || NOT_A_PARTY.test(p) || NOT_A_PERSON.test(p)) continue;
+      if (norm.split(" ").length < 2) continue;   // bare surnames are useless
+      add("coparty", norm, p);
+    }
+    for (const a of record.attorneys || [])
+      if (normEntity(a) && !INSTITUTIONAL.test(a) && !NOT_A_PERSON.test(a))
+        add("atty", normEntity(a), dedupeRepeat(a));
+    for (const f of record.firms || [])
+      if (normEntity(f) && !INSTITUTIONAL.test(f) && !NOT_A_PERSON.test(f))
+        add("firm", normEntity(f), dedupeRepeat(f));
+    if (record.judge) add("judge", normEntity(record.judge), record.judge);
+    if (record.courtId) add("court", record.courtId);
+    const st = courtToState(record.courtId);
+    if (st) add("state", st);
+  }
+
+  return {
+    record: record, matchedName: matchedName, residual: residual,
+    features: features, display: display, massAction: massAction
+  };
+}
+
+/* 1 - (df-1)/n. Textbook log-IDF degenerates at small n: with two records any
+   shared feature has df == n, so log(n/df) collapses to zero and two filings by
+   the same private firm score as no evidence at all. */
+function buildExclusivity(bags) {
+  const n = Math.max(bags.length, 1);
+  const df = {};
+  for (const b of bags) for (const f of b.features) df[f] = (df[f] || 0) + 1;
+  const out = {};
+  for (const f of Object.keys(df)) out[f] = Math.max(0, 1 - (df[f] - 1) / n);
+  return { exclusivity: out, df: df };
+}
+
+/* Deliberately NOT exclusivity-weighted: a rare name's distinctiveness belongs
+   to the name itself, not to how often it recurs in one result set. */
+function nameFormScore(a, b, residualDf, total) {
+  const fa = fullWords(a.residual), fb = fullWords(b.residual);
+  const shared = [...fa].filter(t => fb.has(t));
+  if (!shared.length) return [0, null];
+  const key = shared.slice().sort().join(" ");
+  const df = residualDf[key] || 1;
+  const specificity = 1 + 0.8 * (shared.length - 1);
+  const spread = Math.max(0.4, 1 - (df - 1) / Math.max(total - 1, 1));
+  return [NAME_FORM_WEIGHT * specificity * spread, "same distinctive name form (" + key + ")"];
+}
+
+function pairScore(a, b, exclusivity, residualDf, total, power, powerReason) {
+  if (namesConflict(a.residual, b.residual)) return [-Infinity, ["conflicting given names"]];
+
+  let score = 0;
+  const ev = [];
+  for (const f of a.features) {
+    if (!b.features.has(f)) continue;
+    const split = f.split(SEP);
+    const kind = split[0], value = split[1];
+    let contrib = (BASE_WEIGHT[kind] || 0) * (exclusivity[f] || 0);
+    if (power) contrib *= (f in power ? power[f] : 1);
+    if (contrib <= 0.01) continue;
+    score += contrib;
+    let label = (HUMAN_LABEL[kind] || kind) + ": " + (a.display[f] || b.display[f] || value);
+    if (powerReason && powerReason[f]) label += " [" + powerReason[f] + "]";
+    ev.push([contrib, label]);
+  }
+
+  const nf = nameFormScore(a, b, residualDf, total);
+  if (nf[1]) { score += nf[0]; ev.push([nf[0], nf[1]]); }
+
+  ev.sort((x, y) => y[0] - x[0]);
+  return [score, ev.map(e => e[1])];
+}
+
+async function clusterRecords(records, queryNames, opts, log) {
+  const bags = records.map(r => extractFeatures(r, queryNames));
+  const n = bags.length;
+  if (!n) return [];
+
+  const ex = buildExclusivity(bags);
+  const exclusivity = ex.exclusivity, df = ex.df;
+
+  const residualDf = {};
+  for (const b of bags) {
+    const fw = [...fullWords(b.residual)].sort();
+    if (fw.length) { const k = fw.join(" "); residualDf[k] = (residualDf[k] || 0) + 1; }
+  }
+
+  /* Score every pair with no discount first to see which pairs are near a
+     merge, then judge only the names driving those. A judgement can only ever
+     lower a score, so this pass is a safe superset - no merge can hide. */
+  const pending = new Set();
+  for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+    const s = pairScore(bags[i], bags[j], exclusivity, residualDf, n, null, null)[0];
+    if (s >= THRESHOLD) for (const f of bags[i].features) if (bags[j].features.has(f)) pending.add(f);
+  }
+  const candidates = [...pending].filter(f => ["coparty", "atty", "firm"].indexOf(f.split(SEP)[0]) !== -1);
+  candidates.sort((x, y) => (df[y] || 0) - (df[x] || 0));
+
+  const display = {};
+  for (const b of bags) Object.assign(display, b.display);
+
+  /* The title and seed-roster checks cost nothing and always run. Only the
+     frequency lookup needs the network, so leaving that box unchecked weakens
+     the result but must not switch off the offline roster - Wexford Health
+     Sources should never link strangers whether or not anyone is online. */
+  const power = {}, powerReason = {};
+  const cache = loadCache();
+  const state = { probes: 0, skipped: 0, unverified: 0, dirty: false };
+  if (opts.probe && candidates.length)
+    log("checking " + Math.min(candidates.length, MAX_PROBES) + " name(s) for frequency...");
+
+  let done = 0;
+  for (const f of candidates) {
+    const kind = f.split(SEP)[0];
+    const shown = display[f] || f.split(SEP)[1];
+    let res;
+    if (opts.probe) {
+      res = await probeInformativeness(kind, shown, opts.token, cache, state, log);
+      done++;
+      log("  " + done + "/" + candidates.length + " " +
+          String(shown).slice(0, 34) + (res[1] ? " - " + res[1] : ""));
+    } else {
+      const verdict = staticVerdict(dedupeRepeat(String(shown || "").trim()));
+      res = verdict ? [0.0, verdict] : [1.0, null];
+    }
+    power[f] = res[0];
+    if (res[1]) powerReason[f] = res[1];
+  }
+  if (state.dirty) saveCache(cache);
+  if (state.probes) log("  checked " + state.probes +
+    (state.skipped ? ", " + state.skipped + " skipped (budget)" : "") +
+    (state.unverified ? ", " + state.unverified + " unverified" : ""));
+
+  const edges = [];
+  const forbidden = new Set();
+  for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+    const res = pairScore(bags[i], bags[j], exclusivity, residualDf, n, power, powerReason);
+    if (res[0] === -Infinity) { forbidden.add(i + ":" + j); forbidden.add(j + ":" + i); }
+    else if (res[0] >= THRESHOLD) edges.push([res[0], i, j, res[1]]);
+  }
+  edges.sort((a, b) => b[0] - a[0]);
+
+  const parent = [];
+  for (let i = 0; i < n; i++) parent.push(i);
+  const find = i => { while (parent[i] !== i) { parent[i] = parent[parent[i]]; i = parent[i]; } return i; };
+  const members = new Map();
+  for (let i = 0; i < n; i++) members.set(i, new Set([i]));
+  const linkage = new Map();
+
+  for (const edge of edges) {
+    const s = edge[0], i = edge[1], j = edge[2], ev = edge[3];
+    const ri = find(i), rj = find(j);
+    if (ri === rj) continue;
+
+    /* Cannot-link is enforced between whole clusters, not just the endpoints. */
+    let blocked = false;
+    for (const x of members.get(ri)) {
+      for (const y of members.get(rj)) if (forbidden.has(x + ":" + y)) { blocked = true; break; }
+      if (blocked) break;
+    }
+    if (blocked) continue;
+
+    parent[rj] = ri;
+    const merged = new Set([...members.get(ri), ...members.get(rj)]);
+    members.delete(ri); members.delete(rj);
+    const root = find(ri);
+    members.set(root, merged);
+    if (!linkage.has(root)) linkage.set(root, []);
+    linkage.get(root).push([s, ev]);
+  }
+
+  const groups = new Map();
+  for (let i = 0; i < n; i++) {
+    const r = find(i);
+    if (!groups.has(r)) groups.set(r, []);
+    groups.get(r).push(i);
+  }
+
+  const out = [];
+  for (const entry of groups) {
+    const root = entry[0], idxs = entry[1];
+    const recs = idxs.map(i => bags[i].record);
+    const names = idxs.map(i => bags[i].matchedName).filter(Boolean);
+    const link = (linkage.get(root) || []).slice().sort((a, b) => b[0] - a[0]);
+    const strength = link.length ? link[0][0] : 0;
+    const dates = recs.map(r => r.dateFiled).filter(Boolean).sort();
+
+    let label = names.length ? names[0] : (recs[0].caseName || "");
+    for (const nm of names) {
+      if (fullWords(nameResidual(nm, [])).size > fullWords(nameResidual(label, [])).size ||
+          (nm.length > label.length &&
+           fullWords(nameResidual(nm, [])).size === fullWords(nameResidual(label, [])).size))
+        label = nm;
+    }
+
+    out.push({
+      label: label,
+      size: idxs.length,
+      records: recs,
+      bags: idxs.map(i => bags[i]),
+      nameVariants: [...new Set(names)],
+      courts: [...new Set(recs.map(r => r.courtId).filter(Boolean))].sort(),
+      dateRange: dates.length ? [dates[0], dates[dates.length - 1]] : [null, null],
+      evidence: link.map(l => l[1]),
+      strength: strength,
+      confidence: idxs.length === 1 ? "unlinked"
+        : strength >= 4 ? "strong" : strength >= 2.5 ? "moderate" : "weak"
+    });
+  }
+  out.sort((a, b) => b.size - a.size || b.strength - a.strength);
+  return out;
+}
+
+/* ------------------------------------------------------------------ *
+ * Rendering
+ * ------------------------------------------------------------------ */
+function caseRow(rec, bag, queryNames) {
+  const bits = [];
+  if (rec.natureOfSuit) bits.push(esc(rec.natureOfSuit));
+  if (rec.chapter) bits.push("bankruptcy ch. " + esc(rec.chapter));
+  if (rec.status) bits.push(esc(String(rec.status).toLowerCase()));
+  if (rec.docketNumber) bits.push("no. " + esc(rec.docketNumber));
+
+  let matchedHtml = "";
+  if ((rec.parties || []).length) {
+    const hits = matchingParties(rec.parties, queryNames);
+    const total = rec.parties.length;
+    matchedHtml = hits.length
+      ? '<div class="matched">Matched party: <b>' + esc(hits.join("; ")) + "</b></div>"
+      : '<div class="matched">Matched party: <b>not identifiable in the party list</b> &mdash; verify at the source</div>';
+    if (total > MASS_ACTION_PARTIES)
+      matchedHtml += '<div class="mass">Mass action: ' + total +
+        " parties on this docket &mdash; being listed here may carry little individual significance</div>";
+  }
+
+  return '<div class="case">' +
+    (rec.url ? '<a href="' + esc(rec.url) + '" target="_blank" rel="noopener">' + esc(rec.caseName) + "</a>"
+             : esc(rec.caseName)) +
+    '<div class="cmeta">' + esc(rec.court || rec.courtId || "unknown court") +
+    " &middot; filed " + esc(rec.dateFiled || "unknown") +
+    (bits.length ? " &middot; " + bits.join(" &middot; ") : "") + "</div>" +
+    matchedHtml + "</div>";
+}
+
+function render(clusters, records, queryNames, clustered) {
+  const el = $("results");
+  if (!records.length) {
+    el.innerHTML = '<div class="panel"><h2>No records matched</h2>' +
+      '<p class="hint">Absence of a match is not a clean record. RECAP is a partial mirror of PACER, ' +
+      "and most state trial courts are not indexed at all &mdash; check the relevant state's own portal.</p></div>";
+    return;
+  }
+
+  if (!clustered) {
+    el.innerHTML = '<div class="panel"><h2>' + records.length + " record(s)</h2>" +
+      records.map(r => caseRow(r, null, queryNames)).join("") + "</div>";
+    return;
+  }
+
+  const linked = clusters.filter(c => c.size > 1);
+  const single = clusters.filter(c => c.size === 1);
+  let html = '<div class="panel"><h2>' + records.length + " record(s) &rarr; " +
+    clusters.length + " apparent " + (clusters.length === 1 ? "identity" : "identities") +
+    ' <span class="hint">(' + linked.length + " grouped, " + single.length + " unlinked)</span></h2></div>";
+
+  linked.forEach((c, i) => {
+    html += '<div class="person"><h3>Person ' + (i + 1) + ": " + esc(c.label) +
+      '<span class="badge">' + esc(c.confidence) + " evidence</span></h3>" +
+      '<div class="meta">' + c.size + " records &middot; " +
+      esc(c.dateRange[0] || "?") + " to " + esc(c.dateRange[1] || "?") +
+      " &middot; courts: " + esc(c.courts.join(", ")) + "</div>";
+    if (c.nameVariants.length > 1)
+      html += '<div class="ev">Name variants: ' + esc(c.nameVariants.join("; ")) + "</div>";
+    c.evidence.slice(0, 3).forEach(ev => {
+      html += '<div class="ev"><b>Linked by:</b> ' + esc(ev.slice(0, 3).join(", ")) + "</div>";
+    });
+    c.records.forEach((r, k) => { html += caseRow(r, c.bags[k], queryNames); });
+    html += "</div>";
+  });
+
+  if (single.length) {
+    html += '<details class="unlinked-block panel" open><summary>Unlinked (' + single.length +
+      " records)</summary>" +
+      '<p class="hint" style="margin-top:0">No evidence ties these to any other record. They may belong to ' +
+      "the same person as a group above, or to distinct people. The data cannot say.</p>";
+    single.forEach(c => { html += caseRow(c.records[0], c.bags[0], queryNames); });
+    html += "</details>";
+  }
+
+  el.innerHTML = html;
+}
+
+/* ------------------------------------------------------------------ *
+ * Wiring
+ * ------------------------------------------------------------------ */
+(function init() {
+  let stored = "";
+  try { stored = localStorage.getItem(TOKEN_KEY) || ""; } catch (e) { stored = ""; }
+  if (stored) { $("token").value = stored; $("tokenState").textContent = "token loaded from this browser"; }
+
+  $("token").addEventListener("change", () => {
+    const v = $("token").value.trim();
+    try { v ? localStorage.setItem(TOKEN_KEY, v) : localStorage.removeItem(TOKEN_KEY); } catch (e) { /* private mode */ }
+    $("tokenState").textContent = v ? "saved in this browser" : "";
+  });
+
+  $("clearToken").addEventListener("click", () => {
+    $("token").value = "";
+    try { localStorage.removeItem(TOKEN_KEY); localStorage.removeItem(PROBE_CACHE_KEY); } catch (e) { /* ignore */ }
+    $("tokenState").textContent = "cleared";
+  });
+
+  $("stop").addEventListener("click", () => { if (abortCtl) abortCtl.abort(); });
+
+  $("form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = $("name").value.trim();
+    if (!name) return;
+
+    const corpora = [];
+    if ($("doDockets").checked) corpora.push("r");
+    if ($("doOpinions").checked) corpora.push("o");
+    if (!corpora.length) { alert("Pick at least one corpus."); return; }
+
+    for (const pair of [["after", "Filed after"], ["before", "Filed before"]]) {
+      const v = $(pair[0]).value.trim();
+      if (v && !/^\d{4}-\d{2}-\d{2}$/.test(v)) { alert(pair[1] + " must be YYYY-MM-DD."); return; }
+    }
+    const limit = Math.max(1, parseInt($("limit").value, 10) || 40);
+
+    abortCtl = new AbortController();
+    $("go").disabled = true; $("stop").disabled = false;
+    $("results").innerHTML = "";
+    const logEl = $("log"); logEl.textContent = "";
+    const log = m => { logEl.textContent += m + "\n"; logEl.scrollTop = logEl.scrollHeight; };
+
+    try {
+      const opts = {
+        name: name, corpora: corpora, limit: limit, token: $("token").value.trim(),
+        court: $("court").value.trim(), after: $("after").value.trim(),
+        before: $("before").value.trim(), probe: $("doProbe").checked
+      };
+      const records = await search(opts, log);
+      const queryNames = [name];
+      let clusters = [];
+      const wantCluster = $("doCluster").checked && records.length > 0;
+      if (wantCluster) {
+        log("grouping...");
+        clusters = await clusterRecords(records, queryNames, opts, log);
+      }
+      log("done.");
+      render(clusters, records, queryNames, wantCluster);
+    } catch (err) {
+      if (err.name === "AbortError") log("stopped.");
+      else {
+        log("error: " + err.message);
+        $("results").innerHTML = '<div class="note"><strong>Search failed</strong>' + esc(err.message) + "</div>";
+      }
+    } finally {
+      $("go").disabled = false; $("stop").disabled = true; abortCtl = null;
+    }
+  });
+})();
+</script>
+</body>
+</html>
