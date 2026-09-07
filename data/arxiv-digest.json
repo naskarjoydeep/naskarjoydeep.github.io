@@ -2510,6 +2510,72 @@
     "priority": 1
   },
   {
+    "id": "2609.05409v1",
+    "title": "Decompactification and the Flat-Space Limit of AdS$_5\\times$ S$^5$ Master Correlators",
+    "authors": [
+      "Burkhard Eden",
+      "Paul Heslop",
+      "Harshal Kulkarni",
+      "Arthur Lipstein",
+      "Romain Ruzziconi",
+      "Akshay Yelleshpur Srikant"
+    ],
+    "categories": [
+      "hep-th"
+    ],
+    "published": "2026-09-04",
+    "link": "https://arxiv.org/abs/2609.05409v1",
+    "summary": "We study the flat-space limit of AdS$_5$/CFT$_4$ holographic correlators while accounting for the simultaneous decompactification of the internal S$^5$. We show that this limit is naturally formulated in terms of master propagators and correlators, which resum the infinite tower of Kaluza--Klein modes. For boundary correlators, the resulting expressions can be interpreted in terms of amplitudes with kinematics restricted to 5d. We then consider master correlators whose external insertions are kept in the AdS$_5\\times$S$^5$ bulk before taking the limit, and argue that they recover flat-space amplitudes with unrestricted kinematics in 10d Minkowski space. Finally, we show that the flat-space limit commutes with the boundary limit if we analytically continue the sphere so that the bulk geometry becomes AdS$_5 \\times$dS$_5$, and the resulting formulae suggest an interpretation in terms of amplitudes in flat space with two time directions and with 10d kinematics satisfying two simultaneous null constraints. We discuss the implications of these constructions for flat-space holography and its relation to the Carrollian limit of the dual CFT.",
+    "matched_terms": [
+      "Carrollian"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2609.05402v1",
+    "title": "Parametric and feedback-controlled multiparameter quantum estimation in a double cavity optomechanics: steady and dynamical state",
+    "authors": [
+      "Hamza Harraf",
+      "Mohamed Amazioug",
+      "Amjad Sohail",
+      "Mojtaba Mazaheri",
+      "Rachid Ahl Laamara"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-09-04",
+    "link": "https://arxiv.org/abs/2609.05402v1",
+    "summary": "Multiparameter quantum estimation in open optomechanical systems is fundamentally constrained by dissipation, thermal fluctuations, and measurement incompatibility. In this work, we investigate a coupled-cavity optomechanical platform in which two mechanical modes interact with driven optical cavities, two-mode squeezed vacuum, intracavity degenerate parametric amplification, and coherent optical feedback. Using the continuous-variable Gaussian-state formalism, we derive the linearized quantum Langevin dynamics and steady-state covariance matrix and evaluate the quantum Fisher information matrices associated with simultaneous estimation of the optomechanical coupling strength and cavity dissipation rate. We characterize the precision bounds using the symmetric and right logarithmic derivative formalisms and employ $\\mathcal{B}_{\\rm MI}=\\max\\{\\mathcal{B}_S,\\mathcal{B}_R\\}$ as a comparative figure of merit within the SLD/RLD framework. We find that parametric amplification can substantially reduce , demonstrating an enhancement of multiparameter sensitivity over a broad range of operating conditions. In contrast, coherent feedback produces a nonmonotonic modification of the estimation precision, with its effect depending sensitively on the feedback reflectivity, phase, squeezing strength, and thermal occupation. This behavior reveals that coherent feedback acts not simply as an enhancing or degrading mechanism, but as a tunable resource for engineering the quantum fluctuations and parameter-dependent correlations of the optomechanical state. We further analyze the transient and steady-state regimes and identify parameter regions in which squeezing and parametric amplification provide the largest metrological gain.",
+    "matched_terms": [
+      "Langevin"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
+    "id": "2609.05379v1",
+    "title": "Coincidence-based spectral engineering for spectral matching in cascaded downconversion",
+    "authors": [
+      "Mohammed Charafi",
+      "Alexandre Z. Leger",
+      "Samridhi Gambhir",
+      "Deny R. Hamel"
+    ],
+    "categories": [
+      "quant-ph"
+    ],
+    "published": "2026-09-04",
+    "link": "https://arxiv.org/abs/2609.05379v1",
+    "summary": "Three-photon states generated via cascaded spontaneous parametric downconversion provide a direct route to multipartite entanglement. However, current implementations require careful spectral matching between successive nonlinear stages, which constrains the choice of downconversion sources. In this work, we show that coincidence-based spectral filtering relaxes this requirement by conditionally tailoring the spectrum of the pump photon entering the second stage. By filtering the herald photon, we conditionally tailor the spectrum of its partner to match the acceptance bandwidth of the secondary nonlinear process, enabling efficient coupling between broadband and narrowband stages without altering the sources themselves. Using an electro-optically gated spectrometer, we directly measure the conditional spectra that govern the cascaded process, allowing us to quantitatively predict the enhancement in second-stage conversion probability per detected herald. We then verify this prediction through photon-triplet measurements, demonstrating improved performance at fixed heralding rates. Our results establish coincidence-based spectral engineering as a practical tool for optimizing cascaded downconversion, particularly in regimes limited by detector saturation or spectral incompatibility.",
+    "matched_terms": [
+      "multipartite entanglement"
+    ],
+    "matched_authors": [],
+    "priority": 2
+  },
+  {
     "id": "2609.04191v1",
     "title": "Baby-universe state dependence of the wormhole-induced gravi-axion mass gap",
     "authors": [
