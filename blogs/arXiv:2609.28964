@@ -1,1 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A self-contained guide to the Ising minimal string: how a moving classical curve and the allowed poles of a boundary amplitude determine its first quantum correction.">
+<meta name="theme-color" content="#f6f3ec">
+<meta property="og:title" content="A quantum surface, one boundary at a time">
+<meta property="og:description" content="The Ising minimal string, explained from a cubic curve to its first quantum correction. An interactive worked example for physics students.">
+<meta property="og:type" content="article">
+<title>A quantum surface, one boundary at a time · The Ising example</title>
+<style>
+/* All article styles are scoped to #ising-story for easier incorporation into a blog. */
+body{margin:0;background:#f6f3ec}
+#ising-story{--paper:#f6f3ec;--ink:#212c2a;--muted:#5a655f;--teal:#126457;--teal-light:#e5eee7;--ochre:#926020;--line:#d9d9ce;--white:#fffef9;--serif:Georgia,'Times New Roman',serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.8;overflow-wrap:break-word}
+#ising-story *{box-sizing:border-box}
+#ising-story a{color:var(--teal);text-underline-offset:4px}
+#ising-story a:hover{text-decoration-thickness:2px}
+#ising-story :focus-visible{outline:3px solid var(--ochre);outline-offset:5px}
+#ising-story .skip{position:absolute;left:16px;top:-100px;background:var(--white);padding:12px;z-index:10}
+#ising-story .skip:focus{top:10px}
+#ising-story .masthead{max-width:1152px;margin:auto;padding:24px 36px;border-bottom:1px solid var(--line);display:flex;gap:16px;justify-content:space-between;align-items:center;font-size:12px;font-weight:650;letter-spacing:.1em;text-transform:uppercase}
+#ising-story .masthead a{text-decoration:none}
+#ising-story .masthead .mark{display:inline-block;width:9px;height:9px;background:var(--teal);border-radius:50%;margin-right:10px}
+#ising-story .hero{max-width:1050px;margin:auto;padding:78px 36px 44px}
+#ising-story .eyebrow{color:var(--teal);font-size:12px;letter-spacing:.15em;font-weight:700;text-transform:uppercase;margin:0 0 20px}
+#ising-story h1{font-family:var(--serif);font-size:clamp(43px,6.3vw,76px);font-weight:400;letter-spacing:-.045em;line-height:1.08;max-width:880px;margin:0 0 26px}
+#ising-story .dek{font-size:21px;line-height:1.6;color:var(--muted);max-width:730px;margin:0 0 28px}
+#ising-story .meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12px;color:var(--muted);line-height:1.7}
+#ising-story .meta span+span::before{content:'·';margin-right:20px}
+#ising-story .intro-note{max-width:730px;margin:30px 0 0;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+#ising-story .contents{max-width:978px;margin:0 auto 58px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px}
+#ising-story .contents a{text-decoration:none;color:var(--muted)}
+#ising-story .contents a:hover{color:var(--teal)}
+#ising-story .prose{max-width:730px;margin:auto;padding:0 12px}
+#ising-story section{scroll-margin-top:24px}
+#ising-story .section-title{display:flex;align-items:baseline;gap:16px;margin:60px 0 20px}
+#ising-story .section-title .number{font-size:12px;letter-spacing:.08em;color:var(--teal);font-weight:700;flex:none}
+#ising-story h2{font-family:var(--serif);font-weight:400;font-size:34px;letter-spacing:-.025em;line-height:1.25;margin:0}
+#ising-story h3{font-size:17px;line-height:1.45;margin:22px 0 12px}
+#ising-story p{margin:0 0 21px}
+#ising-story strong{font-weight:650}
+#ising-story .lead{font-size:20px;line-height:1.75}
+#ising-story .aside{border-left:3px solid var(--teal);padding:4px 0 4px 22px;margin:30px 0;color:var(--muted);font-size:15px}
+#ising-story .aside p:last-child{margin-bottom:0}
+#ising-story .glossary{display:grid;grid-template-columns:60px 1fr;gap:12px 16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;margin:28px 0;font-size:15px}
+#ising-story .glossary dt{font-family:var(--serif);font-style:italic;font-size:23px;color:var(--teal)}
+#ising-story .glossary dd{margin:0}
+#ising-story .equation{margin:22px 0;padding:16px 12px;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;line-height:1.5;border-radius:5px}
+#ising-story math{font-size:1.13em;white-space:nowrap}
+#ising-story .equation:focus-visible{outline-offset:0}
+#ising-story .wide{max-width:1040px;margin:36px auto;padding:0 24px}
+#ising-story .explorer{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 8px 28px #253a2910}
+#ising-story .figure-top{padding:28px 30px 0;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:baseline}
+#ising-story .figure-top h3{margin:0;font-family:var(--serif);font-size:25px;font-weight:400}
+#ising-story .legend{display:flex;gap:20px;font-size:12px;color:var(--muted);align-items:center}
+#ising-story .legend span{display:flex;gap:7px;align-items:center}
+#ising-story .swatch{width:23px;height:0;border-top:3px solid var(--teal)}
+#ising-story .swatch.gravity{border-color:var(--ochre);border-top-style:dashed}
+#ising-story .plot{display:block;width:100%;height:auto;background:var(--white)}
+#ising-story .plot text{font-family:var(--sans);font-size:13px;fill:var(--muted)}
+#ising-story .plot .grid{stroke:#e9ebe3;stroke-width:1}
+#ising-story .plot .axis{stroke:#a4aea4;stroke-width:1}
+#ising-story .plot .curve{fill:none;stroke-width:3;stroke-linecap:round}
+#ising-story .controls{padding:8px 30px 22px;display:grid;grid-template-columns:auto 1fr auto;gap:10px 22px;align-items:center;font-size:14px}
+#ising-story .controls label{font-weight:650;min-width:75px}
+#ising-story input[type=range]{width:100%;min-width:80px;accent-color:var(--teal);cursor:pointer;height:32px;margin:0}
+#ising-story button{font:inherit;font-size:12px;font-weight:600;border:1px solid #96aa9b;border-radius:6px;padding:8px 12px;background:var(--white);color:var(--teal);cursor:pointer}
+#ising-story button:hover{background:var(--teal-light)}
+#ising-story .plot-status{grid-column:1/-1;font-size:13px;color:var(--muted);margin:0;min-height:23px}
+#ising-story .edge-values{background:#eef2eb;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);font-size:13px;line-height:1.7}
+#ising-story .edge-values>div{padding:16px 30px}
+#ising-story .edge-values>div+div{border-left:1px solid var(--line)}
+#ising-story .edge-values strong{display:block}
+#ising-story .edge-values output{font-variant-numeric:tabular-nums}
+#ising-story figcaption{font-size:13px;line-height:1.75;color:var(--muted);margin:16px 8px 0}
+#ising-story figcaption strong{color:var(--ink)}
+#ising-story .disks{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:28px 0}
+#ising-story .disk-card{border:1px solid var(--line);border-radius:10px;background:var(--white);padding:18px 20px}
+#ising-story .disk-card h3{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+#ising-story .disk-card .equation{padding:12px 0;margin:12px 0 8px;font-size:15px}
+#ising-story .disk-card p{font-size:13px;color:var(--muted);margin:0}
+#ising-story .mini{width:100%;height:115px;display:block}
+#ising-story .mini path{fill:none;stroke-width:2.5}
+#ising-story .mini line{stroke:#d8dfd4;stroke-width:1}
+#ising-story details{border:1px solid var(--line);border-radius:9px;margin:28px 0;background:var(--white)}
+#ising-story summary{padding:17px 20px;cursor:pointer;font-size:14px;font-weight:600;color:var(--teal)}
+#ising-story details[open] summary{border-bottom:1px solid var(--line)}
+#ising-story .detail-body{padding:22px 22px 4px;font-size:15px}
+#ising-story .detail-body .equation{font-size:14px}
+#ising-story .pipeline{display:grid;grid-template-columns:1fr 1fr 1fr;margin:32px 0;gap:12px}
+#ising-story .pipeline div{border-top:2px solid var(--teal);padding:14px 10px 0 0;font-size:13px;line-height:1.65;color:var(--muted)}
+#ising-story .pipeline span{display:block;font-size:11px;letter-spacing:.08em;color:var(--teal);margin-bottom:7px}
+#ising-story .pipeline strong{display:block;color:var(--ink);font-size:15px;margin-bottom:6px}
+#ising-story .conditions{list-style:none;padding:0;counter-reset:conditions;margin:28px 0}
+#ising-story .conditions li{position:relative;padding:0 0 20px 46px;counter-increment:conditions}
+#ising-story .conditions li::before{content:counter(conditions);position:absolute;left:0;top:2px;width:28px;height:28px;border:1px solid #9bac9d;border-radius:50%;font-size:12px;display:grid;place-items:center;color:var(--teal)}
+#ising-story .answer{border:1px solid #a8bbac;border-left:4px solid var(--teal);border-radius:7px;padding:23px 24px;margin:34px 0;background:var(--teal-light)}
+#ising-story .answer .eyebrow{margin:0 0 8px;font-size:11px}
+#ising-story .answer .equation{font-size:16px;padding:14px 0;margin:12px 0}
+#ising-story .answer p:last-child{margin-bottom:0;font-size:14px;color:var(--muted)}
+#ising-story .table-wrap{overflow:auto}
+#ising-story table{width:100%;border-collapse:collapse;margin:12px 0 22px;font-size:14px;font-variant-numeric:tabular-nums}
+#ising-story th,#ising-story td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+#ising-story th{font-size:12px;color:var(--muted);font-weight:600}
+#ising-story .takeaway{margin:52px 0 44px;padding:30px;background:#e9ece1;border-radius:9px}
+#ising-story .takeaway h2{font-size:28px;margin-bottom:15px}
+#ising-story .takeaway p{font-size:17px;margin-bottom:0}
+#ising-story .references{font-size:14px;border-top:1px solid var(--line);padding-top:25px;margin-top:40px}
+#ising-story .references h2{font-size:25px;margin-bottom:20px}
+#ising-story .references ol{padding-left:22px}
+#ising-story .references li{padding-left:4px;margin-bottom:13px}
+#ising-story footer{max-width:1050px;margin:50px auto 0;border-top:1px solid var(--line);padding:25px 36px 45px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:16px}
+#ising-story .no-js{font-size:13px;padding:12px 30px;color:var(--muted)}
+@media(max-width:760px){#ising-story{font-size:16px}#ising-story .masthead{padding:19px 22px;font-size:10px}#ising-story .hero{padding:48px 24px 32px}#ising-story .dek{font-size:19px}#ising-story .contents{margin:0 24px 36px;gap:10px 20px}#ising-story .prose{padding:0 25px}#ising-story .wide{padding:0 14px;margin:28px auto}#ising-story h2{font-size:29px}#ising-story .section-title{margin-top:44px;gap:12px}#ising-story .figure-top{padding:22px 20px 0}#ising-story .figure-top h3{font-size:23px}#ising-story .controls{padding:8px 20px 19px;gap:7px 12px}#ising-story .edge-values>div{padding:14px 20px}#ising-story .answer{padding:20px 15px}#ising-story .answer .equation{font-size:14px}#ising-story math{font-size:1.08em}#ising-story .meta{font-size:11px;gap:7px 12px}#ising-story .meta span+span::before{margin-right:12px}#ising-story footer{padding:24px;flex-wrap:wrap}}
+#ising-story .plot .curve{vector-effect:non-scaling-stroke}
+@media(max-width:440px){#ising-story .plot text{font-size:28px}#ising-story .disks{grid-template-columns:1fr}#ising-story .controls{grid-template-columns:auto 1fr}#ising-story .controls button{grid-column:1/-1;justify-self:start}#ising-story .edge-values{grid-template-columns:1fr}#ising-story .edge-values>div+div{border-left:0;border-top:1px solid var(--line)}#ising-story .pipeline{gap:10px}#ising-story .pipeline strong{font-size:13px}#ising-story .pipeline div{font-size:12px}#ising-story .detail-body{padding:16px 14px 1px}}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media print{body{background:white}#ising-story{font-size:11pt;background:white}#ising-story .masthead,#ising-story .contents,#ising-story .controls,#ising-story .skip{display:none}#ising-story .hero{padding:15px 0}#ising-story h1{font-size:32pt}#ising-story .prose,#ising-story .wide{max-width:100%;padding:0}#ising-story .section-title{margin-top:28px}#ising-story .answer,#ising-story .explorer,#ising-story .disk-card{break-inside:avoid;box-shadow:none}#ising-story .equation{overflow:visible;font-size:10pt}#ising-story .references a{color:inherit}#ising-story footer{padding:15px 0}#ising-story .intro-note{margin-top:15px}}
+</style>
+</head>
+<body>
+<article id="ising-story">
+<a class="skip" href="#start">Skip to the article</a>
+<header class="masthead"><a href="#top"><span class="mark" aria-hidden="true"></span>Notes on quantum geometry</a><a href="#references">Sources &amp; conventions ↗</a></header>
+<div class="hero" id="top">
+<p class="eyebrow">A worked example · The Ising minimal string</p>
+<h1>A quantum surface,<br>one boundary at a time.</h1>
+<p class="dek">How a moving cubic curve and two conditions on a boundary amplitude determine the first quantum correction to Ising matter coupled to gravity.</p>
+<div class="meta"><span>For physics students</span><span>Calculus is enough to follow the main argument</span><span>About 15 minutes · optional algebra included</span></div>
+<p class="intro-note">The story is self-contained. We will define the objects as we need them, work through the first correction, and finish with an independently known equation that checks the answer.</p>
+</div>
+<nav class="contents" aria-label="Article contents"><a href="#start">01 / The physics</a><a href="#curve">02 / The curve</a><a href="#ode">03 / The differential equation</a><a href="#reconstruction">04 / The reconstruction</a><a href="#check">05 / The check</a></nav>
 
+<div class="prose">
+<section id="start">
+<div class="section-title"><span class="number">01</span><h2>Let the lattice fluctuate, too.</h2></div>
+<p class="lead">In the ordinary Ising model, spins point up or down on a fixed lattice. Now imagine summing over the lattice itself: both the spins and the geometry fluctuate.</p>
+<p>At criticality, the continuum theory is <strong>Ising matter coupled to two-dimensional gravity</strong>. Its minimal-string description is labelled (3, 4). These numbers specify the orders of two differential operators used to describe the model; the matter theory has central charge <i>c</i> = 1/2. We work in its zero-magnetic-field sector.</p>
+<p>The theory organizes surfaces by their <strong>genus</strong> <i>g</i>, the number of handles, and their number of boundaries <i>n</i>. A disk has (<i>g</i>, <i>n</i>) = (0, 1). Add a handle while keeping one boundary and you get (1, 1): a torus with a disk removed.</p>
+<p>Our target is the <strong>genus-one, one-boundary amplitude</strong>. It is a generating function for that topology, expressed in a spectral coordinate. It is not a probability density or a picture of a particular surface. Converting it into a function of physical boundary length requires a further transform.</p>
+<aside class="aside"><p><strong>The question.</strong> Suppose we know the classical background. Can the allowed singularities of a boundary amplitude determine the first quantum correction to the differential equation?</p></aside>
+</section>
+
+<section id="curve">
+<div class="section-title"><span class="number">02</span><h2>A cubic curve with a memory.</h2></div>
+<p>The Ising background starts with the following energy polynomial, on the real branch <i>x</i> &gt; 0:</p>
+<div class="equation" tabindex="0" role="group" aria-label="The moving classical energy polynomial"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mrow><mi>E</mi><mo>(</mo><mrow><mi>p</mi><mo>,</mo><mi>x</mi></mrow><mo>)</mo></mrow><mo>=</mo><msup><mi>p</mi><mn>3</mn></msup><mo>−</mo><mn>3</mn><msup><mi>x</mi><mfrac><mn>1</mn><mn>3</mn></mfrac></msup><mi>p</mi></mrow></math></div>
+<p>Before using it, let us separate three coordinates that play very different roles.</p>
+<dl class="glossary"><dt>x</dt><dd>The background parameter. Changing it moves us through a family of classical curves. It is not a coordinate on the physical surface.</dd><dt>p</dt><dd>A parameter along a curve. It becomes the leading logarithmic derivative of an auxiliary wavefunction.</dd><dt>E</dt><dd>The spectral energy. For a fixed background, the equation above maps a point <i>p</i> to its energy.</dd><dt>ℏ</dt><dd>A formal expansion parameter. In the fields used below, each additional power of ℏ² advances one genus.</dd></dl>
+<p>Choose the endpoint <i>x</i> = 1, where we will read off the amplitude. Then</p>
+<div class="equation" tabindex="0" role="group" aria-label="At x equals one, E equals p cubed minus three p, and Delta equals three p squared minus three"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mrow><mi>E</mi><mo>(</mo><mrow><mi>p</mi></mrow><mo>)</mo></mrow><mo>=</mo><msup><mi>p</mi><mn>3</mn></msup><mo>−</mo><mn>3</mn><mi>p</mi><mo>,</mo><mrow><mi>Δ</mi><mo>=</mo><mfrac><mrow><mi>d</mi><mi>E</mi></mrow><mrow><mi>d</mi><mi>p</mi></mrow></mfrac><mo>=</mo><mn>3</mn><msup><mi>p</mi><mn>2</mn></msup><mo>−</mo><mn>3</mn></mrow></mrow></math></div>
+<p>The derivative vanishes at <i>p</i> = ±1. Near either point, the leading change in energy is quadratic rather than linear. Two local solutions for <i>p</i> meet there. These are the <strong>ramification points</strong>; their energy values are −2 and +2.</p>
+<p>A small surprise: a third-order description of <strong>pure gravity</strong>, with no Ising matter, has exactly the same endpoint polynomial. Away from the endpoint its background scales as <i>x</i><sup>1/2</sup>, while Ising scales as <i>x</i><sup>1/3</sup>.</p>
+</section>
+</div>
+
+<figure class="wide" aria-labelledby="explorer-title">
+<div class="explorer">
+<div class="figure-top"><h3 id="explorer-title">Same snapshot. Different motion.</h3><div class="legend" aria-label="Plot legend"><span><i class="swatch" aria-hidden="true"></i>Ising</span><span><i class="swatch gravity" aria-hidden="true"></i>Pure gravity</span></div></div>
+<svg id="energy-plot" class="plot" viewBox="0 0 920 350" role="img" aria-labelledby="energy-title energy-description">
+<title id="energy-title">Energy projections for Ising and pure gravity</title>
+<desc id="energy-description">At x equals one, both curves are E equals p cubed minus three p. They have turning points at p equals minus one and plus one. Move the background slider to compare their different motions.</desc>
+<defs><clipPath id="energy-clip"><rect x="62" y="28" width="804" height="284"/></clipPath></defs>
+<g id="plot-grid"></g><g clip-path="url(#energy-clip)"><path id="gravity-curve" class="curve" stroke="#926020" stroke-dasharray="8 7"/><path id="ising-curve" class="curve" stroke="#126457"/><g id="turning-points"></g></g>
+<text x="875" y="183">p</text><text x="451" y="20">E</text>
+</svg>
+<div class="controls"><label for="background">x = <output id="x-label" for="background">1.00</output></label><input id="background" type="range" min="0.25" max="2.50" value="1" step="0.01" aria-describedby="plot-status"><button id="reset-background" type="button">Return to x = 1</button><p id="plot-status" class="plot-status" role="status">At x = 1 the two energy projections coincide exactly.</p></div>
+<div class="edge-values"><div><strong>Ising · E = p³ − 3x<sup>1/3</sup>p</strong>Turning points: <output id="ising-p">p = ±1.000</output><br>Branch values: <output id="ising-e">E = ±2.000</output></div><div><strong>Pure gravity · E = p³ − 3x<sup>1/2</sup>p</strong>Turning points: <output id="gravity-p">p = ±1.000</output><br>Branch values: <output id="gravity-e">E = ±2.000</output></div></div>
+<noscript><p class="no-js">The formulas and endpoint values above remain valid without JavaScript. Enable JavaScript to draw and explore the moving curves.</p></noscript>
+</div>
+<figcaption><strong>Move the slider away from 1.</strong> Solid dots mark the Ising turning points; outlined squares mark pure gravity. On both curves, the positive turning point maps to the negative branch value. The energy projection at one endpoint does not specify the whole theory.</figcaption>
+</figure>
+
+<div class="prose">
+<p>To describe the boundary observable we also need a <strong>disk function</strong>, <i>y</i>(<i>p</i>). Together, <i>E</i>(<i>p</i>) and <i>y</i>(<i>p</i>) form the spectral data for the disk differential <i>ω</i><sub>0,1</sub> = <i>y</i> d<i>E</i>. Here are the two disks at <i>x</i> = 1, in the normalization used throughout this article:</p>
+<div class="disks"><div class="disk-card"><h3 style="color:var(--teal)">Ising / (3, 4)</h3><div class="equation" tabindex="0" role="group" aria-label="Ising disk: minus one quarter of p to the fourth minus four p squared plus two"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>y</mi><mi>I</mi></msub><mo>=</mo><mo>−</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mrow><mo>(</mo><msup><mi>p</mi><mn>4</mn></msup><mo>−</mo><mn>4</mn><msup><mi>p</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mo>)</mo></mrow></mrow></math></div><svg class="mini" id="disk-ising" viewBox="0 0 300 115" role="img" aria-label="Shape of the quartic Ising disk for p between minus 2.2 and 2.2"></svg><p>A quartic disk function.</p></div><div class="disk-card"><h3 style="color:var(--ochre)">Pure gravity / (3, 2)</h3><div class="equation" tabindex="0" role="group" aria-label="Pure-gravity disk: p squared minus two, divided by three"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>y</mi><mi>G</mi></msub><mo>=</mo><mfrac><mrow><mo>(</mo><msup><mi>p</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mo>)</mo></mrow><mn>3</mn></mfrac></mrow></math></div><svg class="mini" id="disk-gravity" viewBox="0 0 300 115" role="img" aria-label="Shape of the quadratic pure-gravity disk for p between minus 2.2 and 2.2"></svg><p>A quadratic disk function.</p></div></div>
+<p>These small plots use the same axes: −2.2 ≤ <i>p</i> ≤ 2.2 horizontally and −1.8 ≤ <i>y</i> ≤ 1.2 vertically. The different disks distinguish the two theories even though their endpoint energy projections agree. We will see how the Ising disk follows from the moving background.</p>
+
+<section id="ode">
+<div class="section-title"><span class="number">03</span><h2>Replace a surface sum by an ODE.</h2></div>
+<p>The differential operator is an auxiliary device for calculating the amplitudes. On the Ising sector we use</p>
+<div class="equation" tabindex="0" role="group" aria-label="The symmetrically ordered third-order operator Q"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>Q</mi><mo>=</mo><msup><mi>D</mi><mn>3</mn></msup><mo>+</mo><mi>b</mi><mi>D</mi><mo>+</mo><mfrac><mi>ℏ</mi><mn>2</mn></mfrac><msup><mi>b</mi><mo>′</mo></msup><mo>,</mo><mi>D</mi><mo>=</mo><mi>ℏ</mi><msub><mo>∂</mo><mi>x</mi></msub></mrow></math></div>
+<p>Primes denote derivatives with respect to <i>x</i>. The last term comes from placing the field and derivative symmetrically: ½(<i>bD</i> + <i>Db</i>). It is fixed by this ordering, rather than being another adjustable field. In the full third-order problem there is also a constant coefficient <i>a</i>; we set it to zero in the Ising sector considered here.</p>
+<div class="equation" tabindex="0" role="group" aria-label="The field b as a formal expansion in hbar squared"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>b</mi><mo>=</mo><mo>−</mo><mn>3</mn><msup><mi>x</mi><mfrac><mn>1</mn><mn>3</mn></mfrac></msup><mo>+</mo><msup><mi>ℏ</mi><mn>2</mn></msup><msub><mi>b</mi><mn>1</mn></msub><mo>+</mo><msup><mi>ℏ</mi><mn>4</mn></msup><msub><mi>b</mi><mn>2</mn></msub><mo>+</mo><mo>⋯</mo></mrow></math></div>
+<p>The first term is known. The functions <i>b</i><sub>1</sub>, <i>b</i><sub>2</sub>, … are what we want to reconstruct. At leading order, replacing <i>D</i> by <i>p</i> in the spectral equation <i>Qψ</i> = <i>Eψ</i> gives our cubic energy polynomial.</p>
+<p>From the operator and its adjoint one builds a normalized scalar <strong>resolvent</strong>, denoted R̂. For this calculation it is a formal series encoding the local spectral response of the operator. Its expansion begins</p>
+<div class="equation" tabindex="0" role="group" aria-label="The normalized scalar resolvent expansion"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mover accent="true"><mi>R</mi><mo>^</mo></mover><mo>=</mo><mfrac><mn>1</mn><mi>Δ</mi></mfrac><mo>+</mo><msup><mi>ℏ</mi><mn>2</mn></msup><msub><mover accent="true"><mi>R</mi><mo>^</mo></mover><mn>2</mn></msub><mo>+</mo><msup><mi>ℏ</mi><mn>4</mn></msup><msub><mover accent="true"><mi>R</mi><mo>^</mo></mover><mn>4</mn></msub><mo>+</mo><mo>⋯</mo></mrow></math></div>
+<p>The leading term is simply the reciprocal slope of the energy map. Higher terms follow recursively from the differential equation. They contain the unknown corrections to <i>b</i>.</p>
+<div class="pipeline" aria-label="Three steps of the construction"><div><span>STEP 1</span><strong>Specify the background</strong>The classical curve and its motion in x.</div><div><span>STEP 2</span><strong>Expand the resolvent</strong>Keep the new field correction unknown.</div><div><span>STEP 3</span><strong>Find an allowed primitive</strong>Its coefficients fix the correction.</div></div>
+<p>A <strong>primitive</strong> means an antiderivative. At positive genus, seek Q̂<sub>g</sub> whose derivative at <em>fixed energy</em> is the corresponding resolvent coefficient. Evaluating it at <i>x</i> = 1 gives the one-boundary differential:</p>
+<div class="equation" tabindex="0" role="group" aria-label="A primitive of the resolvent gives the one-boundary differential at the endpoint"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>𝒟</mi><mi>E</mi></msub><msub><mover accent="true"><mi>Q</mi><mo>^</mo></mover><mi>g</mi></msub><mo>=</mo><msub><mover accent="true"><mi>R</mi><mo>^</mo></mover><mo>2g</mo></msub><mo>,</mo><msub><mi>ω</mi><mo>g,1</mo></msub><mo>=</mo><msub><mover accent="true"><mi>Q</mi><mo>^</mo></mover><mi>g</mi></msub><mi>d</mi><mi>E</mi></mrow></math></div>
+<p>Here 𝒟<sub>E</sub> means differentiation in <i>x</i> while keeping <i>E</i> fixed. The subscript 2<i>g</i> on R̂ labels the power of ℏ; the subscript <i>g</i> on Q̂ labels the genus.</p>
+<h3>Why “fixed energy” changes the derivative</h3>
+<p>If <i>x</i> changes, the point <i>p</i> must move to keep <i>E</i>(<i>p</i>, <i>x</i>) unchanged. Define <i>V</i> = ∂<i>E</i>/∂<i>x</i> at fixed <i>p</i>. The chain rule gives</p>
+<div class="equation" tabindex="0" role="group" aria-label="Keeping E fixed forces dp by dx to equal minus V over Delta"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>Δ</mi><mfrac><mrow><mi>d</mi><mi>p</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>+</mo><mi>V</mi><mo>=</mo><mn>0</mn><mo>⇒</mo><mfrac><mrow><mi>d</mi><mi>p</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>=</mo><mo>−</mo><mfrac><mi>V</mi><mi>Δ</mi></mfrac></mrow></math></div>
+<p>Thus differentiating a function of both <i>p</i> and <i>x</i> requires an extra term, −(<i>V</i>/Δ)∂/∂<i>p</i>. This is the source of the stronger poles at ramification points.</p>
+<details><summary>Work through the disk integral</summary><div class="detail-body">
+<p>At genus zero, 𝒟<sub>E</sub>Q̂<sub>0</sub> = 1/Δ. Since d<i>x</i> = −Δ d<i>p</i>/<i>V</i> along a fixed-energy trajectory,</p><div class="equation" tabindex="0" role="group" aria-label="The disk is obtained by integrating minus dp over V along a fixed-energy trajectory"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mover accent="true"><mi>Q</mi><mo>^</mo></mover><mn>0</mn></msub><mo>=</mo><mo>−</mo><mo>∫</mo><mfrac><mrow><mi>d</mi><mi>p</mi></mrow><mi>V</mi></mfrac></mrow></math></div>
+<p>For Ising, write <i>E</i> = <i>p</i>³ + <i>b</i><sub>0</sub><i>p</i> and eliminate the background coefficient:</p><div class="equation" tabindex="0" role="group" aria-label="Eliminate the background field along a fixed-energy trajectory"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>b</mi><mn>0</mn></msub><mo>=</mo><mfrac><mi>E</mi><mi>p</mi></mfrac><mo>−</mo><msup><mi>p</mi><mn>2</mn></msup><mo>,</mo><mi>x</mi><mo>=</mo><mo>−</mo><mfrac><msup><msub><mi>b</mi><mn>0</mn></msub><mn>3</mn></msup><mn>27</mn></mfrac><mo>,</mo><mi>V</mi><mo>=</mo><mo>−</mo><mfrac><mrow><mn>9</mn><mi>p</mi></mrow><msup><msub><mi>b</mi><mn>0</mn></msub><mn>2</mn></msup></mfrac></mrow></math></div>
+<p>Then −1/<i>V</i> = <i>E</i>²/(9<i>p</i>³) − 2<i>E</i>/9 + <i>p</i>³/9. Integrate term by term, treating <i>E</i> as a constant:</p><div class="equation" tabindex="0" role="group" aria-label="The fixed-energy disk antiderivative"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mover accent="true"><mi>Q</mi><mo>^</mo></mover><mn>0</mn></msub><mo>=</mo><mo>−</mo><mfrac><msup><mi>E</mi><mn>2</mn></msup><mrow><mn>18</mn><msup><mi>p</mi><mn>2</mn></msup></mrow></mfrac><mo>−</mo><mfrac><mrow><mn>2</mn><mi>E</mi><mi>p</mi></mrow><mn>9</mn></mfrac><mo>+</mo><mfrac><msup><mi>p</mi><mn>4</mn></msup><mn>36</mn></mfrac><mo>+</mo><mrow><mi>C</mi><mo>(</mo><mrow><mi>E</mi></mrow><mo>)</mo></mrow></mrow></math></div>
+<p>Only now substitute <i>x</i> = 1 and <i>E</i> = <i>p</i>³ − 3<i>p</i>. Choosing the common integration term <i>C</i>(<i>E</i>) = 0 gives the quartic Ising disk above. Adding a common function of <i>E</i> does not change the difference of the disk functions on the two local sheets used by spectral recursion.</p>
+</div></details>
+<details><summary>How the ODE produces the resolvent</summary><div class="detail-body">
+<p>Set <i>w</i> = ℏψ′/ψ. Dividing <i>Qψ</i> = <i>Eψ</i> by ψ turns the linear equation into</p><div class="equation" tabindex="0" role="group" aria-label="The scalar Riccati equation used to calculate the resolvent"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msup><mi>w</mi><mn>3</mn></msup><mo>+</mo><mn>3</mn><mi>ℏ</mi><mi>w</mi><msup><mi>w</mi><mo>′</mo></msup><mo>+</mo><msup><mi>ℏ</mi><mn>2</mn></msup><msup><mi>w</mi><mo>′′</mo></msup><mo>+</mo><mi>b</mi><mi>w</mi><mo>+</mo><mfrac><mi>ℏ</mi><mn>2</mn></mfrac><msup><mi>b</mi><mo>′</mo></msup><mo>=</mo><mi>E</mi></mrow></math></div>
+<p>Expand <i>w</i> = <i>p</i> + ℏ<i>w</i><sub>1</sub> + ℏ²<i>w</i><sub>2</sub> + ⋯. At each order, the new coefficient is multiplied by Δ. So it is found from known lower-order terms by division by Δ.</p>
+<p>A paired solution χ of the adjoint equation has logarithmic derivative w̃ = ℏχ′/χ. A conserved bilinear pairing, the third-order analogue of a Wronskian, fixes the normalization and gives</p><div class="equation" tabindex="0" role="group" aria-label="The third-order bilinear pairing gives the reciprocal Sigma"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>Σ</mi><mo>=</mo><msup><mi>w</mi><mn>2</mn></msup><mo>+</mo><msup><mover accent="true"><mi>w</mi><mo>~</mo></mover><mn>2</mn></msup><mo>−</mo><mi>w</mi><mover accent="true"><mi>w</mi><mo>~</mo></mover><mo>+</mo><mi>ℏ</mi><mrow><mo>(</mo><msup><mi>w</mi><mo>′</mo></msup><mo>+</mo><msup><mover accent="true"><mi>w</mi><mo>~</mo></mover><mo>′</mo></msup><mo>)</mo></mrow><mo>+</mo><mi>b</mi><mo>,</mo><mover accent="true"><mi>R</mi><mo>^</mo></mover><mo>=</mo><mfrac><mn>1</mn><mi>Σ</mi></mfrac></mrow></math></div>
+<p>The symmetric ordering implies w̃(ℏ) = −<i>w</i>(−ℏ). Substitution makes the normalized R̂ even in ℏ, although <i>w</i> itself still has odd terms. This scalar recursion supplies the source used in the next step.</p>
+</div></details>
+</section>
+
+<section id="reconstruction">
+<div class="section-title"><span class="number">04</span><h2>Let the poles determine the correction.</h2></div>
+<p>We have supplied the classical Ising background, but we have not yet imposed its quantum string equation. Instead we ask the primitive to satisfy two analytic conditions:</p>
+<ol class="conditions"><li><strong>Finite poles only where sheets meet.</strong> In the scaled coordinate below, the allowed locations are <i>z</i> = ±1. A pole is a point where the rational function diverges.</li><li><strong>No pole of the amplitude differential at infinity.</strong> This restricts the numerator degree. It is a condition on Q̂<sub>1</sub> d<i>E</i>, not merely on Q̂<sub>1</sub>.</li></ol>
+<p>Use the scale of the classical background to make the calculation dimensionless:</p><div class="equation" tabindex="0" role="group" aria-label="The scale U and dimensionless coordinate z"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>U</mi><mo>=</mo><msup><mi>x</mi><mfrac><mn>1</mn><mn>3</mn></mfrac></msup><mo>,</mo><mi>z</mi><mo>=</mo><mfrac><mi>p</mi><msqrt><mi>U</mi></msqrt></mfrac></mrow></math></div>
+<p>The homogeneous Ising expansion fixes the first correction’s dependence on <i>x</i>. Only its numerical coefficient remains unknown:</p><div class="equation" tabindex="0" role="group" aria-label="The first unknown Ising correction has one dimensionless coefficient d one"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>b</mi><mo>=</mo><mo>−</mo><mn>3</mn><mi>U</mi><mo>+</mo><msup><mi>ℏ</mi><mn>2</mn></msup><msub><mi>d</mi><mn>1</mn></msub><msup><mi>U</mi><mo>−6</mo></msup><mo>+</mo><mrow><mi>O</mi><mo>(</mo><mrow><msup><mi>ℏ</mi><mn>4</mn></msup></mrow><mo>)</mo></mrow></mrow></math></div>
+<p>At genus one, the scalar recurrence bounds the resolvent’s poles by order seven. The fixed-energy derivative can raise a primitive’s pole order by two. With the Ising symmetry, the allowed primitive can therefore be written</p><div class="equation" tabindex="0" role="group" aria-label="The admissible genus-one primitive has four numerator coefficients"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable rowspacing="0.8em"><mtr><mtd><mrow><msub><mover accent="true"><mi>Q</mi><mo>^</mo></mover><mn>1</mn></msub><mo>=</mo><msup><mi>U</mi><mo>−5</mo></msup><mrow><msub><mi>q</mi><mn>1</mn></msub><mo>(</mo><mrow><mi>z</mi></mrow><mo>)</mo></mrow></mrow></mtd></mtr><mtr><mtd><mrow><mrow><msub><mi>q</mi><mn>1</mn></msub><mo>(</mo><mrow><mi>z</mi></mrow><mo>)</mo></mrow><mo>=</mo><mfrac><mrow><msub><mi>c</mi><mn>0</mn></msub><mo>+</mo><msub><mi>c</mi><mn>1</mn></msub><msup><mi>z</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><msup><mi>z</mi><mn>4</mn></msup><mo>+</mo><msub><mi>c</mi><mn>3</mn></msub><msup><mi>z</mi><mn>6</mn></msup></mrow><msup><mrow><mo>(</mo><msup><mi>z</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>5</mn></msup></mfrac></mrow></mtd></mtr></mtable></math></div>
+<p>There are <strong>five unknown numbers</strong>: <i>d</i><sub>1</sub> and four numerator coefficients. The numerator’s degree is at most six because multiplying the primitive by d<i>E</i> must leave a differential regular at infinity.</p>
+<p>Insert this form into the primitive equation and clear denominators. Matching powers of <i>z</i> gives a small linear system. All coefficient conditions are satisfied by a unique answer:</p><div class="equation" tabindex="0" role="group" aria-label="Solution: d one equals one eighth and the explicit primitive"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>d</mi><mn>1</mn></msub><mo>=</mo><mfrac><mn>1</mn><mn>8</mn></mfrac><mo>,</mo><mrow><msub><mi>q</mi><mn>1</mn></msub><mo>(</mo><mrow><mi>z</mi></mrow><mo>)</mo></mrow><mo>=</mo><mo>−</mo><mfrac><mrow><mn>3</mn><msup><mi>z</mi><mn>6</mn></msup><mo>−</mo><mn>3</mn><msup><mi>z</mi><mn>4</mn></msup><mo>+</mo><mn>17</mn><msup><mi>z</mi><mn>2</mn></msup><mo>+</mo><mn>7</mn></mrow><mrow><mn>216</mn><msup><mrow><mo>(</mo><msup><mi>z</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>5</mn></msup></mrow></mfrac></mrow></math></div>
+<div class="answer"><p class="eyebrow">The reconstructed field</p><div class="equation" tabindex="0" role="group" aria-label="Reconstructed field through the first quantum correction"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>b</mi><mo>=</mo><mo>−</mo><mn>3</mn><msup><mi>x</mi><mfrac><mn>1</mn><mn>3</mn></mfrac></msup><mo>+</mo><mfrac><msup><mi>ℏ</mi><mn>2</mn></msup><mrow><mn>8</mn><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac><mo>+</mo><mrow><mi>O</mi><mo>(</mo><mrow><msup><mi>ℏ</mi><mn>4</mn></msup></mrow><mo>)</mo></mrow></mrow></math></div><p>The coefficient 1/8 is determined by the primitive conditions within the specified homogeneous Ising sector.</p></div>
+<details><summary>See the complete genus-one coefficient match</summary><div class="detail-body">
+<p>After removing a common factor <i>U</i><sup>−8</sup>, the resolvent source with <i>d</i><sub>1</sub> = 0 is</p><div class="equation" tabindex="0" role="group" aria-label="The genus-one source with the new field coefficient set to zero"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mrow><msub><mi>s</mi><mn>1</mn></msub><mo>(</mo><mrow><mi>z</mi></mrow><mo>)</mo></mrow><mo>=</mo><mfrac><mrow><mn>25</mn><msup><mi>z</mi><mn>6</mn></msup><mo>−</mo><mn>17</mn><msup><mi>z</mi><mn>4</mn></msup><mo>+</mo><mn>99</mn><msup><mi>z</mi><mn>2</mn></msup><mo>+</mo><mn>13</mn></mrow><mrow><mn>324</mn><msup><mrow><mo>(</mo><msup><mi>z</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>7</mn></msup></mrow></mfrac></mrow></math></div>
+<p>The fixed-energy derivative and the new field contribution give the rational identity</p><div class="equation" tabindex="0" role="group" aria-label="The rational identity used to determine all five coefficients"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mo>−</mo><mfrac><mn>5</mn><mn>3</mn></mfrac><msub><mi>q</mi><mn>1</mn></msub><mo>−</mo><mfrac><mrow><mi>z</mi><mrow><mo>(</mo><msup><mi>z</mi><mn>2</mn></msup><mo>−</mo><mn>3</mn><mo>)</mo></mrow></mrow><mrow><mn>6</mn><mrow><mo>(</mo><msup><mi>z</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn><mo>)</mo></mrow></mrow></mfrac><msup><msub><mi>q</mi><mn>1</mn></msub><mo>′</mo></msup><mo>=</mo><msub><mi>s</mi><mn>1</mn></msub><mo>+</mo><mfrac><mrow><msub><mi>d</mi><mn>1</mn></msub><mrow><mo>(</mo><msup><mi>z</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>)</mo></mrow></mrow><mrow><mn>9</mn><msup><mrow><mo>(</mo><msup><mi>z</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>3</mn></msup></mrow></mfrac></mrow></math></div>
+<p>Here the prime on <i>q</i><sub>1</sub> means d/d<i>z</i>. Multiply by 324(<i>z</i>² − 1)⁷. There are six potentially nonzero coefficients, at powers 0, 2, 4, 6, 8 and 10, and each must vanish. The odd powers vanish by symmetry. Solving the six linear conditions gives:</p>
+<div class="table-wrap"><table><caption style="text-align:left;margin-bottom:8px">Coefficients of the primitive and field correction</caption><thead><tr><th scope="col">d₁</th><th scope="col">c₀</th><th scope="col">c₁</th><th scope="col">c₂</th><th scope="col">c₃</th></tr></thead><tbody><tr><td>1/8</td><td>−7/216</td><td>−17/216</td><td>1/72</td><td>−1/72</td></tr></tbody></table></div>
+<p>There are more conditions than unknowns, but they are consistent. For example, the coefficient of <i>z</i><sup>10</sup> is −324<i>c</i><sub>3</sub> − 36<i>d</i><sub>1</sub>, which vanishes for these values. Substitution makes the entire polynomial zero.</p>
+</div></details>
+<h3>Read off the surface amplitude</h3>
+<p>At <i>x</i> = 1, we have <i>U</i> = 1 and <i>z</i> = <i>p</i>. Multiplying the primitive by Δ converts d<i>E</i> to d<i>p</i>. Writing <i>ω</i><sub>1,1</sub> = <i>W</i><sub>1,1</sub>(<i>p</i>) d<i>p</i>, the answer is</p>
+<div class="answer"><p class="eyebrow">One handle · one boundary</p><div class="equation" tabindex="0" role="group" aria-label="The final genus-one one-boundary amplitude in the paper normalization"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mrow><msub><mi>W</mi><mo>1,1</mo></msub><mo>(</mo><mrow><mi>p</mi></mrow><mo>)</mo></mrow><mo>=</mo><mo>−</mo><mfrac><mrow><mn>3</mn><msup><mi>p</mi><mn>6</mn></msup><mo>−</mo><mn>3</mn><msup><mi>p</mi><mn>4</mn></msup><mo>+</mo><mn>17</mn><msup><mi>p</mi><mn>2</mn></msup><mo>+</mo><mn>7</mn></mrow><mrow><mn>72</mn><msup><mrow><mo>(</mo><msup><mi>p</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>4</mn></msup></mrow></mfrac></mrow></math></div><p>This is the first positive-genus one-boundary amplitude, with the disk normalization fixed above.</p></div>
+<p>Its only finite poles are at <i>p</i> = ±1. At large <i>p</i>, it behaves as −1/(24<i>p</i>²). Since d<i>p</i>/<i>p</i>² = −d(1/<i>p</i>), the differential is regular at infinity. The overall sign follows our spectral convention; this amplitude is not required to be a positive function.</p>
+<aside class="aside"><p><strong>Why the answer is unique.</strong> A nonzero difference between two allowed primitives would, after fixed-energy differentiation, generate a pole of order at least four. A change in the new field coefficient contributes poles of order at most three. Those differences cannot cancel. This proves uniqueness when the reconstruction is consistent; it does not prove consistency for every possible background.</p></aside>
+</section>
+
+<section id="check">
+<div class="section-title"><span class="number">05</span><h2>Check against the Ising string equation.</h2></div>
+<p>Now bring in an independent description of the same model. Introduce the conventional potential 𝔲 = −<i>b</i>/3. The known Ising string equation, in our normalization, is</p><div class="equation" tabindex="0" role="group" aria-label="The Ising string equation, used as an independent check"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msup><mi>𝔲</mi><mn>3</mn></msup><mo>−</mo><mfrac><mn>3</mn><mn>4</mn></mfrac><msup><mi>ℏ</mi><mn>2</mn></msup><mi>𝔲</mi><msup><mi>𝔲</mi><mo>′′</mo></msup><mo>−</mo><mfrac><mn>3</mn><mn>8</mn></mfrac><msup><mi>ℏ</mi><mn>2</mn></msup><msup><mrow><mo>(</mo><msup><mi>𝔲</mi><mo>′</mo></msup><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mfrac><msup><mi>ℏ</mi><mn>4</mn></msup><mn>24</mn></mfrac><msup><mi>𝔲</mi><mo>′′′′</mo></msup><mo>=</mo><mi>x</mi></mrow></math></div>
+<p>Our reconstructed field predicts</p><div class="equation" tabindex="0" role="group" aria-label="Convert the reconstructed field to the standard Ising potential"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>𝔲</mi><mo>=</mo><mo>−</mo><mfrac><mi>b</mi><mn>3</mn></mfrac><mo>=</mo><msup><mi>x</mi><mfrac><mn>1</mn><mn>3</mn></mfrac></msup><mo>−</mo><mfrac><msup><mi>ℏ</mi><mn>2</mn></msup><mrow><mn>24</mn><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac><mo>+</mo><mrow><mi>O</mi><mo>(</mo><mrow><msup><mi>ℏ</mi><mn>4</mn></msup></mrow><mo>)</mo></mrow></mrow></math></div>
+<p>Substitute this into the equation. At order ℏ⁰ it reduces to (𝔲<sub>0</sub>)³ = <i>x</i>. At order ℏ², the contribution from the correction to 𝔲 cancels the two derivative terms. The first quantum correction therefore passes a check that was not used to determine it.</p>
+<p>The manuscript continues the same reconstruction through genus three in the homogeneous zero-magnetic-field sector. Those field corrections satisfy the string equation through ℏ⁶, and the one-boundary amplitudes agree with the known Ising results after accounting for the disk normalization. This is a reconstruction of established amplitudes, and a test of the method.</p>
+<details><summary>What changes when we add boundaries?</summary><div class="detail-body">
+<p>For one boundary, the normalized scalar pairing is enough. For several boundaries, its components are assembled into a rank-one matrix projector. Cyclic traces of products of this projector generate connected multi-boundary correlators.</p>
+<p>The planar three-boundary result in the same normalization is particularly short:</p><div class="equation" tabindex="0" role="group" aria-label="The planar three-boundary amplitude is a sum over two ramification points"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>W</mi><mo>0,3</mo></msub><mo>=</mo><mo>−</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><munderover><mo>∑</mo><mrow><mi>α</mi><mo>=</mo><mo>±</mo><mn>1</mn></mrow><mrow></mrow></munderover><munderover><mo>∏</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mn>3</mn></munderover><mfrac><mn>1</mn><msup><mrow><mo>(</mo><msub><mi>p</mi><mi>i</mi></msub><mo>−</mo><mi>α</mi><mo>)</mo></mrow><mn>2</mn></msup></mfrac></mrow></math></div>
+<p>Each <i>p</i><sub>i</sub> labels a boundary’s spectral coordinate. The two terms come from the two ramification points. Identifying the full matrix construction with topological recursion requires properties of the specified string system in addition to the scalar uniqueness argument.</p>
+</div></details>
+<div class="takeaway"><h2>What the example teaches</h2><p>A boundary amplitude can constrain the quantum equation that produces it. In the Ising example, once the moving classical background, ordering and sector are specified, the allowed primitive determines the first correction. The disk keeps track of the background motion that an endpoint energy polynomial alone cannot reveal.</p></div>
+</section>
+
+<section class="references" id="references">
+<h2>Sources &amp; conventions</h2>
+<p>This article follows the Ising example in <a href="https://arxiv.org/abs/2609.28964"><em>Resolvent reconstruction of minimal strings beyond KdV</em> (arXiv:2609.28964)</a>, by Wasif Ahmed and Joydeep Naskar. It uses the monic spatial operator, symmetric ordering, endpoint <i>x</i> = 1 and quartic disk displayed above. The genus counts handles of the surfaces being summed over; the auxiliary classical curve is rational and has geometric genus zero.</p>
+<ol><li><a href="https://arxiv.org/abs/1312.4237">M. Bergère, G. Borot and B. Eynard, <em>Rational differential systems, loop equations, and application to the q-th reductions of KP</em></a>. This reference is abbreviated BBE below. Section 6.3 provides the Ising string system and amplitudes. To match the conventions here, use <i>t</i><sub>B</sub> = 4<i>x</i> and ℏ<sub>B</sub> = 4ℏ.</li><li><a href="https://arxiv.org/abs/2507.18715">W. Ahmed, C. V. Johnson and K. Saraswat, <em>Weil–Petersson volumes for extended JT supergravity from ordinary differential equations</em></a>. Appendix C explains the descending primitive construction in the second-order setting.</li></ol>
+<p>The disk used here is one quarter of the BBE disk. Consequently stable amplitudes in these conventions are 4<sup>2g−2+n</sup> times the corresponding BBE amplitudes. Keeping the disk and operator normalizations together is essential when comparing formulas.</p>
+</section>
+</div>
+<footer><span>Ising matter × two-dimensional gravity</span><a href="#top">Back to the beginning ↑</a></footer>
+</article>
+<script>
+(()=>{'use strict';
+const root=document.getElementById('ising-story');
+const get=id=>root.querySelector('#'+id);
+const ns='http://www.w3.org/2000/svg';
+function element(tag,attrs,text){const e=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(text!==undefined)e.textContent=text;return e;}
+const px=p=>62+(p+2.65)/5.3*804,py=e=>312-(e+15)/30*284;
+const grid=get('plot-grid');
+for(let e=-15;e<=15;e+=5){grid.append(element('line',{x1:62,x2:866,y1:py(e),y2:py(e),class:e===0?'axis':'grid'}));if(e!==0)grid.append(element('text',{x:49,y:py(e)+4,'text-anchor':'end'},String(e)));}
+for(let p=-2;p<=2;p++){grid.append(element('line',{x1:px(p),x2:px(p),y1:28,y2:312,class:p===0?'axis':'grid'}));grid.append(element('text',{x:px(p),y:333,'text-anchor':'middle'},String(p)));}
+function curve(U){let d='';for(let i=0;i<=500;i++){const p=-2.65+i*5.3/500;d+=(i?'L':'M')+px(p).toFixed(2)+','+py(p*p*p-3*U*p).toFixed(2);}return d;}
+function update(){const x=Number(get('background').value),uI=Math.cbrt(x),uG=Math.sqrt(x);
+get('x-label').value=x.toFixed(2);get('ising-curve').setAttribute('d',curve(uI));get('gravity-curve').setAttribute('d',curve(uG));
+const points=get('turning-points');points.replaceChildren();
+for(const sign of [-1,1]){const pG=sign*Math.sqrt(uG),eG=-2*sign*Math.pow(x,.75),pI=sign*Math.sqrt(uI),eI=-2*sign*Math.sqrt(x);points.append(element('rect',{x:px(pG)-6,y:py(eG)-6,width:12,height:12,fill:'#fffef9',stroke:'#926020','stroke-width':2}));points.append(element('circle',{cx:px(pI),cy:py(eI),r:4,fill:'#126457'}));}
+get('ising-p').value='p = ±'+Math.sqrt(uI).toFixed(3);get('ising-e').value='E = ±'+(2*Math.sqrt(x)).toFixed(3);get('gravity-p').value='p = ±'+Math.sqrt(uG).toFixed(3);get('gravity-e').value='E = ±'+(2*Math.pow(x,.75)).toFixed(3);
+get('plot-status').textContent=x===1?'At x = 1 the two energy projections coincide exactly.':'Away from x = 1, the different background scalings separate the curves.';
+get('energy-description').textContent='At x = '+x.toFixed(2)+', Ising has turning points p = ±'+Math.sqrt(uI).toFixed(3)+' and branch values E = ±'+(2*Math.sqrt(x)).toFixed(3)+'. Pure gravity has turning points p = ±'+Math.sqrt(uG).toFixed(3)+' and branch values E = ±'+(2*Math.pow(x,.75)).toFixed(3)+'. The positive turning point has the negative branch value.';
+}
+get('background').addEventListener('input',update);get('reset-background').addEventListener('click',()=>{get('background').value='1';update();});update();
+function mini(id,fn,color){const svg=get(id),X=p=>10+(p+2.2)/4.4*280,Y=y=>105-(y+1.8)/3*95;svg.append(element('line',{x1:10,x2:290,y1:Y(0),y2:Y(0)}));svg.append(element('line',{x1:X(0),x2:X(0),y1:10,y2:105}));let d='';for(let i=0;i<=200;i++){const p=-2.2+i*4.4/200;d+=(i?'L':'M')+X(p).toFixed(2)+','+Y(fn(p)).toFixed(2);}svg.append(element('path',{d,stroke:color}));}
+mini('disk-ising',p=>-(p**4-4*p*p+2)/4,'#126457');mini('disk-gravity',p=>(p*p-2)/3,'#926020');
+})();
+</script>
+</body>
+</html>
