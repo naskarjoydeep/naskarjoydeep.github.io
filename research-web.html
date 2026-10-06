@@ -62,7 +62,7 @@
 <body>
   <a class="back-link" href="publications.html">&larr; Publications</a>
   <h1>My Research Journey</h1>
-  <p class="lede">How my work connects, from my master's thesis on the conformal bootstrap onward. The links come from the papers themselves: which ones build on which, which cite each other, and which share an idea without a citation. The web falls into separate pieces because my interests do. Theses and posters are drawn as squares or hollow circles; they are not publications.</p>
+  <p class="lede">How my work connects, from my master's thesis on the conformal bootstrap onward. The links come from the papers themselves: which ones build on which, which cite each other, and which share an idea without a citation. The web falls into separate pieces because my interests do. Theses are drawn as a square or a hollow circle; they are not publications.</p>
 
   <section id="research-web" aria-label="Research web">
     <p class="web-lede">Time runs left to right. Click a paper to see what it builds on and what builds on it; use the boxes to show or hide each kind of link.</p>
@@ -80,7 +80,7 @@
 <!-- Hand-curated connections. Node keys are arXiv IDs (or doi:/inspire: for records without one). -->
 <script type="application/json" id="connections-data">
 {
-  "note": "Hand-curated from full-text reading. Dates are first-appearance (YYYY-MM or YYYY-MM-DD). Node keys are arXiv IDs, or doi:/inspire: for records without one. Edges run from the earlier paper to the later one. Titles and metadata are read from publications.html at load time; papers listed there but not here show up in the web as 'not yet placed'. Nodes with \"kind\": \"other\" (theses, posters) are drawn hollow; \"when\" overrides the displayed date and not counted as publications.",
+  "note": "Hand-curated from full-text reading. Dates are first-appearance (YYYY-MM or YYYY-MM-DD). Node keys are arXiv IDs, or doi:/inspire: for records without one. Edges run from the earlier paper to the later one. Titles and metadata are read from publications.html at load time; papers listed there but not here show up in the web as 'not yet placed'. Nodes with \"kind\": \"other\" (e.g. theses) are drawn hollow; \"when\" overrides the displayed date and not counted as publications.",
   "clusters": [
     {
       "id": "games",
@@ -263,23 +263,6 @@
       },
       "remark": "Not a publication.",
       "when": "2020–21"
-    },
-    {
-      "key": "niser-poster",
-      "label": "NN for CFT poster",
-      "cluster": "nn",
-      "date": "2020-10",
-      "when": "2020",
-      "kind": "other",
-      "extra": {
-        "title": "Application of Neural Networks to CFT",
-        "authors": [
-          "J. Naskar"
-        ],
-        "journal": "Poster, NISER Bhubaneswar (2020)",
-        "url": "https://www.researchgate.net/publication/353436804_Application_of_Neural_Networks_to_CFT"
-      },
-      "remark": "Poster, not a publication."
     },
     {
       "key": "2409.12222",
@@ -492,12 +475,6 @@
       "to": "2609.28964",
       "type": "idea",
       "note": "The thesis studied minimal models and the 2D Ising model. Minimal strings couples the same minimal models (Ising is the (3,4) model) to 2D gravity."
-    },
-    {
-      "from": "niser-poster",
-      "to": "2409.12222",
-      "type": "idea",
-      "note": "The poster applied neural networks to conformal field theory. Conformal fields from neural networks turns this around and builds CFTs out of ensembles of neural networks."
     }
   ]
 }
@@ -814,7 +791,7 @@
     });
     var papers = nodes.filter(function (n) { return n.cluster !== 'thesis' && n.kind !== 'other'; }).length;
     var other = nodes.length - papers;
-    panel.innerHTML = '<p class="wp-hint">' + papers + ' papers and ' + other + ' theses and posters, ' +
+    panel.innerHTML = '<p class="wp-hint">' + papers + ' papers and ' + other + ' theses, ' +
       edges.length + ' connections, ' + comp + ' separate pieces. Click a paper to see what it builds on and what builds on it.</p>';
   }
   renderSummary();
