@@ -1,0 +1,68 @@
+name: Research web connections
+
+on:
+  # Right after the weekly INSPIRE sync, so new papers are already in publications.html.
+  workflow_run:
+    workflows: ["Publications"]
+    types: [completed]
+  workflow_dispatch:      # run by hand from the Actions tab
+    inputs:
+      paper:
+        description: "Dry run: arXiv ID of a paper to classify as if it were new (leave empty for a normal run)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write         # push the proposal branch
+  pull-requests: write    # open the review PR
+  models: read            # free GitHub Models inference with the built-in GITHUB_TOKEN
+
+jobs:
+  propose-connections:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Propose connections
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FORCE_PAPER: ${{ github.event.inputs.paper }}
+        run: python scripts/classify_connections.py
+
+      - name: Open a pull request for review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -n "${{ github.event.inputs.paper }}" ]; then
+            cat connections-report.md >> "$GITHUB_STEP_SUMMARY"   # dry run: show, don't commit
+            exit 0
+          fi
+          git config user.name "connections-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if [ ! -f connections-report.md ]; then
+            # Nothing new to review; only the remembered arXiv versions may have changed.
+            git add research-web.html
+            git diff --quiet --cached || { git commit -m "Record arXiv versions for the research web"; git push; }
+            exit 0
+          fi
+          branch="connections/$(date -u +%Y-%m-%d)"
+          git checkout -b "$branch"
+          git add research-web.html
+          git commit -m "Propose research-web connections ($(date -u +%Y-%m-%d))"
+          git push -f origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "Research web: proposed connections ($(date -u +%Y-%m-%d))" \
+            --body-file connections-report.md \
+            || gh pr edit "$branch" --body-file connections-report.md
