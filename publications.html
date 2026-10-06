@@ -39,6 +39,21 @@
     .profiles a { display: inline-block; background: #e0f2fe; color: #0369a1; font-size: 0.82rem; padding: 5px 13px; border-radius: 20px; text-decoration: none; }
     .profiles a:hover { background: #bae6fd; text-decoration: none; }
     .empty { color: #475569; font-style: italic; }
+    .journey { display: flex; align-items: center; gap: 18px; margin: 20px 0; padding: 16px 22px; border-radius: 12px; color: #0f172a; text-decoration: none;
+               background: linear-gradient(120deg, #e0f2fe 0%, #ede9fe 55%, #fce7f3 100%); box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform .2s, box-shadow .2s; }
+    .journey:hover { text-decoration: none; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(7,89,133,0.15); }
+    .journey:focus-visible { outline: 3px solid #0369a1; outline-offset: 3px; }
+    .journey-art { flex: none; width: 96px; height: 64px; }
+    .journey-art circle { transform-box: fill-box; transform-origin: center; transition: transform .3s; }
+    .journey:hover .journey-art circle { transform: scale(1.25); }
+    .journey:hover .journey-art circle:nth-of-type(2n) { transition-delay: .08s; }
+    .journey-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .journey-title { font-size: 1.15rem; font-weight: 700; color: #075985; }
+    .journey-sub { font-size: 0.9rem; color: #475569; }
+    .journey-go { margin-left: auto; font-size: 1.5rem; color: #0369a1; transition: transform .2s; }
+    .journey:hover .journey-go { transform: translateX(4px); }
+    @media (max-width: 520px) { .journey-art { width: 72px; height: 48px; } .journey-go { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .journey, .journey-art circle, .journey-go { transition: none; } .journey:hover { transform: none; } }
   </style>
 </head>
 <body>
@@ -50,6 +65,21 @@
     <a href="https://scholar.google.com/citations?user=W6xl2eMAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
     <a href="https://inspirehep.net/authors/2044957" target="_blank" rel="noopener">INSPIRE-HEP</a>
   </p>
+
+  <a class="journey" href="research-web.html">
+    <svg class="journey-art" viewBox="0 0 120 80" aria-hidden="true">
+      <path d="M14 58 C34 58 34 22 56 22 M56 22 C74 22 76 46 96 46 M14 58 C44 70 70 66 96 46 M56 22 C70 10 92 14 106 18" fill="none" stroke="#7dd3fc" stroke-width="2"/>
+      <path d="M30 34 C44 40 46 54 64 58" fill="none" stroke="#fdba74" stroke-width="2" stroke-dasharray="4 3"/>
+      <circle cx="14" cy="58" r="6" fill="#6d28d9"/><circle cx="56" cy="22" r="7" fill="#1d4ed8"/>
+      <circle cx="96" cy="46" r="6" fill="#be185d"/><circle cx="106" cy="18" r="5" fill="#0e7490"/>
+      <circle cx="30" cy="34" r="5" fill="#fff" stroke="#b45309" stroke-width="2.5"/><circle cx="64" cy="58" r="5" fill="#b45309"/>
+    </svg>
+    <span class="journey-text">
+      <span class="journey-title">My Research Journey</span>
+      <span class="journey-sub">See how my papers connect.</span>
+    </span>
+    <span class="journey-go" aria-hidden="true">&rarr;</span>
+  </a>
 
   <div class="summary-bar" id="summary"></div>
   <main id="pubs-root"></main>
@@ -421,6 +451,9 @@
     if (r.arxiv) out.push('<a href="https://arxiv.org/abs/' + esc(r.arxiv) + '" target="_blank" rel="noopener">arXiv:' + esc(r.arxiv) + '</a>');
     if (r.doi) out.push('<a href="https://doi.org/' + esc(r.doi) + '" target="_blank" rel="noopener">DOI</a>');
     if (r.inspire_id) out.push('<a href="https://inspirehep.net/literature/' + esc(r.inspire_id) + '" target="_blank" rel="noopener">INSPIRE</a>');
+    // Same key the research web uses for its nodes: arXiv ID, else inspire:<recid>
+    var webKey = r.arxiv || (r.inspire_id ? 'inspire:' + r.inspire_id : null);
+    if (webKey) out.push('<a href="research-web.html#' + esc(webKey) + '">Research journey</a>');
     return out.join('');
   }
 
