@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Research Journey — Joydeep Naskar</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.6; margin: 0; padding: 20px; max-width: 900px; margin: auto; }
+    h1, h2, h3 { color: #075985; }
+    section { background: #fff; padding: 18px 24px; margin: 20px 0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    a { color: #0369a1; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back-link { font-size: 0.9rem; color: #475569; }
+    h1 { margin: 10px 0 6px; }
+    .lede { color: #475569; max-width: 72ch; }
+    .thread h2 { font-size: 1.05rem; margin: 0; }
+    .thread-span { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.78rem; font-weight: 400; color: #475569; margin-left: 6px; }
+    .thread-blurb { color: #475569; font-size: 0.92rem; margin: 4px 0 0; max-width: 72ch; }
+    ol.thread-list { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    ol.thread-list li { font-size: 0.95rem; }
+    .thread-date { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.78rem; color: #475569; display: inline-block; min-width: 5.5em; }
+    .thread-meta { font-size: 0.85rem; color: #475569; }
+    .stamp { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.74rem; color: #475569; text-align: center; margin-top: 30px; }
+    .web-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 20px; }
+    .web-head h2 { margin: 0; }
+    .web-lede { color: #475569; font-size: 0.92rem; margin: 6px 0 0; max-width: 72ch; }
+    .web-filters { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.82rem; color: #475569; margin: 12px 0 0; }
+    .web-filters label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+    .web-filters svg { flex: none; }
+    .web-scroll { overflow-x: auto; margin: 10px 0 0; border: 1px solid #e2e8f0; border-radius: 10px; background: #fcfdfe; }
+    #web-svg { display: block; min-width: 760px; width: 100%; height: auto; font-family: system-ui, sans-serif; }
+    #web-svg .band-name { font-size: 12px; font-weight: 600; }
+    #web-svg .tick { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10.5px; fill: #64748b; }
+    #web-svg .wnode { cursor: pointer; }
+    #web-svg .wnode circle:not(.other), #web-svg .wnode rect { stroke: #fff; stroke-width: 2; }
+    #web-svg .wnode text { font-size: 12px; fill: #334155; paint-order: stroke; stroke: #fcfdfe; stroke-width: 4px; stroke-linejoin: round; }
+    #web-svg .wnode:focus { outline: none; }
+    #web-svg .wnode:focus-visible circle, #web-svg .wnode:focus-visible rect { stroke: #0369a1; stroke-width: 3; }
+    #web-svg .wedge { fill: none; transition: opacity .15s; }
+    #web-svg.dim .wedge { opacity: .08; }
+    #web-svg.dim .wnode { opacity: .3; }
+    #web-svg.dim .wedge.on { opacity: 1; }
+    #web-svg.dim .wnode.on { opacity: 1; }
+    #web-svg .wnode.sel text { font-weight: 700; fill: #0f172a; }
+    .web-panel { margin: 12px 0 0; font-size: 0.92rem; min-height: 4.5em; }
+    .web-panel .wp-title { font-weight: 600; }
+    .web-panel .wp-meta { color: #475569; font-size: 0.88rem; }
+    .web-panel ul { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+    .web-panel li { padding-left: 12px; border-left: 3px solid #e2e8f0; }
+    .web-panel button.wp-node { font: inherit; font-weight: 600; color: #0369a1; background: none; border: 0; padding: 0; cursor: pointer; }
+    .web-panel button.wp-node:hover { text-decoration: underline; }
+    .wtype { display: inline-block; font-size: 0.7rem; padding: 1px 8px; border-radius: 20px; margin-right: 2px; background: #f1f5f9; color: #475569; vertical-align: 1px; }
+    .wtype.idea { background: #ffedd5; color: #9a3412; }
+    .wtype.builds { background: #e0f2fe; color: #0369a1; }
+    .wtype.thesis { background: #e2e8f0; color: #0f172a; }
+    .web-panel .wp-hint { color: #475569; }
+    .links a.web-link { cursor: pointer; }
+    ol.pubs li:target { background: #f0f9ff; border-radius: 8px; box-shadow: 0 0 0 6px #f0f9ff; }
+    @media (prefers-reduced-motion: reduce) { #web-svg .wedge { transition: none; } }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="publications.html">&larr; Publications</a>
+  <h1>My Research Journey</h1>
+  <p class="lede">How my work connects, from my master's thesis on the conformal bootstrap onward. The links come from the papers themselves: which ones build on which, which cite each other, and which share an idea without a citation. The web falls into separate pieces because my interests do. Theses and posters are drawn as squares or hollow circles; they are not publications.</p>
+
+  <section id="research-web" aria-label="Research web">
+    <p class="web-lede">Time runs left to right. Click a paper to see what it builds on and what builds on it; use the boxes to show or hide each kind of link.</p>
+    <div class="web-filters" id="web-filters"></div>
+    <div class="web-scroll">
+      <svg id="web-svg" role="img" aria-label="Chronological web of connections between publications"></svg>
+    </div>
+    <div class="web-panel" id="web-panel" aria-live="polite"></div>
+  </section>
+
+  <div id="web-threads"></div>
+
+  <p class="stamp">Paper details are read from the <a href="publications.html">publications page</a>; connections are curated by hand.</p>
+
+<!-- Hand-curated connections. Node keys are arXiv IDs (or doi:/inspire: for records without one). -->
+<script type="application/json" id="connections-data">
+{
+  "note": "Hand-curated from full-text reading. Dates are first-appearance (YYYY-MM or YYYY-MM-DD). Node keys are arXiv IDs, or doi:/inspire: for records without one. Edges run from the earlier paper to the later one. Titles and metadata are read from publications.html at load time; papers listed there but not here show up in the web as 'not yet placed'. Nodes with \"kind\": \"other\" (theses, posters) are drawn hollow; \"when\" overrides the displayed date and not counted as publications.",
+  "clusters": [
+    {
+      "id": "games",
+      "name": "Quantum games",
+      "color": "#6d28d9",
+      "band": 0,
+      "blurb": "A comment on a quantized Colonel Blotto game, then a construction that fixes its classical limit."
+    },
+    {
+      "id": "recon",
+      "name": "Bulk reconstruction",
+      "color": "#0e7490",
+      "band": 1,
+      "blurb": "Which boundary regions, even fractal ones, can still reconstruct the bulk, and which wedge is the right one."
+    },
+    {
+      "id": "cone",
+      "name": "Entropy cone",
+      "color": "#1d4ed8",
+      "band": 2,
+      "blurb": "Which entropy inequalities every holographic state obeys, whether contraction maps can prove them all, and where else they hold."
+    },
+    {
+      "id": "thesis",
+      "name": "",
+      "color": "#0f172a",
+      "band": 2.5
+    },
+    {
+      "id": "signals",
+      "name": "Multipartite signals",
+      "color": "#be185d",
+      "band": 3,
+      "blurb": "Quantities that detect genuinely multipartite correlation, and whether the holographic signal inequality survives for mixed states."
+    },
+    {
+      "id": "nn",
+      "name": "Conformal field theory",
+      "color": "#b45309",
+      "band": 4,
+      "blurb": "From conformal bootstrap in my master's thesis to conformal field theories built from ensembles of neural networks, and their operator content."
+    },
+    {
+      "id": "strings",
+      "name": "Minimal strings",
+      "color": "#15803d",
+      "band": 5,
+      "blurb": "How much of the quantum string equation the classical spectral curve determines."
+    }
+  ],
+  "nodes": [
+    {
+      "key": "doi:10.1007/s11128-020-02734-1",
+      "label": "Blotto comment",
+      "cluster": "games",
+      "date": "2020-05",
+      "extra": {
+        "title": "Comments on Quantization and experimental realization of the Colonel Blotto game",
+        "authors": [
+          "J. Naskar"
+        ],
+        "journal": "Quant.Inf.Proc. 19 (2020) 388",
+        "doi": "10.1007/s11128-020-02734-1",
+        "inspire_id": 2936301
+      },
+      "remark": "Sits on a separate INSPIRE author record, so the sync does not list it yet.",
+      "when": "2020"
+    },
+    {
+      "key": "2008.00762",
+      "label": "Multiplayer Blotto",
+      "cluster": "games",
+      "date": "2020-08-03"
+    },
+    {
+      "key": "2203.01379",
+      "label": "Sierpinski code",
+      "cluster": "recon",
+      "date": "2022-03-02"
+    },
+    {
+      "key": "2209.15026",
+      "label": "Fractal wedges",
+      "cluster": "recon",
+      "date": "2022-09-29"
+    },
+    {
+      "key": "2408.04016",
+      "label": "Wedge classification",
+      "cluster": "recon",
+      "date": "2024-08-07"
+    },
+    {
+      "key": "2411.02825",
+      "label": "Fractal codes revisited",
+      "cluster": "recon",
+      "date": "2024-11-05"
+    },
+    {
+      "key": "2403.13283",
+      "label": "Contraction maps",
+      "cluster": "cone",
+      "date": "2024-03-19"
+    },
+    {
+      "key": "2408.04741",
+      "label": "Toric",
+      "cluster": "cone",
+      "date": "2024-08-08"
+    },
+    {
+      "key": "2409.17317",
+      "label": "Classification",
+      "cluster": "cone",
+      "date": "2024-09-25"
+    },
+    {
+      "key": "2412.05484",
+      "label": "TEE",
+      "cluster": "cone",
+      "date": "2024-12-06"
+    },
+    {
+      "key": "2506.18086",
+      "label": "Completeness",
+      "cluster": "cone",
+      "date": "2025-06-22"
+    },
+    {
+      "key": "inspire:3185432",
+      "label": "PhD thesis",
+      "cluster": "thesis",
+      "date": "2026-06",
+      "extra": {
+        "title": "Multipartite correlations in holography",
+        "authors": [
+          "J. Naskar"
+        ],
+        "journal": "PhD thesis, Northeastern University (2026)",
+        "inspire_id": 3185432
+      }
+    },
+    {
+      "key": "2509.08209",
+      "label": "Tripartite signal",
+      "cluster": "signals",
+      "date": "2025-09-10"
+    },
+    {
+      "key": "2605.26617",
+      "label": "Mixed-state signal",
+      "cluster": "signals",
+      "date": "2026-05-26"
+    },
+    {
+      "key": "msc-thesis",
+      "label": "Master's thesis",
+      "cluster": "nn",
+      "date": "2021-05",
+      "kind": "other",
+      "extra": {
+        "title": "Conformal Field Theory: Recent Works & Applications",
+        "authors": [
+          "J. Naskar"
+        ],
+        "journal": "Integrated MSc thesis, NISER Bhubaneswar (2020–21), supervised by C. N. Gowdigere",
+        "url": "https://www.researchgate.net/profile/Joydeep-Naskar-2"
+      },
+      "remark": "Not a publication.",
+      "when": "2020–21"
+    },
+    {
+      "key": "niser-poster",
+      "label": "NN for CFT poster",
+      "cluster": "nn",
+      "date": "2020-10",
+      "when": "2020",
+      "kind": "other",
+      "extra": {
+        "title": "Application of Neural Networks to CFT",
+        "authors": [
+          "J. Naskar"
+        ],
+        "journal": "Poster, NISER Bhubaneswar (2020)",
+        "url": "https://www.researchgate.net/publication/353436804_Application_of_Neural_Networks_to_CFT"
+      },
+      "remark": "Poster, not a publication."
+    },
+    {
+      "key": "2409.12222",
+      "label": "NN conformal fields",
+      "cluster": "nn",
+      "date": "2024-09-18"
+    },
+    {
+      "key": "2608.15001",
+      "label": "Spinning",
+      "cluster": "nn",
+      "date": "2026-08-15",
+      "labelPos": "above"
+    },
+    {
+      "key": "2609.37074",
+      "label": "Algebra",
+      "cluster": "nn",
+      "labelPos": "below",
+      "date": "2026-09-29"
+    },
+    {
+      "key": "2609.28964",
+      "label": "Minimal strings",
+      "cluster": "strings",
+      "date": "2026-09-24"
+    }
+  ],
+  "types": {
+    "builds": "builds on",
+    "related": "cites",
+    "idea": "shared idea, no citation",
+    "thesis": "in the thesis"
+  },
+  "edges": [
+    {
+      "from": "doi:10.1007/s11128-020-02734-1",
+      "to": "2008.00762",
+      "type": "builds",
+      "note": "The Comment showed that the quantized Blotto game of Maioli et al. fails its classical limit. This paper gives each player their own qubit, which fixes it."
+    },
+    {
+      "from": "2203.01379",
+      "to": "2209.15026",
+      "type": "builds",
+      "note": "Adds bulk entropy to the Sierpinski-triangle code and shows the code survives."
+    },
+    {
+      "from": "2209.15026",
+      "to": "2411.02825",
+      "type": "builds",
+      "note": "Tests the vacuum-AdS approximation against BTZ black holes and extends the analysis to strips in higher dimensions."
+    },
+    {
+      "from": "2408.04016",
+      "to": "2411.02825",
+      "type": "builds",
+      "note": "Uses the min- and max-entanglement wedges from the classification for one-shot uberholography. The two papers cite each other."
+    },
+    {
+      "from": "2209.15026",
+      "to": "2408.04016",
+      "type": "related",
+      "note": "Cites uberholography as an application of min/max wedges."
+    },
+    {
+      "from": "2203.01379",
+      "to": "2411.02825",
+      "type": "related",
+      "note": "Contrast: the Sierpinski code works at all sizes, while Cantor-like strips work only asymptotically."
+    },
+    {
+      "from": "2403.13283",
+      "to": "2408.04741",
+      "type": "builds",
+      "note": "The contraction-map algorithm completes the proof of the new (3,1;3) inequality."
+    },
+    {
+      "from": "2403.13283",
+      "to": "2409.17317",
+      "type": "builds",
+      "note": "The generation program sketched at the end of Contraction maps becomes the partial-cube classification."
+    },
+    {
+      "from": "2409.17317",
+      "to": "2506.18086",
+      "type": "builds",
+      "note": "The triality of inequalities, contraction maps, and partial cubes is the core of the completeness proof."
+    },
+    {
+      "from": "2403.13283",
+      "to": "2506.18086",
+      "type": "builds",
+      "note": "Proves the completeness that Contraction maps argued for, and reuses its deterministic rules."
+    },
+    {
+      "from": "2409.17317",
+      "to": "2412.05484",
+      "type": "builds",
+      "note": "Uses the coefficient-sum lemma from Classification to show every facet inequality holds for gapped ground states."
+    },
+    {
+      "from": "2408.04741",
+      "to": "2411.02825",
+      "type": "related",
+      "note": "Proposes fractal configurations with many regions as a testbed for entropy inequalities."
+    },
+    {
+      "from": "2409.17317",
+      "to": "2411.02825",
+      "type": "related",
+      "note": "Proposes fractal configurations with many regions as a testbed for entropy inequalities."
+    },
+    {
+      "from": "2509.08209",
+      "to": "2605.26617",
+      "type": "builds",
+      "note": "Reuses the signals Δ_w and Δ_p and takes up the Markov-gap question left open."
+    },
+    {
+      "from": "2506.18086",
+      "to": "2509.08209",
+      "type": "idea",
+      "note": "Completeness notes that the cyclic inequalities lower-bound multipartite entanglement of purification, the quantity the tripartite signal is built from. Neither paper cites the other."
+    },
+    {
+      "from": "2412.05484",
+      "to": "2509.08209",
+      "type": "idea",
+      "note": "TEE proposes bringing holographic multipartite signals to topological matter. The signals work starts from the same literature."
+    },
+    {
+      "from": "2408.04016",
+      "to": "2509.08209",
+      "type": "idea",
+      "note": "In the genuinely tripartite phase, reconstructing the bulk needs all three boundary regions, a wedge-reconstruction question. There are no citations either way."
+    },
+    {
+      "from": "2409.12222",
+      "to": "2608.15001",
+      "type": "builds",
+      "note": "Extends the scalar construction to spinning fields, a direction proposed in the first paper."
+    },
+    {
+      "from": "2409.12222",
+      "to": "2609.37074",
+      "type": "builds",
+      "note": "Revisits the mixed-correlator puzzle, explaining it through degenerate operators, and sets out the algebra of the theory."
+    },
+    {
+      "from": "2608.15001",
+      "to": "2609.37074",
+      "type": "related",
+      "note": "The spinning paper points ahead to the algebraic note, which leaves spinning operators to it."
+    },
+    {
+      "from": "2509.08209",
+      "to": "inspire:3185432",
+      "type": "thesis",
+      "note": "Chapter 1. The thesis argues that because bipartite correlations dominate in holography, the entropy cone is the right tool."
+    },
+    {
+      "from": "2403.13283",
+      "to": "inspire:3185432",
+      "type": "thesis",
+      "note": "Chapter 2."
+    },
+    {
+      "from": "2409.17317",
+      "to": "inspire:3185432",
+      "type": "thesis",
+      "note": "Chapter 3."
+    },
+    {
+      "from": "2506.18086",
+      "to": "inspire:3185432",
+      "type": "thesis",
+      "note": "Chapter 4."
+    },
+    {
+      "from": "2408.04741",
+      "to": "inspire:3185432",
+      "type": "thesis",
+      "note": "Listed as a related publication."
+    },
+    {
+      "from": "2412.05484",
+      "to": "inspire:3185432",
+      "type": "thesis",
+      "note": "Listed as a related publication."
+    },
+    {
+      "from": "2605.26617",
+      "to": "inspire:3185432",
+      "type": "thesis",
+      "note": "Listed as a related publication. It takes up the thesis's suggested next step."
+    },
+    {
+      "from": "msc-thesis",
+      "to": "2409.12222",
+      "type": "idea",
+      "note": "The master's thesis derived free-scalar OPE coefficients from 4D Dolan–Osborn conformal blocks and ran numerical bootstrap. Conformal fields from neural networks decomposes its four-point functions into the same 4D blocks and builds the free boson."
+    },
+    {
+      "from": "msc-thesis",
+      "to": "2609.28964",
+      "type": "idea",
+      "note": "The thesis studied minimal models and the 2D Ising model. Minimal strings couples the same minimal models (Ising is the (3,4) model) to 2D gravity."
+    },
+    {
+      "from": "niser-poster",
+      "to": "2409.12222",
+      "type": "idea",
+      "note": "The poster applied neural networks to conformal field theory. Conformal fields from neural networks turns this around and builds CFTs out of ensembles of neural networks."
+    }
+  ]
+}
+</script>
+
+<script>
+// Research web: a chronological, possibly disconnected graph of the papers.
+// Paper metadata is read from the publications-data block of publications.html (kept current by
+// the INSPIRE sync); the connections come from connections-data below (hand-curated).
+(function () {
+  var svg = document.getElementById('web-svg');
+  var panel = document.getElementById('web-panel');
+  var filtersEl = document.getElementById('web-filters');
+  if (!svg) return;
+
+  var conn = {};
+  try { conn = JSON.parse(document.getElementById('connections-data').textContent); } catch (e) { conn = { clusters: [], nodes: [], edges: [] }; }
+
+  fetch('publications.html', { cache: 'no-cache' })
+    .then(function (r) { return r.text(); })
+    .then(function (html) {
+      var m = /<script type="application\/json" id="publications-data">([\s\S]*?)<\/script>/.exec(html);
+      return m ? JSON.parse(m[1]) : { records: [] };
+    })
+    .catch(function () { return { records: [] }; })
+    .then(draw);
+
+  function draw(pubs) {
+
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(e);
+    return e;
+  }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // ---- index records from the sync ----
+  var records = pubs.records || [];
+  var byKey = {};
+  records.forEach(function (r) {
+    if (r.arxiv) byKey[r.arxiv] = r;
+    if (r.inspire_id) byKey['inspire:' + r.inspire_id] = r;
+    if (r.doi) byKey['doi:' + r.doi] = r;
+  });
+  function recordKey(r) { return r.arxiv || ('inspire:' + r.inspire_id); }
+
+  // ---- clusters ----
+  var clusters = {};
+  (conn.clusters || []).forEach(function (c) { clusters[c.id] = c; });
+  var UNPLACED = { id: 'unplaced', name: 'Not yet placed', color: '#94a3b8', band: 0 };
+
+  // ---- nodes: curated ones first, then any synced record the curation doesn't know about ----
+  var nodes = [], nodeByKey = {};
+  function addNode(n) {
+    var rec = byKey[n.key] || (n.extra && n.extra.inspire_id && byKey['inspire:' + n.extra.inspire_id]) || null;
+    var info = rec || n.extra || {};
+    var node = {
+      key: n.key, label: n.label || info.title || n.key, cluster: clusters[n.cluster] ? n.cluster : 'unplaced',
+      date: n.date, when: n.when, labelPos: n.labelPos, remark: n.remark, kind: n.kind, rec: rec, info: info
+    };
+    nodes.push(node); nodeByKey[n.key] = node;
+    if (rec) { nodeByKey[recordKey(rec)] = node; }
+  }
+  (conn.nodes || []).forEach(addNode);
+  records.forEach(function (r) {
+    if (!nodeByKey[recordKey(r)] && !(r.inspire_id && nodeByKey['inspire:' + r.inspire_id])) {
+      var short = r.title.length > 28 ? r.title.slice(0, 26) + '…' : r.title;
+      addNode({ key: recordKey(r), label: short, cluster: 'unplaced' });
+    }
+  });
+  if (nodes.some(function (n) { return n.cluster === 'unplaced'; })) {
+    var maxBand = Math.max.apply(null, (conn.clusters || [{ band: -1 }]).map(function (c) { return c.band; }));
+    UNPLACED.band = Math.floor(maxBand) + 1;
+    clusters.unplaced = UNPLACED;
+  }
+
+  // ---- dates: explicit "YYYY-MM", else from the arXiv number, else the record year ----
+  function decimalDate(n) {
+    var m;
+    if (n.date && (m = /^(\d{4})-(\d{2})(?:-(\d{2}))?/.exec(n.date))) return +m[1] + (+m[2] - 1 + (m[3] ? (+m[3] - 0.5) / 31 : 0.5)) / 12;
+    var ax = (n.rec && n.rec.arxiv) || (/^\d{4}\.\d{4,5}$/.test(n.key) ? n.key : null);
+    if (ax) return 2000 + +ax.slice(0, 2) + (+ax.slice(2, 4) - 0.5) / 12;
+    var y = (n.rec && n.rec.year) || n.info.year;
+    return y && /^\d{4}$/.test(y) ? +y + 0.5 : new Date().getFullYear() + 0.5;
+  }
+  nodes.forEach(function (n) { n.t = decimalDate(n); });
+
+  // ---- edges ----
+  var edges = (conn.edges || []).filter(function (e) { return nodeByKey[e.from] && nodeByKey[e.to]; })
+    .map(function (e) { return { a: nodeByKey[e.from], b: nodeByKey[e.to], type: e.type, note: e.note }; });
+  // how a link reads from the selected paper's side: [other paper is earlier, other paper is later]
+  var DIRECTED = { builds: ['builds on', 'built on by'], related: ['cites', 'cited by'],
+                   idea: ['shared idea with', 'shared idea with'], thesis: ['collected from', 'collected in'] };
+  var TYPES = conn.types || { builds: 'builds on', related: 'cites', idea: 'shared idea, no citation', thesis: 'in the thesis' };
+
+  // ---- x scale: one column per year; years with no papers collapse to a narrow break ----
+  var years = nodes.map(function (n) { return Math.floor(n.t); });
+  var y0 = Math.min.apply(null, years), y1 = Math.max.apply(null, years);
+  var occupied = {}; years.forEach(function (y) { occupied[y] = true; });
+  var LEFT = 112, FULL = 140, GAP = 24, PAD_R = 24;
+  var yearX = {}, x = LEFT;
+  for (var yy = y0; yy <= y1; yy++) { yearX[yy] = { x: x, w: occupied[yy] ? FULL : GAP, on: !!occupied[yy] }; x += yearX[yy].w; }
+  var W = x + PAD_R;
+  function xOf(t) { var c = yearX[Math.floor(t)]; return c.x + (t - Math.floor(t)) * c.w; }
+
+  // ---- y: bands ----
+  var BAND_H = 68, TOP = 26;
+  var bandList = Object.keys(clusters).map(function (k) { return clusters[k]; }).sort(function (p, q) { return p.band - q.band; });
+  var minBand = bandList.length ? bandList[0].band : 0;
+  function yOfBand(b) { return TOP + (b - minBand) * BAND_H + BAND_H / 2; }
+  var maxBandAll = bandList.length ? bandList[bandList.length - 1].band : 0;
+  var H = TOP + (maxBandAll - minBand + 1) * BAND_H + 24;
+  svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+
+  nodes.forEach(function (n) { n.x = xOf(n.t); n.y = yOfBand(clusters[n.cluster].band); });
+
+  // place labels greedily in date order: preferred side first, then the other side, then a second tier,
+  // avoiding other labels and node markers, and anchoring at the edges so nothing is clipped
+  var boxes = nodes.map(function (n) { return { x0: n.x - 8, x1: n.x + 8, y0: n.y - 8, y1: n.y + 8 }; });
+  function labelBox(n, side, tier) {
+    var w = n.label.length * 6.5 + 4, base = side === 'above' ? n.y - 12 - tier * 15 : n.y + 21 + tier * 15;
+    var anchor = 'middle', x0 = n.x - w / 2;
+    if (x0 < LEFT - 6) { anchor = 'start'; x0 = n.x - 6; }
+    if (x0 + w > W - 4) { anchor = 'end'; x0 = n.x + 6 - w; }
+    return { x0: x0, x1: x0 + w, y0: base - 11, y1: base + 3, base: base, anchor: anchor,
+             tx: anchor === 'middle' ? n.x : anchor === 'start' ? x0 : x0 + w };
+  }
+  function hits(b) { return boxes.some(function (o) { return b.x0 < o.x1 && b.x1 > o.x0 && b.y0 < o.y1 && b.y1 > o.y0; }); }
+  nodes.slice().sort(function (p, q) { return p.t - q.t; }).forEach(function (n) {
+    var first = n.labelPos || 'above', other = first === 'above' ? 'below' : 'above';
+    var tries = [[first, 0], [other, 0], [first, 1], [other, 1], [first, 2]], pick = null;
+    for (var i = 0; i < tries.length && !pick; i++) { var b = labelBox(n, tries[i][0], tries[i][1]); if (!hits(b)) pick = b; }
+    n.lab = pick || labelBox(n, first, 0);
+    boxes.push(n.lab);
+  });
+
+  // ---- draw: year columns, band names ----
+  var axisG = el('g', {});
+  for (yy = y0; yy <= y1; yy++) {
+    var c = yearX[yy];
+    if (c.on) {
+      el('rect', { x: c.x, y: TOP - 6, width: c.w, height: H - TOP - 18, fill: (yy % 2 ? '#f8fafc' : '#ffffff') }, axisG);
+      el('text', { x: c.x + c.w / 2, y: H - 8, 'text-anchor': 'middle', 'class': 'tick' }, axisG).textContent = yy;
+    } else {
+      var mx = c.x + c.w / 2, by = H - 12;
+      el('path', { d: 'M' + (mx - 7) + ',' + (by + 5) + ' L' + (mx - 1) + ',' + (by - 5) + ' M' + (mx + 1) + ',' + (by + 5) + ' L' + (mx + 7) + ',' + (by - 5), stroke: '#94a3b8', fill: 'none' }, axisG);
+    }
+  }
+  bandList.forEach(function (b) {
+    if (!b.name) return;
+    var y = yOfBand(b.band);
+    el('rect', { x: 12, y: y - 9, width: 3, height: 18, rx: 1.5, fill: b.color }, axisG);
+    var words = b.name.split(' '), lines = b.name.length > 13 && words.length > 1 ? [words[0], words.slice(1).join(' ')] : [b.name];
+    var t = el('text', { x: 22, y: y + 4 - (lines.length - 1) * 7, 'class': 'band-name', fill: b.color }, axisG);
+    lines.forEach(function (ln, i) { el('tspan', { x: 22, dy: i ? 14 : 0 }, t).textContent = ln; });
+  });
+
+  // ---- draw: edges ----
+  var STYLE = {
+    builds: function (e) { return { stroke: clusters[e.a.cluster].color, 'stroke-width': 2, opacity: 0.75 }; },
+    related: function () { return { stroke: '#94a3b8', 'stroke-width': 1.3, opacity: 0.8 }; },
+    idea: function () { return { stroke: '#ea580c', 'stroke-width': 2, 'stroke-dasharray': '6 4', opacity: 0.9 }; },
+    thesis: function () { return { stroke: '#0f172a', 'stroke-width': 1.4, 'stroke-dasharray': '1.5 3.5', opacity: 0.7 }; }
+  };
+  var edgeG = el('g', {});
+  edges.forEach(function (e, i) {
+    var a = e.a, b = e.b, d;
+    if (a.y === b.y) {
+      var dx = b.x - a.x, lift = Math.min(26, 8 + Math.abs(dx) * 0.2), s = i % 2 ? -1 : 1;
+      d = 'M' + a.x + ',' + a.y + ' C' + (a.x + dx * 0.3) + ',' + (a.y + s * lift) + ' ' + (b.x - dx * 0.3) + ',' + (b.y + s * lift) + ' ' + b.x + ',' + b.y;
+    } else {
+      var mxe = (a.x + b.x) / 2;
+      d = 'M' + a.x + ',' + a.y + ' C' + mxe + ',' + a.y + ' ' + mxe + ',' + b.y + ' ' + b.x + ',' + b.y;
+    }
+    var attrs = (STYLE[e.type] || STYLE.related)(e);
+    attrs.d = d; attrs['class'] = 'wedge';
+    e.path = el('path', attrs, edgeG);
+    el('title', {}, e.path).textContent = a.label + ' → ' + b.label + ': ' + (e.note || '');
+  });
+
+  // ---- draw: nodes ----
+  var nodeG = el('g', {});
+  nodes.forEach(function (n) {
+    var g = el('g', { 'class': 'wnode', tabindex: 0, role: 'button', 'aria-label': n.label + ', ' + (n.info.title || '') }, nodeG);
+    var col = clusters[n.cluster].color;
+    if (n.cluster === 'thesis') el('rect', { x: n.x - 8, y: n.y - 8, width: 16, height: 16, rx: 3, fill: col }, g);
+    else if (n.kind === 'other') el('circle', { cx: n.x, cy: n.y, r: 6, fill: '#fff', stroke: col, 'stroke-width': 2.5, 'class': 'other' }, g);
+    else el('circle', { cx: n.x, cy: n.y, r: 7, fill: col }, g);
+    el('text', { x: n.lab.tx, y: n.lab.base, 'text-anchor': n.lab.anchor }, g).textContent = n.label;
+    n.g = g;
+    g.addEventListener('click', function (ev) { ev.stopPropagation(); select(n); });
+    g.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select(n); } });
+    g.addEventListener('mouseenter', function () { if (!selected) highlight(n); });
+    g.addEventListener('mouseleave', function () { if (!selected) highlight(null); });
+  });
+  svg.addEventListener('click', function () { select(null); });
+
+  // ---- filters ----
+  var visible = { builds: true, related: true, idea: true, thesis: true };
+  var SWATCH = {
+    builds: '<line x1="0" y1="5" x2="24" y2="5" stroke="#0e7490" stroke-width="2.2"/>',
+    related: '<line x1="0" y1="5" x2="24" y2="5" stroke="#94a3b8" stroke-width="1.4"/>',
+    idea: '<line x1="0" y1="5" x2="24" y2="5" stroke="#ea580c" stroke-width="2" stroke-dasharray="6 4"/>',
+    thesis: '<line x1="0" y1="5" x2="24" y2="5" stroke="#0f172a" stroke-width="1.6" stroke-dasharray="1.5 3.5"/>'
+  };
+  filtersEl.innerHTML = Object.keys(visible).map(function (t) {
+    return '<label><input type="checkbox" id="web-f-' + t + '" checked> <svg width="24" height="10" aria-hidden="true">' + SWATCH[t] + '</svg>' + esc(TYPES[t] || t) + '</label>';
+  }).join('');
+  Object.keys(visible).forEach(function (t) {
+    document.getElementById('web-f-' + t).addEventListener('change', function (ev) {
+      visible[t] = ev.target.checked;
+      edges.forEach(function (e) { if (e.type === t) e.path.style.display = visible[t] ? '' : 'none'; });
+      if (selected) select(selected); else highlight(null);
+    });
+  });
+
+  // ---- interaction ----
+  var selected = null;
+  function linksOf(n) {
+    return edges.filter(function (e) { return visible[e.type] && (e.a === n || e.b === n); });
+  }
+  function highlight(n) {
+    if (!n) {
+      svg.classList.remove('dim');
+      edges.forEach(function (e) { e.path.classList.remove('on'); });
+      nodes.forEach(function (m) { m.g.classList.remove('on'); m.g.classList.remove('sel'); });
+      return;
+    }
+    svg.classList.add('dim');
+    var on = {}; on[n.key] = true;
+    edges.forEach(function (e) {
+      var hit = visible[e.type] && (e.a === n || e.b === n);
+      e.path.classList.toggle('on', hit);
+      if (hit) { on[e.a.key] = true; on[e.b.key] = true; }
+    });
+    nodes.forEach(function (m) { m.g.classList.toggle('on', !!on[m.key]); m.g.classList.toggle('sel', m === n); });
+  }
+  function entryLink(n) {
+    if (n.info.url) return n.info.url;
+    if (n.info.arxiv) return 'https://arxiv.org/abs/' + n.info.arxiv;
+    if (/^\d{4}\.\d{4,5}$/.test(n.key)) return 'https://arxiv.org/abs/' + n.key;
+    if (n.info.doi) return 'https://doi.org/' + n.info.doi;
+    if (n.info.inspire_id) return 'https://inspirehep.net/literature/' + n.info.inspire_id;
+    return null;
+  }
+  function select(n) {
+    selected = n;
+    highlight(n);
+    try { history.replaceState(null, '', n ? '#' + n.key : location.pathname); } catch (e) {}
+    if (!n) { renderSummary(); return; }
+    var info = n.info, href = entryLink(n);
+    var title = href ? '<a href="' + esc(href) + '" target="_blank" rel="noopener">' + esc(info.title || n.label) + '</a>' : esc(info.title || n.label);
+    var meta = [(info.authors || []).join(', '), info.journal || (n.rec ? 'Preprint' : ''), info.arxiv ? 'arXiv:' + info.arxiv : ''].filter(Boolean).join(' · ');
+    var ls = linksOf(n).sort(function (p, q) { return (p.a === n ? p.b.t : p.a.t) - (q.a === n ? q.b.t : q.a.t); });
+    var items = ls.map(function (e) {
+      var other = e.a === n ? e.b : e.a, later = e.a === n;
+      var verb = (DIRECTED[e.type] || [TYPES[e.type] || e.type, TYPES[e.type] || e.type])[later ? 1 : 0];
+      return '<li><span class="wtype ' + esc(e.type) + '">' + esc(verb) + '</span> ' +
+        '<button class="wp-node" data-key="' + esc(other.key) + '">' + esc(other.label) + '</button>' +
+        ' <span class="wp-meta">' + Math.floor(other.t) + '</span><br>' + esc(e.note || '') + '</li>';
+    }).join('');
+    panel.innerHTML = '<div class="wp-title">' + title + '</div><div class="wp-meta">' + esc(meta) + '</div>' +
+      (n.remark ? '<div class="wp-meta"><em>' + esc(n.remark) + '</em></div>' : '') +
+      (items ? '<ul>' + items + '</ul>' : '<p class="wp-hint">No connections to the other papers yet.</p>');
+    Array.prototype.forEach.call(panel.querySelectorAll('button.wp-node'), function (b) {
+      b.addEventListener('click', function () { var m = nodeByKey[b.getAttribute('data-key')]; select(m); if (m) m.g.focus(); });
+    });
+  }
+
+  // ---- threads: each cluster as a chronological list ----
+  function fmtDate(n) {
+    if (n.when) return n.when;
+    var y = Math.floor(n.t), mo = Math.floor((n.t - y) * 12);
+    return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][Math.min(11, Math.max(0, mo))] + ' ' + y;
+  }
+  function renderThreads() {
+    var host = document.getElementById('web-threads');
+    if (!host) return;
+    host.innerHTML = bandList.filter(function (c) { return perCluster(c.id).length; }).map(function (c) {
+      var ns = perCluster(c.id);
+      var span = Math.floor(ns[0].t) === Math.floor(ns[ns.length - 1].t) ? Math.floor(ns[0].t) : Math.floor(ns[0].t) + '–' + Math.floor(ns[ns.length - 1].t);
+      var name = c.id === 'thesis' ? 'PhD thesis' : c.name;
+      return '<section class="thread"><h2 style="color:' + esc(c.color) + '">' + esc(name) + ' <span class="thread-span">' + span + '</span></h2>' +
+        (c.blurb ? '<p class="thread-blurb">' + esc(c.blurb) + '</p>' : '') +
+        '<ol class="thread-list">' + ns.map(function (n) {
+          var href = entryLink(n), info = n.info;
+          var back = edges.filter(function (e) { return e.b === n && e.type !== 'thesis'; }).map(function (e) { return e.a.label; });
+          return '<li><span class="thread-date">' + fmtDate(n) + '</span> ' +
+            (href ? '<a href="' + esc(href) + '" target="_blank" rel="noopener">' + esc(info.title || n.label) + '</a>' : esc(info.title || n.label)) +
+            (info.journal ? ' <span class="thread-meta">· ' + esc(info.journal) + '</span>' : '') +
+            '<br><span class="thread-meta">' + (back.length ? 'Builds on or connects to: ' + esc(back.join(', ')) + '. ' : '') +
+            '<a href="#' + esc(n.key) + '">Show in web</a></span></li>';
+        }).join('') + '</ol></section>';
+    }).join('');
+  }
+  function perCluster(id) {
+    return nodes.filter(function (n) { return n.cluster === id; }).sort(function (p, q) { return p.t - q.t; });
+  }
+  function renderSummary() {
+    var comp = 0, seen = {};
+    // count connected components (ignoring the thesis node so it doesn't glue programs together)
+    var adj = {}; nodes.forEach(function (n) { adj[n.key] = []; });
+    edges.forEach(function (e) { if (e.type !== 'thesis') { adj[e.a.key].push(e.b.key); adj[e.b.key].push(e.a.key); } });
+    nodes.forEach(function (n) {
+      if (n.cluster === 'thesis' || seen[n.key]) return;
+      comp++; var stack = [n.key];
+      while (stack.length) { var k = stack.pop(); if (seen[k]) continue; seen[k] = true; adj[k].forEach(function (j) { stack.push(j); }); }
+    });
+    var papers = nodes.filter(function (n) { return n.cluster !== 'thesis' && n.kind !== 'other'; }).length;
+    var other = nodes.length - papers;
+    panel.innerHTML = '<p class="wp-hint">' + papers + ' papers and ' + other + ' theses and posters, ' +
+      edges.length + ' connections, ' + comp + ' separate pieces. Click a paper to see what it builds on and what builds on it.</p>';
+  }
+  renderSummary();
+
+  renderThreads();
+
+  // deep links: research-web.html#2409.17317 opens with that paper selected
+  function fromHash() {
+    var n = nodeByKey[decodeURIComponent(location.hash.slice(1))];
+    if (n && n !== selected) { select(n); document.getElementById('research-web').scrollIntoView(); }
+  }
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+  }
+})();
+</script>
+</body>
+</html>
