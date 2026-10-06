@@ -57,6 +57,29 @@
     .links a.web-link { cursor: pointer; }
     ol.pubs li:target { background: #f0f9ff; border-radius: 8px; box-shadow: 0 0 0 6px #f0f9ff; }
     @media (prefers-reduced-motion: reduce) { #web-svg .wedge { transition: none; } }
+    .frame-title { font-size: 1.15rem; margin: 0; }
+    #places-svg { display: block; min-width: 600px; width: 100%; height: auto; font-family: system-ui, sans-serif; }
+    #places-svg .place-name { font-size: 12px; fill: #334155; }
+    #places-svg .place-note { font-size: 10.5px; fill: #fff; font-weight: 600; }
+    #places-svg .place-note.out { fill: #0369a1; }
+    #places-svg .tick { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; fill: #64748b; }
+    #map-svg { display: block; min-width: 680px; width: 100%; height: auto; font-family: system-ui, sans-serif; }
+    #map-svg .msite { cursor: pointer; }
+    #map-svg .msite-total { fill: rgba(3, 105, 161, 0.10); stroke: #0369a1; stroke-width: 1.6; stroke-dasharray: 1.5 3; stroke-linecap: round; transition: r .4s; }
+    #map-svg .msite-me { fill: #0369a1; opacity: .85; transition: r .4s; }
+    #map-svg .msite text { font-size: 11.5px; fill: #0f172a; font-weight: 600; paint-order: stroke; stroke: #fcfdfe; stroke-width: 4px; stroke-linejoin: round; }
+    #map-svg .msite.sel .msite-total { stroke-width: 2.6; fill: rgba(3, 105, 161, 0.18); }
+    #map-svg .msite:focus { outline: none; }
+    #map-svg .msite:focus-visible .msite-total { stroke: #ea580c; stroke-width: 2.6; }
+    #map-svg .journey-path { fill: none; stroke: #ea580c; stroke-width: 1.8; stroke-dasharray: 5 4; opacity: .85; }
+    .map-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 10px 0 0; font-size: 0.88rem; color: #475569; }
+    .map-controls input[type=range] { flex: 1; min-width: 160px; max-width: 360px; accent-color: #0369a1; }
+    .map-controls output { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #0f172a; }
+    .map-play { font: inherit; font-size: 0.85rem; color: #fff; background: #0369a1; border: 0; border-radius: 20px; padding: 4px 14px; cursor: pointer; }
+    .map-play:hover { background: #075985; }
+    .map-play:focus-visible { outline: 3px solid #7dd3fc; outline-offset: 2px; }
+    #map-panel ul + ul { margin-top: 10px; }
+    @media (prefers-reduced-motion: reduce) { #map-svg .msite-total, #map-svg .msite-me { transition: none; } }
   </style>
 </head>
 <body>
@@ -73,14 +96,31 @@
     <div class="web-panel" id="web-panel" aria-live="polite"></div>
   </section>
 
+  <section id="people" aria-label="People and places">
+    <h2 class="frame-title">People and places</h2>
+    <p class="web-lede">Where the work happened, read from each paper's title page. Each paper counts as one, split equally among its authors, and each author's share is split equally among the places they list. The solid disc is my own share; the dotted ring adds my coauthors'. The orange arrows follow me from place to place.</p>
+    <div class="map-controls">
+      <button type="button" id="map-play" class="map-play">Play</button>
+      <label for="map-year">Up to <output id="map-year-out">2026</output></label>
+      <input type="range" id="map-year" min="2020" max="2026" step="1" value="2026">
+    </div>
+    <div class="web-scroll"><svg id="map-svg" role="img" aria-label="World map of fractional authorship by place"></svg></div>
+    <div class="web-panel" id="map-panel" aria-live="polite"></div>
+    <p class="web-lede">My affiliations over time, as listed on my papers and theses.</p>
+    <div class="web-scroll"><svg id="places-svg" role="img" aria-label="Timeline of my affiliations"></svg></div>
+  </section>
+
   <div id="web-threads"></div>
 
   <p class="stamp">Paper details are read from the <a href="publications.html">publications page</a>; connections are curated by hand.</p>
 
+<!-- Dotted world land (1.5° grid, Natural Earth 110m land via world-atlas), run-length encoded per row from 76°N. -->
+<script type="application/json" id="world-dots">{"step": 1.5, "lat0": 76, "cols": 240, "rows": "39,42-44,47,52-54,58-59,79-106,160-163,182-183,185-195,212-214;44-45,60-63,65,82-106,157-158,177-193;37-43,48-49,53-54,56-58,60-61,63-65,67-68,83-104,155-157,174-205;0,6-8,37-39,41-49,54,56-57,60-70,83-104,154-156,165-167,169,171-205,208,210,212-219;12-24,33-35,42-52,54,56-58,63-66,68-74,84-104,133-139,165-167,169-226;1-130,146-154,156-157,165,169;3-128,147-148,150-151,168;0,6-127,135-136,143-146;13-59,62-63,65,71-76,85-92,105-108,126-133,135-143,145-238;10-57,64,68,74-75,87-91,124-131,134-228,230-239;10-18,20-56,68-73,88-90,123-131,134-223,229-234;12-17,19,27-56,68-73,76,124-131,137,139-219,221-222,227-228;15-16,31-57,68-77,116-117,128-130,136-213,225-227;13-14,32-60,69-78,116-117,125-126,128-130,134-211,224-228;11,33-64,68-80,115,117-118,126,134-209,224-227;31,34-64,67-82,114-115,118-119,125-213,224-226;35-65,67-82,113-114,117-120,123-214,224;34,36-79,116-117,121-213,215;36,38-73,75-76,81-83,119-212;37-72,74-76,83-84,118-212;37-76,79,119-139,142,145-152,155-211;37-74,76-77,119-127,130-138,142,145-150,154-210,214;37-72,114-121,127-128,132-138,147-151,155-208,213-215;37-72,114-121,128-130,133-138,141-143,148-152,156-205;37-70,114-119,126,130,133-134,138-152,155-199,201-204,213-214;38-69,114-119,134-135,138-152,156-197,203-205,213;39-68,114-118,124,126,134,138-153,156-201,205,212-213;39-68,116,119-126,144-199,204-205,209-213;41-67,115-126,144-199,207,209-210;42-65,114-129,134,143-200,207;42,45-65,113-130,133-141,143-200;43,45-56,59,64-65,113-151,154-200;44,46-54,65,112-151,154-200;45,47-54,65-68,111-142,144-152,156,158-199;45,48-54,110-142,145-153,157,165-198;46,49-54,109-143,146-158,166-197,200;50-54,63,66-67,109-144,146-159,166-178,181-194,200;50-54,60-61,69,109-144,146-158,169-177,182-190,193;50-55,59-61,72-73,109-144,147-157,169-175,183-189,192-193;52-60,109-145,148-156,169-174,183-190,200-201;55,57-60,109-145,149-154,169-173,183,185-191,200;59-64,108-146,149-152,170-172,185-192;62-63,109-147,149,170-173,186-192,200,202;63,71,73,109-148,153,170-172,189-192,201,203;63-64,70-71,73-77,110-153,171-172,190;64-66,68-79,111-153,171,173,185-186,203;68-80,112-152,173,186,203;68-84,113-119,123-151,187-188,197-198;68-85,126-151,184-185,187-188,196-198;68-85,126-150,185-186,188,194-198;67-86,126-148,186-188,193-198,200,205;66-87,126-147,187-188,193-197,208;66-89,126-146,187-189,193-197,199-200,208-209,211-212;66-93,127-146,188-190,196-197,201,204,209-215,221;66-95,128-145,189-190,211-216;66-96,128-145,190-191,209,212-218,223;67-96,129-145,193-196,212-215,217-218;68-95,129-145,199,218-219,226;68-94,129-146;69-94,129-146,207-210,214-215;69-93,128-146,152,204,206-210,214-215;70-93,128-146,151-153,203-210,214-216;72-93,128-145,149-152,203-212,214-216;73-93,128-143,149-152,201-216;73-92,129-142,150-151,199-218;73-92,129-143,149-151,197-219,230;73-90,130-143,149-151,196-220;73-88,130-142,149-151,196-220;73-87,130-141,196-221;73-87,130-141,196-221;72-86,131-140,197-221;72-85,132-139,197-221;72-84,132-138,197-204,208-221;72-84,132-137,197-202,210,212-220;72-81,198,211-220,235;71-81,213-219,236;71-81,214-215,217-218,236-238;71-78,236-237;71-77,216,218;72-77,217-218,234-235;71-75,232-234;70-74,231-233;71-75;70-74;70-74;70-73,80;70-73;72-75;"}</script>
+
 <!-- Hand-curated connections. Node keys are arXiv IDs (or doi:/inspire: for records without one). -->
 <script type="application/json" id="connections-data">
 {
-  "note": "Hand-curated from full-text reading. Dates are first-appearance (YYYY-MM or YYYY-MM-DD). Node keys are arXiv IDs, or doi:/inspire: for records without one. Edges run from the earlier paper to the later one. Titles and metadata are read from publications.html at load time; papers listed there but not here show up in the web as 'not yet placed'. Nodes with \"kind\": \"other\" (e.g. theses) are drawn hollow; \"when\" overrides the displayed date and not counted as publications.",
+  "note": "Hand-curated from full-text reading. Dates are first-appearance (YYYY-MM or YYYY-MM-DD). Node keys are arXiv IDs, or doi:/inspire: for records without one. Edges run from the earlier paper to the later one. Titles and metadata are read from publications.html at load time; papers listed there but not here show up in the web as 'not yet placed'. Nodes with \"kind\": \"other\" (e.g. theses) are drawn hollow; \"when\" overrides the displayed date and not counted as publications. \"people\" maps author names as they appear in publications-data to a full name and affiliation; \"self\" adds to the affiliations timeline, which is otherwise derived from my affiliations on the papers: per institution id, optional from/to/note overrides (no \"to\" and a paper this year means present). \"affiliations\" are read from each paper's title page (INSPIRE has errors): per paper, author -> institution ids; \"year\" overrides the paper date when the affiliations come from a later published version. Institutions carry \"match\" phrases the bot uses to recognise them in a new paper's title block.",
   "clusters": [
     {
       "id": "games",
@@ -230,7 +270,8 @@
           "J. Naskar"
         ],
         "journal": "PhD thesis, Northeastern University (2026)",
-        "inspire_id": 3185432
+        "inspire_id": 3185432,
+        "advisor": "N. Bao"
       }
     },
     {
@@ -259,7 +300,8 @@
           "J. Naskar"
         ],
         "journal": "Integrated MSc thesis, NISER Bhubaneswar (2020–21), supervised by C. N. Gowdigere",
-        "url": "https://www.researchgate.net/profile/Joydeep-Naskar-2"
+        "url": "https://www.researchgate.net/profile/Joydeep-Naskar-2",
+        "supervisor": "C. N. Gowdigere"
       },
       "remark": "Not a publication.",
       "when": "2020–21"
@@ -476,7 +518,508 @@
       "type": "idea",
       "note": "The thesis studied minimal models and the 2D Ising model. Minimal strings couples the same minimal models (Ising is the (3,4) model) to 2D gravity."
     }
-  ]
+  ],
+  "people": {
+    "N. Bao": {
+      "name": "Ning Bao"
+    },
+    "K. Furuya": {
+      "name": "Keiichiro Furuya"
+    },
+    "Y. Jiang": {
+      "name": "Yikun Jiang"
+    },
+    "J. Halverson": {
+      "name": "James Halverson"
+    },
+    "M. Dogra": {
+      "name": "Manas Dogra"
+    },
+    "J. Tian": {
+      "name": "Jiahua Tian"
+    },
+    "A. Bhattacharjee": {
+      "name": "Abhik Bhattacharjee"
+    },
+    "S. S. Samal": {
+      "name": "Sai Satyam Samal"
+    },
+    "S. Leutheusser": {
+      "name": "Sam Leutheusser"
+    },
+    "W. Ahmed": {
+      "name": "Wasif Ahmed"
+    },
+    "C. N. Gowdigere": {
+      "name": "Chethan N. Gowdigere",
+      "affiliation": "NISER Bhubaneswar"
+    },
+    "A. C. Maioli": {
+      "name": "Alan C. Maioli"
+    },
+    "G. Tiago": {
+      "name": "G. Tiago"
+    },
+    "W. F. Balthazar": {
+      "name": "Wagner F. Balthazar"
+    },
+    "A. G. M. Schmidt": {
+      "name": "A. G. M. Schmidt"
+    },
+    "J. A. O. Huguenin": {
+      "name": "José A. O. Huguenin"
+    }
+  },
+  "self": [
+    {
+      "inst": "niser",
+      "from": 2016,
+      "to": 2021,
+      "note": "Integrated MSc"
+    },
+    {
+      "inst": "neu",
+      "from": 2021,
+      "note": "PhD"
+    },
+    {
+      "inst": "kitp",
+      "to": 2026,
+      "note": "Graduate Fellowship"
+    }
+  ],
+  "institutions": {
+    "neu": {
+      "name": "Northeastern University",
+      "city": "Boston, USA",
+      "lat": 42.3398,
+      "lon": -71.0892,
+      "site": "boston",
+      "match": [
+        "northeastern university"
+      ],
+      "short": "Northeastern University"
+    },
+    "iaifi": {
+      "name": "NSF AI Institute for AI and Fundamental Interactions (IAIFI)",
+      "city": "Cambridge, USA",
+      "lat": 42.3601,
+      "lon": -71.0942,
+      "site": "boston",
+      "match": [
+        "artificial intelligence and fundamental interactions",
+        "iaifi"
+      ],
+      "short": "IAIFI, Cambridge"
+    },
+    "bnl": {
+      "name": "Brookhaven National Laboratory",
+      "city": "Upton, USA",
+      "lat": 40.869,
+      "lon": -72.8862,
+      "site": "upton",
+      "match": [
+        "brookhaven"
+      ],
+      "short": "Brookhaven National Laboratory"
+    },
+    "purdue": {
+      "name": "Purdue University",
+      "city": "West Lafayette, USA",
+      "lat": 40.4237,
+      "lon": -86.9212,
+      "site": "purdue",
+      "match": [
+        "purdue"
+      ],
+      "short": "Purdue University"
+    },
+    "kitp": {
+      "name": "Kavli Institute for Theoretical Physics",
+      "city": "Santa Barbara, USA",
+      "lat": 34.414,
+      "lon": -119.8489,
+      "site": "sb",
+      "match": [
+        "kavli institute for theoretical physics",
+        "kitp"
+      ],
+      "short": "KITP, Santa Barbara"
+    },
+    "ucsb": {
+      "name": "University of California, Santa Barbara",
+      "city": "Santa Barbara, USA",
+      "lat": 34.4129,
+      "lon": -119.8452,
+      "site": "sb",
+      "match": [
+        "university of california, santa barbara",
+        "uc santa barbara",
+        "broida hall"
+      ],
+      "short": "UC Santa Barbara"
+    },
+    "niser": {
+      "name": "National Institute of Science Education and Research",
+      "city": "Bhubaneswar, India",
+      "lat": 20.1835,
+      "lon": 85.665,
+      "site": "niser",
+      "match": [
+        "national institute of science education and research",
+        "niser"
+      ],
+      "short": "NISER Bhubaneswar"
+    },
+    "hri": {
+      "name": "Harish-Chandra Research Institute",
+      "city": "Prayagraj, India",
+      "lat": 25.4945,
+      "lon": 81.8606,
+      "site": "hri",
+      "match": [
+        "harish-chandra",
+        "harish chandra"
+      ],
+      "short": "Harish-Chandra Research Institute"
+    },
+    "bimsa": {
+      "name": "Beijing Institute of Mathematical Sciences and Applications",
+      "city": "Beijing, China",
+      "lat": 40.4093,
+      "lon": 116.6849,
+      "site": "beijing",
+      "match": [
+        "beijing institute of mathematical sciences and applications",
+        "bimsa"
+      ],
+      "short": "BIMSA, Beijing"
+    },
+    "ecnu": {
+      "name": "East China Normal University",
+      "city": "Shanghai, China",
+      "lat": 31.0286,
+      "lon": 121.45,
+      "site": "shanghai",
+      "match": [
+        "east china normal"
+      ],
+      "short": "East China Normal University"
+    },
+    "uff-nit": {
+      "name": "Universidade Federal Fluminense (Niterói)",
+      "city": "Niterói, Brazil",
+      "lat": -22.9063,
+      "lon": -43.1325,
+      "site": "rio",
+      "match": [
+        "fluminense, niter",
+        "niterói",
+        "niteroi"
+      ],
+      "short": "UFF Niterói"
+    },
+    "uff-vr": {
+      "name": "Universidade Federal Fluminense (Volta Redonda)",
+      "city": "Volta Redonda, Brazil",
+      "lat": -22.5132,
+      "lon": -44.1019,
+      "site": "rio",
+      "match": [
+        "fluminense, volta redonda",
+        "instituto de ciências exatas"
+      ],
+      "short": "UFF Volta Redonda"
+    },
+    "cbpf": {
+      "name": "Centro Brasileiro de Pesquisas Físicas",
+      "city": "Rio de Janeiro, Brazil",
+      "lat": -22.955,
+      "lon": -43.1745,
+      "site": "rio",
+      "match": [
+        "centro brasileiro de pesquisas"
+      ],
+      "short": "CBPF, Rio de Janeiro"
+    },
+    "ifrj": {
+      "name": "Instituto Federal do Rio de Janeiro (IFRJ)",
+      "city": "Volta Redonda, Brazil",
+      "lat": -22.5235,
+      "lon": -44.104,
+      "site": "rio",
+      "match": [
+        "instituto federal de educação, ciência e tecnologia do rio",
+        "ifrj"
+      ],
+      "short": "IFRJ, Volta Redonda"
+    }
+  },
+  "sites": {
+    "boston": {
+      "name": "Boston & Cambridge",
+      "label": "right"
+    },
+    "upton": {
+      "name": "Upton (BNL)",
+      "label": "below"
+    },
+    "purdue": {
+      "name": "West Lafayette",
+      "label": "left"
+    },
+    "sb": {
+      "name": "Santa Barbara",
+      "label": "left"
+    },
+    "niser": {
+      "name": "Bhubaneswar",
+      "label": "below"
+    },
+    "hri": {
+      "name": "Prayagraj",
+      "label": "above"
+    },
+    "beijing": {
+      "name": "Beijing",
+      "label": "above"
+    },
+    "shanghai": {
+      "name": "Shanghai",
+      "label": "right"
+    },
+    "rio": {
+      "name": "Rio de Janeiro state",
+      "label": "right"
+    }
+  },
+  "affiliations": {
+    "doi:10.1007/s11128-020-02734-1": {
+      "authors": {
+        "J. Naskar": [
+          "niser"
+        ]
+      }
+    },
+    "2008.00762": {
+      "year": 2025,
+      "source": "published version (Quant. Inf. Proc. 24, 2025)",
+      "authors": {
+        "G. Tiago": [
+          "uff-nit",
+          "uff-vr"
+        ],
+        "J. Naskar": [
+          "neu"
+        ],
+        "A. C. Maioli": [
+          "cbpf"
+        ],
+        "W. F. Balthazar": [
+          "ifrj"
+        ],
+        "A. G. M. Schmidt": [
+          "uff-nit",
+          "uff-vr"
+        ],
+        "J. A. O. Huguenin": [
+          "uff-nit",
+          "uff-vr"
+        ]
+      }
+    },
+    "2203.01379": {
+      "authors": {
+        "N. Bao": [
+          "bnl"
+        ],
+        "J. Naskar": [
+          "neu"
+        ]
+      }
+    },
+    "2209.15026": {
+      "authors": {
+        "N. Bao": [
+          "bnl"
+        ],
+        "J. Naskar": [
+          "neu"
+        ]
+      }
+    },
+    "2403.13283": {
+      "authors": {
+        "N. Bao": [
+          "neu",
+          "bnl"
+        ],
+        "J. Naskar": [
+          "neu",
+          "iaifi"
+        ]
+      }
+    },
+    "2408.04016": {
+      "authors": {
+        "N. Bao": [
+          "neu",
+          "bnl"
+        ],
+        "Y. Jiang": [
+          "neu"
+        ],
+        "J. Naskar": [
+          "neu",
+          "iaifi"
+        ]
+      }
+    },
+    "2408.04741": {
+      "authors": {
+        "N. Bao": [
+          "neu",
+          "bnl"
+        ],
+        "K. Furuya": [
+          "neu"
+        ],
+        "J. Naskar": [
+          "neu",
+          "iaifi"
+        ]
+      }
+    },
+    "2409.12222": {
+      "authors": {
+        "J. Halverson": [
+          "neu",
+          "iaifi"
+        ],
+        "J. Naskar": [
+          "neu",
+          "iaifi"
+        ],
+        "J. Tian": [
+          "ecnu"
+        ]
+      }
+    },
+    "2409.17317": {
+      "authors": {
+        "N. Bao": [
+          "neu",
+          "bnl"
+        ],
+        "K. Furuya": [
+          "neu"
+        ],
+        "J. Naskar": [
+          "neu",
+          "iaifi"
+        ]
+      }
+    },
+    "2411.02825": {
+      "authors": {
+        "A. Bhattacharjee": [
+          "hri"
+        ],
+        "J. Naskar": [
+          "neu",
+          "iaifi"
+        ]
+      }
+    },
+    "2412.05484": {
+      "authors": {
+        "J. Naskar": [
+          "neu",
+          "iaifi"
+        ],
+        "S. S. Samal": [
+          "purdue"
+        ]
+      }
+    },
+    "2506.18086": {
+      "authors": {
+        "N. Bao": [
+          "neu",
+          "bnl"
+        ],
+        "K. Furuya": [
+          "neu"
+        ],
+        "J. Naskar": [
+          "neu",
+          "iaifi"
+        ]
+      }
+    },
+    "2509.08209": {
+      "authors": {
+        "N. Bao": [
+          "neu",
+          "bnl"
+        ],
+        "K. Furuya": [
+          "neu"
+        ],
+        "J. Naskar": [
+          "neu",
+          "iaifi"
+        ]
+      }
+    },
+    "2605.26617": {
+      "authors": {
+        "J. Naskar": [
+          "neu",
+          "kitp"
+        ]
+      }
+    },
+    "2608.15001": {
+      "authors": {
+        "M. Dogra": [
+          "neu"
+        ],
+        "J. Halverson": [
+          "neu",
+          "iaifi"
+        ],
+        "J. Naskar": [
+          "neu",
+          "iaifi",
+          "bimsa"
+        ]
+      }
+    },
+    "2609.28964": {
+      "authors": {
+        "W. Ahmed": [
+          "ucsb"
+        ],
+        "J. Naskar": [
+          "bimsa"
+        ]
+      }
+    },
+    "2609.37074": {
+      "authors": {
+        "S. Leutheusser": [
+          "kitp"
+        ],
+        "J. Naskar": [
+          "kitp",
+          "neu",
+          "iaifi",
+          "bimsa"
+        ]
+      }
+    }
+  }
 }
 </script>
 
@@ -537,9 +1080,11 @@
   function addNode(n) {
     var rec = byKey[n.key] || (n.extra && n.extra.inspire_id && byKey['inspire:' + n.extra.inspire_id]) || null;
     var info = rec || n.extra || {};
+    // titles may carry LaTeX from INSPIRE (e.g. $\mathrm{AdS}/\mathrm{CFT}$); show plain text
+    if (info.title) info = Object.assign({}, info, { title: info.title.replace(/\\math(rm|it|bf)\{([^}]*)\}/g, '$2').replace(/\$/g, '') });
     var node = {
       key: n.key, label: n.label || info.title || n.key, cluster: clusters[n.cluster] ? n.cluster : 'unplaced',
-      date: n.date, when: n.when, labelPos: n.labelPos, remark: n.remark, kind: n.kind, rec: rec, info: info
+      date: n.date, when: n.when, labelPos: n.labelPos, remark: n.remark, kind: n.kind, rec: rec, info: info, extra: n.extra || {}
     };
     nodes.push(node); nodeByKey[n.key] = node;
     if (rec) { nodeByKey[recordKey(rec)] = node; }
@@ -776,6 +1321,229 @@
         }).join('') + '</ol></section>';
     }).join('');
   }
+
+
+  // ---- world map: fractional authorship by place ----
+  function renderMap() {
+    var msvg = document.getElementById('map-svg'), mpanel = document.getElementById('map-panel');
+    var slider = document.getElementById('map-year'), yearOut = document.getElementById('map-year-out'), play = document.getElementById('map-play');
+    var insts = conn.institutions || {}, affs = conn.affiliations || {}, sitesMeta = conn.sites || {};
+    var dots = {};
+    try { dots = JSON.parse(document.getElementById('world-dots').textContent); } catch (e) { return; }
+    if (!msvg || !Object.keys(affs).length) return;
+
+    var MW = 960, LAT_TOP = dots.lat0, STEP = dots.step, NROWS = dots.rows.split(';').length;
+    var LAT_BOT = LAT_TOP - (NROWS - 1) * STEP, MH = Math.round(MW * (LAT_TOP - LAT_BOT + STEP) / 360);
+    msvg.setAttribute('viewBox', '0 0 ' + MW + ' ' + MH);
+    function mx(lon) { return (lon + 180) / 360 * MW; }
+    function my(lat) { return (LAT_TOP + STEP / 2 - lat) / (LAT_TOP - LAT_BOT + STEP) * MH; }
+
+    // dotted land, drawn as one path of zero-length round-capped segments
+    var d = [], cw = MW / dots.cols;
+    dots.rows.split(';').forEach(function (row, ri) {
+      if (!row) return;
+      var y = (my(LAT_TOP - ri * STEP)).toFixed(1);
+      row.split(',').forEach(function (run) {
+        var ab = run.split('-'), a = +ab[0], b = ab.length > 1 ? +ab[1] : a;
+        for (var c = a; c <= b; c++) d.push('M' + ((c + 0.5) * cw).toFixed(1) + ' ' + y + 'h0');
+      });
+    });
+    el('path', { d: d.join(''), stroke: '#cbd5e1', 'stroke-width': cw * 0.55, 'stroke-linecap': 'round', fill: 'none' }, msvg);
+
+    // fractional authorship: each paper counts 1, split equally among authors,
+    // and each author's share split equally among the affiliations they list
+    var papers = Object.keys(affs).map(function (k) {
+      var n = nodeByKey[k], entry = affs[k];
+      return { key: k, node: n, year: entry.year || (n ? Math.floor(n.t) : 0), authors: entry.authors || {}, source: entry.source };
+    }).filter(function (p) { return p.node; });
+    var years = papers.map(function (p) { return p.year; });
+    var yMin = Math.min.apply(null, years), yMaxAll = Math.max.apply(null, years);
+    slider.min = yMin; slider.max = yMaxAll; slider.value = yMaxAll;
+
+    function tally(upTo) {
+      var sites = {};
+      papers.forEach(function (p) {
+        if (p.year > upTo) return;
+        var names = Object.keys(p.authors), share = 1 / names.length;
+        names.forEach(function (a) {
+          var ids = p.authors[a], me = /naskar/i.test(a);
+          ids.forEach(function (id) {
+            var inst = insts[id];
+            if (!inst || inst.lat == null) return;
+            var sk = inst.site || id;
+            var s = sites[sk] || (sites[sk] = { key: sk, me: 0, others: 0, insts: {}, papers: {}, people: {}, first: p.year });
+            var part = share / ids.length;
+            s[me ? 'me' : 'others'] += part;
+            var si = s.insts[id] || (s.insts[id] = { me: 0, others: 0 });
+            si[me ? 'me' : 'others'] += part;
+            s.papers[p.key] = p;
+            if (!me) s.people[a] = true;
+            s.first = Math.min(s.first, p.year);
+          });
+        });
+      });
+      return sites;
+    }
+    function sitePos(sk) {
+      var ids = Object.keys(insts).filter(function (i) { return (insts[i].site || i) === sk && insts[i].lat != null; });
+      var lat = 0, lon = 0;
+      ids.forEach(function (i) { lat += insts[i].lat; lon += insts[i].lon; });
+      return { x: mx(lon / ids.length), y: my(lat / ids.length) };
+    }
+    var finalSites = tally(yMaxAll), maxTotal = 0;
+    Object.keys(finalSites).forEach(function (k) { var s = finalSites[k]; maxTotal = Math.max(maxTotal, s.me + s.others); });
+    var K = 34 / Math.sqrt(maxTotal || 1);
+
+    var pathG = el('g', {}, msvg), siteG = el('g', {}, msvg);
+    var defs = el('defs', {}, msvg), mk = el('marker', { id: 'journey-arrow', viewBox: '0 0 10 10', refX: 8, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' }, defs);
+    el('path', { d: 'M0,0 L10,5 L0,10 z', fill: '#ea580c' }, mk);
+
+    function myPath(upTo) {
+      // my own sites in the order I first appear there
+      var first = {};
+      papers.slice().sort(function (a, b) { return a.year - b.year || a.node.t - b.node.t; }).forEach(function (p) {
+        if (p.year > upTo) return;
+        Object.keys(p.authors).forEach(function (a) {
+          if (!/naskar/i.test(a)) return;
+          p.authors[a].forEach(function (id) {
+            var inst = insts[id]; if (!inst || inst.lat == null) return;
+            var sk = inst.site || id;
+            if (!(sk in first)) first[sk] = p.year + p.node.t % 1;
+          });
+        });
+      });
+      return Object.keys(first).sort(function (a, b) { return first[a] - first[b]; });
+    }
+
+    var selectedSite = null;
+    function draw(upTo) {
+      while (pathG.firstChild) pathG.removeChild(pathG.firstChild);
+      while (siteG.firstChild) siteG.removeChild(siteG.firstChild);
+      yearOut.textContent = upTo;
+      var sites = tally(upTo);
+      var route = myPath(upTo);
+      for (var i = 1; i < route.length; i++) {
+        var a = sitePos(route[i - 1]), b = sitePos(route[i]);
+        var mxp = (a.x + b.x) / 2, myp = Math.min(a.y, b.y) - Math.abs(b.x - a.x) * 0.18 - 20;
+        el('path', { d: 'M' + a.x + ',' + a.y + ' Q' + mxp + ',' + myp + ' ' + b.x + ',' + b.y, 'class': 'journey-path', 'marker-end': 'url(#journey-arrow)' }, pathG);
+      }
+      Object.keys(sites).sort(function (a, b) { return (sites[b].me + sites[b].others) - (sites[a].me + sites[a].others); }).forEach(function (sk) {
+        var s = sites[sk], pos = sitePos(sk), total = s.me + s.others;
+        var g = el('g', { 'class': 'msite' + (selectedSite === sk ? ' sel' : ''), tabindex: 0, role: 'button',
+                          'aria-label': ((sitesMeta[sk] || {}).name || sk) + ', ' + total.toFixed(2) + ' fractional authorships' }, siteG);
+        el('circle', { cx: pos.x, cy: pos.y, r: K * Math.sqrt(total), 'class': 'msite-total' }, g);
+        if (s.me > 0) el('circle', { cx: pos.x, cy: pos.y, r: K * Math.sqrt(s.me), 'class': 'msite-me' }, g);
+        var meta = sitesMeta[sk] || {}, rr = K * Math.sqrt(total) + 5, dir = meta.label || 'right';
+        var lx = pos.x + (dir === 'right' ? rr : dir === 'left' ? -rr : 0), ly = pos.y + (dir === 'below' ? rr + 10 : dir === 'above' ? -rr - 4 : 4);
+        var t = el('text', { x: lx, y: ly, 'text-anchor': dir === 'right' ? 'start' : dir === 'left' ? 'end' : 'middle' }, g);
+        t.textContent = (meta.name || sk) + ' · ' + total.toFixed(1);
+        g.addEventListener('click', function (ev) { ev.stopPropagation(); selectedSite = sk; draw(+slider.value); showSite(sk, sites[sk]); });
+        g.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); selectedSite = sk; draw(+slider.value); showSite(sk, sites[sk]); } });
+      });
+      if (selectedSite && sites[selectedSite]) showSite(selectedSite, sites[selectedSite]);
+      else { selectedSite = null; summary(sites, upTo); }
+    }
+    function summary(sites, upTo) {
+      var me = 0, tot = 0, n = Object.keys(sites).length;
+      Object.keys(sites).forEach(function (k) { me += sites[k].me; tot += sites[k].me + sites[k].others; });
+      mpanel.innerHTML = '<p class="wp-hint">Up to ' + upTo + ': ' + tot.toFixed(0) + ' papers across ' + n + ' places; my own fractional share is ' +
+        me.toFixed(1) + '. Click a circle for the breakdown.</p>';
+    }
+    function showSite(sk, s) {
+      var meta = sitesMeta[sk] || {};
+      var rows = Object.keys(s.insts).map(function (id) {
+        var v = s.insts[id], inst = insts[id];
+        return '<li><b>' + esc(inst.name) + '</b> <span class="wp-meta">' + esc(inst.city) + '</span><br><span class="wp-meta">me ' +
+          v.me.toFixed(2) + ' · coauthors ' + v.others.toFixed(2) + '</span></li>';
+      }).join('');
+      var ps = Object.keys(s.papers).map(function (k) { return s.papers[k]; }).sort(function (a, b) { return a.year - b.year; });
+      var plist = ps.map(function (p) {
+        return '<li><button class="wp-node" data-key="' + esc(p.key) + '">' + esc(p.node.info.title || p.node.label) + '</button> <span class="wp-meta">' + p.year +
+          (p.source ? ' · ' + esc(p.source) : '') + '</span></li>';
+      }).join('');
+      var people = Object.keys(s.people).map(function (a) { return ((conn.people || {})[a] || {}).name || a; });
+      mpanel.innerHTML = '<div class="wp-title">' + esc(meta.name || sk) + '</div><div class="wp-meta">me ' + s.me.toFixed(2) + ' + coauthors ' +
+        s.others.toFixed(2) + ' = ' + (s.me + s.others).toFixed(2) + ' fractional authorships' + (people.length ? ' · with ' + esc(people.join(', ')) : '') +
+        '</div><ul>' + rows + '</ul><ul>' + plist + '</ul>';
+      Array.prototype.forEach.call(mpanel.querySelectorAll('button.wp-node'), function (b) {
+        b.addEventListener('click', function () {
+          var m = nodeByKey[b.getAttribute('data-key')];
+          if (m) { select(m); document.getElementById('research-web').scrollIntoView({ behavior: 'smooth' }); }
+        });
+      });
+    }
+    msvg.addEventListener('click', function () { selectedSite = null; draw(+slider.value); });
+    slider.addEventListener('input', function () { draw(+slider.value); });
+    var timer = null;
+    play.addEventListener('click', function () {
+      if (timer) { clearInterval(timer); timer = null; play.textContent = 'Play'; return; }
+      var y = yMin; slider.value = y; draw(y); play.textContent = 'Pause';
+      timer = setInterval(function () {
+        y++; if (y > yMaxAll) { clearInterval(timer); timer = null; play.textContent = 'Play'; return; }
+        slider.value = y; draw(y);
+      }, 900);
+    });
+    draw(yMaxAll);
+  }
+
+  // ---- people and places ----
+  function renderPlaces() {
+    var ps = document.getElementById('places-svg');
+    var insts = conn.institutions || {}, affs = conn.affiliations || {};
+    if (!ps) return;
+    var now = new Date().getFullYear();
+    // derive my affiliations from the papers' title pages, then apply the hand-written additions in "self"
+    var span = {};
+    Object.keys(affs).forEach(function (k) {
+      var n = nodeByKey[k], entry = affs[k]; if (!n) return;
+      var y = entry.year || Math.floor(n.t);
+      Object.keys(entry.authors || {}).forEach(function (a) {
+        if (!/naskar/i.test(a)) return;
+        entry.authors[a].forEach(function (id) {
+          var s = span[id] || (span[id] = { inst: id, from: y, last: y });
+          s.from = Math.min(s.from, y); s.last = Math.max(s.last, y);
+        });
+      });
+    });
+    (conn.self || []).forEach(function (o) {
+      var s = span[o.inst] || (span[o.inst] = { inst: o.inst, from: o.from, last: o.to || o.from });
+      if (o.from != null) s.from = o.from;
+      if (o.to !== undefined) s.to = o.to;
+      if (o.note) s.note = o.note;
+    });
+    var list = Object.keys(span).map(function (k) {
+      var s = span[k];
+      if (s.to === undefined) s.to = s.last >= now ? null : s.last;   // still on a paper this year: present
+      s.place = (insts[k] || {}).short || (insts[k] || {}).name || k;
+      return s;
+    }).sort(function (a, b) { return a.from - b.from || (b.to == null) - (a.to == null); });
+    if (!list.length) return;
+    var y0p = Math.min.apply(null, list.map(function (p) { return p.from; })), y1p = now + 1;
+    var LBL = 230, PW = 720, ROW = 24, TOPP = 8;
+    var HP = TOPP + list.length * ROW + 26;
+    ps.setAttribute('viewBox', '0 0 ' + PW + ' ' + HP);
+    function px(y) { return LBL + (y - y0p) / (y1p - y0p) * (PW - LBL - 16); }
+    for (var y = y0p; y <= y1p; y++) {
+      el('line', { x1: px(y), y1: TOPP, x2: px(y), y2: HP - 22, stroke: '#e2e8f0' }, ps);
+      if (y < y1p && (y - y0p) % 2 === 0) el('text', { x: px(y) + 2, y: HP - 8, 'class': 'tick' }, ps).textContent = y;
+    }
+    list.forEach(function (p, i) {
+      var yy = TOPP + i * ROW, to = p.to == null ? y1p : p.to + 1, open = p.to == null;
+      el('text', { x: LBL - 10, y: yy + 15, 'text-anchor': 'end', 'class': 'place-name' }, ps).textContent = p.place;
+      el('rect', { x: px(p.from), y: yy + 5, width: Math.max(8, px(to) - px(p.from)), height: 13, rx: 6.5,
+                   fill: open ? 'url(#place-open)' : '#0369a1', opacity: open ? 1 : 0.8 }, ps);
+      if (p.note) {
+        var bw = px(to) - px(p.from), nw = p.note.length * 6.2 + 12;
+        if (bw >= nw) el('text', { x: px(p.from) + 8, y: yy + 15, 'class': 'place-note' }, ps).textContent = p.note;
+        else if (px(to) + nw < PW) el('text', { x: px(to) + 6, y: yy + 15, 'class': 'place-note out' }, ps).textContent = p.note;
+        else el('text', { x: px(p.from) - 6, y: yy + 15, 'text-anchor': 'end', 'class': 'place-note out' }, ps).textContent = p.note;
+      }
+    });
+    var defs = el('defs', {}, ps), grad = el('linearGradient', { id: 'place-open', x1: 0, x2: 1, y1: 0, y2: 0 }, defs);
+    el('stop', { offset: '0%', 'stop-color': '#0369a1', 'stop-opacity': 0.85 }, grad);
+    el('stop', { offset: '100%', 'stop-color': '#0369a1', 'stop-opacity': 0.25 }, grad);
+  }
+
   function perCluster(id) {
     return nodes.filter(function (n) { return n.cluster === id; }).sort(function (p, q) { return p.t - q.t; });
   }
@@ -797,6 +1565,8 @@
   renderSummary();
 
   renderThreads();
+  renderMap();
+  renderPlaces();
 
   // deep links: research-web.html#2409.17317 opens with that paper selected
   function fromHash() {
