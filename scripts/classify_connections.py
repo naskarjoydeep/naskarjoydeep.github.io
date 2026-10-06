@@ -122,6 +122,58 @@ def own_citations(recid, own_by_recid):
     return keys
 
 
+def format_author(full_name):
+    """'Bao, Ning' -> 'N. Bao', matching how publications.html lists authors."""
+    if "," not in full_name:
+        return full_name.strip()
+    surname, _, given = full_name.partition(",")
+    initials = [part[0].upper() + "." for part in given.replace(".", " ").split() if part]
+    return (" ".join(initials) + " " + surname.strip()).strip() if initials else surname.strip()
+
+
+def new_coauthors(recid, people):
+    """People entries (full name, affiliation on this paper) for coauthors not yet known."""
+    url = f"https://inspirehep.net/api/literature/{recid}?fields=authors.full_name,authors.affiliations"
+    try:
+        authors = session.get(url, timeout=40).json()["metadata"].get("authors", [])
+    except (requests.RequestException, ValueError, KeyError):
+        return {}
+    out = {}
+    for a in authors:
+        full = a.get("full_name", "")
+        short = format_author(full)
+        if SELF_SURNAME in full.lower() or short in people:
+            continue
+        surname, _, given = full.partition(",")
+        affs = [x.get("value") for x in a.get("affiliations", []) if x.get("value")]
+        entry = {"name": (given.strip() + " " + surname.strip()).strip(), "auto": True}
+        if affs:
+            entry["affiliation"] = affs[0]
+        out[short] = entry
+    return out
+
+
+def title_block(tex, limit=4000):
+    """The LaTeX between \\begin{document} (or \\title) and the abstract, where authors and affiliations live."""
+    start = tex.find("\\title")
+    if start < 0:
+        start = tex.find("\\begin{document}")
+    head = tex[max(start, 0):]
+    stop = re.search(r"\\begin\{abstract\}|\\abstract\{|\\maketitle", head)
+    head = head[: stop.start()] if stop and stop.start() > 200 else head
+    return re.sub(r"(?<!\\)%.*", "", head)[:limit]
+
+
+def match_institution(aff, institutions):
+    """Id of the known institution whose longest match phrase occurs in the affiliation string."""
+    low, best = aff.lower(), (0, None)
+    for iid, inst in institutions.items():
+        for phrase in inst.get("match", []):
+            if phrase.lower() in low and len(phrase) > best[0]:
+                best = (len(phrase), iid)
+    return best[1]
+
+
 def arxiv_source(arxiv_id):
     """(all .tex text, all .bib/.bbl text) from the arXiv e-print, or ('', '')."""
     try:
@@ -243,6 +295,17 @@ Earlier papers:
 {items}
 
 Reply as {{"links": [{{"key": "...", "type": "builds|related|drop", "note": "...", "evidence": "..."}}]}}"""
+
+AFFIL_SYSTEM = "You read the title block of a physics paper and list each author's affiliations. Reply with JSON only."
+
+AFFIL_PROMPT = """Authors (use exactly these names as keys): {authors}
+
+Title block (LaTeX):
+{block}
+
+Reply as {{"authors": {{"<author>": ["<full affiliation as printed>", ...]}},
+"places": [{{"affiliation": "<an affiliation from above>", "name": "<short institution name>", "city": "<city, country>", "lat": <number>, "lon": <number>}}]}}
+List every distinct affiliation once in "places" with approximate coordinates of the institution."""
 
 PLACE_SYSTEM = (
     "You place a new physics paper in an author's map of research areas. Be conservative: "
@@ -438,6 +501,45 @@ def main():
                 if ik in key_to_cluster and ik != key and ik not in cited and (ik, key) not in existing_pairs:
                     new_edges.append({"from": ik, "to": key, "type": "idea", "note": idea.get("note", ""), "auto": True})
                     lines.append(f"- **shared idea (suggested)** ↔ `{ik}` ({node_by_key[ik].get('label', ik)}): {idea.get('note', '')}")
+            # world map: affiliations as printed on the paper (INSPIRE's are sometimes wrong)
+            insts = conn.setdefault("institutions", {})
+            short_names = r.get("authors", [])
+            res = ask_llm(AFFIL_SYSTEM, AFFIL_PROMPT.format(authors=", ".join(short_names), block=title_block(tex))) if tex else None
+            if res and res.get("authors"):
+                places = {pl.get("affiliation"): pl for pl in res.get("places", []) if pl.get("affiliation")}
+                entry = {}
+                for author, affl in res["authors"].items():
+                    if author not in short_names:
+                        continue
+                    ids = []
+                    for aff in affl:
+                        iid = match_institution(aff, insts)
+                        if not iid:
+                            pl = places.get(aff, {})
+                            iid = re.sub(r"[^a-z0-9]+", "-", (pl.get("name") or aff).lower()).strip("-")[:30]
+                            if iid not in insts:
+                                insts[iid] = {"name": pl.get("name") or aff, "short": pl.get("name") or aff,
+                                              "city": pl.get("city", ""), "lat": pl.get("lat"), "lon": pl.get("lon"),
+                                              "site": iid, "match": [pl.get("name", aff).lower()], "auto": True}
+                                # map label: the city, so the circle reads like the others
+                                conn.setdefault("sites", {})[iid] = {"name": (pl.get("city") or pl.get("name") or aff).split(",")[0],
+                                                                     "label": "right", "auto": True}
+                                lines.append(f"- **new place** {insts[iid]['name']} ({insts[iid]['city']}; "
+                                             f"lat {pl.get('lat')}, lon {pl.get('lon')} from the model: check)")
+                        if iid not in ids:
+                            ids.append(iid)
+                    entry[author] = ids
+                conn.setdefault("affiliations", {})[key] = {"authors": entry, "auto": True}
+                lines.append("- **affiliations** (check against the PDF title page): " + "; ".join(
+                    f"{a} → {', '.join(insts[i]['name'] for i in ids)}" for a, ids in entry.items()))
+            else:
+                lines.append("- **affiliations** not extracted; add them to `affiliations` by hand from the title page")
+
+            # collaborators frame: new coauthors with their affiliation on this paper
+            people = conn.setdefault("people", {})
+            for short, entry in new_coauthors(r.get("inspire_id"), people).items():
+                people[short] = entry
+                lines.append(f"- **new collaborator** {entry['name']} ({entry.get('affiliation', 'affiliation not listed on INSPIRE')})")
         else:
             node_for(r)["arxiv_version"] = meta[ax]["version"]
 
