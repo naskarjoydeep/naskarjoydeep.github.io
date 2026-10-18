@@ -165,10 +165,10 @@
     },
     {
       "id": "strings",
-      "name": "Minimal strings",
+      "name": "2D gravity",
       "color": "#15803d",
       "band": 5,
-      "blurb": "How much of the quantum string equation the classical spectral curve determines."
+      "blurb": "Two-dimensional gravity through matrix models and topological recursion: minimal strings, and discrete and q-deformed Weil–Petersson volumes from double-scaled SYK."
     }
   ],
   "nodes": [
@@ -334,6 +334,22 @@
       "label": "Minimal strings",
       "cluster": "strings",
       "date": "2026-09-24",
+      "arxiv_version": 1
+    },
+    {
+      "key": "2610.13899",
+      "label": "q-deformed WP volumes",
+      "cluster": "strings",
+      "date": "2026-10-09",
+      "labelPos": "below",
+      "arxiv_version": 1
+    },
+    {
+      "key": "2610.13667",
+      "label": "𝒩=2 discrete volumes",
+      "cluster": "strings",
+      "date": "2026-10-09",
+      "labelPos": "above",
       "arxiv_version": 1
     }
   ],
@@ -517,6 +533,18 @@
       "to": "2609.28964",
       "type": "idea",
       "note": "The thesis studied minimal models and the 2D Ising model. Minimal strings couples the same minimal models (Ising is the (3,4) model) to 2D gravity."
+    },
+    {
+      "from": "2609.28964",
+      "to": "2610.13667",
+      "type": "builds",
+      "note": "Uses the string-equation prescription of Resolvent reconstruction to check the 𝒩 = 2 local volumes independently."
+    },
+    {
+      "from": "2610.13667",
+      "to": "2610.13899",
+      "type": "related",
+      "note": "Companion papers posted the same day. The q-deformed paper points to the 𝒩 = 2 discrete curve, whose two edges give the bosonic and 𝒩 = 2 top-degree volumes."
     }
   ],
   "people": {
@@ -568,6 +596,9 @@
     },
     "J. A. O. Huguenin": {
       "name": "José A. O. Huguenin"
+    },
+    "K. Saraswat": {
+      "name": "Krishan Saraswat"
     }
   },
   "self": [
@@ -1018,6 +1049,31 @@
           "bimsa"
         ]
       }
+    },
+    "2610.13667": {
+      "authors": {
+        "W. Ahmed": [
+          "ucsb"
+        ],
+        "J. Naskar": [
+          "bimsa",
+          "kitp"
+        ]
+      }
+    },
+    "2610.13899": {
+      "authors": {
+        "W. Ahmed": [
+          "ucsb"
+        ],
+        "J. Naskar": [
+          "bimsa",
+          "kitp"
+        ],
+        "K. Saraswat": [
+          "ucsb"
+        ]
+      }
     }
   }
 }
@@ -1081,7 +1137,7 @@
     var rec = byKey[n.key] || (n.extra && n.extra.inspire_id && byKey['inspire:' + n.extra.inspire_id]) || null;
     var info = rec || n.extra || {};
     // titles may carry LaTeX from INSPIRE (e.g. $\mathrm{AdS}/\mathrm{CFT}$); show plain text
-    if (info.title) info = Object.assign({}, info, { title: info.title.replace(/\\math(rm|it|bf)\{([^}]*)\}/g, '$2').replace(/\$/g, '') });
+    if (info.title) info = Object.assign({}, info, { title: info.title.replace(/\\mathscr\{N\}/g, '𝒩').replace(/\\math[a-z]+\{([^}]*)\}/g, '$1').replace(/\$/g, '') });
     var node = {
       key: n.key, label: n.label || info.title || n.key, cluster: clusters[n.cluster] ? n.cluster : 'unplaced',
       date: n.date, when: n.when, labelPos: n.labelPos, remark: n.remark, kind: n.kind, rec: rec, info: info, extra: n.extra || {}
@@ -1141,6 +1197,11 @@
   svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
 
   nodes.forEach(function (n) { n.x = xOf(n.t); n.y = yOfBand(clusters[n.cluster].band); });
+  // papers posted within days of each other in the same row would overlap: nudge them apart
+  Object.keys(clusters).forEach(function (cid) {
+    var row = nodes.filter(function (n) { return n.cluster === cid; }).sort(function (a, b) { return a.x - b.x; });
+    for (var i = 1; i < row.length; i++) if (row[i].x - row[i - 1].x < 17) row[i].x = row[i - 1].x + 17;
+  });
 
   // place labels greedily in date order: preferred side first, then the other side, then a second tier,
   // avoiding other labels and node markers, and anchoring at the edges so nothing is clipped
