@@ -32,30 +32,23 @@
   <h1>Machine learning</h1>
   <p class="lede">Neural networks as field theories.</p>
 
-  <p class="intro">An ensemble of neural networks with randomly drawn parameters defines a random function, that is, a statistical field theory. Its correlation functions can be computed directly in parameter space, without writing down an action. My work asks which field theories, and in particular which conformal field theories, can be built this way. It grew out of my master's thesis on the conformal bootstrap.</p>
-
   <section>
-    <h2>Conformal fields from neural networks</h2>
+    <h2>Conformal field theories from neural networks</h2>
+    <p>An ensemble of neural networks with randomly drawn parameters defines a random function, that is, a statistical field theory. Its correlation functions can be computed directly in parameter space, without writing down an action. This project asks which field theories, and in particular which conformal field theories, can be built this way. It grew out of my master's thesis on the conformal bootstrap.</p>
     <p>With Jim Halverson and Jiahua Tian, I built conformal fields in D dimensions from homogeneous neural networks in D + 2 dimensions with a Lorentz-invariant parameter distribution, restricted to the projective null cone of the embedding formalism. We computed exact four-point functions in several examples and decomposed them into 4D conformal blocks, using methods from Feynman integrals where needed. In the infinite-width limit, where the network becomes a Gaussian process, the construction gives generalized free CFTs and the free boson; for deep networks, recursion relations carry conformal fields and their four-point functions from layer to layer.</p>
+    <p>With Manas Dogra and Jim Halverson, I extended the construction to spinning conformal fields, computed their two-, three- and four-point functions, and recovered the free 4D Maxwell CFT from an ensemble of independent neurons at infinite width.</p>
+    <p>With Sam Leutheusser, I took a closer look at the operators of these theories. They contain an infinite tower of degenerate operators with the same scaling dimension, which has to be taken into account when matching conformal block decompositions, and their operator product expansion holds inside correlators rather than as an identity between operators. We also lay out a recipe for the algebra of the theory; since these theories are in general not unitary, we propose that it acts on a space with an indefinite inner product.</p>
       <ul class="papers">
         <li data-paper="2409.12222"><a class="paper-title" href="https://arxiv.org/abs/2409.12222" target="_blank" rel="noopener">Conformal fields from neural networks</a><span class="paper-meta">arXiv:2409.12222</span></li>
-      </ul>
-  </section>
-
-  <section>
-    <h2>Spin and gauge fields</h2>
-    <p>With Manas Dogra and Jim Halverson, I extended the construction to spinning conformal fields, computed their two-, three- and four-point functions, and recovered the free 4D Maxwell CFT from an ensemble of independent neurons at infinite width.</p>
-      <ul class="papers">
         <li data-paper="2608.15001"><a class="paper-title" href="https://arxiv.org/abs/2608.15001" target="_blank" rel="noopener">Spinning conformal correlators from neural networks</a><span class="paper-meta">arXiv:2608.15001</span></li>
-      </ul>
-  </section>
-
-  <section>
-    <h2>Operator content</h2>
-    <p>With Sam Leutheusser, I took a closer look at the operators of these theories. These theories contain an infinite tower of degenerate operators with the same scaling dimension, which has to be taken into account when matching conformal block decompositions, and their operator product expansion holds inside correlators rather than as an identity between operators. We also lay out a recipe for the algebra of the theory; since these theories are in general not unitary, we propose that it acts on a space with an indefinite inner product.</p>
-      <ul class="papers">
         <li data-paper="2609.37074"><a class="paper-title" href="https://arxiv.org/abs/2609.37074" target="_blank" rel="noopener">Notes on algebraic perspective on neural network conformal theories</a><span class="paper-meta">arXiv:2609.37074</span></li>
       </ul>
+  </section>
+
+  <section>
+    <h2>Model collapse</h2>
+    <p>Generative models are increasingly trained on data that earlier models produced. When this repeats over several generations, the models can degenerate: rare events in the tails of the original distribution disappear first, the outputs lose diversity, and the learned distribution drifts away from the real one. This effect, called model collapse, has been seen in language models, variational autoencoders and Gaussian mixture models (<a href="https://doi.org/10.1038/s41586-024-07566-y" target="_blank" rel="noopener">Shumailov et al., Nature 2024</a>).</p>
+    <p>I am currently studying it.</p>
   </section>
 
   <p class="journey-note">How these papers connect to each other, and to my other work: <a href="research-web.html">My Research Journey</a>.</p>
