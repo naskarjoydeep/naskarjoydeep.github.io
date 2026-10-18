@@ -16,6 +16,16 @@
     .lede { color: #475569; }
     h1 { margin: 10px 0 6px; }
     .note { font-size: 0.9rem; color: #475569; }
+    .intro { max-width: 72ch; }
+    section h2 { font-size: 1.15rem; margin: 0 0 8px; }
+    section p { max-width: 72ch; margin: 0 0 10px; }
+    ul.papers { list-style: none; margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid #f1f5f9; display: flex; flex-direction: column; gap: 10px; }
+    ul.papers li { margin: 0; }
+    .paper-title { font-weight: 600; display: block; }
+    .paper-meta { display: block; font-size: 0.88rem; color: #475569; }
+    .me { color: #0f172a; font-weight: 600; }
+    .see-also { color: #475569; font-size: 0.92rem; }
+    .journey-note { text-align: center; color: #475569; font-size: 0.92rem; margin: 30px 0 10px; }
   </style>
 </head>
 <body>
@@ -23,5 +33,45 @@
   <h1>Mathematical physics</h1>
   <p class="lede">Exact structures in low-dimensional gravity and gauge theory: topological recursion and spectral curves, and operator-algebraic approaches to quantum field theory.</p>
 
-  </body>
+  <section>
+    <h2>Topological recursion and two-dimensional gravity</h2>
+    <p>Two-dimensional theories of gravity, such as JT gravity and minimal string theory, are dual to double-scaled matrix models. Their amplitudes are computed by topological recursion on a spectral curve, and are often volumes of moduli spaces of surfaces, such as Weil–Petersson volumes.</p>
+    <p>For minimal strings, Wasif Ahmed and I asked how much of the quantum string equation is fixed by the classical spectral curve and how it moves with the background. Starting from the resolvent of a differential operator, we reconstruct the quantum corrections genus by genus, and prove that they are unique when the branch points are simple and the procedure is consistent. We work through pure gravity, the Ising model, higher-order, dual and nonunitary models, and examples related to r-spin theory.</p>
+      <ul class="papers">
+        <li data-paper="2609.28964"><a class="paper-title" href="https://arxiv.org/abs/2609.28964" target="_blank" rel="noopener">Resolvent reconstruction of minimal strings beyond KdV</a><span class="paper-meta">arXiv:2609.28964</span></li>
+      </ul>
+  </section>
+
+  <section>
+    <h2>Weil–Petersson volumes from double-scaled SYK</h2>
+    <p>The double-scaled SYK model has an exactly known density of states, and topological recursion on its spectral curve defines discrete and q-deformed analogues of Weil–Petersson volumes. With Wasif Ahmed and Krishan Saraswat, I showed that the q-deformed volumes of Do and Norbury come from a matrix model obtained by zooming into the soft edges of the DSSYK density, and applied the same idea to the hard edge of 𝒩 = 1 DSSYK to obtain candidate q-deformed super Weil–Petersson volumes.</p>
+    <p>With Wasif Ahmed, I constructed the 𝒩 = 2 version: a discrete spectral curve from 𝒩 = 2 DSSYK whose volumes are quasi-polynomials in integer boundary lengths. The volumes of its lower edge reduce, in a q → 1 limit, to the super Weil–Petersson volumes of Turiaci and Witten, and we give an all-genus intersection-theoretic formula for them on the moduli space of stable curves.</p>
+      <ul class="papers">
+        <li data-paper="2610.13899"><a class="paper-title" href="https://arxiv.org/abs/2610.13899" target="_blank" rel="noopener">q-deformed Weil–Petersson volumes from the spectral edge of DSSYK and supersymmetric extensions</a><span class="paper-meta">arXiv:2610.13899</span></li>
+        <li data-paper="2610.13667"><a class="paper-title" href="https://arxiv.org/abs/2610.13667" target="_blank" rel="noopener">A discrete analogue of 𝒩 = 2 super Weil–Petersson volumes</a><span class="paper-meta">arXiv:2610.13667</span></li>
+      </ul>
+  </section>
+
+  <section>
+    <h2>Operator algebras</h2>
+    <p>Conformal field theories built from neural networks give a concrete setting for algebraic questions in quantum field theory. With Sam Leutheusser, I lay out a recipe for the algebra of such a theory; because these theories are in general not unitary, we propose that it acts on a space with an indefinite inner product rather than a Hilbert space. More on these theories is on the <a href="machine-learning.html">Machine learning</a> page.</p>
+      <ul class="papers">
+        <li data-paper="2609.37074"><a class="paper-title" href="https://arxiv.org/abs/2609.37074" target="_blank" rel="noopener">Notes on algebraic perspective on neural network conformal theories</a><span class="paper-meta">arXiv:2609.37074</span></li>
+      </ul>
+  </section>
+
+  <section>
+    <h2>Combinatorics of entropy inequalities</h2>
+    <p>The holographic entropy cone has a discrete-mathematics side: proofs of entropy inequalities become maps between hypercubes, and generating new inequalities becomes a question about graph homomorphisms onto partial cubes. The physics is on the <a href="holography.html">Holography</a> page.</p>
+      <ul class="papers">
+        <li data-paper="2403.13283"><a class="paper-title" href="https://arxiv.org/abs/2403.13283" target="_blank" rel="noopener">Properties of the contraction map for holographic entanglement entropy inequalities</a><span class="paper-meta">arXiv:2403.13283</span></li>
+        <li data-paper="2409.17317"><a class="paper-title" href="https://arxiv.org/abs/2409.17317" target="_blank" rel="noopener">Towards a complete classification of holographic entropy inequalities</a><span class="paper-meta">arXiv:2409.17317</span></li>
+        <li data-paper="2506.18086"><a class="paper-title" href="https://arxiv.org/abs/2506.18086" target="_blank" rel="noopener">On the completeness of contraction map proof method for holographic entropy inequalities</a><span class="paper-meta">arXiv:2506.18086</span></li>
+      </ul>
+  </section>
+
+  <p class="journey-note">How these papers connect to each other, and to my other work: <a href="research-web.html">My Research Journey</a>.</p>
+
+<script src="research-areas.js"></script>
+</body>
 </html>
