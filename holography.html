@@ -15,11 +15,59 @@
     .back-link { font-size: 0.9rem; color: #475569; }
     .lede { color: #475569; }
     h1 { margin: 10px 0 6px; }
+    .intro { max-width: 72ch; }
+    section h2 { font-size: 1.15rem; margin: 0 0 8px; }
+    section p { max-width: 72ch; margin: 0 0 10px; }
+    ul.papers { list-style: none; margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid #f1f5f9; display: flex; flex-direction: column; gap: 10px; }
+    ul.papers li { margin: 0; }
+    .paper-title { font-weight: 600; display: block; }
+    .paper-meta { display: block; font-size: 0.88rem; color: #475569; }
+    .me { color: #0f172a; font-weight: 600; }
+    .see-also { color: #475569; font-size: 0.92rem; }
+    .journey-note { text-align: center; color: #475569; font-size: 0.92rem; margin: 30px 0 10px; }
   </style>
 </head>
 <body>
   <a class="back-link" href="index.html">&larr; Joydeep Naskar</a>
   <h1>Holography</h1>
   <p class="lede">CFT lessons for gravity & gravity lessons for CFT.</p>
+
+  <p class="intro">In AdS/CFT, a gravitational theory in the bulk is equivalent to a conformal field theory on its boundary. Much of my work uses the Ryu–Takayanagi formula as the bridge: minimal surfaces in the bulk decide how entanglement can be shared among boundary regions, and boundary entanglement in turn tells us which bulk regions a boundary region can describe.</p>
+
+  <section>
+    <h2>The holographic entropy cone</h2>
+    <p>Entanglement entropies of states with a classical bulk dual obey inequalities that general quantum states can violate, such as monogamy of mutual information. These holographic entropy inequalities are usually proved by finding a contraction map between hypercubes. With Ning Bao, I found rules that build contraction maps deterministically, with almost no trial and error, which made proofs of large inequalities fast and turned up two new six-party inequalities.</p>
+    <p>With Ning Bao and Keiichiro Furuya, I then generalized the toric family of inequalities using tilings and products of cycle graphs; recast contraction maps as graph homomorphisms onto partial cubes, which turns the search for new inequalities into a graph problem; and argued that every valid linear inequality with rational coefficients has a contraction map, under the assumptions stated in that paper. These papers form the core of my PhD thesis.</p>
+      <ul class="papers">
+        <li data-paper="2403.13283"><a class="paper-title" href="https://arxiv.org/abs/2403.13283" target="_blank" rel="noopener">Properties of the contraction map for holographic entanglement entropy inequalities</a><span class="paper-meta">arXiv:2403.13283</span></li>
+        <li data-paper="2408.04741"><a class="paper-title" href="https://arxiv.org/abs/2408.04741" target="_blank" rel="noopener">A framework for generalizing toric inequalities for holographic entanglement entropy</a><span class="paper-meta">arXiv:2408.04741</span></li>
+        <li data-paper="2409.17317"><a class="paper-title" href="https://arxiv.org/abs/2409.17317" target="_blank" rel="noopener">Towards a complete classification of holographic entropy inequalities</a><span class="paper-meta">arXiv:2409.17317</span></li>
+        <li data-paper="2506.18086"><a class="paper-title" href="https://arxiv.org/abs/2506.18086" target="_blank" rel="noopener">On the completeness of contraction map proof method for holographic entropy inequalities</a><span class="paper-meta">arXiv:2506.18086</span></li>
+        <li><a class="paper-title" href="https://inspirehep.net/literature/3185432" target="_blank" rel="noopener">Multipartite correlations in holography</a><span class="paper-meta">PhD thesis, Northeastern University (2026)</span></li>
+      </ul>
+  </section>
+
+  <section>
+    <h2>Beyond bipartite entanglement</h2>
+    <p>Entropy inequalities only see bipartite quantities. To detect genuinely multipartite correlations, Ning Bao, Keiichiro Furuya and I defined a tripartite signal from the multipartite entanglement of purification. It vanishes on product states and is blind to GHZ-type entanglement; its holographic version, computed from entanglement wedge cross-sections, jumps when the entanglement wedge of three regions becomes connected.</p>
+    <p>I later extended the holographic signal inequality of Balasubramanian et al. to mixed states. The naive extension fails in geometries where the Markov gap vanishes, evaluating it on the canonical purification restores it, and I conjecture a new inequality for tripartite holographic states.</p>
+      <ul class="papers">
+        <li data-paper="2509.08209"><a class="paper-title" href="https://arxiv.org/abs/2509.08209" target="_blank" rel="noopener">Tripartite correlation signal from multipartite entanglement of purification</a><span class="paper-meta">arXiv:2509.08209</span></li>
+        <li data-paper="2605.26617"><a class="paper-title" href="https://arxiv.org/abs/2605.26617" target="_blank" rel="noopener">On a mixed-state extension of the holographic signal inequality</a><span class="paper-meta">arXiv:2605.26617</span></li>
+      </ul>
+  </section>
+
+  <section>
+    <h2>Subregion duality</h2>
+    <p>Which part of the bulk does a boundary region describe? With Ning Bao and Yikun Jiang, I separated the background wedge, the region whose geometry a boundary region can reconstruct, from the wedges in which it can reconstruct operators: the causal wedge, the entanglement wedge, and the min- and max-entanglement wedges of one-shot holography. The distinction resolves an apparent paradox in which the background wedge extends beyond the entanglement wedge, and it tightens the argument that holographic theories have no global symmetries.</p>
+      <ul class="papers">
+        <li data-paper="2408.04016"><a class="paper-title" href="https://arxiv.org/abs/2408.04016" target="_blank" rel="noopener">Subregion duality, wedge classification and no global symmetries in AdS/CFT</a><span class="paper-meta">arXiv:2408.04016</span></li>
+      </ul>
+    <p class="see-also">Error-correcting properties of fractal boundary regions are on the <a href="quantum-information.html">Quantum information</a> page, and two-dimensional gravity and double-scaled SYK on the <a href="mathematical-physics.html">Mathematical physics</a> page.</p>
+  </section>
+
+  <p class="journey-note">How these papers connect to each other, and to my other work: <a href="research-web.html">My Research Journey</a>.</p>
+
+<script src="research-areas.js"></script>
 </body>
 </html>
