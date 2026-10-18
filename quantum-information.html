@@ -15,11 +15,62 @@
     .back-link { font-size: 0.9rem; color: #475569; }
     .lede { color: #475569; }
     h1 { margin: 10px 0 6px; }
+    .intro { max-width: 72ch; }
+    section h2 { font-size: 1.15rem; margin: 0 0 8px; }
+    section p { max-width: 72ch; margin: 0 0 10px; }
+    ul.papers { list-style: none; margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid #f1f5f9; display: flex; flex-direction: column; gap: 10px; }
+    ul.papers li { margin: 0; }
+    .paper-title { font-weight: 600; display: block; }
+    .paper-meta { display: block; font-size: 0.88rem; color: #475569; }
+    .me { color: #0f172a; font-weight: 600; }
+    .see-also { color: #475569; font-size: 0.92rem; }
+    .journey-note { text-align: center; color: #475569; font-size: 0.92rem; margin: 30px 0 10px; }
   </style>
 </head>
 <body>
   <a class="back-link" href="index.html">&larr; Joydeep Naskar</a>
   <h1>Quantum information</h1>
   <p class="lede">Quantum error correction as an organizing principle for spacetime — and the entanglement structures, codes, and operator algebras that make it work.</p>
+
+  <section>
+    <h2>Holographic codes on fractals</h2>
+    <p>Holographic codes can protect bulk information even when the boundary is erased in a fractal pattern, an effect called uberholography. No-go theorems rule this out for topological codes on fractals in two dimensions. With Ning Bao, I showed that a Sierpinski-triangle boundary region in AdS<sub>4</sub>/CFT<sub>3</sub> keeps these code properties, with a code-distance exponent of log 3 / log 4, while the Sierpinski gasket in AdS<sub>5</sub>/CFT<sub>4</sub> does not. We then showed that the codes survive highly entropic mixed states in the bulk, whose effect is suppressed exponentially in the fractal level.</p>
+    <p>With Abhik Bhattacharjee, I checked these results against black-hole backgrounds, extended them to strips in higher dimensions, where the code properties hold only asymptotically, and related uberholography to one-shot holography and complexity transfer.</p>
+      <ul class="papers">
+        <li data-paper="2203.01379"><a class="paper-title" href="https://arxiv.org/abs/2203.01379" target="_blank" rel="noopener">Code properties of the holographic Sierpinski triangle</a><span class="paper-meta">arXiv:2203.01379</span></li>
+        <li data-paper="2209.15026"><a class="paper-title" href="https://arxiv.org/abs/2209.15026" target="_blank" rel="noopener">Reconstruction wedges in AdS/CFT with boundary fractal-like structures</a><span class="paper-meta">arXiv:2209.15026</span></li>
+        <li data-paper="2411.02825"><a class="paper-title" href="https://arxiv.org/abs/2411.02825" target="_blank" rel="noopener">Revisiting holographic codes with fractal-like boundary erasures</a><span class="paper-meta">arXiv:2411.02825</span></li>
+      </ul>
+  </section>
+
+  <section>
+    <h2>Multipartite entanglement</h2>
+    <p>Which combination of entropies, or of optimized quantities like the entanglement of purification, detects a given kind of multipartite correlation? The tripartite signal I defined with Ning Bao and Keiichiro Furuya works for any finite-dimensional quantum state: it is non-negative, vanishes on product states and is blind to GHZ-type entanglement. Its holographic version and a mixed-state extension of the holographic signal inequality are described on the <a href="holography.html">Holography</a> page.</p>
+      <ul class="papers">
+        <li data-paper="2509.08209"><a class="paper-title" href="https://arxiv.org/abs/2509.08209" target="_blank" rel="noopener">Tripartite correlation signal from multipartite entanglement of purification</a><span class="paper-meta">arXiv:2509.08209</span></li>
+        <li data-paper="2605.26617"><a class="paper-title" href="https://arxiv.org/abs/2605.26617" target="_blank" rel="noopener">On a mixed-state extension of the holographic signal inequality</a><span class="paper-meta">arXiv:2605.26617</span></li>
+      </ul>
+  </section>
+
+  <section>
+    <h2>Entanglement and topological order</h2>
+    <p>Topological entanglement entropy detects topological order in gapped ground states through subtraction schemes, such as those of Kitaev–Preskill and Levin–Wen. With Sai Satyam Samal, I stated conditions under which a combination of entropies captures the topological term, which places those two schemes in different classes, and showed that the facet holographic entropy inequalities are satisfied by nondegenerate ground states of topologically ordered two-dimensional media.</p>
+      <ul class="papers">
+        <li data-paper="2412.05484"><a class="paper-title" href="https://arxiv.org/abs/2412.05484" target="_blank" rel="noopener">Topological entanglement entropy meets holographic entropy inequalities</a><span class="paper-meta">arXiv:2412.05484</span></li>
+      </ul>
+  </section>
+
+  <section>
+    <h2>Quantum games</h2>
+    <p>My first papers were on quantum game theory. I pointed out that a published quantization of the Colonel Blotto game does not reduce to the classical game when every player uses classical strategies. With Alan Maioli, I then built a multiplayer quantum Blotto game in which each player has their own qubit, which restores the classical limit and gives players with quantum strategies an advantage. The published version includes an all-optical experiment with José Huguenin's group at Universidade Federal Fluminense.</p>
+      <ul class="papers">
+        <li><a class="paper-title" href="https://doi.org/10.1007/s11128-020-02734-1" target="_blank" rel="noopener">Comments on Quantization and experimental realization of the Colonel Blotto game</a><span class="paper-meta"><span class="me">J. Naskar</span> · Quant. Inf. Proc. 19 (2020) 388</span></li>
+        <li data-paper="2008.00762"><a class="paper-title" href="https://arxiv.org/abs/2008.00762" target="_blank" rel="noopener">Classical and quantum multiplayer Colonel Blotto game in all-optical setup</a><span class="paper-meta">arXiv:2008.00762</span></li>
+      </ul>
+  </section>
+
+  <p class="journey-note">How these papers connect to each other, and to my other work: <a href="research-web.html">My Research Journey</a>.</p>
+
+<script src="research-areas.js"></script>
 </body>
 </html>
