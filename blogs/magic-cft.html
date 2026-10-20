@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How Pauli measurements see structure that entanglement misses: a student’s introduction to quantum magic, stabilizer Rényi moments, and critical spin chains.">
+<meta name="theme-color" content="#f6f3ec">
+<meta property="og:title" content="The quantum magic that entanglement misses">
+<meta property="og:description" content="From one qubit and a Bell pair to the critical Ising chain: an undergraduate guide to stabilizer Rényi moments beyond entanglement.">
+<meta property="og:type" content="article">
+<title>The quantum magic that entanglement misses · Joydeep Naskar</title>
+<style>
+body{margin:0;background:#f6f3ec}
+#magic-story{--paper:#f6f3ec;--ink:#212c2a;--muted:#5a655f;--teal:#126457;--light:#e5eee7;--ochre:#926020;--plum:#785780;--line:#d9d9ce;--white:#fffef9;--serif:Georgia,'Times New Roman',serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.8;overflow-wrap:break-word}
+#magic-story *{box-sizing:border-box}
+#magic-story a{color:var(--teal);text-underline-offset:4px}
+#magic-story a:hover{text-decoration-thickness:2px}
+#magic-story :focus-visible{outline:3px solid var(--ochre);outline-offset:4px}
+#magic-story .skip{position:absolute;left:16px;top:-100px;background:var(--white);padding:12px;z-index:10}
+#magic-story .skip:focus{top:10px}
+#magic-story .masthead{max-width:1152px;margin:auto;padding:24px 36px;border-bottom:1px solid var(--line);display:flex;gap:16px;justify-content:space-between;align-items:center;font-size:12px;font-weight:650;letter-spacing:.08em;text-transform:uppercase}
+#magic-story .masthead a{text-decoration:none}
+#magic-story .mark{display:inline-block;width:9px;height:9px;background:var(--teal);border-radius:50%;margin-right:10px}
+#magic-story .hero{max-width:1050px;margin:auto;padding:70px 36px 40px}
+#magic-story .eyebrow{color:var(--teal);font-size:12px;letter-spacing:.13em;font-weight:700;text-transform:uppercase;margin:0 0 18px}
+#magic-story h1{font-family:var(--serif);font-size:clamp(42px,6.2vw,72px);font-weight:400;letter-spacing:-.04em;line-height:1.08;max-width:900px;margin:0 0 26px;text-wrap:balance}
+#magic-story .dek{font-size:21px;line-height:1.6;color:var(--muted);max-width:730px;margin:0 0 25px}
+#magic-story .meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12px;color:var(--muted)}
+#magic-story .contents{max-width:978px;margin:0 auto 40px;padding:17px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px}
+#magic-story .contents a{text-decoration:none;color:var(--muted)}
+#magic-story .prose{max-width:754px;margin:auto;padding:0 12px}
+#magic-story section{scroll-margin-top:24px}
+#magic-story h2{font-family:var(--serif);font-weight:400;font-size:33px;letter-spacing:-.025em;line-height:1.25;margin:52px 0 20px;text-wrap:balance}
+#magic-story h3{font-size:17px;line-height:1.4;margin:0 0 12px}
+#magic-story p{margin:0 0 21px}
+#magic-story strong{font-weight:650}
+#magic-story .lead{font-size:20px;line-height:1.75}
+#magic-story .aside{border-left:3px solid var(--teal);padding:4px 0 4px 20px;margin:28px 0;color:var(--muted);font-size:15px}
+#magic-story .aside p:last-child{margin-bottom:0}
+#magic-story .equation{margin:22px 0;padding:15px 8px;overflow-x:auto;overflow-y:hidden;line-height:1.5}
+#magic-story math{font-size:1.12em}
+#magic-story .equation math{white-space:nowrap}
+#magic-story .widget{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:24px;margin:30px 0}
+#magic-story .widget>p{font-size:14px;color:var(--muted);margin-bottom:15px}
+#magic-story .qubit-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center}
+#magic-story .qubit-circle{display:block;width:100%;height:auto;max-width:260px;margin:auto}
+#magic-story svg text{font-family:var(--sans)}
+#magic-story .bar-row{display:grid;grid-template-columns:34px 1fr 42px;gap:8px;align-items:center;font-size:13px;margin:14px 0}
+#magic-story .track{height:9px;background:#eceee6;border-radius:10px;overflow:hidden}
+#magic-story .fill{height:100%;background:var(--teal);border-radius:10px}
+#magic-story .fill.plum{background:var(--plum)}
+#magic-story .controls{display:flex;align-items:center;gap:14px;margin:16px 0 10px}
+#magic-story .controls label{font-size:14px;white-space:nowrap}
+#magic-story input[type=range]{width:100%;min-width:60px;accent-color:var(--teal);height:32px;cursor:pointer}
+#magic-story .presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+#magic-story button{font:inherit;font-size:12px;color:var(--teal);border:1px solid #a6b9ab;background:var(--white);padding:6px 10px;border-radius:5px;cursor:pointer}
+#magic-story button:hover{background:var(--light)}
+#magic-story .qubit-result{border-top:1px solid var(--line);padding-top:14px;font-size:14px;font-variant-numeric:tabular-nums}
+#magic-story .qubit-result output{font-weight:650;color:var(--teal)}
+#magic-story .qubit-note{font-size:13px;color:var(--muted);min-height:48px;margin:10px 0 0}
+#magic-story figure{margin:30px 0}
+#magic-story .intervals{display:block;width:100%;height:auto;background:var(--white);border:1px solid var(--line);border-radius:10px}
+#magic-story figcaption{font-size:13px;line-height:1.7;color:var(--muted);margin:12px 6px 0}
+#magic-story .comparison{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0}
+#magic-story .comparison>div{border-top:3px solid var(--teal);background:var(--white);padding:18px}
+#magic-story .comparison>div+div{border-color:var(--plum)}
+#magic-story .comparison .power{font-family:var(--serif);font-size:30px;line-height:1.4;margin:8px 0}
+#magic-story .comparison p{font-size:14px;color:var(--muted);margin:0}
+#magic-story details{border:1px solid var(--line);border-radius:7px;margin:26px 0;background:var(--white)}
+#magic-story summary{cursor:pointer;padding:15px 19px;font-size:14px;font-weight:650;color:var(--teal)}
+#magic-story .detail-body{padding:0 19px 1px;font-size:15px}
+#magic-story .table-wrap{overflow-x:auto}
+#magic-story table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums;margin:20px 0}
+#magic-story th,#magic-story td{text-align:left;border-bottom:1px solid var(--line);padding:10px 12px}
+#magic-story th{color:var(--muted);font-size:12px;font-weight:650}
+#magic-story .last-row{color:var(--teal)}
+#magic-story .takeaway{background:var(--light);padding:25px;border-radius:9px;margin:38px 0}
+#magic-story .takeaway p{margin:0}
+#magic-story .references{font-size:14px;line-height:1.7;color:var(--muted);border-top:1px solid var(--line);margin-top:45px;padding-top:5px}
+#magic-story .references h2{font-size:26px;margin-top:26px}
+#magic-story .references ol{padding-left:22px}
+#magic-story .references li{margin-bottom:14px;padding-left:4px}
+#magic-story footer{max-width:1050px;margin:55px auto 0;padding:24px 36px 40px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;font-size:13px;color:var(--muted)}
+@media(max-width:760px){#magic-story{font-size:16px}#magic-story .masthead{padding:19px 22px;font-size:10px}#magic-story .hero{padding:45px 24px 28px}#magic-story .dek{font-size:19px}#magic-story .contents{margin:0 24px 30px}#magic-story .prose{padding:0 25px}#magic-story h2{font-size:29px;margin-top:42px}#magic-story .widget{padding:18px}#magic-story footer{padding:24px}}
+@media(max-width:480px){#magic-story .qubit-layout{grid-template-columns:1fr}#magic-story .qubit-circle{max-width:220px}#magic-story .comparison{grid-template-columns:1fr}#magic-story .lead{font-size:18px}}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media print{body{background:white}#magic-story{font-size:11pt}#magic-story .masthead,#magic-story .contents,#magic-story .controls,#magic-story .presets,#magic-story .skip{display:none}#magic-story .hero{padding:20px 0}#magic-story h1{font-size:32pt}#magic-story .prose{max-width:100%;padding:0}#magic-story .widget,#magic-story .comparison{break-inside:avoid}#magic-story footer{padding:15px 0}}
+</style>
+</head>
+<body>
+<article id="magic-story">
+<a class="skip" href="#start">Skip to the article</a>
+<header class="masthead"><a href="../blog.html"><span class="mark" aria-hidden="true"></span>Notes on quantum geometry</a><a href="#sources">Further reading ↗</a></header>
+<div class="hero">
+<p class="eyebrow">Quantum information · Critical phenomena</p>
+<h1>The quantum magic that entanglement misses</h1>
+<p class="dek">Entanglement tells us how parts of a quantum system fit together. What happens when we also ask how that system looks to a particular set of measurements?</p>
+<div class="meta"><span>Joydeep Naskar</span><span><time datetime="2026-10-20">20 October 2026</time></span><span>For physics undergraduates</span><span>About 15 minutes</span></div>
+</div>
+<nav class="contents" aria-label="Article contents"><a href="#start">Entanglement and magic</a><a href="#measure">A Pauli fingerprint</a><a href="#bell">The Bell-pair check</a><a href="#critical">From qubits to CFT</a><a href="#rotation">The rotation test</a><a href="#continuum">Growing the intervals</a></nav>
+<main class="prose">
+<section id="start">
+<p class="lead">Imagine taking a quantum spin chain and applying exactly the same rotation to every spin. You have acted separately on each spin, without coupling spins that were previously separate. The entanglement across every cut stays the same.</p>
+<p>Could a measure of quantum structure nevertheless change its <em>long-distance power law</em>? In recent work with Vishnu Jejjala, we show that stabilizer Rényi moments can do precisely this. To understand why, we can start with the quantum mechanics of a single spin.</p>
+<h2>Entanglement is only part of the story</h2>
+<p>A qubit has basis states |0⟩ and |1⟩, and can occupy a superposition such as |+⟩ = (|0⟩ + |1⟩)/√2. Two qubits can form the entangled Bell state (|00⟩ + |11⟩)/√2. Superposition and entanglement are both essential quantum ideas, but neither by itself tells us which computations are hard to simulate on an ordinary computer.</p>
+<p>There is a large family of quantum circuits that can create entanglement and still be simulated efficiently. These circuits use <strong>Clifford gates</strong>: gates that turn products of Pauli operators into other products of Pauli operators under conjugation. Starting with |0⟩ states and using these gates produces <strong>stabilizer states</strong>. The Bell state is one of them.</p>
+<p>To go beyond this restricted computational toolbox, we need an additional resource, called <strong>magic</strong>. For a pure state, having magic means being outside the stabilizer family. Even a single qubit can have it, although a single qubit cannot be entangled with itself.</p>
+<p>That makes entanglement and magic different questions. Entanglement asks how a state is shared between subsystems. Magic asks about its relation to a specified stabilizer toolbox. Our work investigates how the second question appears in spatial correlations.</p>
+</section>
+<section id="measure">
+<h2>A fingerprint made of Pauli measurements</h2>
+<p>If you know spin-½, you already know the three Pauli matrices X, Y and Z. Their expectation values give the components of a qubit’s Bloch vector. For several qubits, their products play the same role: X ⊗ I, Z ⊗ Z, X ⊗ Y ⊗ I, and so on. These are called <strong>Pauli strings</strong>.</p>
+<p>For a region A containing N qubits, let D = 2<sup>N</sup>, and let P run over all 4<sup>N</sup> Pauli strings, including the identity. Write ⟨P⟩ = Tr(ρ<sub>A</sub>P), where ρ<sub>A</sub> is the state of that region. We focus on the second stabilizer Rényi expression:</p>
+<div class="equation" tabindex="0" role="group" aria-label="M hat two of A equals minus the natural logarithm of one over D times the sum of fourth powers of Pauli expectation values">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mover><mi>M</mi><mo>^</mo></mover><mn>2</mn></msub><mo>(</mo><mi>A</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi mathvariant="normal">ln</mi><mo>[</mo><mfrac><mn>1</mn><mi>D</mi></mfrac><munder><mo>∑</mo><mi>P</mi></munder><msup><mrow><mo>⟨</mo><mi>P</mi><mo stretchy="false">⟩</mo></mrow><mn>4</mn></msup><mo>]</mo><mo>.</mo></mrow></math>
+</div>
+<p>You do not need to calculate a huge sum to see the idea. Fourth powers give much more weight to a few large expectation values than to many small ones. This quantity probes how the state’s Pauli fingerprint is distributed. The logarithm makes it additive for independent systems. All logarithms here are natural.</p>
+<p>For a pure stabilizer state, exactly D strings have expectation value +1 or −1; the rest have zero expectation. The expression in brackets is therefore 1, and the entropy is zero. A pure nonstabilizer state has a positive value.</p>
+<p>For one qubit, try the real state |ψ<sub>θ</sub>⟩ = cos(θ/2)|0⟩ + sin(θ/2)|1⟩. Its Pauli expectations are sin θ, 0 and cos θ. Rotating from θ = 0 to θ = π/4 changes the second stabilizer Rényi entropy from zero to ln(4/3), even though the state stays pure throughout.</p>
+<div class="widget" id="qubit-demo" hidden>
+<h3>Rotate one qubit</h3>
+<p>The measurement axes X, Y and Z stay fixed. The point moves along the X–Z great circle of the Bloch sphere; here we see that circle face-on.</p>
+<div class="qubit-layout">
+<svg class="qubit-circle" viewBox="0 0 260 245" role="img" aria-labelledby="qubit-title qubit-desc"><title id="qubit-title">A pure qubit in the X–Z plane</title><desc id="qubit-desc">The Bloch vector rotates from positive Z towards positive X. Its length stays one.</desc>
+<circle cx="122" cy="122" r="88" fill="none" stroke="#d9d9ce" stroke-width="1.5"/>
+<path d="M22 122H224M122 22V224" fill="none" stroke="#c4c9bf" stroke-width="1"/>
+<text x="233" y="126" font-size="14" fill="#5a655f">X</text><text x="117" y="15" font-size="14" fill="#5a655f">Z</text>
+<text x="24" y="139" font-size="12" fill="#5a655f">−X</text><text x="131" y="221" font-size="12" fill="#5a655f">−Z</text>
+<line id="bloch-vector" x1="122" y1="122" x2="184.225" y2="59.775" stroke="#126457" stroke-width="3"/>
+<circle cx="122" cy="122" r="3" fill="#5a655f"/><circle id="bloch-dot" cx="184.225" cy="59.775" r="6" fill="#126457"/>
+</svg>
+<div><div class="bar-row"><span>⟨X⟩</span><div class="track"><div class="fill" id="bar-x" style="width:70.711%"></div></div><output id="value-x">0.707</output></div>
+<div class="bar-row"><span>⟨Y⟩</span><div class="track"><div class="fill" style="width:0%"></div></div><span>0.000</span></div>
+<div class="bar-row"><span>⟨Z⟩</span><div class="track"><div class="fill plum" id="bar-z" style="width:70.711%"></div></div><output id="value-z">0.707</output></div>
+<p style="font-size:13px;color:var(--muted);margin:20px 0 0">Purity: <strong>1</strong><br>Entanglement: <strong>0</strong><br>Both stay constant.</p></div>
+</div>
+<div class="controls"><label for="qubit-angle">θ = <output id="angle-out">45°</output></label><input id="qubit-angle" type="range" min="0" max="90" step="0.5" value="45" aria-describedby="qubit-status"></div>
+<div class="presets"><button type="button" data-angle="0">|0⟩ · 0°</button><button type="button" data-angle="45">Halfway · 45°</button><button type="button" data-angle="90">|+⟩ · 90°</button></div>
+<div class="qubit-result">Second stabilizer Rényi entropy: <output id="magic-out">0.287682</output> nats</div>
+<p class="qubit-note" id="qubit-status" aria-live="polite">Halfway between X and Z: a nonstabilizer state, with M₂ = ln(4/3).</p>
+</div>
+<p>The axes matter. A Clifford rotation permutes Pauli strings, possibly changing their signs, and leaves the sum unchanged. A generic rotation does not. If we rotate the state <em>and</em> the measurement axes together, nothing changes; our question keeps the measurement toolbox fixed while rotating the state.</p>
+</section>
+<section id="bell">
+<h2>A Bell pair gives a useful warning</h2>
+<p>So far the state was pure. A region of a spin chain usually is not: even when the whole chain is pure, tracing out the rest produces a mixed density matrix. Here we must be careful about what the expression measures.</p>
+<p>Take a Bell pair and keep only its first qubit. That qubit has ρ<sub>A</sub> = I/2, so its X, Y and Z expectations all vanish. Only the identity contributes to the sum. The result is <strong>M̂₂(A) = ln 2</strong>.</p>
+<p>But the Bell pair is a stabilizer state, and I/2 is just an equal mixture of |0⟩ and |1⟩. That positive number cannot by itself diagnose magic. It records the mixedness caused by ignoring the partner.</p>
+<p>We derive an exact general version of this observation. Whenever ρ<sub>A</sub> comes from a pure stabilizer state,</p>
+<div class="equation" tabindex="0" role="group" aria-label="M hat two of A equals S two of A, which equals minus the natural logarithm of the purity">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mover><mi>M</mi><mo>^</mo></mover><mn>2</mn></msub><mo>(</mo><mi>A</mi><mo>)</mo><mo>=</mo><msub><mi>S</mi><mn>2</mn></msub><mo>(</mo><mi>A</mi><mo>)</mo><mo>=</mo><mo>−</mo><mi mathvariant="normal">ln</mi><mspace width="0.2em"/><mi mathvariant="normal">Tr</mi><mspace width="0.15em"/><msubsup><mi>ρ</mi><mi>A</mi><mn>2</mn></msubsup><mo>.</mo></mrow></math>
+</div>
+<p>S<sub>2</sub> is the ordinary second Rényi entropy. For a subsystem of a pure state, it measures entanglement with the rest. This is the <strong>entanglement baseline</strong> hidden inside the stabilizer expression.</p>
+<p>Subtracting the baseline is useful, but even the remainder is not a faithful measure of magic for arbitrary mixed states: some mixtures of stabilizer states still give a positive remainder. In this post, “stabilizer moment” means the particular Pauli-based diagnostic we calculate. It should not be read as a count of magic resources inside an arbitrary mixed region.</p>
+</section>
+<section id="critical">
+<h2>Why bring in a conformal field theory?</h2>
+<p>Consider a line of spins with the Hamiltonian</p>
+<div class="equation" tabindex="0" role="group" aria-label="H equals minus the sum over j of X j X j plus one plus Z j">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>H</mi><mo>=</mo><mo>−</mo><munder><mo>∑</mo><mi>j</mi></munder><mo>(</mo><msub><mi>X</mi><mi>j</mi></msub><msub><mi>X</mi><mrow><mi>j</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>Z</mi><mi>j</mi></msub><mo>)</mo><mo>.</mo></mrow></math>
+</div>
+<p>The first term favours neighbouring spins aligned along X. The second favours alignment along Z. At the equal couplings written here, their competition puts the chain at a quantum critical point.</p>
+<p>At criticality there is no finite correlation length cutting off the fluctuations. Correlations survive over arbitrarily large distances, decaying as power laws. The long-distance description is the <strong>Ising conformal field theory</strong>, or CFT. It lives in one space dimension and one time dimension. “Conformal” refers to an enlarged set of symmetries that includes changes of scale; those symmetries tightly constrain the correlations.</p>
+<p>For our purposes, the most useful CFT fact is that a field’s <strong>scaling dimension</strong> Δ fixes its two-point decay: a correlator behaves as r<sup>−2Δ</sup>. The Ising order field has Δ = 1/8, so the critical chain has ⟨X<sub>0</sub>X<sub>r</sub>⟩ proportional to r<sup>−1/4</sup> at large r.</p>
+<p>We want to probe two separated regions A and B. Define T<sub>2</sub>(A) as the sum of ⟨P⟩<sup>4</sup> over all strings in A, and compare the joint sum with the separate sums:</p>
+<div class="equation" tabindex="0" role="group" aria-label="F two of A and B equals T two of their union divided by T two of A times T two of B">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>F</mi><mn>2</mn></msub><mo>(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>)</mo><mo>=</mo><mfrac><mrow><msub><mi>T</mi><mn>2</mn></msub><mo>(</mo><mi>A</mi><mo>∪</mo><mi>B</mi><mo>)</mo></mrow><mrow><msub><mi>T</mi><mn>2</mn></msub><mo>(</mo><mi>A</mi><mo>)</mo><msub><mi>T</mi><mn>2</mn></msub><mo>(</mo><mi>B</mi><mo>)</mo></mrow></mfrac><mo>.</mo></mrow></math>
+</div>
+<p>For a product state of the two regions, the expectation values factorize and F<sub>2</sub> = 1. Thus F<sub>2</sub> − 1 isolates a departure from factorization in these moments. It is sensitive to correlations, including correlations that are not entanglement.</p>
+<figure>
+<svg class="intervals" viewBox="0 0 650 150" role="img" aria-labelledby="interval-title interval-desc"><title id="interval-title">Two separated regions in a spin chain</title><desc id="interval-desc">Equal blocks A and B of length ell have centres separated by r. The rest of the chain is traced out.</desc>
+<path d="M28 80H622" stroke="#a2aaa0" stroke-width="2"/>
+<path d="M88 80H214" stroke="#126457" stroke-width="10" stroke-linecap="round"/><path d="M424 80H550" stroke="#785780" stroke-width="10" stroke-linecap="round"/>
+<g fill="#fffef9" stroke="#5a655f" stroke-width="1.4"><circle cx="88" cy="80" r="3"/><circle cx="130" cy="80" r="3"/><circle cx="172" cy="80" r="3"/><circle cx="214" cy="80" r="3"/><circle cx="256" cy="80" r="3"/><circle cx="298" cy="80" r="3"/><circle cx="340" cy="80" r="3"/><circle cx="382" cy="80" r="3"/><circle cx="424" cy="80" r="3"/><circle cx="466" cy="80" r="3"/><circle cx="508" cy="80" r="3"/><circle cx="550" cy="80" r="3"/></g>
+<path d="M151 42H487M151 37V47M487 37V47" stroke="#5a655f" stroke-width="1.2"/>
+<text x="319" y="31" text-anchor="middle" font-size="15" fill="#5a655f">r</text><text x="151" y="119" text-anchor="middle" font-size="16" fill="#126457">A · length ℓ</text><text x="487" y="119" text-anchor="middle" font-size="16" fill="#785780">B · length ℓ</text>
+</svg>
+<figcaption>We measure strings supported in A and B, including their joint correlations. For equal continuum intervals with centre separation r, the geometric cross-ratio is η = ℓ²/r². When the intervals are far apart, η is small.</figcaption>
+</figure>
+<p>The chain’s spin-flip symmetry makes ⟨X⟩ = 0, while allowing ⟨X<sub>0</sub>X<sub>r</sub>⟩ to be nonzero: flipping both spins changes two signs, which cancel. For two single-site regions, this correlator enters T<sub>2</sub> to the fourth power. Its contribution therefore falls as (r<sup>−1/4</sup>)<sup>4</sup> = r<sup>−1</sup>. In the unrotated chain, it is the leading term in F<sub>2</sub> − 1.</p>
+<details><summary>The symmetry rule at other Rényi indices</summary><div class="detail-body"><p>At index α, replace the fourth power by the absolute value raised to 2α. An operator that picks up a nontrivial phase under a symmetry is called “charged”; this refers to its symmetry transformation, not necessarily electric charge. Its one-region expectation vanishes in a symmetry-invariant state.</p><p>If the symmetry acts this way on the chosen Pauli or Weyl basis, and the lightest contributing charged field has dimension Δ, a charged two-region correlator scales as r<sup>−2Δ</sup>. Its moment contribution scales as r<sup>−4αΔ</sup>, or η<sup>2αΔ</sup>. There are finitely many strings at fixed region size, so their positive leading weights cannot cancel. Other, neutral contributions can still dominate the full observable. The rule assumes power-law asymptotics without leading logarithmic factors.</p></div></details>
+</section>
+<section id="rotation">
+<h2>Rotate the state. Keep the measurements.</h2>
+<p>Now apply a rotation by π/4 about Y to every spin:</p>
+<div class="equation" tabindex="0" role="group" aria-label="The rotated state is U psi, where U is the tensor product of exp of minus i pi Y over eight on every site">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mo stretchy="false">|</mo><msup><mi>ψ</mi><mo>′</mo></msup><mo stretchy="false">⟩</mo><mo>=</mo><mi>U</mi><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo><mo>,</mo><mspace width="1em"/><mi>U</mi><mo>=</mo><munder><mo>⨂</mo><mi>j</mi></munder><msup><mi>e</mi><mrow><mo>−</mo><mi>i</mi><mi>π</mi><msub><mi>Y</mi><mi>j</mi></msub><mo>/</mo><mn>8</mn></mrow></msup><mo>.</mo></mrow></math>
+</div>
+<p>This is the halfway rotation in the qubit demonstration. For any region A, its density matrix changes by ρ<sub>A</sub> → U<sub>A</sub>ρ<sub>A</sub>U<sub>A</sub><sup>†</sup>. Unitary conjugation preserves eigenvalues. Therefore <em>every subsystem entanglement spectrum</em> is identical before and after the rotation, including all the ordinary Rényi entropies.</p>
+<p>We can also rotate the Hamiltonian to H′ = UHU<sup>†</sup>. Its energy spectrum is unchanged, and the rotated state is its ground state. This compares two equivalent descriptions of the critical Ising physics using the same fixed Pauli measurements.</p>
+<p>The stabilizer moments respond differently. A direct calculation gives, for two single-site regions at large separation:</p>
+<div class="comparison"><div><h3>Before the rotation</h3><div class="power">F₂ − 1 ∝ r<sup>−1</sup></div><p>The spin correlator enters through its fourth power.</p></div><div><h3>After the rotation</h3><div class="power">F′₂ − 1 ∝ r<sup>−1/2</sup></div><p>Mixing the measurement directions allows a contribution quadratic in the spin correlator.</p></div></div>
+<p>Why a different power? In the rotated state, some joint Pauli expectations contain a nonzero background together with a small, slowly decaying spin correlation. Pairs of terms have the form (b + c)<sup>4</sup> + (b − c)<sup>4</sup>, where b approaches a nonzero constant and c is proportional to r<sup>−1/4</sup>. Expanding gives 2b<sup>4</sup> + 12b²c² + 2c<sup>4</sup>. The linear correction cancels, but the quadratic one survives. It falls as r<sup>−1/2</sup>, slower than r<sup>−1</sup>.</p>
+<p>This is an exact asymptotic result from the Ising correlators. The rotation changes the exponent, not just the prefactor. <strong>Even the complete collection of subsystem entanglement spectra does not determine these spatial stabilizer moments.</strong> Their scaling also remembers how the state sits relative to the Pauli toolbox.</p>
+</section>
+<section id="continuum">
+<h2>Do the lattice results survive at larger scales?</h2>
+<p>There is a subtlety in calling this a CFT result. Two single spins remain microscopic objects, even if their separation becomes enormous. To study macroscopic regions, we must also grow the number of sites in each interval.</p>
+<p>Those are different limits. We can first move two fixed blocks far apart, or first grow both blocks while keeping their geometric ratio η fixed. A coefficient that is nonzero for every finite block could shrink to zero as the blocks grow. The fixed-block exponent alone does not settle the continuum answer.</p>
+<p>For the critical Ising chain at index two, we derive a way to study much larger blocks. A block of 128 qubits has 4<sup>128</sup> Pauli strings—about 10<sup>77</sup>. Enumerating them is hopeless. Using the model’s free-fermion structure, we rewrite the sums relevant to the leading charged coefficient in terms of <strong>Pfaffians</strong>, algebraic relatives of determinants. This lets us evaluate that coefficient up to 128 sites.</p>
+<p>For equal blocks, the charged part of the normalized moment has the far-separation form C<sub>2</sub>(ℓ)η<sup>1/2</sup>. Here ℓ is the number of sites in a block. A candidate calculation in boundary CFT predicts a limiting coefficient of 1/4:</p>
+<div class="table-wrap"><table><caption>Charged coefficient at index two</caption><thead><tr><th scope="col">Block length ℓ</th><th scope="col">C₂(ℓ)</th></tr></thead><tbody><tr><td>4 sites</td><td>0.17991</td></tr><tr><td>16 sites</td><td>0.21207</td></tr><tr><td>128 sites</td><td>0.2357979</td></tr><tr class="last-row"><td>Candidate continuum value</td><td>0.25</td></tr></tbody></table></div>
+<p>The sequence moves towards the prediction, and suitable extrapolations land close to 0.25. That is encouraging evidence, but identifying the lattice limit with this boundary calculation still requires matching the interval endpoints and controlling the order of limits. Notice that 1/4 here is an <em>amplitude</em> multiplying η<sup>1/2</sup>; it is not the rotated two-site exponent discussed above.</p>
+<details><summary>What does “boundary CFT” mean here?</summary><div class="detail-body"><p>A useful trick for nonlinear expressions is to make several mathematical copies of the state. At index two, the fourth powers involve four copies. The sum over Pauli labels can be represented using a Bell basis, with the same label imposed across the copies. In a path-integral description, this insertion becomes a boundary condition along the measured interval. Its endpoints are junctions where that boundary condition changes.</p><p>Earlier work by Hoshino, Oshikawa and Ashida developed the boundary-CFT description of stabilizer Rényi entropy. Our separated-interval problem also needs the way these junctions couple to fields propagating between the intervals. The candidate Ising calculation gives a coupling of 1/2; pairing two intervals gives its square, 1/4. Establishing that the lattice endpoints select this junction remains part of the continuum problem.</p></div></details>
+<p>We also derive a cancellation among neutral contributions, leaving terms tied to an interval endpoint. Numerically, the remaining linear neutral coefficient appears to fall inversely with block length. This helps explain how the continuum behaviour could differ from the fixed-site result, although a general bound is still missing.</p>
+<div class="takeaway"><p>The question that motivates this work is simple: what can we learn about a quantum state by looking beyond its entanglement spectra? Stabilizer moments give a concrete answer. They remember a choice of local measurements, symmetry controls which correlations enter, and an on-site rotation can change their long-distance decay while preserving every entanglement spectrum. Understanding which parts survive when microscopic spins become continuum fields is the next challenge.</p></div>
+</section>
+<section class="references" id="sources">
+<h2>The work behind this post</h2>
+<p>This article is based on the October 2026 manuscript <cite>Stabilizer Rényi moments beyond entanglement</cite>, by Vishnu Jejjala and Joydeep Naskar. It distinguishes the exact lattice results from the proposed continuum interpretation. The one-qubit demonstration is an elementary illustration of the definitions.</p>
+<ol>
+<li>Lorenzo Leone, Salvatore F. E. Oliviero and Alioscia Hamma, <a href="https://arxiv.org/abs/2106.12587"><cite>Stabilizer Rényi Entropy</cite></a>. The underlying Pauli-moment measure.</li>
+<li>Christopher David White, ChunJun Cao and Brian Swingle, <a href="https://arxiv.org/abs/2007.01303"><cite>Conformal field theories are magical</cite></a>. Earlier work on magic in critical systems, using mana in the three-state Potts chain.</li>
+<li>Masahiro Hoshino, Masaki Oshikawa and Yuto Ashida, <a href="https://arxiv.org/abs/2503.13599"><cite>Stabilizer Rényi Entropy and Conformal Field Theory</cite></a>. The boundary-CFT approach used as a starting point for our continuum comparison.</li>
+</ol>
+</section>
+</main>
+<footer><a href="../blog.html">← All posts</a><a href="../quantum-information.html">Quantum information</a><a href="../index.html">Joydeep Naskar</a></footer>
+</article>
+<script>
+(function () {
+  'use strict';
+  var demo = document.getElementById('qubit-demo');
+  var slider = document.getElementById('qubit-angle');
+  function update() {
+    var deg = Number(slider.value), theta = deg * Math.PI / 180;
+    var x = Math.sin(theta), z = Math.cos(theta);
+    var value = -Math.log((1 + Math.pow(x, 4) + Math.pow(z, 4)) / 2);
+    var bx = 122 + 88 * x, by = 122 - 88 * z;
+    document.getElementById('bloch-vector').setAttribute('x2', bx.toFixed(4));
+    document.getElementById('bloch-vector').setAttribute('y2', by.toFixed(4));
+    document.getElementById('bloch-dot').setAttribute('cx', bx.toFixed(4));
+    document.getElementById('bloch-dot').setAttribute('cy', by.toFixed(4));
+    document.getElementById('bar-x').style.width = (100 * x).toFixed(3) + '%';
+    document.getElementById('bar-z').style.width = (100 * z).toFixed(3) + '%';
+    document.getElementById('value-x').textContent = x.toFixed(3);
+    document.getElementById('value-z').textContent = z.toFixed(3);
+    document.getElementById('angle-out').textContent = deg + '°';
+    document.getElementById('magic-out').textContent = Math.max(0, value).toFixed(6);
+    slider.setAttribute('aria-valuetext', deg + ' degrees');
+    var note = 'A pure nonstabilizer state. Its Pauli fingerprint changes while purity and entanglement stay fixed.';
+    if (deg === 0) note = 'At the Z axis: |0⟩ is a stabilizer state, with M₂ = 0.';
+    if (deg === 90) note = 'At the X axis: |+⟩ is also a stabilizer state, with M₂ = 0.';
+    if (deg === 45) note = 'Halfway between X and Z: a nonstabilizer state, with M₂ = ln(4/3).';
+    document.getElementById('qubit-status').textContent = note;
+  }
+  slider.addEventListener('input', update);
+  demo.querySelectorAll('button[data-angle]').forEach(function (button) {
+    button.addEventListener('click', function () { slider.value = button.getAttribute('data-angle'); update(); });
+  });
+  update();
+  demo.hidden = false;
+})();
+</script>
+</body>
+</html>
