@@ -120,7 +120,7 @@
 <!-- Hand-curated connections. Node keys are arXiv IDs (or doi:/inspire: for records without one). -->
 <script type="application/json" id="connections-data">
 {
-  "note": "Hand-curated from full-text reading. Dates are first-appearance (YYYY-MM or YYYY-MM-DD). Node keys are arXiv IDs, or doi:/inspire: for records without one. Edges run from the earlier paper to the later one. Titles and metadata are read from publications.html at load time; papers listed there but not here show up in the web as 'not yet placed'. Nodes with \"kind\": \"other\" (e.g. theses) are drawn hollow; \"when\" overrides the displayed date and not counted as publications. \"people\" maps author names as they appear in publications-data to a full name and affiliation; \"self\" adds to the affiliations timeline, which is otherwise derived from my affiliations on the papers: per institution id, optional from/to/note overrides (no \"to\" and a paper this year means present). \"affiliations\" are read from each paper's title page (INSPIRE has errors): per paper, author -> institution ids; \"year\" overrides the paper date when the affiliations come from a later published version. Institutions carry \"match\" phrases the bot uses to recognise them in a new paper's title block.",
+  "note": "Hand-curated from full-text reading. Dates are first-appearance (YYYY-MM or YYYY-MM-DD). Node keys are arXiv IDs, or doi:/inspire: for records without one. Edges run from the earlier paper to the later one. Titles and metadata are read from publications.html at load time; papers listed there but not here show up in the web as 'not yet placed'. Nodes with \"kind\": \"other\" (e.g. theses) are drawn hollow; \"when\" overrides the displayed date and not counted as publications. \"people\" maps author names as they appear in publications-data to a full name and affiliation; \"self\" adds to the affiliations timeline, which is otherwise derived from my affiliations on the papers: per institution id, optional from/to/note overrides (a year, or a \"YYYY-MM\" / \"YYYY-MM-DD\" date where known) (no \"to\" and a paper this year means present). \"affiliations\" are read from each paper's title page (INSPIRE has errors): per paper, author -> institution ids; \"year\" overrides the paper date when the affiliations come from a later published version. Institutions carry \"match\" phrases the bot uses to recognise them in a new paper's title block.",
   "clusters": [
     {
       "id": "games",
@@ -652,23 +652,32 @@
   "self": [
     {
       "inst": "niser",
-      "from": 2016,
-      "to": 2021,
+      "from": "2016-08",
+      "to": "2021-08",
       "note": "Integrated MSc"
     },
     {
       "inst": "neu",
-      "from": 2021,
-      "note": "PhD"
+      "from": "2021-09",
+      "note": "PhD",
+      "to": "2026-08"
     },
     {
       "inst": "kitp",
-      "to": 2026,
-      "note": "Graduate Fellowship"
+      "to": "2026-05",
+      "note": "Graduate Fellowship",
+      "from": "2026-01"
     },
     {
       "inst": "bimsa",
-      "note": "Postdoc"
+      "note": "Postdoc",
+      "from": "2026-08-22"
+    },
+    {
+      "inst": "iaifi",
+      "from": "2024-03",
+      "to": "2026-08",
+      "note": "Junior Investigator"
     }
   ],
   "institutions": {
@@ -1653,7 +1662,17 @@
     var ps = document.getElementById('places-svg');
     var insts = conn.institutions || {}, affs = conn.affiliations || {};
     if (!ps) return;
-    var now = new Date().getFullYear();
+    var today = new Date(), now = today.getUTCFullYear();
+    // a year (whole year) or a "YYYY-MM-DD" / "YYYY-MM" date, as a fractional year
+    function fy(v, end) {
+      if (typeof v === 'number') return end ? v + 1 : v;
+      var m = /^(\d{4})-(\d{2})(?:-(\d{2}))?/.exec(String(v));
+      if (!m) return NaN;
+      var y = +m[1], mo = +m[2] - 1, start = Date.UTC(y, 0, 1), len = Date.UTC(y + 1, 0, 1) - start;
+      var t = m[3] ? Date.UTC(y, mo, +m[3] + (end ? 1 : 0)) : Date.UTC(y, mo + (end ? 1 : 0), 1);
+      return y + (t - start) / len;
+    }
+    var nowFrac = fy(today.toISOString().slice(0, 10), true);
     // derive my affiliations from the papers' title pages, then apply the hand-written additions in "self"
     var span = {};
     Object.keys(affs).forEach(function (k) {
@@ -1678,9 +1697,9 @@
       if (s.to === undefined) s.to = s.last >= now ? null : s.last;   // still on a paper this year: present
       s.place = (insts[k] || {}).short || (insts[k] || {}).name || k;
       return s;
-    }).sort(function (a, b) { return a.from - b.from || (b.to == null) - (a.to == null); });
+    }).sort(function (a, b) { return fy(a.from) - fy(b.from) || (b.to == null) - (a.to == null); });
     if (!list.length) return;
-    var y0p = Math.min.apply(null, list.map(function (p) { return p.from; })), y1p = now + 1;
+    var y0p = Math.floor(Math.min.apply(null, list.map(function (p) { return fy(p.from); }))), y1p = now + 1;
     var LBL = 230, PW = 720, ROW = 24, TOPP = 8;
     var HP = TOPP + list.length * ROW + 26;
     ps.setAttribute('viewBox', '0 0 ' + PW + ' ' + HP);
@@ -1690,15 +1709,16 @@
       if (y < y1p && (y - y0p) % 2 === 0) el('text', { x: px(y) + 2, y: HP - 8, 'class': 'tick' }, ps).textContent = y;
     }
     list.forEach(function (p, i) {
-      var yy = TOPP + i * ROW, to = p.to == null ? y1p : p.to + 1, open = p.to == null;
+      // bars start and end at the known date; current ones stop at today
+      var yy = TOPP + i * ROW, open = p.to == null, from = fy(p.from), to = open ? nowFrac : fy(p.to, true);
       el('text', { x: LBL - 10, y: yy + 15, 'text-anchor': 'end', 'class': 'place-name' }, ps).textContent = p.place;
-      el('rect', { x: px(p.from), y: yy + 5, width: Math.max(8, px(to) - px(p.from)), height: 13, rx: 6.5,
+      el('rect', { x: px(from), y: yy + 5, width: Math.max(8, px(to) - px(from)), height: 13, rx: 6.5,
                    fill: open ? 'url(#place-open)' : '#0369a1', opacity: open ? 1 : 0.8 }, ps);
       if (p.note) {
-        var bw = px(to) - px(p.from), nw = p.note.length * 6.2 + 12;
-        if (bw >= nw) el('text', { x: px(p.from) + 8, y: yy + 15, 'class': 'place-note' }, ps).textContent = p.note;
+        var bw = px(to) - px(from), nw = p.note.length * 6.2 + 12;
+        if (bw >= nw) el('text', { x: px(from) + 8, y: yy + 15, 'class': 'place-note' }, ps).textContent = p.note;
         else if (px(to) + nw < PW) el('text', { x: px(to) + 6, y: yy + 15, 'class': 'place-note out' }, ps).textContent = p.note;
-        else el('text', { x: px(p.from) - 6, y: yy + 15, 'text-anchor': 'end', 'class': 'place-note out' }, ps).textContent = p.note;
+        else el('text', { x: px(from) - 6, y: yy + 15, 'text-anchor': 'end', 'class': 'place-note out' }, ps).textContent = p.note;
       }
     });
     var defs = el('defs', {}, ps), grad = el('linearGradient', { id: 'place-open', x1: 0, x2: 1, y1: 0, y2: 0 }, defs);
