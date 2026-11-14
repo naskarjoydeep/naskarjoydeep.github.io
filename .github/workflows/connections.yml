@@ -14,7 +14,8 @@ on:
 
 permissions:
   contents: write         # push the proposal branch
-  pull-requests: write    # open the review PR
+  pull-requests: write    # open the review pull request
+  issues: write           # fall back to an issue if Actions may not open pull requests here
   models: read            # free GitHub Models inference with the built-in GITHUB_TOKEN
 
 jobs:
@@ -23,12 +24,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: main
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
@@ -41,9 +42,10 @@ jobs:
           FORCE_PAPER: ${{ github.event.inputs.paper }}
         run: python scripts/classify_connections.py
 
-      - name: Open a pull request for review
+      - name: Share the proposal for review
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
         run: |
           if [ -n "${{ github.event.inputs.paper }}" ]; then
             cat connections-report.md >> "$GITHUB_STEP_SUMMARY"   # dry run: show, don't commit
@@ -57,12 +59,41 @@ jobs:
             git diff --quiet --cached || { git commit -m "Record arXiv versions for the research web"; git push; }
             exit 0
           fi
-          branch="connections/$(date -u +%Y-%m-%d)"
-          git checkout -b "$branch"
+          cat connections-report.md >> "$GITHUB_STEP_SUMMARY"
+
+          # One branch, rebuilt from main each week, so proposals never pile up.
+          branch="connections/proposal"
+          title="Research web: proposed connections"
+          git checkout -B "$branch"
           git add research-web.html
           git commit -m "Propose research-web connections ($(date -u +%Y-%m-%d))"
           git push -f origin "$branch"
-          gh pr create --base main --head "$branch" \
-            --title "Research web: proposed connections ($(date -u +%Y-%m-%d))" \
-            --body-file connections-report.md \
-            || gh pr edit "$branch" --body-file connections-report.md
+
+          # 1. A pull request, if this repository lets Actions open one.
+          pr=$(gh pr list --head "$branch" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$pr" ]; then
+            gh pr edit "$pr" --body-file connections-report.md
+            exit 0
+          fi
+          if gh pr create --base main --head "$branch" --title "$title" --body-file connections-report.md; then
+            exit 0
+          fi
+
+          # 2. Otherwise an issue, with a one-click link to open the pull request by hand.
+          {
+            echo "GitHub Actions is not allowed to open pull requests in this repository, so the proposal is posted here."
+            echo ""
+            echo "**Review the changes and open the pull request:** https://github.com/$REPO/compare/main...$branch?expand=1"
+            echo ""
+            echo "To let the bot open pull requests itself, tick *Settings → Actions → General → Workflow permissions →"
+            echo "Allow GitHub Actions to create and approve pull requests*."
+            echo ""
+            cat connections-report.md
+          } > issue-body.md
+          issue=$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[0].number // empty')
+          if [ -n "$issue" ]; then
+            gh issue edit "$issue" --body-file issue-body.md
+            gh issue comment "$issue" --body "Updated with the proposal of $(date -u +%Y-%m-%d)."
+          else
+            gh issue create --title "$title" --body-file issue-body.md
+          fi
