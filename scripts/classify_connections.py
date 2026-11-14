@@ -246,10 +246,14 @@ def intro_excerpt(tex, limit=3000):
 
 # ----------------------------- LLM -----------------------------------------
 
+MODEL_ERRORS = []   # why model calls failed, shown at the top of the report
+
+
 def ask_llm(system, user):
     """One JSON-mode chat completion on GitHub Models, or None if unavailable."""
     token = os.environ.get("GITHUB_TOKEN")
     if not token:
+        MODEL_ERRORS.append("no GITHUB_TOKEN in the environment")
         return None
     payload = {
         "model": MODEL,
@@ -258,20 +262,37 @@ def ask_llm(system, user):
         "messages": [{"role": "system", "content": system}, {"role": "user", "content": user[:MAX_PROMPT_CHARS]}],
     }
     for attempt in range(3):
-        r = requests.post(MODELS_URL, json=payload, timeout=120,
-                          headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"})
+        try:
+            r = requests.post(MODELS_URL, json=payload, timeout=120,
+                              headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"})
+        except requests.RequestException as e:
+            MODEL_ERRORS.append(f"request failed: {e}")
+            return None
         if r.status_code == 429:
-            time.sleep(int(r.headers.get("retry-after", "30")) + 1)
+            time.sleep(min(int(r.headers.get("retry-after", "30")), 120) + 1)
             continue
         if not r.ok:
-            print(f"Model call failed ({r.status_code}): {r.text[:200]}")
+            MODEL_ERRORS.append(f"HTTP {r.status_code}: {r.text[:300]}")
+            print(f"Model call failed ({r.status_code}): {r.text[:300]}")
             return None
         try:
             return json.loads(r.json()["choices"][0]["message"]["content"])
         except (KeyError, ValueError, IndexError):
-            print("Model returned non-JSON output; skipping.")
+            MODEL_ERRORS.append("the model returned output that is not JSON")
             return None
+    MODEL_ERRORS.append("rate limited (HTTP 429) on every retry")
     return None
+
+
+def short_label(title, limit=28):
+    """A plain-text short label from a title: LaTeX removed, cut at a word boundary."""
+    t = re.sub(r"\\math[a-z]+\{([^}]*)\}", r"\1", title or "")
+    t = re.sub(r"\$|\\[a-zA-Z]+", "", t)
+    t = " ".join(t.split())
+    if len(t) <= limit:
+        return t
+    cut = t[:limit].rsplit(" ", 1)[0]
+    return cut if len(cut) > 8 else t[:limit]
 
 
 CLASSIFY_SYSTEM = (
@@ -440,8 +461,13 @@ def main():
 
         new_edges = []
         for ck in cited:
-            link = labels.get(ck) or {"type": "related", "note": f"Cites {node_by_key[ck].get('label', ck)}.",
-                                      "evidence": "" if contexts.get(ck) else "(no citation context found; labelled without the model)"}
+            link = labels.get(ck)
+            if not link:
+                # no model label: most self-citations are background, so don't guess a link
+                lines.append(f"- unlabelled citation of `{ck}` ({node_by_key[ck].get('label', ck)}): add it by hand "
+                             "if the paper does more than list it as background"
+                             + (f"  \n  > {contexts[ck][0][:240]}" if contexts.get(ck) else ""))
+                continue
             if link["type"] == "drop" or (ck, key) in existing_pairs:
                 lines.append(f"- skipped `{ck}` ({link['type'] if link['type'] == 'drop' else 'already linked'})")
                 continue
@@ -455,6 +481,8 @@ def main():
             votes = Counter()
             for e in new_edges:
                 votes[key_to_cluster.get(e["from"])] += 1 if e["type"] == "builds" else 0.5
+            for ck in cited:
+                votes[key_to_cluster.get(ck)] += 0.25
             coauthors = {a.lower() for a in r.get("authors", []) if SELF_SURNAME not in a.lower()}
             for other in records:
                 on = node_for(other)
@@ -485,7 +513,7 @@ def main():
                 cluster = voted if voted in cluster_ids else None
 
             date = meta.get(ax, {}).get("date") or (r.get("year") or "")
-            node = {"key": key, "label": (res.get("label") or r["title"][:28]).strip(), "date": date[:10], "auto": True}
+            node = {"key": key, "label": short_label(res.get("label") or r["title"]), "date": date[:10], "auto": True}
             if cluster:
                 node["cluster"] = cluster
             if ax in meta:
@@ -547,6 +575,10 @@ def main():
         existing_pairs.update((e["from"], e["to"]) for e in new_edges)
         report.extend(header + (lines or ["- no links to my other papers found"]) + [""])
 
+    if MODEL_ERRORS:
+        report[2:2] = [f"> **The model step did not run** ({len(MODEL_ERRORS)} failed call(s)). First error: "
+                       f"`{MODEL_ERRORS[0][:300]}`. Citations below are listed for you to judge rather than added as links, "
+                       "and rows and labels were chosen without the model.", ""]
     if force:
         report.insert(0, f"> Dry run for `{force}`: nothing was written to research-web.html.\n")
     else:
