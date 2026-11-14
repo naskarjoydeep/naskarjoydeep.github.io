@@ -25,12 +25,22 @@
     .me { color: #0f172a; font-weight: 600; }
     .see-also { color: #475569; font-size: 0.92rem; }
     .journey-note { text-align: center; color: #475569; font-size: 0.92rem; margin: 30px 0 10px; }
+    section.ongoing { background: #fffbeb; border: 1px dashed #f59e0b; box-shadow: none; }
+    section.ongoing h2 { color: #92400e; }
+    .ongoing-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #92400e; background: #fde68a; padding: 2px 10px; border-radius: 20px; margin: 0 0 8px; }
   </style>
 </head>
 <body>
   <a class="back-link" href="index.html">&larr; Joydeep Naskar</a>
   <h1>Machine learning</h1>
   <p class="lede">Neural networks as field theories.</p>
+
+  <section class="ongoing" aria-label="Ongoing work">
+    <span class="ongoing-badge">Ongoing</span>
+    <h2>Model collapse</h2>
+    <p>Generative models are increasingly trained on data that earlier models produced. When this repeats over several generations, the models can degenerate: rare events in the tails of the original distribution disappear first, the outputs lose diversity, and the learned distribution drifts away from the real one. This effect, called model collapse, has been seen in language models, variational autoencoders and Gaussian mixture models (<a href="https://doi.org/10.1038/s41586-024-07566-y" target="_blank" rel="noopener">Shumailov et al., Nature 2024</a>).</p>
+    <p>I am currently studying it.</p>
+  </section>
 
   <section>
     <h2>Conformal field theories from neural networks</h2>
@@ -43,12 +53,6 @@
         <li data-paper="2608.15001"><a class="paper-title" href="https://arxiv.org/abs/2608.15001" target="_blank" rel="noopener">Spinning conformal correlators from neural networks</a><span class="paper-meta">arXiv:2608.15001</span></li>
         <li data-paper="2609.37074"><a class="paper-title" href="https://arxiv.org/abs/2609.37074" target="_blank" rel="noopener">Notes on algebraic perspective on neural network conformal theories</a><span class="paper-meta">arXiv:2609.37074</span></li>
       </ul>
-  </section>
-
-  <section>
-    <h2>Model collapse</h2>
-    <p>Generative models are increasingly trained on data that earlier models produced. When this repeats over several generations, the models can degenerate: rare events in the tails of the original distribution disappear first, the outputs lose diversity, and the learned distribution drifts away from the real one. This effect, called model collapse, has been seen in language models, variational autoencoders and Gaussian mixture models (<a href="https://doi.org/10.1038/s41586-024-07566-y" target="_blank" rel="noopener">Shumailov et al., Nature 2024</a>).</p>
-    <p>I am currently studying it.</p>
   </section>
 
   <p class="journey-note">How these papers connect to each other, and to my other work: <a href="research-web.html">My Research Journey</a>.</p>
