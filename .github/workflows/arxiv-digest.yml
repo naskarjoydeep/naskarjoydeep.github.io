@@ -2,10 +2,11 @@ name: arXiv Digest
 
 on:
   schedule:
-    # 12:00 UTC daily. GitHub may delay scheduled runs by up to ~30 min at
-    # peak times — this is a platform limitation, not a bug. Edit the cron
-    # expression to change the time (fields are: minute hour day month weekday).
-    - cron: "0 12 * * *"
+    # Fridays at 10:00 UTC (18:00 in Beijing), after arXiv's Thursday
+    # announcement, so each issue covers the full week. GitHub may delay
+    # scheduled runs by up to ~30 min at peak times. Edit the cron expression
+    # to change the time (fields are: minute hour day month weekday).
+    - cron: "0 10 * * 5"
   workflow_dispatch: {}   # lets you trigger a run by hand from the Actions tab
 
 permissions:
